@@ -3,7 +3,7 @@
     package="com.foodgeene">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".scanner.ScannerResult"></activity>
+        <activity android:name=".restraunt.RestrauntActivity"></activity>
+        <activity android:name=".scanner.ScannerResult" />
         <activity android:name=".scanner.ScannerActivity" />
         <activity android:name=".forgot.ForgotActivity" />
         <activity android:name=".MainActivity" />

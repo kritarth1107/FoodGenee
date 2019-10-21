@@ -21,6 +21,9 @@ public class ScannerModel {
     @SerializedName("logo")
     @Expose
     private String logo;
+    @SerializedName("text")
+    @Expose
+    private String text;
     @SerializedName("coverpic")
     @Expose
     private String coverpic;
@@ -33,6 +36,13 @@ public class ScannerModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getMerchantid() {

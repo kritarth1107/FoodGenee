@@ -51,7 +51,6 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     public void handleResult(Result result) {
         CallScannerApi(result.getText());
-        Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_LONG).show();
         zXingScannerView.resumeCameraPreview(this);
     }
 
@@ -62,18 +61,30 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             @Override
             public void onResponse(Call<ScannerModel> call, Response<ScannerModel> response) {
 
-                String merchantid = response.body().getMerchantid().trim();
-                String status = response.body().getStatus().trim();
-                String table = response.body().getTable().trim();
-                String store = response.body().getStore().trim();
-                String logo = response.body().getLogo().trim();
-                String coverpic = response.body().getCoverpic().trim();
+                try {
+                    String status = response.body().getStatus().trim();
+                    if (status.equals("1")) {
+
+                        String merchantid = response.body().getMerchantid().trim();
+                        String table = response.body().getTable().trim();
+                        String store = response.body().getStore().trim();
+                        String logo = response.body().getLogo().trim();
+                        String coverpic = response.body().getCoverpic().trim();
+                        Toast.makeText(getApplicationContext(), "Correct QR", Toast.LENGTH_LONG).show();
+
+                    } else if (status.equals("0")) {
+                        String text = response.body().getText().trim();
+                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                    }
 
 
+                }
+                catch (Exception e){
 
+                    Toast.makeText(ScannerActivity.this, "Wrong QR-code Scan Again", Toast.LENGTH_SHORT).show();
+                }
 
             }
-
             @Override
             public void onFailure(Call<ScannerModel> call, Throwable t) {
                 Toast.makeText(ScannerActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
