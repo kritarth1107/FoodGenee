@@ -12,6 +12,6 @@ public class RestrauntActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restraunt);
 
-        //Heloo Buddy
+        //Heloo Buddy Ayush
     }
 }
