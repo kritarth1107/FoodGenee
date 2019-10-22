@@ -1,8 +1,13 @@
 package com.foodgeene.scanner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
@@ -13,9 +18,11 @@ import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.login.LoginActivity;
 import com.foodgeene.login.LoginModel;
+import com.foodgeene.restraunt.RestrauntActivity;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.zxing.Result;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +39,31 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     SessionManager sessionManager;
     private ZXingScannerView zXingScannerView;
     String UserToken;
+    Dialog loadingDialog;
+    boolean close=true;
+    final int RequestCameraPermissionID = 1001;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case RequestCameraPermissionID: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(ScannerActivity.this,
+                                new String[]{Manifest.permission.CAMERA},
+                                RequestCameraPermissionID);
+                        return;
+                    }
+
+                }
+            }
+            break;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_scanner);
+            req_camera_permission();
             sessionManager = new SessionManager(this);
             HashMap<String, String> user = sessionManager.getUserDetail();
             UserToken = user.get(sessionManager.USER_ID);
@@ -51,10 +79,16 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     public void handleResult(Result result) {
         CallScannerApi(result.getText());
+            loadingDialog = new Dialog(this);
+            loadingDialog.setContentView(R.layout.loading_dialog_layout);
+            loadingDialog.show();
+            loadingDialog.setCancelable(false);
+            loadingDialog.setCanceledOnTouchOutside(false);
         zXingScannerView.resumeCameraPreview(this);
+
     }
 
-    public void CallScannerApi(String result){
+    public void CallScannerApi(final String result){
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
         Call<ScannerModel> call = foodGeneeAPI.submitScannedQR("qrcode",result,UserToken,"application/x-www-form-urlencoded");
         call.enqueue(new Callback<ScannerModel>() {
@@ -65,12 +99,13 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                     String status = response.body().getStatus().trim();
                     if (status.equals("1")) {
 
-                        String merchantid = response.body().getMerchantid().trim();
-                        String table = response.body().getTable().trim();
                         String store = response.body().getStore().trim();
-                        String logo = response.body().getLogo().trim();
-                        String coverpic = response.body().getCoverpic().trim();
-                        Toast.makeText(getApplicationContext(), "Correct QR", Toast.LENGTH_LONG).show();
+                        loadingDialog.cancel();
+                        loadingDialog.dismiss();
+                        Intent intent = new Intent(ScannerActivity.this, RestrauntActivity.class);
+                        intent.putExtra("encKey",result);
+                        intent.putExtra("store",store);
+                        startActivity(intent);
 
                     } else if (status.equals("0")) {
                         String text = response.body().getText().trim();
@@ -80,8 +115,9 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
                 }
                 catch (Exception e){
-
-                    Toast.makeText(ScannerActivity.this, "Wrong QR-code Scan Again", Toast.LENGTH_SHORT).show();
+                    loadingDialog.cancel();
+                    loadingDialog.dismiss();
+                    Toast.makeText(ScannerActivity.this, "Invalid QR-code Scan Again", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -91,5 +127,16 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             }
         });
 
+
+    }
+
+    public void req_camera_permission(){
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(ScannerActivity.this,
+                    new String[]{Manifest.permission.CAMERA},
+                    RequestCameraPermissionID);
+            return;
+        }
     }
 }
