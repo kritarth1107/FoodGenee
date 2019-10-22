@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -32,19 +33,22 @@ public class RestrauntActivity extends AppCompatActivity {
     SessionManager sessionManager;
     String UserToken;
     Intent getIntent;
-    String encKey,Store_Name;
+    String encKey,Store_Name,Table_Name;
     Toolbar toolbar;
     ShimmerFrameLayout shimmerFrameLayout;
+    TextView table_number,store;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restraunt);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        table_number = findViewById(R.id.table_number);
+        store = findViewById(R.id.store);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(RestrauntActivity.this,ScannerActivity.class));
                 finish();
             }
         });
@@ -60,7 +64,11 @@ public class RestrauntActivity extends AppCompatActivity {
         getIntent = getIntent();
         encKey = getIntent.getStringExtra("encKey");
         Store_Name = getIntent.getStringExtra("store");
+        Table_Name = getIntent.getStringExtra("table");
         collapsingToolbarLayout.setTitle(Store_Name);
+        collapsingToolbarLayout.setStatusBarScrim(getResources().getDrawable(R.drawable.bg3));
+        store.setText(Store_Name);
+        table_number.setText(Table_Name);
         CallScannerApi(encKey);
 
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,7 +24,8 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
     private Context mContext ;
     private List<Productlist> mData ;
     RequestOptions option;
-    Float quantity;
+    Integer quantity;
+    String Q_String;
 
 
     public RestrauntAdapter(Context mContext, List<Productlist> mData) {
@@ -42,21 +44,18 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
         LayoutInflater inflater = LayoutInflater.from(mContext);
         view = inflater.inflate(R.layout.restraunt_product_list,parent,false) ;
         final MyViewHolder viewHolder = new MyViewHolder(view);
-
-
-
-
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         holder.food_title.setText(mData.get(position).getTitle());
         holder.price.setText(mData.get(position).getPrice());
         holder.sale_price.setText(mData.get(position).getSaleprice());
         holder.serve_line.setText(mData.get(position).getServeline());
         holder.tagline.setText(mData.get(position).getLabeltag());
+
         String av,tagline;
         av = mData.get(position).getAvailabilty();
         tagline = mData.get(position).getLabeltag();
@@ -77,13 +76,63 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
             holder.rest_tagline_logo.setVisibility(View.VISIBLE);
             holder.tagline.setVisibility(View.VISIBLE);
         }
-
         if(holder.quantity_tv.getText().equals("0")){
-            holder.quantity_card.setVisibility(View.GONE);
+            holder.add.setVisibility(View.GONE);
             holder.subtract.setVisibility(View.GONE);
+            holder.quantity_card.setVisibility(View.GONE);
+            holder.add_now_tv.setVisibility(View.VISIBLE);
         }
-        String Q_String = holder.quantity_tv.getText().toString().trim();
-        quantity = Float.parseFloat(Q_String);
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Q_String = holder.quantity_tv.getText().toString().trim();
+                quantity = Integer.parseInt(Q_String);
+                quantity = quantity+1;
+                holder.quantity_tv.setText(String.valueOf(quantity));
+                holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
+            }
+        });
+        holder.subtract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Q_String = holder.quantity_tv.getText().toString().trim();
+                quantity = Integer.parseInt(Q_String);
+                quantity = quantity-1;
+                if(quantity>0){
+
+                    holder.quantity_tv.setText(String.valueOf(quantity));
+                    holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
+                }
+                else{
+                    holder.add.setVisibility(View.GONE);
+                    holder.subtract.setVisibility(View.GONE);
+                    holder.quantity_card.setVisibility(View.GONE);
+                    holder.add_now_tv.setVisibility(View.VISIBLE);
+                    holder.quantity_tv.setText("0");
+                    holder.add_now_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
+                    holder.add.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
+                    holder.quantity_card.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
+                    holder.subtract.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
+                }
+            }
+        });
+        holder.add_now_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.add_now_tv.setVisibility(View.GONE);
+                holder.add.setVisibility(View.VISIBLE);
+                holder.subtract.setVisibility(View.VISIBLE);
+                holder.quantity_card.setVisibility(View.VISIBLE);
+                holder.quantity_tv.setText("1");
+                holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
+                holder.add_now_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
+            }
+        });
+
+
+
 
 
 
@@ -100,7 +149,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
         TextView sale_price,price,tagline,serve_line,quantity_tv,not_available,food_title;
         ImageView food_image,rest_tagline_logo;
         LinearLayout available_layout;
-        CardView add,subtract,quantity_card;
+        CardView add,subtract,quantity_card,add_now_tv;
 
 
 
@@ -120,6 +169,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
             add = itemView.findViewById(R.id.add_button);
             subtract = itemView.findViewById(R.id.subtract_button);
             quantity_card = itemView.findViewById(R.id.quantity_card);
+            add_now_tv = itemView.findViewById(R.id.add_now_tv);
 
 
 
