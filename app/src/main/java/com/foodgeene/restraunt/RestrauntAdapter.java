@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
 import com.foodgeene.scanner.Productlist;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
     Integer quantity;
     String Q_String;
 
+    BottomSheetBehavior bottomSheetBehavior;
 
     public RestrauntAdapter(Context mContext, List<Productlist> mData) {
         this.mContext = mContext;
@@ -91,6 +93,8 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 quantity = quantity+1;
                 holder.quantity_tv.setText(String.valueOf(quantity));
                 holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
+
+
             }
         });
         holder.subtract.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +134,6 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 holder.add_now_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
             }
         });
-
 
 
 

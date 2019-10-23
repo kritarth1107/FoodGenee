@@ -1,5 +1,6 @@
 package com.foodgeene.restraunt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +20,12 @@ import com.foodgeene.scanner.Productlist;
 import com.foodgeene.scanner.ScannerActivity;
 import com.foodgeene.scanner.ScannerModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindView;
 import network.FoodGeneeAPI;
 import network.RetrofitClient;
 import retrofit2.Call;
@@ -37,6 +41,11 @@ public class RestrauntActivity extends AppCompatActivity {
     Toolbar toolbar;
     ShimmerFrameLayout shimmerFrameLayout;
     TextView table_number,store;
+
+    @BindView(R.id.bottom_sheet)
+    LinearLayout layoutBottomSheet;
+
+    BottomSheetBehavior sheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +79,21 @@ public class RestrauntActivity extends AppCompatActivity {
         store.setText(Store_Name);
         table_number.setText(Table_Name);
         CallScannerApi(encKey);
+
+
+//        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+//
+//        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+//            @Override
+//            public void onStateChanged(@NonNull View view, int i) {
+//
+//            }
+//
+//            @Override
+//            public void onSlide(@NonNull View view, float v) {
+//
+//            }
+//        });
 
     }
 
