@@ -81,8 +81,8 @@ public class RestrauntActivity extends AppCompatActivity {
         CallScannerApi(encKey);
 
 
-//        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
-//
+        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
+
 //        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 //            @Override
 //            public void onStateChanged(@NonNull View view, int i) {

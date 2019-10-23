@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -94,6 +95,22 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 holder.quantity_tv.setText(String.valueOf(quantity));
                 holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
 
+                if(quantity!=0){
+
+                    bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                        @Override
+                        public void onStateChanged(@NonNull View view, int i) {
+
+
+
+                        }
+
+                        @Override
+                        public void onSlide(@NonNull View view, float v) {
+
+                        }
+                    });
+                }
 
             }
         });
