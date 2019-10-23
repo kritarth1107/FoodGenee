@@ -275,9 +275,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="8dp"
-                    android:alpha="0.4"
+                    android:layout_margin="8dp"
+                    android:alpha="0.1"
                     android:background="@android:color/darker_gray"
                     android:layout_width="match_parent"
                     android:layout_height="1dp">

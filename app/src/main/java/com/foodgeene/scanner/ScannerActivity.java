@@ -42,6 +42,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     Dialog loadingDialog;
     boolean close=true;
     final int RequestCameraPermissionID = 1001;
+    String ActivityString="Home";
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -73,6 +74,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         setContentView(zXingScannerView);
         zXingScannerView.setResultHandler(this);
         zXingScannerView.startCamera();
+        ActivityString="Scanner";
 
     }
 
@@ -141,5 +143,18 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                     RequestCameraPermissionID);
             return;
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if(ActivityString.equals("Home")){
+            finish();
+        }
+        else{
+            ActivityString="Home";
+            setContentView(R.layout.activity_scanner);
+        }
+
     }
 }

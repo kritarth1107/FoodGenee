@@ -25,15 +25,22 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
 
     private Context mContext ;
     private List<Productlist> mData ;
+    private  LinearLayout OrderSheet;
+    private TextView Total_amount,Quanity_item_tv;
     RequestOptions option;
-    Integer quantity;
+    Integer quantity,finalAmmount=0,total_quantity=0;
     String Q_String;
+
+
 
     BottomSheetBehavior bottomSheetBehavior;
 
-    public RestrauntAdapter(Context mContext, List<Productlist> mData) {
+    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv) {
         this.mContext = mContext;
         this.mData = mData;
+        this.OrderSheet = OrderSheet;
+        this.Total_amount = Total_amount;
+        this.Quanity_item_tv = Quanity_item_tv;
         option = new RequestOptions().centerCrop().placeholder(R.drawable.ic_image).error(R.drawable.ic_image);
 
 
@@ -51,7 +58,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         holder.food_title.setText(mData.get(position).getTitle());
         holder.price.setText(mData.get(position).getPrice());
@@ -94,23 +101,12 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 quantity = quantity+1;
                 holder.quantity_tv.setText(String.valueOf(quantity));
                 holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
-
-                if(quantity!=0){
-
-                    bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-                        @Override
-                        public void onStateChanged(@NonNull View view, int i) {
-
-
-
-                        }
-
-                        @Override
-                        public void onSlide(@NonNull View view, float v) {
-
-                        }
-                    });
-                }
+                String saleP = mData.get(position).getSaleprice();
+                Integer SalePrice = Integer.parseInt(saleP);
+                finalAmmount = finalAmmount+SalePrice;
+                Total_amount.setText(String.valueOf(finalAmmount));
+                total_quantity = total_quantity+1;
+                Quanity_item_tv.setText(String.valueOf(total_quantity));
 
             }
         });
@@ -137,6 +133,16 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                     holder.quantity_card.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
                     holder.subtract.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
                 }
+                String saleP = mData.get(position).getSaleprice();
+                Integer SalePrice = Integer.parseInt(saleP);
+                finalAmmount = finalAmmount-SalePrice;
+                if(finalAmmount==0){
+                    OrderSheet.setVisibility(View.GONE);
+                    OrderSheet.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_down));
+                }
+                Total_amount.setText(String.valueOf(finalAmmount));
+                total_quantity = total_quantity-1;
+                Quanity_item_tv.setText(String.valueOf(total_quantity));
             }
         });
         holder.add_now_tv.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +155,17 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 holder.quantity_tv.setText("1");
                 holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
                 holder.add_now_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
+
+                if(finalAmmount==0){
+                    OrderSheet.setVisibility(View.VISIBLE);
+                    OrderSheet.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_up));
+                }
+                String saleP = mData.get(position).getSaleprice();
+                Integer SalePrice = Integer.parseInt(saleP);
+                finalAmmount = finalAmmount+SalePrice;
+                Total_amount.setText(String.valueOf(finalAmmount));
+                total_quantity = total_quantity+1;
+                Quanity_item_tv.setText(String.valueOf(total_quantity));
             }
         });
 

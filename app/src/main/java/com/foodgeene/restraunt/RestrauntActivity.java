@@ -25,7 +25,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import java.util.HashMap;
 import java.util.List;
 
-import butterknife.BindView;
 import network.FoodGeneeAPI;
 import network.RetrofitClient;
 import retrofit2.Call;
@@ -40,12 +39,9 @@ public class RestrauntActivity extends AppCompatActivity {
     String encKey,Store_Name,Table_Name;
     Toolbar toolbar;
     ShimmerFrameLayout shimmerFrameLayout;
-    TextView table_number,store;
+    TextView table_number,store,Total_amount,Quanity_item_tv;
 
-    @BindView(R.id.bottom_sheet)
-    LinearLayout layoutBottomSheet;
-
-    BottomSheetBehavior sheetBehavior;
+    LinearLayout OrderSheet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +60,9 @@ public class RestrauntActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar_id);
         collapsingToolbarLayout.setTitleEnabled(true);
 
-
+        OrderSheet = findViewById(R.id.OrderSheet);
+        Quanity_item_tv = findViewById(R.id.Quanity_item_tv);
+        Total_amount = findViewById(R.id.Total_amount);
         recyclerView = findViewById(R.id.ActsRecyclerView);
         shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
         sessionManager = new SessionManager(this);
@@ -81,19 +79,7 @@ public class RestrauntActivity extends AppCompatActivity {
         CallScannerApi(encKey);
 
 
-        sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
 
-//        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-//            @Override
-//            public void onStateChanged(@NonNull View view, int i) {
-//
-//            }
-//
-//            @Override
-//            public void onSlide(@NonNull View view, float v) {
-//
-//            }
-//        });
 
     }
 
@@ -115,8 +101,7 @@ public class RestrauntActivity extends AppCompatActivity {
                         String store = response.body().getStore().trim();
                         String table = response.body().getTable().trim();
                         List<Productlist> productlists = response.body().getProductlist();
-
-                        RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists) ;
+                        RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists,OrderSheet,Total_amount,Quanity_item_tv) ;
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(restrauntAdapter);
                         shimmerFrameLayout.stopShimmerAnimation();
