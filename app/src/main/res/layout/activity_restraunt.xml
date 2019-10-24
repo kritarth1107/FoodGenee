@@ -271,6 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4">
                     <LinearLayout
+                        android:id="@+id/ViewCartLayout"
                         android:gravity="end|center_vertical"
                         android:orientation="horizontal"
                         android:padding="12dp"

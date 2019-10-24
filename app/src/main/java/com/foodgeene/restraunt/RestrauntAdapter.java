@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,31 +17,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
+import com.foodgeene.cart.CartModel;
 import com.foodgeene.scanner.Productlist;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyViewHolder> {
 
     private Context mContext ;
     private List<Productlist> mData ;
-    private  LinearLayout OrderSheet;
+    private  LinearLayout OrderSheet,ViewCartLayout;
     private TextView Total_amount,Quanity_item_tv;
     RequestOptions option;
     Integer quantity,finalAmmount=0,total_quantity=0;
     String Q_String;
+    List<CartModel> CartData= new ArrayList<>();
 
 
 
     BottomSheetBehavior bottomSheetBehavior;
 
-    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv) {
+    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv,LinearLayout ViewCartLayout) {
         this.mContext = mContext;
         this.mData = mData;
         this.OrderSheet = OrderSheet;
         this.Total_amount = Total_amount;
         this.Quanity_item_tv = Quanity_item_tv;
+        this.ViewCartLayout = ViewCartLayout;
         option = new RequestOptions().centerCrop().placeholder(R.drawable.ic_image).error(R.drawable.ic_image);
 
 
@@ -65,6 +70,8 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
         holder.sale_price.setText(mData.get(position).getSaleprice());
         holder.serve_line.setText(mData.get(position).getServeline());
         holder.tagline.setText(mData.get(position).getLabeltag());
+
+
 
         String av,tagline;
         av = mData.get(position).getAvailabilty();
@@ -166,6 +173,17 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 Total_amount.setText(String.valueOf(finalAmmount));
                 total_quantity = total_quantity+1;
                 Quanity_item_tv.setText(String.valueOf(total_quantity));
+                String Item_Name =mData.get(position).getTitle();
+                String Item_Sale_Price =mData.get(position).getSaleprice();
+                String Item_Price =mData.get(position).getPrice();
+                String Item_image =mData.get(position).getImage();
+                CartData.add(new CartModel(Item_Name,Item_Sale_Price,Item_Price,"1",Item_image));
+            }
+        });
+        ViewCartLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, CartData.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

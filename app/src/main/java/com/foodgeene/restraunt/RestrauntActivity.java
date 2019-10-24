@@ -40,8 +40,7 @@ public class RestrauntActivity extends AppCompatActivity {
     Toolbar toolbar;
     ShimmerFrameLayout shimmerFrameLayout;
     TextView table_number,store,Total_amount,Quanity_item_tv;
-
-    LinearLayout OrderSheet;
+    LinearLayout OrderSheet,ViewCartLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +61,7 @@ public class RestrauntActivity extends AppCompatActivity {
 
         OrderSheet = findViewById(R.id.OrderSheet);
         Quanity_item_tv = findViewById(R.id.Quanity_item_tv);
+        ViewCartLayout = findViewById(R.id.ViewCartLayout);
         Total_amount = findViewById(R.id.Total_amount);
         recyclerView = findViewById(R.id.ActsRecyclerView);
         shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
@@ -101,7 +101,7 @@ public class RestrauntActivity extends AppCompatActivity {
                         String store = response.body().getStore().trim();
                         String table = response.body().getTable().trim();
                         List<Productlist> productlists = response.body().getProductlist();
-                        RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists,OrderSheet,Total_amount,Quanity_item_tv) ;
+                        RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists,OrderSheet,Total_amount,Quanity_item_tv,ViewCartLayout) ;
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(restrauntAdapter);
                         shimmerFrameLayout.stopShimmerAnimation();
