@@ -283,7 +283,7 @@
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View Cart"
+                            android:text="Pay Now"
                             android:textColor="@android:color/white"/>
                         <ImageView
                             android:layout_marginLeft="5dp"

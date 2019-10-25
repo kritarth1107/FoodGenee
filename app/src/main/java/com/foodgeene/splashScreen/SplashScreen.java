@@ -11,6 +11,7 @@ import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.login.LoginActivity;
 import com.foodgeene.scanner.ScannerActivity;
+import com.foodgeene.success.SuccessActivity;
 
 public class SplashScreen extends AppCompatActivity {
     Handler handler;

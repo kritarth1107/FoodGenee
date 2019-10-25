@@ -1,6 +1,7 @@
 package network;
 
 import com.foodgeene.login.LoginModel;
+import com.foodgeene.payment.checksum;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.scanner.ScannerModel;
 
@@ -15,6 +16,20 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface FoodGeneeAPI {
+
+    @FormUrlEncoded
+    @POST("paytmapitest/generateChecksum.php")
+    Call<checksum> getChecksum(
+            @Field("MID") String mId,
+            @Field("ORDER_ID") String orderId,
+            @Field("CUST_ID") String custId,
+            @Field("CHANNEL_ID") String channelId,
+            @Field("TXN_AMOUNT") String txnAmount,
+            @Field("WEBSITE") String website,
+            @Field("CALLBACK_URL") String callbackUrl,
+            @Field("INDUSTRY_TYPE_ID") String industryTypeId
+    );
+
 
     @FormUrlEncoded
     @POST("users/user-registration.php")

@@ -1,6 +1,7 @@
 package com.foodgeene.restraunt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
 import com.foodgeene.cart.CartModel;
+import com.foodgeene.payment.PaymentMethod;
 import com.foodgeene.scanner.Productlist;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -183,7 +185,10 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
         ViewCartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, CartData.toString(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(mContext, PaymentMethod.class);
+                i.putExtra("amount",String.valueOf(finalAmmount));
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(i);
             }
         });
 

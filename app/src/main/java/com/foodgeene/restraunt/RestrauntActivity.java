@@ -19,6 +19,7 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.scanner.Productlist;
 import com.foodgeene.scanner.ScannerActivity;
 import com.foodgeene.scanner.ScannerModel;
+import com.foodgeene.success.SuccessActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -127,5 +128,13 @@ public class RestrauntActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent i = new Intent(RestrauntActivity.this, ScannerActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 }
