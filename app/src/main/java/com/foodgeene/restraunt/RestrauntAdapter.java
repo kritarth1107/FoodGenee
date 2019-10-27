@@ -119,6 +119,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
 
             }
         });
+
         holder.subtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +155,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 Quanity_item_tv.setText(String.valueOf(total_quantity));
             }
         });
+
         holder.add_now_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,6 +184,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 CartData.add(new CartModel(Item_Name,Item_Sale_Price,Item_Price,"1",Item_image));
             }
         });
+
         ViewCartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

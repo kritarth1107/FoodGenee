@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(status.equals("1")){
                     String user_id = response.body().getUsersid().trim();
                     sessionManager.createSession(user_id);
-                    Intent i = new Intent(LoginActivity.this, ScannerActivity.class);
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
                 }

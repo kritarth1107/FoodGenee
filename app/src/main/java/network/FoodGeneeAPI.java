@@ -1,5 +1,6 @@
 package network;
 
+import com.foodgeene.home.HomeMerchantModel;
 import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.checksum;
 import com.foodgeene.register.RegisterModel;
@@ -65,5 +66,13 @@ public interface FoodGeneeAPI {
     );
 
 
+
+    @FormUrlEncoded
+    @POST("merchant/merchants.php")
+    Call<HomeMerchantModel> merchantList(
+            @Field("action") String action,
+            @Header("Authorization") String Authorization,
+            @Header("Content-Type") String CType
+    );
 
 }
