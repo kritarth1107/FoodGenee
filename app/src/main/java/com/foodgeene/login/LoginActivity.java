@@ -85,26 +85,32 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
 
-                String status = response.body().getStatus().trim();
-                String response_text = response.body().getText().trim();
-                if(status.equals("1")){
-                    String user_id = response.body().getUsersid().trim();
-                    sessionManager.createSession(user_id);
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
+                try {
+
+                    assert response.body() != null;
+                    String status = response.body().getStatus();
+                    String response_text = response.body().getText().trim();
+                    if (status.equals("1")) {
+                        String user_id = response.body().getUsersid().trim();
+                        sessionManager.createSession(user_id);
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    } else if (status.equals("0")) {
+                        Toast.makeText(LoginActivity.this, response_text, Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    progressBarLogin.setVisibility(View.GONE);
+                    login.setVisibility(View.VISIBLE);
+
+
+                } catch (Exception e) {
+
+                    Toast.makeText(LoginActivity.this, "Something went wrong, Try again later", Toast.LENGTH_SHORT).show();
+
                 }
-                else if(status.equals("0")){
-                    Toast.makeText(LoginActivity.this, response_text, Toast.LENGTH_SHORT).show();
-                }
-
-
-                progressBarLogin.setVisibility(View.GONE);
-                login.setVisibility(View.VISIBLE);
-
-
             }
-
             @Override
             public void onFailure(Call<LoginModel> call, Throwable t) {
                 progressBarLogin.setVisibility(View.GONE);

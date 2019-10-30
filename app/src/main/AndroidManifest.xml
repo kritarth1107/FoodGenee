@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UpdateProfile"></activity>
+        <activity android:name="updateprofile.UpdateProfile"></activity>
         <activity android:name=".success.PodSuccess" />
         <activity android:name=".payment.PaymentMethod" />
         <activity android:name=".success.SuccessActivity" />

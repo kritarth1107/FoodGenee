@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.foodgeene.R;
-import com.foodgeene.UpdateProfile;
+import updateprofile.UpdateProfile;
 
 /**
  * A simple {@link Fragment} subclass.

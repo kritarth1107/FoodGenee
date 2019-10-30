@@ -15,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import updateprofile.UpdateModel;
 
 public interface FoodGeneeAPI {
 
@@ -75,4 +76,15 @@ public interface FoodGeneeAPI {
             @Header("Content-Type") String CType
     );
 
+
+    @FormUrlEncoded
+    @POST("users/user-profile.php")
+    Call<UpdateModel> updateUser(
+            @Field("action") String action,
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("password") String password,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
 }
