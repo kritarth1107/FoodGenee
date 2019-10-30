@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
 
 import java.util.List;
@@ -19,10 +20,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     List<Merchantlist> list;
     Context context;
+    RequestOptions option;
 
     public HomeAdapter(List<Merchantlist> list, Context context) {
         this.list = list;
         this.context = context;
+        option = new RequestOptions().centerCrop().placeholder(R.drawable.background).error(R.drawable.background);
+
     }
 
     @NonNull
@@ -40,11 +44,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
 
         Glide.with(context)
-                .load(list.get(position).getLogo())
+                .load(list.get(position).getCoverpic())
+                .apply(option)
                 .into(holder.merchImage);
-
-        holder.merchName.setText(list.get(position).getName());
-        holder.merchLoc.setText(list.get(position).getCity());
+        holder.merchName.setText(list.get(position).getStorename());
+        holder.merchType.setText(list.get(position).getStoretype());
+        holder.merchLoc.setText(list.get(position).getCity()+", "+list.get(position).getState());
 
     }
 
@@ -56,13 +61,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public class HomeViewHolder extends RecyclerView.ViewHolder {
 
         ImageView merchImage;
-        TextView merchName, merchLoc;
+        TextView merchName, merchType,merchLoc;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
 
             merchImage = itemView.findViewById(R.id.merchantImage);
             merchName = itemView.findViewById(R.id.merchantName);
-            merchLoc = itemView.findViewById(R.id.merchLocation);
+            merchType = itemView.findViewById(R.id.merchantType);
+            merchLoc = itemView.findViewById(R.id.merchantLocation);
 
 
 

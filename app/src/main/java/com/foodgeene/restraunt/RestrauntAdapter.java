@@ -36,17 +36,23 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
     Integer quantity,finalAmmount=0,total_quantity=0;
     String Q_String;
     List<CartModel> CartData= new ArrayList<>();
+    ArrayList<String> itemIdList = new ArrayList<String>();
+    ArrayList<String> itemCountList = new ArrayList<String>();
+    ArrayList<String> itemPriceList = new ArrayList<String>();
+    String merchandid,table;
 
 
 
     BottomSheetBehavior bottomSheetBehavior;
 
-    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv,LinearLayout ViewCartLayout) {
+    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv,LinearLayout ViewCartLayout,String table, String merchandid) {
         this.mContext = mContext;
         this.mData = mData;
         this.OrderSheet = OrderSheet;
         this.Total_amount = Total_amount;
         this.Quanity_item_tv = Quanity_item_tv;
+        this.merchandid = merchandid;
+        this.table = table;
         this.ViewCartLayout = ViewCartLayout;
         option = new RequestOptions().centerCrop().placeholder(R.drawable.ic_image).error(R.drawable.ic_image);
 
@@ -115,7 +121,16 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 finalAmmount = finalAmmount+SalePrice;
                 Total_amount.setText(String.valueOf(finalAmmount));
                 total_quantity = total_quantity+1;
+                Integer price = quantity*SalePrice;
                 Quanity_item_tv.setText(String.valueOf(total_quantity));
+                int pos = itemIdList.indexOf(mData.get(position).getId());
+                itemIdList.remove(pos);
+                itemCountList.remove(pos);
+                itemPriceList.remove(pos);
+                itemIdList.add(mData.get(position).getId());
+                itemCountList.add(String.valueOf(quantity));
+                itemPriceList.add(String.valueOf(price));
+
 
             }
         });
@@ -127,10 +142,31 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 Q_String = holder.quantity_tv.getText().toString().trim();
                 quantity = Integer.parseInt(Q_String);
                 quantity = quantity-1;
+
+                String saleP = mData.get(position).getSaleprice();
+                Integer SalePrice = Integer.parseInt(saleP);
+                finalAmmount = finalAmmount-SalePrice;
+                if(finalAmmount==0){
+                    OrderSheet.setVisibility(View.GONE);
+                    OrderSheet.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_down));
+                }
+                Total_amount.setText(String.valueOf(finalAmmount));
+                total_quantity = total_quantity-1;
+                Quanity_item_tv.setText(String.valueOf(total_quantity));
+                Integer price = quantity*SalePrice;
+
                 if(quantity>0){
 
                     holder.quantity_tv.setText(String.valueOf(quantity));
                     holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
+                    int pos = itemIdList.indexOf(mData.get(position).getId());
+                    itemIdList.remove(pos);
+                    itemCountList.remove(pos);
+                    itemPriceList.remove(pos);
+                    itemIdList.add(mData.get(position).getId());
+                    itemCountList.add(String.valueOf(quantity));
+                    itemPriceList.add(String.valueOf(price));
+
                 }
                 else{
                     holder.add.setVisibility(View.GONE);
@@ -142,17 +178,11 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                     holder.add.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
                     holder.quantity_card.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
                     holder.subtract.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_out_right));
+                    int pos = itemIdList.indexOf(mData.get(position).getId());
+                    itemIdList.remove(pos);
+                    itemCountList.remove(pos);
+                    itemPriceList.remove(pos);
                 }
-                String saleP = mData.get(position).getSaleprice();
-                Integer SalePrice = Integer.parseInt(saleP);
-                finalAmmount = finalAmmount-SalePrice;
-                if(finalAmmount==0){
-                    OrderSheet.setVisibility(View.GONE);
-                    OrderSheet.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_down));
-                }
-                Total_amount.setText(String.valueOf(finalAmmount));
-                total_quantity = total_quantity-1;
-                Quanity_item_tv.setText(String.valueOf(total_quantity));
             }
         });
 
@@ -182,17 +212,25 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 String Item_Price =mData.get(position).getPrice();
                 String Item_image =mData.get(position).getImage();
                 CartData.add(new CartModel(Item_Name,Item_Sale_Price,Item_Price,"1",Item_image));
+                itemIdList.add(mData.get(position).getId());
+                itemCountList.add("1");
+                itemPriceList.add(mData.get(position).getSaleprice());
             }
         });
 
         ViewCartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(mContext, PaymentMethod.class);
-                i.putExtra("amount",String.valueOf(finalAmmount));
+                i.putExtra("totalamount",String.valueOf(finalAmmount));
+                i.putExtra("productid",itemIdList.toString());
+                i.putExtra("count",itemCountList.toString());
+                i.putExtra("price",itemPriceList.toString());
+                i.putExtra("merchandid",merchandid);
+                i.putExtra("table",table);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(i);
-            }
+                mContext.startActivity(i);}
         });
 
 

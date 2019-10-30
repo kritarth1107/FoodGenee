@@ -99,8 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                     } else if (status.equals("0")) {
                         Toast.makeText(LoginActivity.this, response_text, Toast.LENGTH_SHORT).show();
                     }
-
-
                     progressBarLogin.setVisibility(View.GONE);
                     login.setVisibility(View.VISIBLE);
 

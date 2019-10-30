@@ -3,26 +3,21 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home_24dp"
+        android:icon="@drawable/ic_home"
         android:title="@string/home" />
 
     <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="@string/search" />
-
-    <item
         android:id="@+id/nav_scan"
-        android:icon="@drawable/ic_crop_3_2_black_24dp"
+        android:icon="@drawable/ic_qr_code_black"
         android:title="@string/scan" />
 
     <item
         android:id="@+id/nav_cart"
-        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:icon="@drawable/ic_cart"
         android:title="@string/cart" />
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/ic_person_black"
         android:title="@string/profile" />
 
 </menu>

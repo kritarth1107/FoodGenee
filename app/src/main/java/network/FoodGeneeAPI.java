@@ -87,4 +87,31 @@ public interface FoodGeneeAPI {
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
+    @FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<RegisterModel> OrderByCash(
+            @Field("action") String action,
+            @Field("merchantid") String merchantid,
+            @Field("table") String table,
+            @Field("productid") String productid,
+            @Field("count") String count,
+            @Field("price") String price,
+            @Field("totalamount") String totalamount,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );@FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<RegisterModel> OrderByPrePaid(
+                    @Field("action") String action,
+                    @Field("merchantid") String merchantid,
+                    @Field("table") String table,
+                    @Field("productid") String productid,
+                    @Field("count") String count,
+                    @Field("price") String price,
+                    @Field("totalamount") String totalamount,
+                    @Field("transactionid") String transactionid,
+                    @Field("transactiondate") String transactiondate,
+                    @Header("Authorization") String Auth,
+                    @Header("Content-Type") String Ctype
+            );
 }

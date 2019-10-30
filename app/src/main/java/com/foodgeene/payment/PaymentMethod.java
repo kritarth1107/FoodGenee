@@ -31,7 +31,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     CardView paytm,pod;
     TextView paytm_tv,pod_tv;
     Intent get;
-    String amount;
+    String totalamount,merchantid,productid,count,price,table;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +42,14 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         paytm_tv = findViewById(R.id.amount_tv_paytm);
         pod_tv = findViewById(R.id.amount_tv_pod);
         get = getIntent();
-        amount = get.getStringExtra("amount");
-        paytm_tv.setText(amount);
-        pod_tv.setText(amount);
+        merchantid = get.getStringExtra("merchandid");
+        productid = get.getStringExtra("productid");
+        count = get.getStringExtra("count");
+        price = get.getStringExtra("price");
+        table = get.getStringExtra("table");
+        totalamount = get.getStringExtra("totalamount");
+        paytm_tv.setText(totalamount);
+        pod_tv.setText(totalamount);
         toolbar = findViewById(R.id.toolbar);
         paytm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +68,12 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(PaymentMethod.this, PodSuccess.class);
-                i.putExtra("amount",amount);
+                i.putExtra("totalamount",totalamount);
+                i.putExtra("productid",productid);
+                i.putExtra("count",count);
+                i.putExtra("price",price);
+                i.putExtra("merchandid",merchantid);
+                i.putExtra("table",table);
                 startActivity(i);
             }
         });
@@ -79,7 +89,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         final Paytm paytm = new Paytm(
                 Constants.M_ID,
                 Constants.CHANNEL_ID,
-                amount,
+                totalamount,
                 Constants.WEBSITE,
                 Constants.CALLBACK_URL,
                 Constants.INDUSTRY_TYPE_ID
@@ -174,7 +184,14 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
 
         if(status.equals("TXN_SUCCESS")){
             Intent i = new Intent(PaymentMethod.this, SuccessActivity.class);
-            i.putExtra("amount",amount);
+            i.putExtra("totalamount",totalamount);
+            i.putExtra("productid",productid);
+            i.putExtra("count",count);
+            i.putExtra("price",price);
+            i.putExtra("merchandid",merchantid);
+            i.putExtra("table",table);
+            i.putExtra("TXNID",TXNID);
+            i.putExtra("TXNDATE",TXNDATE);
             startActivity(i);
         }
         else{

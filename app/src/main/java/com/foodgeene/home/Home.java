@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 
@@ -32,6 +33,7 @@ public class Home extends Fragment {
 
     RecyclerView merchantListReycler;
     HomeAdapter homeAdapter;
+    ShimmerFrameLayout shimmerFrameLayout;
 
 
     public Home() {
@@ -45,6 +47,8 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         merchantListReycler = rootView.findViewById(R.id.mercRecycler);
+        //shimmer
+        shimmerFrameLayout = rootView.findViewById(R.id.shimmer_view_container);
 
         bindViews(rootView);
         setupRecyclerView();
@@ -65,6 +69,8 @@ public class Home extends Fragment {
 
         String userToken = user.get(sessionManager.USER_ID);
 
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmerAnimation();
 
         Call<HomeMerchantModel> call = foodGeneeAPI.merchantList("merchants", userToken, "application/x-www-form-urlencoded");
         call.enqueue(new Callback<HomeMerchantModel>() {
@@ -78,10 +84,15 @@ public class Home extends Fragment {
                     homeAdapter = new HomeAdapter(retrievedMerchantList, getContext());
                     merchantListReycler.setAdapter(homeAdapter);
                     merchantListReycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
                 }
                 else if(homeMerchantModel.getStatus()==0){
 
                     Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
 
                 }
 //                else{
@@ -94,6 +105,8 @@ public class Home extends Fragment {
             @Override
             public void onFailure(Call<HomeMerchantModel> call, Throwable t) {
                 Toast.makeText(getContext(), "Try again", Toast.LENGTH_SHORT).show();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                shimmerFrameLayout.stopShimmerAnimation();
 
 
             }

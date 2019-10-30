@@ -14,12 +14,39 @@
         app:lottie_rawRes="@raw/tick_animation"
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />
+    <LinearLayout
+        android:visibility="invisible"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/Loading"
+        android:layout_centerInParent="true"
+        android:layout_width="250dp"
+        android:layout_height="250dp">
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:text="Processing Order"
+            android:textSize="28sp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/hallosans"
+            android:textStyle="bold"/>
+    </LinearLayout>
+<LinearLayout
+    android:id="@+id/detailsTaba"
+    android:orientation="vertical"
+    android:layout_below="@id/animation_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
         android:id="@+id/Suceess_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/animation_view"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:text="Order Recieved"
@@ -32,7 +59,6 @@
         android:id="@+id/Amount_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Suceess_text"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:text="Amount Due - Rs. 500"
@@ -41,12 +67,11 @@
         android:fontFamily="@font/hallosans"
         android:textStyle="bold"/>
     <LinearLayout
+        android:layout_gravity="center_horizontal"
         android:id="@+id/place_order_layout"
         android:padding="10dp"
         android:background="@drawable/gradient_corner"
-        android:layout_margin="15dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="70dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
@@ -58,5 +83,7 @@
             android:textSize="15sp"/>
 
     </LinearLayout>
+</LinearLayout>
+
 
 </RelativeLayout>

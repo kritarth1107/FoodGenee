@@ -1,39 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp"
+    app:cardElevation="0dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.3"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="2dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/merchantImage"/>
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/merchantImage"/>
+        </androidx.cardview.widget.CardView>
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_weight="0.7"
+        android:paddingLeft="10dp"
+
+        >
         <TextView
+            android:textColor="@color/humara_black"
+            android:textStyle="bold"
+            android:textSize="18sp"
             android:id="@+id/merchantName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Merchant Name"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/merchantImage"
-            android:layout_marginTop="10dp"/>
+            android:text="Merchant Name"/>
 
         <TextView
-            android:id="@+id/merchLocation"
+            android:textColor="@color/humara_black"
+            android:id="@+id/merchantType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Merchant Location"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorPrimary"
-            android:layout_below="@id/merchantName"
-            android:layout_toRightOf="@id/merchantImage"
-            android:layout_marginTop="10dp"/>
+            android:text="Merchant Type"/>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray"
+            android:alpha="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp">
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_placeholder"/>
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:textSize="12sp"
+                android:id="@+id/merchantLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Merchant Location"
+                android:textColor="@color/DarkRed"/>
 
 
-    </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

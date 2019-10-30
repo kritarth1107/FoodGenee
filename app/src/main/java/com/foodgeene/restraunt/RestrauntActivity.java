@@ -102,7 +102,7 @@ public class RestrauntActivity extends AppCompatActivity {
                         String store = response.body().getStore().trim();
                         String table = response.body().getTable().trim();
                         List<Productlist> productlists = response.body().getProductlist();
-                        RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists,OrderSheet,Total_amount,Quanity_item_tv,ViewCartLayout) ;
+                        RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists,OrderSheet,Total_amount,Quanity_item_tv,ViewCartLayout,table,merchandid) ;
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(restrauntAdapter);
                         shimmerFrameLayout.stopShimmerAnimation();

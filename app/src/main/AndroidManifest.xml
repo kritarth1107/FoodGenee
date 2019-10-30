@@ -22,14 +22,14 @@
 
         </activity>
         <activity android:name=".register.RegistrationActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".splashScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".splashScreen.SplashScreen"></activity>
+        <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".payment.checksum" />
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"

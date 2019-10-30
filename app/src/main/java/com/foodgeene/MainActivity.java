@@ -21,13 +21,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     SessionManager sessionManager;
     Button logoutButton;
+    String Current_Tab="Home";
+    BottomNavigationView navigation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sessionManager = new SessionManager(this);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Fragment fragment;
+        fragment = new Home();
+        loadFragment(fragment);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -38,22 +43,25 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.nav_home:
+                    if(Current_Tab.equals("Home")){
+                    }
+                    else{
+                        Current_Tab="Home";
                     fragment = new Home();
                     loadFragment(fragment);
-                    return true;
-                case R.id.nav_search:
-                    fragment = new Search();
-                    loadFragment(fragment);
-                    return true;
+
+                    }
+                    break;
                 case R.id.nav_scan:
                     startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
-                    return true;
+                    break;
                 case R.id.nav_cart:
-                    return true;
+                    break;
                 case R.id.nav_profile:
+                    Current_Tab="Profile";
                     fragment = new Profile();
                     loadFragment(fragment);
-                    return true;
+                    break;
 
             }
             return false;
@@ -69,4 +77,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(Current_Tab.equals("Home")){
+            finish();
+        }
+        else{
+            Current_Tab="Home";
+            Fragment fragment;
+            fragment = new Home();
+            loadFragment(fragment);
+
+        }
+    }
 }

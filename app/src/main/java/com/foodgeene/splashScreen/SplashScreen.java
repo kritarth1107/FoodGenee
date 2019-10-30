@@ -29,7 +29,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 if(sessionManager.isLoggin()){
 
-                    Intent intent=new Intent(SplashScreen.this, ScannerActivity.class);
+                    Intent intent=new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
