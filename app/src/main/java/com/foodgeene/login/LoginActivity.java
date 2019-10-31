@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText Email,Password;
-    TextView NavigateToReg,forotPassword;
+    TextView NavigateToReg,forgotPassword;
     Button login;
     ProgressBar progressBarLogin;
     SessionManager sessionManager;
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         NavigateToReg = findViewById(R.id.NavigateToReg);
         login = findViewById(R.id.LoginButton);
         progressBarLogin = findViewById(R.id.progressBarLogin);
-        forotPassword = findViewById(R.id.forotPassword);
+        forgotPassword = findViewById(R.id.forotPassword);
 
         NavigateToReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
-        forotPassword.setOnClickListener(new View.OnClickListener() {
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, ForgotActivity.class));

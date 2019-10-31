@@ -15,7 +15,6 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.home.Home;
 import com.foodgeene.profile.Profile;
 import com.foodgeene.scanner.ScannerActivity;
-import com.foodgeene.search.Search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

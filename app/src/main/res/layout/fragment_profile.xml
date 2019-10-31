@@ -48,6 +48,41 @@
             android:layout_marginTop="10dp" />
 
 
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+            android:layout_below="@id/editProfile"
+            android:layout_centerHorizontal="true"
+            android:text="Name"/>
+
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:drawablePadding="10dp"
+            android:layout_below="@id/userName"
+            android:layout_centerHorizontal="true"
+            android:text="Email"/>
+
+        <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+            android:layout_below="@id/userEmail"
+            android:layout_centerHorizontal="true"
+            android:text="Phone"/>
+
+
     </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>

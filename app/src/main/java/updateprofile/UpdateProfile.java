@@ -31,10 +31,9 @@ public class UpdateProfile extends AppCompatActivity {
 
 
         initViews();
-
         updateButton.setOnClickListener(view -> {
-
             updateUserDetails();
+
         });
 
     }
@@ -88,7 +87,6 @@ public class UpdateProfile extends AppCompatActivity {
         userName = findViewById(R.id.changeName);
         userEmail = findViewById(R.id.changeEmail);
         userPassword = findViewById(R.id.changePassword);
-
 
         updateButton = findViewById(R.id.updateButton);
 
