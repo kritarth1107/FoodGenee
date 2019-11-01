@@ -1,28 +1,25 @@
 package network;
 
+import com.foodgeene.cart.Orderlist;
 import com.foodgeene.home.HomeMerchantModel;
 import com.foodgeene.login.LoginModel;
-import com.foodgeene.payment.checksum;
+import com.foodgeene.payment.Checksum;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.scanner.ScannerModel;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import updateprofile.UpdateModel;
 
 public interface FoodGeneeAPI {
 
     @FormUrlEncoded
     @POST("paytmapitest/generateChecksum.php")
-    Call<checksum> getChecksum(
+    Call<Checksum> getChecksum(
             @Field("MID") String mId,
             @Field("ORDER_ID") String orderId,
             @Field("CUST_ID") String custId,
@@ -123,4 +120,14 @@ public interface FoodGeneeAPI {
                     @Header("Authorization") String Auth,
                     @Header("Content-Type") String Ctype
             );
+    @FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<Orderlist> GetOrderList(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+
+
 }

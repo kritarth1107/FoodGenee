@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.cart.Orders;
 import com.foodgeene.home.Home;
 import com.foodgeene.profile.Profile;
 import com.foodgeene.scanner.ScannerActivity;
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
                     break;
                 case R.id.nav_cart:
+                    Current_Tab="Cart";
+                    fragment = new Orders();
+                    loadFragment(fragment);
                     break;
                 case R.id.nav_profile:
                     Current_Tab="Profile";

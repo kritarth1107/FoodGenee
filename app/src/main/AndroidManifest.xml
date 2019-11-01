@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity"></activity>
-        <activity android:name=".payment.checksum" />
+        <activity android:name=".payment.Checksum" />
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"

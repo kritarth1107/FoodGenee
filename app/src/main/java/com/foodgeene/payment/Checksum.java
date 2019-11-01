@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class checksum {
+public class Checksum {
 
     @SerializedName("CHECKSUMHASH")
     private String checksumHash;
@@ -32,7 +32,7 @@ public class checksum {
     @SerializedName("payt_STATUS")
     private String paytStatus;
 
-    public checksum(String checksumHash, String orderId, String paytStatus) {
+    public Checksum(String checksumHash, String orderId, String paytStatus) {
         this.checksumHash = checksumHash;
         this.orderId = orderId;
         this.paytStatus = paytStatus;

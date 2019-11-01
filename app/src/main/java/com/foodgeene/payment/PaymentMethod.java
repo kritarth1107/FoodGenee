@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
-import com.foodgeene.restraunt.RestrauntActivity;
-import com.foodgeene.scanner.ScannerActivity;
+import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.register.RegisterModel;
 import com.foodgeene.success.PodSuccess;
 import com.foodgeene.success.SuccessActivity;
 import com.paytm.pgsdk.PaytmOrder;
@@ -23,6 +23,7 @@ import java.util.HashMap;
 
 import network.FoodGeneeAPI;
 import network.PaytmRetrofitClient;
+import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,10 +34,16 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     Intent get;
     String totalamount,merchantid,productid,count,price,table;
     Toolbar toolbar;
+    String UserToken;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_method);
+        sessionManager = new SessionManager(this);
+
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        UserToken = user.get(sessionManager.USER_ID);
         paytm = findViewById(R.id.paytm_card);
         pod = findViewById(R.id.pod_card);
         paytm_tv = findViewById(R.id.amount_tv_paytm);
@@ -51,6 +58,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         paytm_tv.setText(totalamount);
         pod_tv.setText(totalamount);
         toolbar = findViewById(R.id.toolbar);
+
+
         paytm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +83,27 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                 i.putExtra("price",price);
                 i.putExtra("merchandid",merchantid);
                 i.putExtra("table",table);
-                startActivity(i);
+
+                FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+                Call<RegisterModel> call = foodGeneeAPI.OrderByCash("cash", merchantid, table, productid, count, price,totalamount,UserToken,"application/x-www-form-urlencoded");
+                call.enqueue(new Callback<RegisterModel>() {
+                    @Override
+                    public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+                        try {
+                            startActivity(i);
+                        }
+                        catch (Exception e)
+                        {
+                            Toast.makeText(PaymentMethod.this, "Order Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RegisterModel> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
     }
@@ -84,8 +113,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
 
         FoodGeneeAPI foodGeneeAPI = PaytmRetrofitClient.getApiClient().create(FoodGeneeAPI.class);
 
-        //creating paytm object
-        //containing all the values required
+
         final Paytm paytm = new Paytm(
                 Constants.M_ID,
                 Constants.CHANNEL_ID,
@@ -96,7 +124,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         );
 
         //creating a call object from the apiService
-        Call<checksum> call = foodGeneeAPI.getChecksum(
+        Call<Checksum> call = foodGeneeAPI.getChecksum(
                 paytm.getmId(),
                 paytm.getOrderId(),
                 paytm.getCustId(),
@@ -107,13 +135,13 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                 paytm.getIndustryTypeId()
         );
 
-        //making the call to generate checksum
-        call.enqueue(new Callback<checksum>() {
+        //making the call to generate Checksum
+        call.enqueue(new Callback<Checksum>() {
             @Override
-            public void onResponse(Call<checksum> call, Response<checksum> response) {
+            public void onResponse(Call<Checksum> call, Response<Checksum> response) {
 
-                //once we get the checksum we will initiailize the payment.
-                //the method is taking the checksum we got and the paytm object as the parameter
+                //once we get the Checksum we will initiailize the payment.
+                //the method is taking the Checksum we got and the paytm object as the parameter
                 if(paytm.getTxnAmount().equals("0")){}
                 else{
                     initializePaytmPayment(response.body().getChecksumHash(), paytm);
@@ -122,7 +150,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             }
 
             @Override
-            public void onFailure(Call<checksum> call, Throwable t) {
+            public void onFailure(Call<Checksum> call, Throwable t) {
 
             }
         });

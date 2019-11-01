@@ -9,16 +9,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
-import com.foodgeene.cart.CartModel;
 import com.foodgeene.payment.PaymentMethod;
 import com.foodgeene.scanner.Productlist;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -35,7 +32,6 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
     RequestOptions option;
     Integer quantity,finalAmmount=0,total_quantity=0;
     String Q_String;
-    List<CartModel> CartData= new ArrayList<>();
     ArrayList<String> itemIdList = new ArrayList<String>();
     ArrayList<String> itemCountList = new ArrayList<String>();
     ArrayList<String> itemPriceList = new ArrayList<String>();
@@ -211,7 +207,6 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 String Item_Sale_Price =mData.get(position).getSaleprice();
                 String Item_Price =mData.get(position).getPrice();
                 String Item_image =mData.get(position).getImage();
-                CartData.add(new CartModel(Item_Name,Item_Sale_Price,Item_Price,"1",Item_image));
                 itemIdList.add(mData.get(position).getId());
                 itemCountList.add("1");
                 itemPriceList.add(mData.get(position).getSaleprice());
@@ -230,6 +225,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 i.putExtra("merchandid",merchandid);
                 i.putExtra("table",table);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 mContext.startActivity(i);}
         });
 
@@ -271,9 +267,6 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
             subtract = itemView.findViewById(R.id.subtract_button);
             quantity_card = itemView.findViewById(R.id.quantity_card);
             add_now_tv = itemView.findViewById(R.id.add_now_tv);
-
-
-
 
         }
     }
