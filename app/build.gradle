@@ -40,6 +40,7 @@ dependencies {
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     // Glide library
     implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'com.android.support:support-v4:29.+'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
@@ -64,5 +65,6 @@ dependencies {
 
     //logginginterceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
+
 
 }

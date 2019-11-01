@@ -3,6 +3,7 @@ package network;
 import com.foodgeene.home.HomeMerchantModel;
 import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.checksum;
+import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.scanner.ScannerModel;
 
@@ -67,6 +68,14 @@ public interface FoodGeneeAPI {
     );
 
 
+
+    @FormUrlEncoded
+    @POST("users/user-profile.php")
+    Call<UserModel> userDetails(
+            @Field("action") String action,
+            @Header("Authorization") String Authorization,
+            @Header("Content-Type") String CType
+    );
 
     @FormUrlEncoded
     @POST("merchant/merchants.php")

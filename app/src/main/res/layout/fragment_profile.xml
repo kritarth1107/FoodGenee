@@ -18,11 +18,21 @@
         <View
             android:layout_width="match_parent"
             android:background="@color/colorPrimary"
-            android:layout_height="200dp">
+            android:layout_height="180dp">
 
 
 
         </View>
+
+       <ImageView
+           android:id="@+id/appsettings"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentEnd="true"
+           android:layout_marginRight="20dp"
+           android:layout_marginTop="10dp"
+           android:src="@drawable/ic_settings_black_24dp"/>
+
 
 
         <de.hdodenhof.circleimageview.CircleImageView

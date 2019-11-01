@@ -7,24 +7,23 @@
     tools:context="updateprofile.UpdateProfile">
 
 
-
     <RelativeLayout
         android:id="@+id/updatetoolbr"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="54dp"
         android:background="@color/colorPrimary">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:text="Update Profile"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Update Profile"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -42,25 +41,29 @@
       android:layout_height="wrap_content"
       android:layout_below="@id/userPic"
       android:layout_marginTop="20dp"
+      android:layout_centerHorizontal="true"
       android:text="Profile Details"
       android:layout_marginLeft="20dp"
       />
 
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layone"
-        android:layout_marginTop="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/profileDetailsText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
             android:id="@+id/changeName"
-            android:hint="Name"
-            android:layout_height="wrap_content"/>
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+            android:layout_centerHorizontal="true"
+            android:hint="Name" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -70,14 +73,17 @@
         android:id="@+id/laytwo"
         android:layout_marginTop="10dp"
         android:layout_below="@id/layone"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
         android:layout_height="wrap_content">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:id="@+id/changeEmail"
             android:hint="@string/email"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_email_black_24dp"
             android:layout_height="wrap_content"/>
 
 
@@ -87,14 +93,17 @@
         android:id="@+id/laythree"
         android:layout_marginTop="10dp"
         android:layout_below="@id/laytwo"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
         android:layout_height="wrap_content">
 
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:id="@+id/changePassword"
-            android:hint="@string/password"
+            android:hint="Phone"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_local_phone_black_24dp"
             android:layout_height="wrap_content"/>
 
 
