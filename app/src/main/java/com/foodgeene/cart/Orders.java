@@ -58,22 +58,16 @@ public class Orders extends Fragment {
         String userToken = user.get(sessionManager.USER_ID);
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<Orderlist> call = foodGeneeAPI.GetOrderList("orderlist",userToken,"application/x-www-form-urlencoded");
-        call.enqueue(new Callback<Orderlist>() {
+        Call<Order> call = foodGeneeAPI.GetOrderList("orderlist",userToken,"application/x-www-form-urlencoded");
+        call.enqueue(new Callback<Order>() {
             @Override
-            public void onResponse(Call<Orderlist> call, Response<Orderlist> response) {
+            public void onResponse(Call<Order> call, Response<Order> response) {
                 try {
-                    String status = response.body().getStatus().trim();
-                    if (status.equals("1")) {
-                        List<Order> order = response.body().getOrders();
-
-                        OrderlistAdapter orderlistAdapter = new OrderlistAdapter(getContext(), order);
+                        List<Product> productList = response.body().getProducts();
+                        OrderlistAdapter orderlistAdapter = new OrderlistAdapter(getContext(), productList);
                         cart_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                         cart_recyclerView.setAdapter(orderlistAdapter);
 
-
-                    } else if (status.equals("0")) {
-                    }
 
 
                 }
@@ -82,7 +76,7 @@ public class Orders extends Fragment {
 
             }
             @Override
-            public void onFailure(Call<Orderlist> call, Throwable t) {
+            public void onFailure(Call<Order> call, Throwable t) {
                 Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

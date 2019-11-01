@@ -19,12 +19,12 @@ import java.util.List;
 
 public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.HomeViewHolder> {
 
-    List<Order> list;
+    List<Product> list;
     Context context;
     RequestOptions option;
 
 
-    public OrderlistAdapter(Context context,List<Order> list) {
+    public OrderlistAdapter(Context context,List<Product> list) {
         this.list = list;
         this.context = context;
         option = new RequestOptions().centerCrop().placeholder(R.drawable.background).error(R.drawable.background);
@@ -45,11 +45,9 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
 
-        List<Product> products = list.get(position).getProducts();
-
-        holder.Amount_cart.setText(products.get(position).getPrice());
-        holder.Name_cart.setText(products.get(position).getName());
-        holder.Quantity_cart.setText(products.get(position).getCount());
+        holder.Amount_cart.setText(list.get(position).getPrice());
+        holder.Name_cart.setText(list.get(position).getName());
+        holder.Quantity_cart.setText(list.get(position).getCount());
 
     }
 
