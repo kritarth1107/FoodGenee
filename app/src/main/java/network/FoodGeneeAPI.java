@@ -18,7 +18,7 @@ import updateprofile.UpdateModel;
 public interface FoodGeneeAPI {
 
     @FormUrlEncoded
-    @POST("paytmapitest/generateChecksum.php")
+    @POST("paytmapi/generateChecksum.php")
     Call<Checksum> getChecksum(
             @Field("MID") String mId,
             @Field("ORDER_ID") String orderId,
@@ -89,7 +89,7 @@ public interface FoodGeneeAPI {
             @Field("action") String action,
             @Field("name") String name,
             @Field("email") String email,
-            @Field("password") String password,
+            @Field("mobile") String mobile,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );

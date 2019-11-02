@@ -33,6 +33,7 @@ public class SuccessActivity extends AppCompatActivity {
     SessionManager sessionManager;
     LottieAnimationView animation_view;
     Integer SUCCESS_TEXT = 0;
+    StringBuilder ProductIdBuilder,CountBuilder,PriceBuilder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,15 @@ public class SuccessActivity extends AppCompatActivity {
         price = get.getStringExtra("price");
         table = get.getStringExtra("table");
         totalamount = get.getStringExtra("totalamount");
+        /*ProductIdBuilder = new StringBuilder(productid);
+        ProductIdBuilder.deleteCharAt(0);
+        ProductIdBuilder.deleteCharAt(productid.length()-1);
+        CountBuilder = new StringBuilder(count);
+        CountBuilder.deleteCharAt(0);
+        CountBuilder.deleteCharAt(count.length()-1);
+        PriceBuilder = new StringBuilder(price);
+        PriceBuilder.deleteCharAt(0);
+        PriceBuilder.deleteCharAt(price.length()-1);*/
         TXNID = get.getStringExtra("TXNID");
         TXNDATE = get.getStringExtra("TXNDATE");
         sessionManager = new SessionManager(this);
@@ -64,6 +74,8 @@ public class SuccessActivity extends AppCompatActivity {
 
             }
         });
+
+        PlaceOrder();
     }
 
     public void PlaceOrder(){

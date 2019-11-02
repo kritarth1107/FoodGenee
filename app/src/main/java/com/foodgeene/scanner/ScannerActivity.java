@@ -149,7 +149,11 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     public void onBackPressed() {
         if(ActivityString.equals("Home")){
-            finish();
+
+            Intent intent = new Intent(ScannerActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         }
         else{
             ActivityString="Home";

@@ -111,7 +111,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     private void generateCheckSum() {
 
 
-        FoodGeneeAPI foodGeneeAPI = PaytmRetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
 
 
         final Paytm paytm = new Paytm(

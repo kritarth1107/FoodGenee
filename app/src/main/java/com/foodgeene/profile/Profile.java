@@ -37,7 +37,7 @@ import updateprofile.UpdateProfile;
  */
 public class Profile extends Fragment {
 
-    LinearLayout editProfile;
+    LinearLayout editProfile,logout;
     SessionManager sessionManager;
     String token;
     TextView name, email, mobile;
@@ -59,10 +59,13 @@ public class Profile extends Fragment {
         name = rootView.findViewById(R.id.userName);
         email = rootView.findViewById(R.id.userEmail);
         mobile = rootView.findViewById(R.id.userPhone);
-
+        logout = rootView.findViewById(R.id.logout);
         editProfile = rootView.findViewById(R.id.editProfile);
         editProfile.setOnClickListener(view -> {
             startActivity(new Intent(getActivity(), UpdateProfile.class));
+        });
+        logout.setOnClickListener(view -> {
+            sessionManager.logout();
         });
         return rootView;
 
