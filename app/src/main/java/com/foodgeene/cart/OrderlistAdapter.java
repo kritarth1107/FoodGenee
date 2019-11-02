@@ -2,6 +2,7 @@ package com.foodgeene.cart;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,12 +56,22 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
         holder.OrderStatus.setText(list.get(position).getOrderprocess());
         holder.PaymentStatus.setText(list.get(position).getPaidstatus());
         ArrayList arrayList = new ArrayList<>(list.get(position).getProducts());
+//        List<Product> l = list.get(position).getProducts();
+//        List<Product> newList = new ArrayList<>();
+//        for(Product product: l){
+//            newList.add(product);
+//        }
 
         holder.OrderCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<Product> products = new ArrayList<Product>(list.get(position).getProducts());
                 Intent intent = new Intent(context,OrderDetails.class);
-                intent.putParcelableArrayListExtra("newList",arrayList);
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",(Serializable)products);
+                intent.putExtra("BUNDLE",args);
+                intent.putExtra("Restraunt",list.get(position).getStorename());
+                intent.putExtra("id",list.get(position).getOrderId());
                 context.startActivity(intent);
             }
         });
@@ -67,12 +79,7 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 
     @Override
     public int getItemCount() {
-        try{
             return list.size();
-        }catch (Exception e){
-
-        }
-        return 1;
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {

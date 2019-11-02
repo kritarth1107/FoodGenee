@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -38,7 +39,7 @@ import retrofit2.Response;
 public class Orders extends Fragment {
     RecyclerView cart_recyclerView;
     ShimmerFrameLayout shimmer_view_container;
-
+    LinearLayout NorOrderFound;
     public Orders() {
         // Required empty public constructor
     }
@@ -50,6 +51,7 @@ public class Orders extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_orders, container, false);
         cart_recyclerView = rootView.findViewById(R.id.cart_recyclerView);
         shimmer_view_container = rootView.findViewById(R.id.shimmer_view_container);
+        NorOrderFound = rootView.findViewById(R.id.NorOrderFound);
         setupRecyclerView();
 
         return rootView;
@@ -70,12 +72,19 @@ public class Orders extends Fragment {
                 try {
                         List<Order> orderDetails = response.body().getOrders();
                         OrderlistAdapter orderlistAdapter = new OrderlistAdapter(getContext(), orderDetails);
-                        cart_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                        cart_recyclerView.setAdapter(orderlistAdapter);
-                        shimmer_view_container.setVisibility(View.GONE);
-                        shimmer_view_container.stopShimmerAnimation();
+                        int  x = orderlistAdapter.getItemCount();
+                        if(x>0){
+                            cart_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            cart_recyclerView.setAdapter(orderlistAdapter);
+                            shimmer_view_container.setVisibility(View.GONE);
+                            shimmer_view_container.stopShimmerAnimation();
+                        }
+                        else{
+                            NorOrderFound.setVisibility(View.VISIBLE);
+                        }
                 }
                 catch (Exception e){
+                    NorOrderFound.setVisibility(View.VISIBLE);
                     shimmer_view_container.setVisibility(View.GONE);
                     shimmer_view_container.stopShimmerAnimation();
                 }

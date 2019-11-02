@@ -52,13 +52,13 @@
                 android:layout_alignParentEnd="true"
                 android:layout_above="@id/editProfile"
                 android:gravity="center"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/blue_circle">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_logout"/>
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_power_button"/>
             </LinearLayout>
 
             <LinearLayout
@@ -67,12 +67,12 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/blue_circle">
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/dark_bg">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_edit"/>
             </LinearLayout>
         </RelativeLayout>
@@ -103,7 +103,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:drawableLeft="@drawable/ic_black_back_closed_envelope_shape"
             android:drawablePadding="10dp"
             android:text="Email"
             android:textColor="@android:color/black"/>

@@ -61,6 +61,27 @@
 
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/NorOrderFound"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/panda"/>
+            <TextView
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="It looks you haven't placed any order yet."
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
 
     </RelativeLayout>
 </FrameLayout>
