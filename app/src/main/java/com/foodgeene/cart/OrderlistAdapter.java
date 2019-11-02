@@ -3,6 +3,7 @@ package com.foodgeene.cart;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,21 +58,25 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
         holder.PaymentStatus.setText(list.get(position).getPaidstatus());
         ArrayList arrayList = new ArrayList<>(list.get(position).getProducts());
 //        List<Product> l = list.get(position).getProducts();
-//        List<Product> newList = new ArrayList<>();
+//        List<Product> newList = new ArrayList<>()
 //        for(Product product: l){
 //            newList.add(product);
 //        }
+
 
         holder.OrderCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 List<Product> products = new ArrayList<Product>(list.get(position).getProducts());
+
                 Intent intent = new Intent(context,OrderDetails.class);
                 Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",(Serializable)products);
+                args.putSerializable("ARRAYLIST",(Serializable) products);
                 intent.putExtra("BUNDLE",args);
                 intent.putExtra("Restraunt",list.get(position).getStorename());
                 intent.putExtra("id",list.get(position).getOrderId());
+
+
                 context.startActivity(intent);
             }
         });

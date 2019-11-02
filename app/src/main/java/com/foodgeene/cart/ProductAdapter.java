@@ -28,7 +28,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
     Context context;
 
 
-    public ProductAdapter(Context context,List<Product> list) {
+    public ProductAdapter(Context context, List<Product> list) {
         this.list = list;
         this.context = context;
 

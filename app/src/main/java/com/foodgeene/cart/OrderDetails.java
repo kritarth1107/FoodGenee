@@ -3,9 +3,11 @@ package com.foodgeene.cart;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import java.io.Serializable;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.foodgeene.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,10 @@ public class OrderDetails extends AppCompatActivity {
     TextView rname,Order_id;
     ProductAdapter productAdapter;
     RecyclerView recyclerView;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,7 @@ public class OrderDetails extends AppCompatActivity {
                 finish();
             }
         });
+
         intent = getIntent();
         String restName = intent.getStringExtra("Restraunt");
         String OdId = intent.getStringExtra("id");
@@ -49,4 +57,7 @@ public class OrderDetails extends AppCompatActivity {
         recyclerView.setAdapter(productAdapter);
 
     }
+
+
+
 }
