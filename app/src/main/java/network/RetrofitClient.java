@@ -10,8 +10,6 @@ public class RetrofitClient {
     public static final String BASE_URL = "http://sansdigitals.com/phpdemos/foodgenee/api/";
     public static Retrofit retrofit;
 
-
-
     public static Retrofit getApiClient(){
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();

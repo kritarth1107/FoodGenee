@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     tools:context=".cart.Orders">
 
 
@@ -40,7 +41,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_below="@id/toolbar"
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            shimmer:duration="800">
+            <!-- Adding 7 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/shimmer_orderlist" />
+                <include layout="@layout/shimmer_orderlist" />
+                <include layout="@layout/shimmer_orderlist" />
+                <include layout="@layout/shimmer_orderlist" />
 
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
     </RelativeLayout>
 </FrameLayout>

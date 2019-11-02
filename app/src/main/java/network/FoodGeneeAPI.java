@@ -1,7 +1,6 @@
 package network;
 
-import com.foodgeene.cart.Order;
-import com.foodgeene.cart.Orderlist;
+import com.foodgeene.cart.OrderListModel;
 import com.foodgeene.home.HomeMerchantModel;
 import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.Checksum;
@@ -123,7 +122,7 @@ public interface FoodGeneeAPI {
             );
     @FormUrlEncoded
     @POST("merchant/orders.php")
-    Call<Order> GetOrderList(
+    Call<OrderListModel> GetOrderList(
             @Field("action") String action,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype

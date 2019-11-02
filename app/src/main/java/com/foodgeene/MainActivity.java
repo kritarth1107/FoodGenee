@@ -22,55 +22,55 @@ public class MainActivity extends AppCompatActivity {
     SessionManager sessionManager;
     Button logoutButton;
     String Current_Tab="Home";
-    BottomNavigationView navigation;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sessionManager = new SessionManager(this);
-        navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        Fragment fragment;
-        fragment = new Home();
-        loadFragment(fragment);
-    }
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment;
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_home:
+                        if(Current_Tab.equals("Home")){
+                        }
+                        else{
+                            Current_Tab="Home";
+                            loadFragment(new Home());
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        }
+                        break;
+                    case R.id.nav_scan:
+                        startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
+                        break;
+                    case R.id.nav_cart:
+                        if(Current_Tab.equals("Cart")){
+                        }
+                        else{
+                            Current_Tab="Cart";
+                            loadFragment(new Orders());
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
-            switch (item.getItemId()) {
-                case R.id.nav_home:
-                    if(Current_Tab.equals("Home")){
-                    }
-                    else{
-                        Current_Tab="Home";
-                    fragment = new Home();
-                    loadFragment(fragment);
+                        }
+                        break;
+                    case R.id.nav_profile:
+                        if(Current_Tab.equals("Profile")){
+                        }
+                        else{
+                            Current_Tab="Profile";
+                            loadFragment(new Profile());
+                        }
+                        break;
 
-                    }
-                    break;
-                case R.id.nav_scan:
-                    startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
-                    break;
-                case R.id.nav_cart:
-                    Current_Tab="Cart";
-                    fragment = new Orders();
-                    loadFragment(fragment);
-                    break;
-                case R.id.nav_profile:
-                    Current_Tab="Profile";
-                    fragment = new Profile();
-                    loadFragment(fragment);
-                    break;
-
+                }
+                return true;
             }
-            return false;
-        }
-    };
-
+        });
+        loadFragment(new Home());
+    }
 
     private void loadFragment(Fragment fragment) {
         // load fragment
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else{
+            bottomNavigationView.setSelectedItemId(R.id.nav_home);
             Current_Tab="Home";
             Fragment fragment;
             fragment = new Home();

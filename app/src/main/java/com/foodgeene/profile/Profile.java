@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ import updateprofile.UpdateProfile;
  */
 public class Profile extends Fragment {
 
-    TextView editProfile;
+    LinearLayout editProfile;
     SessionManager sessionManager;
     String token;
     TextView name, email, mobile;
@@ -58,10 +59,6 @@ public class Profile extends Fragment {
         name = rootView.findViewById(R.id.userName);
         email = rootView.findViewById(R.id.userEmail);
         mobile = rootView.findViewById(R.id.userPhone);
-
-
-
-
 
         editProfile = rootView.findViewById(R.id.editProfile);
         editProfile.setOnClickListener(view -> {
