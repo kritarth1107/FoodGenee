@@ -75,6 +75,11 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
                 intent.putExtra("BUNDLE",args);
                 intent.putExtra("Restraunt",list.get(position).getStorename());
                 intent.putExtra("id",list.get(position).getOrderId());
+                intent.putExtra("paymentMethod",list.get(position).getPaymenttype());
+                intent.putExtra("orderStatus",list.get(position).getOrderprocess());
+                intent.putExtra("paymentStatus",list.get(position).getPaidstatus());
+                intent.putExtra("totalAmount",list.get(position).getTotalamount());
+                intent.putExtra("tableName",list.get(position).getTablename());
 
 
                 context.startActivity(intent);

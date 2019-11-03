@@ -51,7 +51,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
         List<Product> products = list;
 
         holder.Pname.setText(products.get(position).getName());
-        Toast.makeText(context, products.get(position).getName(), Toast.LENGTH_SHORT).show();
+        holder.QuantityTv.setText(products.get(position).getCount());
+        holder.PriceTV.setText(products.get(position).getPrice());
 
     }
 
@@ -61,10 +62,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
-        TextView Pname;
+        TextView Pname,QuantityTv,PriceTV;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             Pname = itemView.findViewById(R.id.Pname);
+            QuantityTv = itemView.findViewById(R.id.QuantityTv);
+            PriceTV = itemView.findViewById(R.id.PriceTV);
 
         }
     }
