@@ -2,10 +2,14 @@ package network;
 
 import com.foodgeene.cart.OrderListModel;
 import com.foodgeene.home.HomeMerchantModel;
+import com.foodgeene.home.brandlist.brandmodel.Brand;
+import com.foodgeene.home.hometwo.models.HomeTwoModel;
+import com.foodgeene.home.hometwo.models.Merchantlist;
 import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.Checksum;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.register.RegisterModel;
+import com.foodgeene.register.signupotp.OtpModel;
 import com.foodgeene.scanner.ScannerModel;
 
 import retrofit2.Call;
@@ -128,6 +132,31 @@ public interface FoodGeneeAPI {
             @Header("Content-Type") String Ctype
     );
 
+    @FormUrlEncoded
+    @POST("merchant/merchants.php")
+    Call<HomeTwoModel> getRecomm(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/merchants.php")
+    Call<Brand> getBrandList(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
 
 
+
+    @FormUrlEncoded
+    @POST("users/user-registration.php")
+    Call<OtpModel> verifyOtp(
+            @Field("action") String action,
+            @Field("otp") String otp,
+            @Field("usersid") String userid
+
+
+            );
 }

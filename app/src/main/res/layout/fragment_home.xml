@@ -8,6 +8,13 @@
     tools:context=".home.Home">
 
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
     <RelativeLayout
         android:background="@android:color/white"
         android:layout_width="match_parent"
@@ -27,7 +34,7 @@
                 android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Food Genee"
+                android:text="FoodQ"
                 android:fontFamily="@font/thinking_of_betty"
                 android:textColor="@color/colorPrimary"
                 />
@@ -37,7 +44,7 @@
         <TextView
             android:id="@+id/were"
             android:layout_width="wrap_content"
-            android:text="We're available"
+            android:text="Restaurants and Theatres"
             android:layout_below="@id/toolbar"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -46,7 +53,10 @@
             android:layout_height="wrap_content">
 
 
+
+
         </TextView>
+
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -54,7 +64,51 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/were"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/abtext"
+            android:layout_width="wrap_content"
+            android:text="We're available"
+            android:layout_below="@id/mercRecycler"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/abtext"
+            android:id="@+id/brandRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/newtext"
+            android:layout_width="wrap_content"
+            android:text="Recommendations"
+            android:layout_below="@id/brandRecycler"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/newtext"
+            android:id="@+id/secondRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_below="@id/were"
             android:layout_marginTop="10dp"
@@ -82,6 +136,8 @@
 
 
     </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </FrameLayout>

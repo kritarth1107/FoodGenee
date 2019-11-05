@@ -2,6 +2,7 @@ package com.foodgeene.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
+import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.register.signupotp.OtpModel;
+import com.foodgeene.restraunt.SignupOtp;
 import com.google.android.material.snackbar.Snackbar;
 
 import network.FoodGeneeAPI;
@@ -24,6 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText Email,Number,Name,Password;
     Button RegisterButton;
     ProgressBar progressBarReg;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,8 @@ public class RegistrationActivity extends AppCompatActivity {
         Password = findViewById(R.id.EditTextPassword);
         RegisterButton = findViewById(R.id.RegisterButton);
         progressBarReg = findViewById(R.id.progressBarReg);
+        sessionManager = new SessionManager(this);
+
 
         NavigateToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,9 +77,22 @@ public class RegistrationActivity extends AppCompatActivity {
                     Register(String_Name,String_Email,String_Number,String_Password);
                 }
 
+                verifyOtp(String_Number);
 
             }
         });
+    }
+
+    private void verifyOtp(String phone) {
+
+//        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+//
+//        Call<OtpModel>call = foodGeneeAPI.verifyOtp("register-otp", "").
+
+        Intent intent = new Intent(this, SignupOtp.class);
+        startActivity(intent);
+
+
     }
 
     public void Register(final String Name,final String Email, final String Phone, final String Password){
@@ -86,12 +106,16 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
 
+                RegisterModel userId = response.body();
+                sessionManager.saveUserId(userId);
                 String status = response.body().getStatus().trim();
                 String response_text = response.body().getText().trim();
                 if(status.equals("1")){
                     String user_id = response.body().getUsersid().trim();
                     Toast.makeText(RegistrationActivity.this, response_text+" - "+user_id, Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent intent = new Intent(RegistrationActivity.this, SignupOtp.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
                 else if(status.equals("0")){
                     Toast.makeText(RegistrationActivity.this, response_text, Toast.LENGTH_SHORT).show();
@@ -100,6 +124,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 progressBarReg.setVisibility(View.GONE);
                 RegisterButton.setVisibility(View.VISIBLE);
+
 
 
             }

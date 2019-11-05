@@ -11,4 +11,5 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="foodq">FoodQ</string>
 </resources>

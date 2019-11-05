@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import com.foodgeene.MainActivity;
 import com.foodgeene.login.LoginActivity;
+import com.foodgeene.register.RegisterModel;
 
 import java.util.HashMap;
 
@@ -18,6 +19,8 @@ public class SessionManager {
     private static final String PREF_NAME = "LOGIN";
     private static final String LOGIN = "IS_LOGIN";
     public static final String USER_ID = "USER_ID";
+    private static final String SHARED_PREF_NAME = "my_shared_preff";
+
 
     public SessionManager(Context context) {
         this.context = context;
@@ -43,6 +46,23 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<>();
         user.put(USER_ID, sharedPreferences.getString(USER_ID, null));
         return user;
+    }
+
+
+    public void saveUserId(RegisterModel registerModel){
+
+        editor.putString("userid", registerModel.getUsersid());
+        editor.putString("getText", registerModel.getText());
+        editor.putString("getStatus", registerModel.getStatus());
+
+    }
+
+
+    public RegisterModel getUserId(){
+
+        return new RegisterModel(sharedPreferences.getString("userid",  null),
+                sharedPreferences.getString("getText", null),
+                sharedPreferences.getString("getStatus", null));
     }
     public void logout(){
         editor.clear();

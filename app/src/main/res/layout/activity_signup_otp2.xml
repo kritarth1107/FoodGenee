@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/relativeLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="30sp"
+        android:padding="25dp"
+        android:textColor="@color/colorPrimary"
+        android:text="FoodQ"
+        android:fontFamily="@font/thinking_of_betty"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Hey!"
+        android:textSize="19dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+
+    <TextView
+        android:id="@+id/signinmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Please wait while we verify your number."
+        app:layout_constraintStart_toStartOf="@+id/welcome_text"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+
+
+    <EditText
+        android:id="@+id/et1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:inputType="phone"
+        android:maxLength="1"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/verify_otp"
+        app:layout_constraintTop_toBottomOf="@+id/signinmessage" />
+
+    <EditText
+        android:id="@+id/et2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:inputType="phone"
+        android:maxLength="1"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/et1"
+        app:layout_constraintTop_toTopOf="@+id/et1" />
+
+    <EditText
+        android:id="@+id/et3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:inputType="phone"
+        android:maxLength="1"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/et2"
+        app:layout_constraintTop_toTopOf="@+id/et2" />
+
+    <EditText
+        android:id="@+id/et4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:inputType="phone"
+        android:maxLength="1"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/et3"
+        app:layout_constraintTop_toTopOf="@+id/et3" />
+
+
+    <Button
+        android:id="@+id/verify_otp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorPrimary"
+        android:text="Verify"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et1" />
+
+
+    <TextView
+        android:id="@+id/did_not_recieve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="1dp"
+        android:text="Didn't Receive OTP ?"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/otpverifyprogress"
+        app:layout_constraintStart_toStartOf="@+id/verify_otp"
+        app:layout_constraintTop_toBottomOf="@+id/verify_otp" />
+
+    <TextView
+        android:id="@+id/resend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="@{()->handler.resend()}"
+        android:text="Resend OTP"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/did_not_recieve"
+        app:layout_constraintTop_toTopOf="@+id/did_not_recieve" />
+
+    <ProgressBar
+        android:id="@+id/otpverifyprogress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signinmessage" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/form_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="et1,et2,et3,et4,verify_otp,did_not_recieve,resend" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

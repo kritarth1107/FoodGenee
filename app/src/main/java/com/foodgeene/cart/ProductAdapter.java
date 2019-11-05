@@ -50,9 +50,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
 
         List<Product> products = list;
 
-        holder.Pname.setText(products.get(position).getName());
+        holder.Pname.setText("Rs. "+products.get(position).getName());
         holder.QuantityTv.setText(products.get(position).getCount());
-        holder.PriceTV.setText(products.get(position).getPrice());
+        holder.PriceTV.setText("Rs. "+products.get(position).getPrice());
 
     }
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".payment.PaymentMethod"
     android:background="@color/bottomnavColor">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -30,6 +31,7 @@
             android:layout_marginLeft="10dp"
             android:background="@color/humara_black"
             android:layout_width="100dp"
+
             android:layout_height="2dp"> </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -37,13 +39,14 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardElevation="5dp"
-            app:cardCornerRadius="6dp"
+            app:cardCornerRadius="10dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="170dp">
             <LinearLayout
                 android:orientation="vertical"
                 android:padding="15dp"
+                android:background="@drawable/cardbgone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <RelativeLayout
@@ -73,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:text="+91 XXXXX XXXXX"
                             android:textSize="15sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:textColor="@android:color/white"/>
                         <TextView
                             android:paddingTop="10dp"
                             android:fontFamily="@font/aero"
@@ -81,7 +84,7 @@
                             android:layout_height="wrap_content"
                             android:text="   * * * * * * * * * * * "
                             android:textSize="15sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:textColor="@android:color/white"/>
 
                     </LinearLayout>
                     <LinearLayout
@@ -93,6 +96,7 @@
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
+                            android:tint="@android:color/white"
                             android:src="@drawable/ic_rupee_indian"/>
 
                         <TextView
@@ -103,7 +107,7 @@
                             android:text="200"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimaryDark"/>
+                            android:textColor="@android:color/white"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -116,13 +120,14 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardElevation="5dp"
-            app:cardCornerRadius="6dp"
+            app:cardCornerRadius="10dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="170dp">
             <LinearLayout
                 android:orientation="vertical"
                 android:padding="15dp"
+                android:background="@drawable/cardbgtwo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <RelativeLayout
@@ -143,7 +148,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/humara_black"
+                            android:textColor="@android:color/white"
                             android:text="Pay on dine"
                             android:fontFamily="@font/hallosans"
                             android:textStyle="bold"
@@ -168,16 +173,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Enjoy your Delicious meal,"
+                            android:textColor="@android:color/white"
                             android:textSize="15sp"
-                            android:textColor="@android:color/darker_gray"/>
+                            />
                         <TextView
                             android:paddingTop="10dp"
                             android:fontFamily="@font/aero"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="then pay"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/darker_gray"/>
+
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
                     <LinearLayout
@@ -189,6 +196,7 @@
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
+                            android:tint="@color/white"
                             android:src="@drawable/ic_rupee_indian"/>
 
                         <TextView
@@ -199,7 +207,7 @@
                             android:text="200"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="@color/colorPrimaryDark"/>
+                            android:textColor="@android:color/white"/>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -214,7 +222,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Online payments are highly appriciated"
+        android:text="Online payments are highly appreciated"
         android:fontFamily="@font/hallosans"
         android:layout_centerHorizontal="true"
         android:padding="10dp"/>
