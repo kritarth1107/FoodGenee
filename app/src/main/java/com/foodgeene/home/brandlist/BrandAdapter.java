@@ -12,16 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
+import com.foodgeene.home.brandlist.brandmodel.Bannerlist;
 import com.foodgeene.home.brandlist.brandmodel.Brandlist;
 
 import java.util.List;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHolder>{
 
-    List<Brandlist> list;
+    List<Bannerlist> list;
     Context context;
 
-    public BrandAdapter(List<Brandlist> list, Context context) {
+    public BrandAdapter(List<Bannerlist> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -40,10 +41,10 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHol
     public void onBindViewHolder(@NonNull BrandViewHolder holder, int position) {
 
         Glide.with(context)
-                .load(list.get(position).getLogo())
+                .load(list.get(position).getImage())
                 .into(holder.brandImage);
 
-        holder.brandName.setText(list.get(position).getName());
+//        holder.brandName.setText(list.get(position).getName());
 
     }
 
@@ -57,7 +58,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHol
         ImageView brandImage;
         public BrandViewHolder(@NonNull View itemView) {
             super(itemView);
-            brandName = itemView.findViewById(R.id.mBrandName);
+//            brandName = itemView.findViewById(R.id.mBrandName);
             brandImage = itemView.findViewById(R.id.mBrandImage);
         }
     }

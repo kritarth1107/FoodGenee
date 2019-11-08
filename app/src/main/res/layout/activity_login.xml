@@ -21,7 +21,7 @@
             android:fontFamily="@font/thinking_of_betty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Food Genee"/>
+            android:text="FoodQ"/>
         <LinearLayout
             android:paddingLeft="25dp"
             android:orientation="vertical"

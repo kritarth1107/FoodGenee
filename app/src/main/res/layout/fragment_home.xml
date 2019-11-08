@@ -41,36 +41,20 @@
         </androidx.appcompat.widget.Toolbar>
 
 
-        <TextView
-            android:id="@+id/were"
-            android:layout_width="wrap_content"
-            android:text="Restaurants and Theatres"
-            android:layout_below="@id/toolbar"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content">
-
-
-
-
-        </TextView>
-
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mercRecycler"
+            android:id="@+id/brandRecycler"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/were"
+            android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/abtext"
             android:layout_width="wrap_content"
-            android:text="We're available"
-            android:layout_below="@id/mercRecycler"
+            android:text="We're available at"
+            android:layout_below="@id/brandRecycler"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -81,7 +65,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:layout_below="@id/abtext"
-            android:id="@+id/brandRecycler"
+            android:id="@+id/mercRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -89,7 +73,7 @@
             android:id="@+id/newtext"
             android:layout_width="wrap_content"
             android:text="Recommendations"
-            android:layout_below="@id/brandRecycler"
+            android:layout_below="@id/mercRecycler"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -110,7 +94,7 @@
 
 
         <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_below="@id/were"
+            android:layout_below="@id/toolbar"
             android:layout_marginTop="10dp"
             android:id="@+id/shimmer_view_container"
             android:layout_width="match_parent"

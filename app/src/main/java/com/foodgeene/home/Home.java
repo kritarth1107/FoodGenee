@@ -4,6 +4,7 @@ package com.foodgeene.home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.home.brandlist.BrandAdapter;
+import com.foodgeene.home.brandlist.brandmodel.Bannerlist;
 import com.foodgeene.home.brandlist.brandmodel.Brand;
 import com.foodgeene.home.brandlist.brandmodel.Brandlist;
 import com.foodgeene.home.hometwo.HomeTwoAdapter;
@@ -41,6 +43,7 @@ public class Home extends Fragment {
     ShimmerFrameLayout shimmerFrameLayout;
     HomeTwoAdapter homeTwoAdapter;
     BrandAdapter brandAdapter;
+    LinearLayoutManager layoutManager;
 
 
     public Home() {
@@ -89,8 +92,13 @@ public class Home extends Fragment {
 
                     if (homeMerchantModel.getStatus() == 1) {
                         homeAdapter = new HomeAdapter(retrievedMerchantList, getContext());
+                        layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+
                         merchantListReycler.setAdapter(homeAdapter);
-                        merchantListReycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                        merchantListReycler.setLayoutManager(layoutManager);
+//                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(merchantListReycler.getContext(),
+//                                layoutManager.getOrientation());
+//                        merchantListReycler.addItemDecoration(dividerItemDecoration);
 
                         shimmerFrameLayout.setVisibility(View.GONE);
                         shimmerFrameLayout.stopShimmerAnimation();
@@ -129,7 +137,12 @@ public class Home extends Fragment {
                     if (homeTwoModel.getStatus() == 1) {
                         homeTwoAdapter = new HomeTwoAdapter(newlist, getContext());
                         merchantTwoRecycler.setAdapter(homeTwoAdapter);
-                        merchantTwoRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                        layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+                        merchantTwoRecycler.setLayoutManager(layoutManager);
+
+//                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(merchantTwoRecycler.getContext(),
+//                                layoutManager.getOrientation());
+//                        merchantTwoRecycler.addItemDecoration(dividerItemDecoration);
 
 
                     } else if (homeTwoModel.getStatus() == 0) {
@@ -147,17 +160,23 @@ public class Home extends Fragment {
             });
 
 
-            Call<Brand> brand = foodGeneeAPI.getBrandList("brandlist", userToken, "application/x-www-form-urlencoded");
+            Call<Brand> brand = foodGeneeAPI.getBrandList("bannerlist", userToken, "application/x-www-form-urlencoded");
             brand.enqueue(new Callback<Brand>() {
                 @Override
                 public void onResponse(Call<Brand> call, Response<Brand> response) {
 
                     Brand brand1 = response.body();
-                    List<Brandlist> retrievedList = brand1.getBrandlist();
+                    List<Bannerlist> bannerlists = brand1.getBannerlist();
 
-                    brandAdapter = new BrandAdapter(retrievedList, getContext());
-                    brandRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                    brandAdapter = new BrandAdapter(bannerlists, getContext());
+                    layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+                    brandRecycler.setLayoutManager(layoutManager);
                     brandRecycler.setAdapter(brandAdapter);
+                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(brandRecycler.getContext(),
+                                layoutManager.getOrientation());
+                        brandRecycler.addItemDecoration(dividerItemDecoration);
+
+
 
 
                 }

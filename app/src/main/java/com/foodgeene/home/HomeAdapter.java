@@ -47,9 +47,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 .load(list.get(position).getCoverpic())
                 .apply(option)
                 .into(holder.merchImage);
-        holder.merchName.setText(list.get(position).getStorename());
-        holder.merchType.setText(list.get(position).getStoretype());
-        holder.merchLoc.setText(list.get(position).getCity()+", "+list.get(position).getState());
+//        holder.merchName.setText(list.get(position).getStorename());
+//        holder.merchType.setText(list.get(position).getStoretype());
+//        holder.merchLoc.setText(list.get(position).getCity()+", "+list.get(position).getState());
 
     }
 
@@ -65,10 +65,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            merchImage = itemView.findViewById(R.id.merchantImage);
-            merchName = itemView.findViewById(R.id.merchantName);
-            merchType = itemView.findViewById(R.id.merchantType);
-            merchLoc = itemView.findViewById(R.id.merchantLocation);
+            merchImage = itemView.findViewById(R.id.wereavaialble);
+//            merchName = itemView.findViewById(R.id.merchantName);
+//            merchType = itemView.findViewById(R.id.merchantType);
+//            merchLoc = itemView.findViewById(R.id.merchantLocation);
 
 
 

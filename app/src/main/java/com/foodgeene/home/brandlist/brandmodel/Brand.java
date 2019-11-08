@@ -10,9 +10,9 @@ public class Brand {
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("brandlist")
+    @SerializedName("bannerlist")
     @Expose
-    private List<Brandlist> brandlist = null;
+    private List<Bannerlist> bannerlist = null;
 
     public String getStatus() {
         return status;
@@ -22,11 +22,11 @@ public class Brand {
         this.status = status;
     }
 
-    public List<Brandlist> getBrandlist() {
-        return brandlist;
+    public List<Bannerlist> getBannerlist() {
+        return bannerlist;
     }
 
-    public void setBrandlist(List<Brandlist> brandlist) {
-        this.brandlist = brandlist;
+    public void setBannerlist(List<Bannerlist> bannerlist) {
+        this.bannerlist = bannerlist;
     }
 }
