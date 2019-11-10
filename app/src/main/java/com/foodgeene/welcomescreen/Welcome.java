@@ -85,7 +85,6 @@ public class Welcome extends AppCompatActivity {
 
                 }
                 catch (Exception e){
-
                     Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
                 }
 

@@ -40,7 +40,7 @@ public class Home extends Fragment {
 
     RecyclerView merchantListReycler, merchantTwoRecycler, brandRecycler;
     HomeAdapter homeAdapter;
-    ShimmerFrameLayout shimmerFrameLayout;
+    ShimmerFrameLayout shimmerFrameLayout,shimmerFrameLayout2,shimmerFrameLayout3;
     HomeTwoAdapter homeTwoAdapter;
     BrandAdapter brandAdapter;
     LinearLayoutManager layoutManager;
@@ -61,6 +61,8 @@ public class Home extends Fragment {
         brandRecycler = rootView.findViewById(R.id.brandRecycler);
         //shimmer
         shimmerFrameLayout = rootView.findViewById(R.id.shimmer_view_container);
+        shimmerFrameLayout2 = rootView.findViewById(R.id.shimmer_view_container2);
+        shimmerFrameLayout3 = rootView.findViewById(R.id.shimmer_view_container3);
 
         setupRecyclerView();
 
@@ -80,6 +82,10 @@ public class Home extends Fragment {
 
             shimmerFrameLayout.setVisibility(View.VISIBLE);
             shimmerFrameLayout.startShimmerAnimation();
+            shimmerFrameLayout2.setVisibility(View.VISIBLE);
+            shimmerFrameLayout2.startShimmerAnimation();
+            shimmerFrameLayout3.setVisibility(View.VISIBLE);
+            shimmerFrameLayout3.startShimmerAnimation();
 
             Call<HomeMerchantModel> call = foodGeneeAPI.merchantList("merchants", userToken, "application/x-www-form-urlencoded");
             call.enqueue(new Callback<HomeMerchantModel>() {
@@ -96,17 +102,14 @@ public class Home extends Fragment {
 
                         merchantListReycler.setAdapter(homeAdapter);
                         merchantListReycler.setLayoutManager(layoutManager);
-//                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(merchantListReycler.getContext(),
-//                                layoutManager.getOrientation());
-//                        merchantListReycler.addItemDecoration(dividerItemDecoration);
 
-                        shimmerFrameLayout.setVisibility(View.GONE);
-                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout3.setVisibility(View.GONE);
+                        shimmerFrameLayout3.stopShimmerAnimation();
                     } else if (homeMerchantModel.getStatus() == 0) {
 
                         Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-                        shimmerFrameLayout.setVisibility(View.GONE);
-                        shimmerFrameLayout.stopShimmerAnimation();
+                        shimmerFrameLayout3.setVisibility(View.GONE);
+                        shimmerFrameLayout3.stopShimmerAnimation();
 
                     }
 //                else{
@@ -119,8 +122,8 @@ public class Home extends Fragment {
                 @Override
                 public void onFailure(Call<HomeMerchantModel> call, Throwable t) {
                     Toast.makeText(getContext(), "Try again", Toast.LENGTH_SHORT).show();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout3.setVisibility(View.GONE);
+                    shimmerFrameLayout3.stopShimmerAnimation();
 
 
                 }
@@ -140,13 +143,14 @@ public class Home extends Fragment {
                         layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
                         merchantTwoRecycler.setLayoutManager(layoutManager);
 
-//                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(merchantTwoRecycler.getContext(),
-//                                layoutManager.getOrientation());
-//                        merchantTwoRecycler.addItemDecoration(dividerItemDecoration);
+                        shimmerFrameLayout2.setVisibility(View.GONE);
+                        shimmerFrameLayout2.stopShimmerAnimation();
 
 
                     } else if (homeTwoModel.getStatus() == 0) {
 
+                        shimmerFrameLayout2.setVisibility(View.GONE);
+                        shimmerFrameLayout2.stopShimmerAnimation();
 
                     }
 
@@ -156,6 +160,8 @@ public class Home extends Fragment {
                 @Override
                 public void onFailure(Call<HomeTwoModel> call, Throwable t) {
 
+                    shimmerFrameLayout2.setVisibility(View.GONE);
+                    shimmerFrameLayout2.stopShimmerAnimation();
                 }
             });
 
@@ -177,19 +183,24 @@ public class Home extends Fragment {
                         brandRecycler.addItemDecoration(dividerItemDecoration);
 
 
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
 
 
                 }
 
                 @Override
                 public void onFailure(Call<Brand> call, Throwable t) {
-
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
 
                 }
             });
 
         } catch (Exception e) {
-            Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+            shimmerFrameLayout.setVisibility(View.GONE);
+            shimmerFrameLayout.stopShimmerAnimation();
         }
 
 
