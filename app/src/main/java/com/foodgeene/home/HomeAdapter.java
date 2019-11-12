@@ -51,7 +51,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 .into(holder.merchImage);
                 holder.merchName.setText(list.get(position).getStorename());
 //                holder.merchType.setText(list.get(position).getStoretype());
-//                holder.merchLoc.setText(list.get(position).getCity()+", "+list.get(position).getState());
+               holder.merchLoc.setText(list.get(position).getCity());
 
                 holder.CardViewRestraunt.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -78,7 +78,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             merchImage = itemView.findViewById(R.id.wereavaialble);
             merchName = itemView.findViewById(R.id.merchantName);
 //            merchType = itemView.findViewById(R.id.merchantType);
-//            merchLoc = itemView.findViewById(R.id.merchantLocation);
+            merchLoc = itemView.findViewById(R.id.merchantLoc);
             CardViewRestraunt = itemView.findViewById(R.id.CardViewRestraunt);
 
 

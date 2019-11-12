@@ -78,7 +78,7 @@ public class PodSuccess extends AppCompatActivity {
         animation_view.setVisibility(View.INVISIBLE);
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<RegisterModel> call = foodGeneeAPI.OrderByCash("cash",merchantid,table,productid,count,price,totalamount,UserToken,"application/x-www-form-urlencoded"
+        Call<RegisterModel> call = foodGeneeAPI.OrderByCash("cash",merchantid,table,productid,count,price,totalamount,"",UserToken,"application/x-www-form-urlencoded"
         );
         call.enqueue(new Callback<RegisterModel>() {
             @Override

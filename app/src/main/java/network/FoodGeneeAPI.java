@@ -7,6 +7,7 @@ import com.foodgeene.home.hometwo.models.HomeTwoModel;
 import com.foodgeene.home.hometwo.models.Merchantlist;
 import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.Checksum;
+import com.foodgeene.payment.coupon.Coupon;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.signupotp.OtpModel;
@@ -107,6 +108,7 @@ public interface FoodGeneeAPI {
             @Field("count") String count,
             @Field("price") String price,
             @Field("totalamount") String totalamount,
+            @Field("coupon") String coupon,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );@FormUrlEncoded
@@ -121,6 +123,7 @@ public interface FoodGeneeAPI {
                     @Field("totalamount") String totalamount,
                     @Field("transactionid") String transactionid,
                     @Field("transactiondate") String transactiondate,
+                    @Field("coupon") String coupon,
                     @Header("Authorization") String Auth,
                     @Header("Content-Type") String Ctype
             );
@@ -157,6 +160,18 @@ public interface FoodGeneeAPI {
             @Field("otp") String otp,
             @Field("usersid") String userid
 
-
             );
+
+    @FormUrlEncoded
+    @POST("merchant/coupon.php")
+    Call<Coupon> applyCoupon(
+            @Field("action") String action,
+            @Field("coupon") String coupon,
+            @Field("amount") String amount,
+            @Field("merchant_id") String merchant_id,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+
 }

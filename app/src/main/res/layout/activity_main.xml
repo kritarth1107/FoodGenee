@@ -21,10 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@android:color/white"
+        android:background="@color/colorPrimary"
         app:menu="@menu/navigation"
         app:labelVisibilityMode="labeled"
-        app:itemTextColor="#747474"
-        app:itemIconTint="#747474"/>
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#FFFFFF"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

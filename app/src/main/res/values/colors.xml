@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#DA714D</color>
     <color name="colorPrimaryDark">#922903</color>
-    <color name="colorAccent">#F7F7F7</color>
+    <color name="colorAccent">#DA714D</color>
     <color name="DarkRed">#B0040D</color>
     <color name="background">#dddddd</color>
     <color name="humara_black">#494949</color>
