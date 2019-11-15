@@ -7,11 +7,15 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.payment.coupon.Coupon;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.success.PodSuccess;
 import com.foodgeene.success.SuccessActivity;
@@ -36,16 +40,28 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     Toolbar toolbar;
     String UserToken;
     SessionManager sessionManager;
+    TextView HaveACouponTV,applyButton,removeButton,appliedTV;
+    LinearLayout CouponLayout;
+    EditText couponEditText;
+    ProgressBar ProgressBarCoupon;
+    String Coupon;
+    String BackupAmount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_method);
         sessionManager = new SessionManager(this);
-
+        CouponLayout = findViewById(R.id.CouponLayout);
+        CouponLayout.setVisibility(View.GONE);
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
         paytm = findViewById(R.id.paytm_card);
         pod = findViewById(R.id.pod_card);
+        appliedTV = findViewById(R.id.appliedTV);
+        applyButton = findViewById(R.id.applyButton);
+        removeButton = findViewById(R.id.removeButton);
+        couponEditText = findViewById(R.id.couponEditText);
+        ProgressBarCoupon = findViewById(R.id.ProgressBarCoupon);
         paytm_tv = findViewById(R.id.amount_tv_paytm);
         pod_tv = findViewById(R.id.amount_tv_pod);
         get = getIntent();
@@ -55,9 +71,40 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         price = get.getStringExtra("price");
         table = get.getStringExtra("table");
         totalamount = get.getStringExtra("totalamount");
+        BackupAmount=totalamount;
         paytm_tv.setText(totalamount);
         pod_tv.setText(totalamount);
         toolbar = findViewById(R.id.toolbar);
+        HaveACouponTV = findViewById(R.id.HaveACouponTV);
+        HaveACouponTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HaveACouponTV.setVisibility(View.GONE);
+                CouponLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Coupon = couponEditText.getText().toString().trim();
+                if (!Coupon.isEmpty()){
+                    applyCoupon(Coupon);
+                }
+            }
+        });
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                totalamount = BackupAmount;
+                pod_tv.setText(BackupAmount);
+                paytm_tv.setText(BackupAmount);
+                applyButton.setVisibility(View.VISIBLE);
+                couponEditText.setText("");
+                removeButton.setVisibility(View.GONE);
+                couponEditText.setVisibility(View.VISIBLE);
+                appliedTV.setVisibility(View.GONE);
+            }
+        });
 
 
         paytm.setOnClickListener(new View.OnClickListener() {
@@ -83,27 +130,47 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                 i.putExtra("price",price);
                 i.putExtra("merchandid",merchantid);
                 i.putExtra("table",table);
+                startActivity(i);
 
-                FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-                Call<RegisterModel> call = foodGeneeAPI.OrderByCash("cash", merchantid, table, productid, count, price,totalamount,UserToken,"application/x-www-form-urlencoded");
-                call.enqueue(new Callback<RegisterModel>() {
-                    @Override
-                    public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
-                        try {
-                            startActivity(i);
-                        }
-                        catch (Exception e)
-                        {
-                            Toast.makeText(PaymentMethod.this, "Order Failed", Toast.LENGTH_SHORT).show();
-                        }
+
+            }
+        });
+    }
+    void applyCoupon(String cpn){
+        applyButton.setVisibility(View.GONE);
+        ProgressBarCoupon.setVisibility(View.VISIBLE);
+        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+        Call<com.foodgeene.payment.coupon.Coupon> call = foodGeneeAPI.applyCoupon("apply-coupon",cpn , totalamount, merchantid,UserToken,"application/x-www-form-urlencoded");
+        call.enqueue(new Callback<Coupon>() {
+            @Override
+            public void onResponse(Call<Coupon> call, Response<Coupon> response) {
+                try {
+                    String status = response.body().getStatus().trim();
+                    if(status.equals("1")){
+                        String amnt = response.body().getTotalamt().toString().trim();
+                        totalamount = amnt;
+                        paytm_tv.setText(amnt);
+                        pod_tv.setText(amnt);
+                        removeButton.setVisibility(View.VISIBLE);
+                        ProgressBarCoupon.setVisibility(View.GONE);
+                        couponEditText.setVisibility(View.GONE);
+                        appliedTV.setVisibility(View.VISIBLE);
                     }
-
-                    @Override
-                    public void onFailure(Call<RegisterModel> call, Throwable t) {
-
+                    else{
+                        applyButton.setVisibility(View.VISIBLE);
+                        ProgressBarCoupon.setVisibility(View.GONE);
+                        Toast.makeText(PaymentMethod.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(PaymentMethod.this, "Invalid Coupon", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Coupon> call, Throwable t) {
+                Toast.makeText(PaymentMethod.this, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

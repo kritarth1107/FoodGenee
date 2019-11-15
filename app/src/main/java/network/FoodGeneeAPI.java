@@ -7,6 +7,7 @@ import com.foodgeene.home.hometwo.models.HomeTwoModel;
 import com.foodgeene.home.hometwo.models.Merchantlist;
 import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.Checksum;
+import com.foodgeene.payment.coupon.Coupon;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.signupotp.OtpModel;
@@ -159,4 +160,16 @@ public interface FoodGeneeAPI {
 
 
             );
+
+
+    @FormUrlEncoded
+    @POST("merchant/coupon.php")
+    Call<Coupon> applyCoupon(
+            @Field("action") String action,
+            @Field("coupon") String coupon,
+            @Field("amount") String amount,
+            @Field("merchant_id") String merchant_id,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
 }

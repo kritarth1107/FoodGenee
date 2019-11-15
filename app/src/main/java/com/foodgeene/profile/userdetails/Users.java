@@ -14,6 +14,9 @@ public class Users {
     @SerializedName("mobile")
     @Expose
     private String mobile;
+    @SerializedName("coins")
+    @Expose
+    private String coins;
 
     public String getName() {
         return name;
@@ -37,5 +40,13 @@ public class Users {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getCoins() {
+        return coins;
+    }
+
+    public void setCoins(String coins) {
+        this.coins = coins;
     }
 }

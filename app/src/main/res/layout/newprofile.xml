@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:id="@+id/logout"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/newcard"
+            android:gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/blue_circle">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_power_button"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/editProfile"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:layout_width="40dp"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/logout"
+            android:layout_height="40dp"
+            android:background="@drawable/dark_bg">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"/>
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userprof"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:src="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="....."
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/userprof"/>
+
+        <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userName"
+            android:text="......."
+            android:textSize="15dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:text="............"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/userPhone"
+            android:layout_marginLeft="20dp"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_height="700dp"
+            android:background="#80FFFFFF"
+            android:layout_marginTop="50dp"
+            android:id="@+id/newcard"
+            app:cardCornerRadius="40dp"
+            android:layout_below="@id/userEmail">
+
+            <RelativeLayout
+                android:background="#80FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your coins score"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:id="@+id/coinstext"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/sumtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/coinstext"
+                android:layout_marginLeft="20dp"
+                android:text="redeem coins and get exciting offers"/>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/coinsscore"
+                    android:layout_width="130dp"
+                    android:layout_marginLeft="20dp"
+                    android:elevation="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_below="@id/sumtext"
+                    app:cardCornerRadius="20dp"
+
+
+                    android:layout_height="130dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:id="@+id/cttext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Coins"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/realcoins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cttext"
+                        android:textSize="30dp"
+                        android:text="300"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"/>
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/coinsmerchants"-->
+<!--                    android:layout_width="130dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:elevation="10dp"-->
+<!--                    android:layout_toRightOf="@id/coinsscore"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:layout_below="@id/sumtext"-->
+<!--                    android:layout_height="130dp">-->
+
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Reward Lists"/>-->
+
+<!--                    </RelativeLayout>-->
+
+<!--                </androidx.cardview.widget.CardView>-->
+
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

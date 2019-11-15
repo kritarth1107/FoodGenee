@@ -5,16 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".splashScreen.SplashScreen"
-    android:background="@color/colorPrimary">
-    <TextView
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:padding="15dp"
+        android:src="@drawable/logonew"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
-        android:textColor="@android:color/white"
-        android:textSize="45sp"
-        android:padding="25dp"
-        android:fontFamily="@font/thinking_of_betty"
+        android:textStyle="bold"
+        android:fontFamily="@font/thinking_of_betty"/>
+
+
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/foodq"/>
+        android:layout_centerInParent="true"
+        android:layout_below="@id/logo"/>
 
 
 </RelativeLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "467077329637",
+    "firebase_url": "https://foodq-67ca7.firebaseio.com",
+    "project_id": "foodq-67ca7",
+    "storage_bucket": "foodq-67ca7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467077329637:android:11ac73b881c23e5bccda0c",
+        "android_client_info": {
+          "package_name": "com.foodgeene"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467077329637-p3gn9l3gsdsn3n3dk6ktf1oc553pfdt6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodgeene",
+            "certificate_hash": "4d345b52a6643dc263439718898404ba1f7ceb72"
+          }
+        },
+        {
+          "client_id": "467077329637-359thb1k1en0e8k4bgji7p1ni4f02lar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgrLjrHjNTxGoepaZwzO8zflfZ_UMQIsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467077329637-359thb1k1en0e8k4bgji7p1ni4f02lar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

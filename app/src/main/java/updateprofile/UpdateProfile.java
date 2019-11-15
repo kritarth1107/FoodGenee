@@ -125,6 +125,7 @@ public class UpdateProfile extends AppCompatActivity {
         userName = findViewById(R.id.changeName);
         userEmail = findViewById(R.id.changeEmail);
         userPassword = findViewById(R.id.changePassword);
+        userPassword.setEnabled(false);
         updateButton = findViewById(R.id.updateButton);
 
 

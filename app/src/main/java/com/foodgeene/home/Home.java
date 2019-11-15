@@ -1,8 +1,18 @@
 package com.foodgeene.home;
 
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -23,8 +34,10 @@ import com.foodgeene.home.brandlist.brandmodel.Brandlist;
 import com.foodgeene.home.hometwo.HomeTwoAdapter;
 import com.foodgeene.home.hometwo.models.HomeTwoModel;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import network.FoodGeneeAPI;
 import network.RetrofitClient;
@@ -36,7 +49,7 @@ import retrofit2.Retrofit;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Home extends Fragment {
+public class Home extends Fragment implements LocationListener {
 
     RecyclerView merchantListReycler, merchantTwoRecycler, brandRecycler;
     HomeAdapter homeAdapter;
@@ -44,6 +57,11 @@ public class Home extends Fragment {
     HomeTwoAdapter homeTwoAdapter;
     BrandAdapter brandAdapter;
     LinearLayoutManager layoutManager;
+    TextView locationNew;
+    private LocationManager locationManager;
+    double longi;
+    double lati;
+
 
 
     public Home() {
@@ -55,10 +73,14 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.new_home, container, false);
         merchantListReycler = rootView.findViewById(R.id.mercRecycler);
         merchantTwoRecycler = rootView.findViewById(R.id.secondRecycler);
         brandRecycler = rootView.findViewById(R.id.brandRecycler);
+        locationNew = rootView.findViewById(R.id.location);
+        locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
+        checkLocationPerm();
+
         //shimmer
         shimmerFrameLayout = rootView.findViewById(R.id.shimmer_view_container);
         shimmerFrameLayout2 = rootView.findViewById(R.id.shimmer_view_container2);
@@ -66,9 +88,62 @@ public class Home extends Fragment {
 
         setupRecyclerView();
 
+
         return rootView;
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+//        switch (requestCode){
+//
+//        }
+    }
+
+    private void checkLocationPerm() {
+        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                !=PackageManager.PERMISSION_GRANTED){
+
+            return;
+
+        }
+
+
+        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+        onLocationChanged(location);
+        try {
+            locateAddress(location);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onLocationChanged(Location location) {
+
+        lati = location.getLatitude();
+         longi = location.getLongitude();
+
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+
+
+    }
 
     private void setupRecyclerView() {
 
@@ -202,6 +277,20 @@ public class Home extends Fragment {
             shimmerFrameLayout.setVisibility(View.GONE);
             shimmerFrameLayout.stopShimmerAnimation();
         }
+
+
+    }
+
+
+    private void locateAddress(Location location) throws IOException {
+
+        Geocoder geocoder = new Geocoder(getContext());
+        List<Address> addresses = null;
+
+        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+
+        String city = addresses.get(0).getLocality();
+        locationNew.setText(city);
 
 
     }

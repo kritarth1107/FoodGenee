@@ -4,22 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context=".welcomescreen.Welcome">
 
 
-    <com.hanks.htextview.line.LineTextView
-        android:id="@+id/welcomeBro"
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:src="@drawable/logonew"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:fontFamily="@font/thinking_of_betty"/>
+
+
+    <TextView
+        android:id="@+id/welcomeTextHere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/thinking_of_betty"
         android:padding="10dp"
-        app:animationDuration="3000"
-        app:lineWidth="4dp"
-        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
         android:textSize="30dp"
         android:layout_centerInParent="true"
         android:text="Welcome "/>
+
+
+    <TextView
+        android:id="@+id/welcomeBro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:layout_below="@id/welcomeTextHere"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp"
+        android:layout_centerInParent="true"
+        android:text=".... "/>
 
 
 

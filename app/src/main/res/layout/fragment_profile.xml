@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+
+
+
     <LinearLayout
+        android:id="@+id/lal"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="280dp">
@@ -19,16 +30,19 @@
                     android:layout_centerInParent="true"
                     android:layout_width="350dp"
                     android:layout_height="350dp"
+                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_circle_sky_blue"/>
                 <ImageView
                     android:layout_centerInParent="true"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
+                    android:tint="@color/colorPrimaryDark"
                     android:src="@drawable/ic_circle_darkblue"/>
 
                 <ImageView
                     android:layout_centerInParent="true"
                     android:layout_width="220dp"
+                    android:tint="@color/colorAccent"
                     android:layout_height="220dp"
                     android:src="@drawable/ic_circle_shape_outline"/>
 
@@ -102,6 +116,7 @@
             android:id="@+id/userEmail"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
             android:layout_marginTop="20dp"
             android:drawableLeft="@drawable/ic_black_back_closed_envelope_shape"
             android:drawablePadding="10dp"
@@ -114,20 +129,126 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:drawableTint="@color/colorPrimary"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_local_phone_black_24dp"
             android:text="Phone"
             android:textColor="@android:color/black"/>
     </LinearLayout>
-<LinearLayout
-    android:layout_margin="25dp"
-    android:layout_alignParentBottom="true"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_height="300dp"
+        android:background="#80FFFFFF"
+        android:id="@+id/newcard"
+        app:cardCornerRadius="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/lal">
+
+        <RelativeLayout
+            android:background="#80FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your coins score"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:id="@+id/coinstext"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/sumtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/coinstext"
+                android:layout_marginLeft="20dp"
+                android:text="redeem coins and get exciting offers"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/coinsscore"
+                android:layout_width="130dp"
+                android:layout_marginLeft="20dp"
+                android:elevation="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/sumtext"
+                app:cardCornerRadius="20dp"
+
+
+                android:layout_height="130dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
 
 
-</LinearLayout>
+                    <TextView
+                        android:id="@+id/cttext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Coins"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="14sp"/>
 
+                    <TextView
+                        android:id="@+id/realcoins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cttext"
+                        android:textSize="30dp"
+                        android:text="300"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"/>
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+            <!--                <androidx.cardview.widget.CardView-->
+            <!--                    android:id="@+id/coinsmerchants"-->
+            <!--                    android:layout_width="130dp"-->
+            <!--                    android:layout_marginLeft="20dp"-->
+            <!--                    android:elevation="10dp"-->
+            <!--                    android:layout_toRightOf="@id/coinsscore"-->
+            <!--                    android:layout_marginTop="30dp"-->
+            <!--                    android:layout_below="@id/sumtext"-->
+            <!--                    android:layout_height="130dp">-->
+
+
+            <!--                    <RelativeLayout-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="match_parent">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="wrap_content"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="Reward Lists"/>-->
+
+            <!--                    </RelativeLayout>-->
+
+            <!--                </androidx.cardview.widget.CardView>-->
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

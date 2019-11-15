@@ -40,6 +40,7 @@ public class Profile extends Fragment {
     LinearLayout editProfile,logout;
     SessionManager sessionManager;
     String token;
+    TextView coins;
     TextView name, email, mobile;
 
     public Profile() {
@@ -59,6 +60,7 @@ public class Profile extends Fragment {
         name = rootView.findViewById(R.id.userName);
         email = rootView.findViewById(R.id.userEmail);
         mobile = rootView.findViewById(R.id.userPhone);
+        coins = rootView.findViewById(R.id.realcoins);
         logout = rootView.findViewById(R.id.logout);
         editProfile = rootView.findViewById(R.id.editProfile);
         editProfile.setOnClickListener(view -> {
@@ -96,6 +98,8 @@ public class Profile extends Fragment {
                     name.setText(retrievedModelUsers.getName());
                     email.setText(retrievedModelUsers.getEmail());
                     mobile.setText(retrievedModelUsers.getMobile());
+                    coins.setText(retrievedModelUsers.getCoins());
+
 
                 }
                 catch (Exception e){
