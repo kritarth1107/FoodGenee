@@ -16,6 +16,7 @@
 
 
     <RelativeLayout
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -89,7 +90,7 @@
         <TextView
             android:id="@+id/newtext"
             android:layout_width="wrap_content"
-            android:text="Recommendations"
+            android:text="We Are Available"
             android:layout_below="@id/brandRecycler"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -181,7 +182,7 @@
         <TextView
             android:id="@+id/abtext"
             android:layout_width="wrap_content"
-            android:text="We're available at"
+            android:text="Recomendations For you"
             android:layout_below="@id/secondRecycler"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"

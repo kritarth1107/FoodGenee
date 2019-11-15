@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Coupon {
+
     @SerializedName("status")
     @Expose
     private String status;
@@ -59,5 +60,4 @@ public class Coupon {
     public void setSavingamt(Integer savingamt) {
         this.savingamt = savingamt;
     }
-
 }
