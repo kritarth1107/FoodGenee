@@ -9,6 +9,12 @@ public class Order {
     @SerializedName("order_id")
     @Expose
     private String orderId;
+    @SerializedName("logo")
+    @Expose
+    private String logo;
+    @SerializedName("coverpic")
+    @Expose
+    private String coverpic;
     @SerializedName("storename")
     @Expose
     private String storename;
@@ -37,6 +43,22 @@ public class Order {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getCoverpic() {
+        return coverpic;
+    }
+
+    public void setCoverpic(String coverpic) {
+        this.coverpic = coverpic;
     }
 
     public String getStorename() {

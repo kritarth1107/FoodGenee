@@ -6,6 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class ScannerModel {
 
+
+    @SerializedName("tablename")
+    @Expose
+    private String tablename;
     @SerializedName("status")
     @Expose
     private String status;
@@ -93,4 +97,11 @@ public class ScannerModel {
         this.productlist = productlist;
     }
 
+    public String getTablename() {
+        return tablename;
+    }
+
+    public void setTablename(String tablename) {
+        this.tablename = tablename;
+    }
 }

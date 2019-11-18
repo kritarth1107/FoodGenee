@@ -84,8 +84,7 @@ public class SuccessActivity extends AppCompatActivity {
         animation_view.setVisibility(View.INVISIBLE);
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<RegisterModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,"",UserToken,"application/x-www-form-urlencoded"
-        );
+        Call<RegisterModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,UserToken,"application/x-www-form-urlencoded");
         call.enqueue(new Callback<RegisterModel>() {
             @Override
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {

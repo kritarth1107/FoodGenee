@@ -53,6 +53,7 @@
                 android:layout_marginRight="40dp"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                android:drawableTint="@color/colorPrimary"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:textSize="10dp"

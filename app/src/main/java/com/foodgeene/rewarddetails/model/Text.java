@@ -1,11 +1,9 @@
-package com.foodgeene.rewards.rewardmodels;
+package com.foodgeene.rewarddetails.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Text implements Serializable {
+public class Text {
 
     @SerializedName("id")
     @Expose
@@ -117,5 +115,4 @@ public class Text implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }

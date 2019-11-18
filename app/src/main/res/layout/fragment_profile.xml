@@ -26,12 +26,7 @@
                 android:layout_marginLeft="-70dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_centerInParent="true"
-                    android:layout_width="350dp"
-                    android:layout_height="350dp"
-                    android:tint="@color/colorAccent"
-                    android:src="@drawable/ic_circle_sky_blue"/>
+
                 <ImageView
                     android:layout_centerInParent="true"
                     android:layout_width="300dp"
@@ -163,6 +158,17 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"/>
 
+            <Button
+                android:id="@+id/redeemNow"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:text="Redeem" />
+
             <TextView
                 android:id="@+id/sumtext"
                 android:layout_width="wrap_content"
@@ -214,6 +220,14 @@
 
 
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_below="@+id/coinsscore"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check your coins transactions"/>
 
 
 

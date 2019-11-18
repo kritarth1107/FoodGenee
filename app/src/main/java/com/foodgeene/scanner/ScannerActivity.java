@@ -102,7 +102,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                     if (status.equals("1")) {
 
                         String store = response.body().getStore().trim();
-                        String table = response.body().getTable().trim();
+                        String table = response.body().getTablename().trim();
                         Intent intent = new Intent(ScannerActivity.this, RestrauntActivity.class);
                         intent.putExtra("encKey",result);
                         intent.putExtra("store",store);

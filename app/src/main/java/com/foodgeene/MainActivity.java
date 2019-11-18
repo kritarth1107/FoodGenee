@@ -21,6 +21,7 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.cart.Orders;
 import com.foodgeene.home.Home;
 import com.foodgeene.profile.Profile;
+import com.foodgeene.rewards.Rewards;
 import com.foodgeene.scanner.ScannerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
+
+                    case R.id.nav_rewards:
+                        startActivity(new Intent(getApplicationContext(), Rewards.class));
                     case R.id.nav_home:
                         if(Current_Tab.equals("Home")){
                         }

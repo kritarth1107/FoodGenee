@@ -34,6 +34,7 @@ import retrofit2.Response;
 
 public class RestrauntActivity extends AppCompatActivity {
     private RecyclerView recyclerView ;
+    TextView tableName;
     SessionManager sessionManager;
     String UserToken;
     Intent getIntent;

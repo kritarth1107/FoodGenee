@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/hideLay"
+    android:layout_height="match_parent"
+    tools:context=".rewarddetails.RewardsDetails">
+
+
+    <RelativeLayout
+        android:id="@+id/backdroplayout"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+
+        <ImageView
+            android:id="@+id/offerImage"
+            android:background="@android:color/holo_orange_dark"
+            android:tint="#7A886E"
+            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"
+            android:tintMode="multiply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/restImage"
+            android:layout_width="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="55dp"/>
+        <TextView
+            android:id="@+id/offername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer Name"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/white" />
+        <TextView
+            android:id="@+id/expireson"
+            android:layout_below="@id/offername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:text="Expires on" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/excerpt"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:layout_above="@id/offername"
+            android:text="Actual Offer Details"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bgtwo"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/backdroplayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/progressDetail"/>
+
+            <TextView
+                android:id="@+id/textOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Offer Details"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/textOffer"
+                android:text="New Offer" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/bgtwo"
+        android:visibility="gone"
+        android:id="@+id/hideCoupon"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/orignalCoupn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CP100"
+            android:padding="10dp"
+            android:background="@drawable/couponborder"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coupon Code"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/orignalRedeemButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/redeem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/hideCoupon"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

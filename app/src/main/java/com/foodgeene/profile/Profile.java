@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.profile.userdetails.Users;
+import com.foodgeene.rewarddetails.RewardsDetails;
+import com.foodgeene.rewards.Rewards;
 
 import org.w3c.dom.Text;
 
@@ -42,6 +45,7 @@ public class Profile extends Fragment {
     String token;
     TextView coins;
     TextView name, email, mobile;
+    Button redeem;
 
     public Profile() {
         // Required empty public constructor
@@ -61,6 +65,13 @@ public class Profile extends Fragment {
         email = rootView.findViewById(R.id.userEmail);
         mobile = rootView.findViewById(R.id.userPhone);
         coins = rootView.findViewById(R.id.realcoins);
+        redeem = rootView.findViewById(R.id.redeemNow);
+        redeem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), Rewards.class));
+            }
+        });
         logout = rootView.findViewById(R.id.logout);
         editProfile = rootView.findViewById(R.id.editProfile);
         editProfile.setOnClickListener(view -> {

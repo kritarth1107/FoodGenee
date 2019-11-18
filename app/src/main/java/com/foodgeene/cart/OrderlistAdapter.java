@@ -49,6 +49,12 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+
+
+        Glide.with(context)
+                .load(list.get(position).getLogo())
+                .into(holder.orderRestImage);
+        
         holder.Restraunt_Name.setText(list.get(position).getStorename());
         holder.OrderID.setText(list.get(position).getOrderId());
         holder.TableNumber.setText(list.get(position).getTablename());
@@ -56,6 +62,10 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
         holder.PaymentMethod.setText(list.get(position).getPaymenttype());
         holder.OrderStatus.setText(list.get(position).getOrderprocess());
         holder.PaymentStatus.setText(list.get(position).getPaidstatus());
+
+//        Glide.with(context)
+//               .load(list.get(position).getOrderprocess());
+
         ArrayList arrayList = new ArrayList<>(list.get(position).getProducts());
 //        List<Product> l = list.get(position).getProducts();
 //        List<Product> newList = new ArrayList<>()
@@ -95,6 +105,7 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
     public class HomeViewHolder extends RecyclerView.ViewHolder {
         TextView Restraunt_Name,OrderID,TableNumber,TotalAmount,PaymentMethod,OrderStatus,PaymentStatus;
         CardView OrderCard;
+        ImageView orderRestImage;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             Restraunt_Name = itemView.findViewById(R.id.Restraunt_Name);
@@ -105,6 +116,7 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
             OrderStatus = itemView.findViewById(R.id.OrderStatus);
             PaymentStatus = itemView.findViewById(R.id.PaymentStatus);
             OrderCard = itemView.findViewById(R.id.OrderCard);
+            orderRestImage = itemView.findViewById(R.id.storeName);
 
         }
     }

@@ -11,6 +11,10 @@ import com.foodgeene.payment.coupon.Coupon;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.signupotp.OtpModel;
+import com.foodgeene.rewarddetails.model.DetailModel;
+import com.foodgeene.rewarddetails.model.RedeemCoins;
+import com.foodgeene.rewards.rewardmodels.RModel;
+import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.scanner.ScannerModel;
 
 import retrofit2.Call;
@@ -172,4 +176,48 @@ public interface FoodGeneeAPI {
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
+
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<RModel> rewardsList(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<RModel> coinsTrans(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<RedeemCount> redeemCount(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<DetailModel> rewardListDetails(
+            @Field("action") String action,
+            @Field("rewardid") String rewardId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<RedeemCoins> redeemCoins(
+            @Field("action") String action,
+            @Field("rewardid") String rewardId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+
 }
