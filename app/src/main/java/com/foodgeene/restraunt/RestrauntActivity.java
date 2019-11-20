@@ -53,7 +53,7 @@ public class RestrauntActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restraunt);
         toolbar = findViewById(R.id.toolbar);
-        option = new RequestOptions().centerCrop().placeholder(R.drawable.bg3).error(R.drawable.bg3);
+        option = new RequestOptions().centerCrop().placeholder(R.drawable.ic_image).error(R.drawable.ic_image);
         setSupportActionBar(toolbar);
         logoHere = findViewById(R.id.aa_thumbnail);
         table_number = findViewById(R.id.table_number);
