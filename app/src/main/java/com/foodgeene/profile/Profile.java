@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.coinstransactions.CoinsTransaction;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.profile.userdetails.Users;
 import com.foodgeene.rewarddetails.RewardsDetails;
@@ -69,7 +70,7 @@ public class Profile extends Fragment {
         redeem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Rewards.class));
+                startActivity(new Intent(getContext(), CoinsTransaction.class));
             }
         });
         logout = rootView.findViewById(R.id.logout);

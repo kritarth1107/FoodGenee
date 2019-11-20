@@ -24,4 +24,5 @@
     <string name="coupon_won">Coupon Won</string>
     <string name="rewards">Rewards</string>
     <string name="redeem">Redeem</string>
+    <string name="rewards_claimed">Rewards Claimed</string>
 </resources>

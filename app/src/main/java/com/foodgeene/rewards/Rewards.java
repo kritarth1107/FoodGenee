@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.coinstransactions.CoinsTransaction;
 import com.foodgeene.rewards.rewardmodels.RModel;
 import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.rewards.rewardmodels.Text;
@@ -32,6 +36,7 @@ public class Rewards extends AppCompatActivity {
     ProgressBar progressBar;
     String token;
     TextView redeemCount;
+    Button check;
 
 
     @Override
@@ -44,9 +49,15 @@ public class Rewards extends AppCompatActivity {
         token = user.get(sessionManager.USER_ID);
         progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
+        check = findViewById(R.id.checkTransaction);
         redeemCount = findViewById(R.id.redeemCount);
 
-
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Rewards.this, CoinsTransaction.class));
+            }
+        });
         setupRecycler();
         setRedeemCount();
     }

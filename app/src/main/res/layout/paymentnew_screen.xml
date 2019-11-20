@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/paymentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/humara_black"
+        android:fontFamily="@font/aero"
+        android:padding="10dp"
+        android:textSize="20sp"/>
+
+
+    <LinearLayout
+        android:id="@+id/lines"
+        android:layout_marginLeft="10dp"
+        android:background="@color/humara_black"
+        android:layout_width="100dp"
+        android:layout_below="@id/paymentText"
+        android:layout_height="2dp"
+        android:orientation="horizontal"> </LinearLayout>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/paytm_card"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@id/lines"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/cardbgone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/paytm_logo"/>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+91 XXXXX XXXXX"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/white"/>
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="* * * * * * * * * * * "
+                        android:textSize="15sp"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="bottom|end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:tint="@android:color/white"
+                        android:src="@drawable/ic_rupee_indian"/>
+
+                    <TextView
+                        android:id="@+id/amount_tv_paytm"
+                        android:paddingTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pod_card"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@id/paytm_card"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/cardbgtwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/cash"/>
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="Pay on dine"
+                        android:fontFamily="@font/hallosans"
+                        android:textStyle="bold"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enjoy your Delicious meal,"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="then pay"
+
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="bottom|end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:tint="@color/white"
+                        android:src="@drawable/ic_rupee_indian"/>
+
+                    <TextView
+                        android:id="@+id/amount_tv_pod"
+                        android:paddingTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/amazon"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@id/pod_card"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/amazonbg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/amazon"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enjoy your Delicious meal,"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="then pay"
+
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="bottom|end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:tint="@color/white"
+                        android:src="@drawable/ic_rupee_indian"/>
+
+                    <TextView
+                        android:id="@+id/amtv"
+                        android:paddingTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/gpay"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@id/amazon"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/gpaybg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/gpayimg"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enjoy your Delicious meal,"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="then pay"
+
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="bottom|end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:tint="@color/white"
+                        android:src="@drawable/ic_rupee_indian"/>
+
+                    <TextView
+                        android:id="@+id/newtc"
+                        android:paddingTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/phonepenew"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@id/gpay"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="170dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="@drawable/phonepe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/phonepeimg"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enjoy your Delicious meal,"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/aero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="then pay"
+
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="bottom|end"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:tint="@color/white"
+                        android:src="@drawable/ic_rupee_indian"/>
+
+                    <TextView
+                        android:id="@+id/newtcs"
+                        android:paddingTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:id="@+id/cops"
+        android:layout_below="@id/phonepenew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/HaveACouponTV"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have a coupon code ?"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/CouponLayout"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_below="@id/cops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@drawable/border"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/appliedTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coupon Applied!"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textStyle="bold"/>
+                <EditText
+                    android:id="@+id/couponEditText"
+                    android:textSize="15sp"
+                    android:hint="Coupon"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3">
+
+                <TextView
+                    android:id="@+id/applyButton"
+                    android:text="Apply"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/removeButton"
+                    android:text="Remove"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <ProgressBar
+                    android:id="@+id/ProgressBarCoupon"
+                    android:visibility="gone"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

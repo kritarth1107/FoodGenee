@@ -1,6 +1,7 @@
 package network;
 
 import com.foodgeene.cart.OrderListModel;
+import com.foodgeene.coinstransactions.model.Transaction;
 import com.foodgeene.home.HomeMerchantModel;
 import com.foodgeene.home.brandlist.brandmodel.Brand;
 import com.foodgeene.home.hometwo.models.HomeTwoModel;
@@ -9,6 +10,7 @@ import com.foodgeene.login.LoginModel;
 import com.foodgeene.payment.Checksum;
 import com.foodgeene.payment.coupon.Coupon;
 import com.foodgeene.profile.userdetails.UserModel;
+import com.foodgeene.redeemedlistdetails.model.RedeemedModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.signupotp.OtpModel;
 import com.foodgeene.rewarddetails.model.DetailModel;
@@ -219,5 +221,20 @@ public interface FoodGeneeAPI {
             @Header("Content-Type") String Ctype
     );
 
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<Transaction> transCoins(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
 
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<RedeemedModel> redeemedListDet(
+            @Field("action") String action,
+            @Field("rewardid") String rewardId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
 }

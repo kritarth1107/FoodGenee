@@ -40,17 +40,18 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
     @Override
     public void onBindViewHolder(@NonNull RewardsViewHolder holder, int position) {
 
-       rewardId = list.get(position).getId();
         holder.rewardWon.setText(list.get(position).getTitle());
         Glide.with(context)
                 .load(list.get(position).getLogo())
                 .into(holder.rewardImageHere);
 
         holder.rewardImageHere.setOnClickListener(view -> {
+            rewardId = list.get(position).getId();
             Intent intent = new Intent(context, RewardsDetails.class);
             intent.putExtra("rewardid", rewardId);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
+            Toast.makeText(context, rewardId, Toast.LENGTH_SHORT).show();
         });
 
         holder.expires.setText("Expires on "+list.get(position).getValidityto());

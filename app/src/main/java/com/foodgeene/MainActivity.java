@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         checkLocationPerm();
         sessionManager = new SessionManager(this);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -102,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        onLocationChanged(location);
+//        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+//        onLocationChanged(location);
     }
 
     private void onLocationChanged(Location location) {
 
-        double longi = location.getLongitude();
-        double lati = location.getLatitude();
+//        double longi = location.getLongitude();
+//        double lati = location.getLatitude();
 
     }
 

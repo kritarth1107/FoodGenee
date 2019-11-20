@@ -41,7 +41,6 @@ public class RewardsDetails extends AppCompatActivity {
     ProgressBar progressBar;
     RelativeLayout hideLay;
     RelativeLayout hideCoupon;
-
     Button redeem;
 
     @Override
@@ -69,37 +68,34 @@ public class RewardsDetails extends AppCompatActivity {
         get = getIntent();
         rewardId = get.getStringExtra("rewardid");
 
-        redeem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        redeem.setOnClickListener(view -> {
 
-                FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-                Call<RedeemCoins> call = foodGeneeAPI.redeemCoins("redeem-coins", rewardId, UserToken, "application/x-www-form-urlencoded");
-                call.enqueue(new Callback<RedeemCoins>() {
-                    @Override
-                    public void onResponse(Call<RedeemCoins> call, Response<RedeemCoins> response) {
-                        try{
-                            RedeemCoins redeemCoins = response.body();
-                            couponCode.setText(redeemCoins.getCouponcode());
-                            hideCoupon.setVisibility(View.VISIBLE);
-                            redeem.setVisibility(View.GONE);
-                            Toast.makeText(RewardsDetails.this, redeemCoins.getMessage(), Toast.LENGTH_SHORT).show();
+            FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+            Call<RedeemCoins> call = foodGeneeAPI.redeemCoins("redeem-coins", rewardId, UserToken, "application/x-www-form-urlencoded");
+            call.enqueue(new Callback<RedeemCoins>() {
+                @Override
+                public void onResponse(Call<RedeemCoins> call, Response<RedeemCoins> response) {
+                    try{
+                        RedeemCoins redeemCoins = response.body();
+                        couponCode.setText(redeemCoins.getCouponcode());
+                        hideCoupon.setVisibility(View.VISIBLE);
+                        redeem.setVisibility(View.GONE);
+                        Toast.makeText(RewardsDetails.this, redeemCoins.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        }
-                        catch (Exception e){
+                    }
+                    catch (Exception e){
 
-
-                        }
 
                     }
 
-                    @Override
-                    public void onFailure(Call<RedeemCoins> call, Throwable t) {
+                }
 
-                    }
-                });
+                @Override
+                public void onFailure(Call<RedeemCoins> call, Throwable t) {
 
-            }
+                }
+            });
+
         });
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
@@ -115,7 +111,7 @@ public class RewardsDetails extends AppCompatActivity {
 
                     offerName.setText(text.getTitle());
                     excerptO.setText(text.getExcerpt());
-                    expireOn.setText("Validity "+text.getValidityfrom()+" to "+text.getValidityto());
+                    expireOn.setText(text.getValidityfrom()+" - "+text.getValidityto());
                     descript.setText(text.getDescription());
                     hideLay.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
@@ -130,7 +126,7 @@ public class RewardsDetails extends AppCompatActivity {
 
 
                 }
-                catch (Exception e){
+                catch (Exception ignored){
 
 
                 }

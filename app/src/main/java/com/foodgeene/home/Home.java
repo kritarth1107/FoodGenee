@@ -51,9 +51,10 @@ import retrofit2.Retrofit;
  */
 public class Home extends Fragment implements LocationListener {
 
+    private static final int GRANT_PERM = 1;
     RecyclerView merchantListReycler, merchantTwoRecycler, brandRecycler;
     HomeAdapter homeAdapter;
-    ShimmerFrameLayout shimmerFrameLayout,shimmerFrameLayout2,shimmerFrameLayout3;
+    ShimmerFrameLayout shimmerFrameLayout, shimmerFrameLayout2, shimmerFrameLayout3;
     HomeTwoAdapter homeTwoAdapter;
     BrandAdapter brandAdapter;
     LinearLayoutManager layoutManager;
@@ -61,7 +62,6 @@ public class Home extends Fragment implements LocationListener {
     private LocationManager locationManager;
     double longi;
     double lati;
-
 
 
     public Home() {
@@ -102,28 +102,46 @@ public class Home extends Fragment implements LocationListener {
     }
 
     private void checkLocationPerm() {
-        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-                !=PackageManager.PERMISSION_GRANTED){
-
-            return;
-
-        }
+//        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED &&
+//
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
 
-        Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-        onLocationChanged(location);
-        try {
-            locateAddress(location);
-        } catch (IOException e) {
-            e.printStackTrace();
+//            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION));
+            if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+
+            } else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        GRANT_PERM);
+
+            }
+
+        } else {
+
+            Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+            onLocationChanged(location);
+            try {
+                locateAddress(location);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
     public void onLocationChanged(Location location) {
 
-        lati = location.getLatitude();
-         longi = location.getLongitude();
+        try {
+            lati = location.getLatitude();
+            longi = location.getLongitude();
+
+        } catch (Exception e) {
+
+        }
 
 
     }
@@ -140,7 +158,6 @@ public class Home extends Fragment implements LocationListener {
 
     @Override
     public void onProviderDisabled(String s) {
-
 
 
     }
@@ -253,9 +270,9 @@ public class Home extends Fragment implements LocationListener {
                     layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
                     brandRecycler.setLayoutManager(layoutManager);
                     brandRecycler.setAdapter(brandAdapter);
-                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(brandRecycler.getContext(),
-                                layoutManager.getOrientation());
-                        brandRecycler.addItemDecoration(dividerItemDecoration);
+//                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(brandRecycler.getContext(),
+//                            layoutManager.getOrientation());
+//                    brandRecycler.addItemDecoration(dividerItemDecoration);
 
 
                     shimmerFrameLayout.setVisibility(View.GONE);
@@ -284,13 +301,20 @@ public class Home extends Fragment implements LocationListener {
 
     private void locateAddress(Location location) throws IOException {
 
-        Geocoder geocoder = new Geocoder(getContext());
-        List<Address> addresses = null;
+        try {
+            Geocoder geocoder = new Geocoder(getContext());
+            List<Address> addresses = null;
 
-        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
-        String city = addresses.get(0).getLocality();
-        locationNew.setText(city);
+            String city = addresses.get(0).getLocality();
+            locationNew.setText(city);
+
+
+        } catch (Exception e) {
+
+
+        }
 
 
     }

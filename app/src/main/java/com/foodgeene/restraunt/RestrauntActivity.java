@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
@@ -43,12 +45,14 @@ public class RestrauntActivity extends AppCompatActivity {
     ShimmerFrameLayout shimmerFrameLayout;
     TextView table_number,store,Total_amount,Quanity_item_tv;
     LinearLayout OrderSheet,ViewCartLayout;
+    ImageView logoHere;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restraunt);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        logoHere = findViewById(R.id.re);
         table_number = findViewById(R.id.table_number);
         store = findViewById(R.id.store);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -95,6 +99,7 @@ public class RestrauntActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ScannerModel> call, Response<ScannerModel> response) {
                 try {
+                    ScannerModel scannerModel = response.body();
                     String status = response.body().getStatus().trim();
                     if (status.equals("1")) {
                         String merchandid = response.body().getMerchantid().trim();
@@ -102,6 +107,7 @@ public class RestrauntActivity extends AppCompatActivity {
                         String logo = response.body().getLogo().trim();
                         String store = response.body().getStore().trim();
                         String table = response.body().getTable().trim();
+
                         List<Productlist> productlists = response.body().getProductlist();
                         RestrauntAdapter restrauntAdapter = new RestrauntAdapter(getApplicationContext(),productlists,OrderSheet,Total_amount,Quanity_item_tv,ViewCartLayout,table,merchandid) ;
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -109,6 +115,9 @@ public class RestrauntActivity extends AppCompatActivity {
                         shimmerFrameLayout.stopShimmerAnimation();
                         shimmerFrameLayout.setVisibility(View.GONE);
 
+//                        Glide.with(RestrauntActivity.this)
+//                                .load(scannerModel.getLogo())
+//                                .into(logoHere);
 
 
                     } else if (status.equals("0")) {
