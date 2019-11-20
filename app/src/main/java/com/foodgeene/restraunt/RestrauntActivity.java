@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
@@ -40,19 +41,21 @@ public class RestrauntActivity extends AppCompatActivity {
     SessionManager sessionManager;
     String UserToken;
     Intent getIntent;
-    String encKey,Store_Name,Table_Name;
+    String encKey,Store_Name,Table_Name,cover;
     Toolbar toolbar;
     ShimmerFrameLayout shimmerFrameLayout;
     TextView table_number,store,Total_amount,Quanity_item_tv;
     LinearLayout OrderSheet,ViewCartLayout;
     ImageView logoHere;
+    RequestOptions option;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restraunt);
         toolbar = findViewById(R.id.toolbar);
+        option = new RequestOptions().centerCrop().placeholder(R.drawable.bg3).error(R.drawable.bg3);
         setSupportActionBar(toolbar);
-//        logoHere = findViewById(R.id.re);
+        logoHere = findViewById(R.id.aa_thumbnail);
         table_number = findViewById(R.id.table_number);
         store = findViewById(R.id.store);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -78,8 +81,9 @@ public class RestrauntActivity extends AppCompatActivity {
         encKey = getIntent.getStringExtra("encKey");
         Store_Name = getIntent.getStringExtra("store");
         Table_Name = getIntent.getStringExtra("table");
+        cover = getIntent.getStringExtra("cover");
         collapsingToolbarLayout.setTitle(Store_Name);
-        collapsingToolbarLayout.setStatusBarScrim(getResources().getDrawable(R.drawable.bg3));
+        Glide.with(this).load(cover).apply(option).into(logoHere);
         store.setText(Store_Name);
         table_number.setText(Table_Name);
         CallScannerApi(encKey);

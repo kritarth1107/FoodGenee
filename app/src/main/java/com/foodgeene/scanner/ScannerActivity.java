@@ -103,10 +103,12 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
                         String store = response.body().getStore().trim();
                         String table = response.body().getTablename().trim();
+                        String cover = response.body().getLogo().trim();
                         Intent intent = new Intent(ScannerActivity.this, RestrauntActivity.class);
                         intent.putExtra("encKey",result);
                         intent.putExtra("store",store);
                         intent.putExtra("table",table);
+                        intent.putExtra("cover",cover);
                         startActivity(intent);
                         finish();
                         loadingDialog.cancel();

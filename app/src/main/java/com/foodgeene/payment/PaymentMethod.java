@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTransactionCallback {
     CardView paytm,pod;
-    TextView paytm_tv,pod_tv;
+    TextView paytm_tv,pod_tv,amtv,newtc,newtcs;
     Intent get;
     String totalamount,merchantid,productid,count,price,table;
     Toolbar toolbar;
@@ -53,6 +53,9 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         sessionManager = new SessionManager(this);
         CouponLayout = findViewById(R.id.CouponLayout);
         CouponLayout.setVisibility(View.GONE);
+        amtv = findViewById(R.id.amtv);
+        newtc = findViewById(R.id.newtc);
+        newtcs = findViewById(R.id.newtcs);
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
         paytm = findViewById(R.id.paytm_card);
@@ -74,6 +77,9 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         BackupAmount=totalamount;
         paytm_tv.setText(totalamount);
         pod_tv.setText(totalamount);
+        amtv.setText(totalamount);
+        newtc.setText(totalamount);
+        newtcs.setText(totalamount);
         toolbar = findViewById(R.id.toolbar);
         HaveACouponTV = findViewById(R.id.HaveACouponTV);
         HaveACouponTV.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +104,9 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                 totalamount = BackupAmount;
                 pod_tv.setText(BackupAmount);
                 paytm_tv.setText(BackupAmount);
+                amtv.setText(BackupAmount);
+                newtc.setText(BackupAmount);
+                newtcs.setText(BackupAmount);
                 applyButton.setVisibility(View.VISIBLE);
                 couponEditText.setText("");
                 removeButton.setVisibility(View.GONE);
@@ -151,6 +160,9 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                         totalamount = amnt;
                         paytm_tv.setText(amnt);
                         pod_tv.setText(amnt);
+                        amtv.setText(amnt);
+                        newtc.setText(amnt);
+                        newtcs.setText(amnt);
                         removeButton.setVisibility(View.VISIBLE);
                         ProgressBarCoupon.setVisibility(View.GONE);
                         couponEditText.setVisibility(View.GONE);

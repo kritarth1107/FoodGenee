@@ -311,9 +311,6 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/gpay"
         android:clickable="true"
@@ -403,10 +400,6 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/phonepenew"
         android:clickable="true"
