@@ -1,18 +1,16 @@
-package com.foodgeene.rewarddetails.model;
+package com.foodgeene.cart;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RedeemCoins {
+public class AlertModel {
+
     @SerializedName("status")
     @Expose
-    private String status;
+    public String status;
     @SerializedName("message")
     @Expose
-    private String message;
-    @SerializedName("couponcode")
-    @Expose
-    private String couponcode;
+    public String message;
 
     public String getStatus() {
         return status;
@@ -28,13 +26,5 @@ public class RedeemCoins {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getCouponcode() {
-        return couponcode;
-    }
-
-    public void setCouponcode(String couponcode) {
-        this.couponcode = couponcode;
     }
 }

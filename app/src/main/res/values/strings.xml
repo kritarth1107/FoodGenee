@@ -24,5 +24,9 @@
     <string name="coupon_won">Coupon Won</string>
     <string name="rewards">Rewards</string>
     <string name="redeem">Redeem</string>
+    <string name="read_file">This app needs access to your file storage so that it can read photos.</string>
+
     <string name="rewards_claimed">Rewards Claimed</string>
+    <string name="no_transactions_yet">No Transactions Yet</string>
+    <string name="otp_has_been_sent_to_registered_mobile_number">OTP has been sent to registered mobile number.</string>
 </resources>

@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewFlipper;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.foodgeene.home.brandlist.BrandAdapter;
 import com.foodgeene.home.brandlist.brandmodel.Bannerlist;
 import com.foodgeene.home.brandlist.brandmodel.Brand;
 import com.foodgeene.home.brandlist.brandmodel.Brandlist;
+import com.foodgeene.home.hometwo.FlipperAdapter;
 import com.foodgeene.home.hometwo.HomeTwoAdapter;
 import com.foodgeene.home.hometwo.models.HomeTwoModel;
 
@@ -52,6 +55,7 @@ import retrofit2.Retrofit;
 public class Home extends Fragment implements LocationListener {
 
     private static final int GRANT_PERM = 1;
+    TextView locationSub;
     RecyclerView merchantListReycler, merchantTwoRecycler, brandRecycler;
     HomeAdapter homeAdapter;
     ShimmerFrameLayout shimmerFrameLayout, shimmerFrameLayout2, shimmerFrameLayout3;
@@ -62,6 +66,7 @@ public class Home extends Fragment implements LocationListener {
     private LocationManager locationManager;
     double longi;
     double lati;
+    private AdapterViewFlipper adapterViewFlipper;
 
 
     public Home() {
@@ -73,10 +78,12 @@ public class Home extends Fragment implements LocationListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.new_home, container, false);
+         View rootView = inflater.inflate(R.layout.new_home, container, false);
+         locationSub = rootView.findViewById(R.id.locationCity);
         merchantListReycler = rootView.findViewById(R.id.mercRecycler);
         merchantTwoRecycler = rootView.findViewById(R.id.secondRecycler);
-        brandRecycler = rootView.findViewById(R.id.brandRecycler);
+        adapterViewFlipper = rootView.findViewById(R.id.brandRecycler);
+//        brandRecycler = rootView.findViewById(R.id.brandRecycler);
         locationNew = rootView.findViewById(R.id.location);
         locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
         checkLocationPerm();
@@ -111,12 +118,27 @@ public class Home extends Fragment implements LocationListener {
 
 //            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION));
             if (ActivityCompat.shouldShowRequestPermissionRationale(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+                onLocationChanged(location);
+                try {
+                    locateAddress(location);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
             } else {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         GRANT_PERM);
+//                Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+//                onLocationChanged(location);
+//                try {
+//                    locateAddress(location);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+
 
             }
 
@@ -266,10 +288,16 @@ public class Home extends Fragment implements LocationListener {
                     Brand brand1 = response.body();
                     List<Bannerlist> bannerlists = brand1.getBannerlist();
 
-                    brandAdapter = new BrandAdapter(bannerlists, getContext());
-                    layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-                    brandRecycler.setLayoutManager(layoutManager);
-                    brandRecycler.setAdapter(brandAdapter);
+
+                    FlipperAdapter flipper = new FlipperAdapter(getContext(), bannerlists);
+                    adapterViewFlipper.setAdapter(flipper);
+                    adapterViewFlipper.setFlipInterval(3000);
+                    adapterViewFlipper.startFlipping();
+
+//                    brandAdapter = new BrandAdapter(bannerlists, getContext());
+//                    layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+//                    brandRecycler.setLayoutManager(layoutManager);
+//                    brandRecycler.setAdapter(brandAdapter);
 //                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(brandRecycler.getContext(),
 //                            layoutManager.getOrientation());
 //                    brandRecycler.addItemDecoration(dividerItemDecoration);
@@ -308,7 +336,9 @@ public class Home extends Fragment implements LocationListener {
             addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
             String city = addresses.get(0).getLocality();
-            locationNew.setText(city);
+            String localAdd = addresses.get(0).getSubLocality();
+            locationNew.setText(localAdd+","); //Ayush's map works for sublocality Geocoder API
+            locationSub.setText(city);
 
 
         } catch (Exception e) {

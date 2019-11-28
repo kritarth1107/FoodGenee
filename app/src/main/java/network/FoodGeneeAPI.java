@@ -1,29 +1,41 @@
 package network;
 
+import com.foodgeene.cart.AlertModel;
 import com.foodgeene.cart.OrderListModel;
 import com.foodgeene.coinstransactions.model.Transaction;
+import com.foodgeene.firebaseservices.FirebaseMessagingModel;
+import com.foodgeene.forgot.ForgotOto;
+import com.foodgeene.forgot.ForgotPasswordModel;
+import com.foodgeene.forgot.changereal.PasswordChangeModel;
 import com.foodgeene.home.HomeMerchantModel;
 import com.foodgeene.home.brandlist.brandmodel.Brand;
 import com.foodgeene.home.hometwo.models.HomeTwoModel;
-import com.foodgeene.home.hometwo.models.Merchantlist;
 import com.foodgeene.login.LoginModel;
+import com.foodgeene.orderratings.CancelModel;
+import com.foodgeene.orderratings.RatingModel;
 import com.foodgeene.payment.Checksum;
 import com.foodgeene.payment.coupon.Coupon;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.redeemedlistdetails.model.RedeemedModel;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.signupotp.OtpModel;
+import com.foodgeene.register.signupotp.ResendOtpModel;
 import com.foodgeene.rewarddetails.model.DetailModel;
-import com.foodgeene.rewarddetails.model.RedeemCoins;
+import com.foodgeene.rewarddetails.model.RedeemCoinsModel;
 import com.foodgeene.rewards.rewardmodels.RModel;
 import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.scanner.ScannerModel;
+import com.foodgeene.transactionlists.model.ListModel;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import updateprofile.UpdateModel;
 
 public interface FoodGeneeAPI {
@@ -214,7 +226,7 @@ public interface FoodGeneeAPI {
 
     @FormUrlEncoded
     @POST("merchant/coins.php")
-    Call<RedeemCoins> redeemCoins(
+    Call<RedeemCoinsModel> redeemCoins(
             @Field("action") String action,
             @Field("rewardid") String rewardId,
             @Header("Authorization") String Auth,
@@ -225,6 +237,7 @@ public interface FoodGeneeAPI {
     @POST("merchant/coins.php")
     Call<Transaction> transCoins(
             @Field("action") String action,
+//            @Field("reason") String coinsGaine,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
@@ -237,4 +250,99 @@ public interface FoodGeneeAPI {
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
+
+
+    @FormUrlEncoded
+    @POST("users/user-profile.php")
+    Call<FirebaseMessagingModel> sendPushId(
+            @Field("action") String action,
+            @Field("pushid") String pushId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("users/feedback.php")
+    Call<RatingModel> orderFeedback(
+            @Field("action") String action,
+            @Field("merchantid") String merchantId,
+            @Field("rating") String rating,
+            @Field("message") String message,
+            @Field("orderid") String orderId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("users/user-registration.php")
+    Call<ForgotPasswordModel> forgotPassword(
+            @Field("action") String action,
+            @Field("username") String forgotPassword
+            );
+
+    @FormUrlEncoded
+    @POST("users/user-registration.php")
+    Call<ForgotOto> verifyForOtp(
+            @Field("action") String action,
+            @Field("otp") String otp,
+            @Field("usersid") String userid
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("users/user-registration.php")
+    Call<PasswordChangeModel> changePassword(
+
+            @Field("action") String action,
+            @Field("password") String otp,
+            @Field("usersid") String userid
+
+    );
+
+    @Multipart
+    @POST("users/user-registration.php")
+    Call<ResponseBody> updatePic(
+
+            @Part MultipartBody.Part profilepic,
+            @Part("usersid") String usersid,
+            @Part("action") String action
+
+    );
+
+    @FormUrlEncoded
+    @POST("users/feedback.php")
+    Call<AlertModel> alertIcon(
+
+            @Field("action") String action,
+            @Field("orderid") String orderId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+
+    );
+
+    @FormUrlEncoded
+    @POST("users/feedback.php")
+    Call<CancelModel> cancelFeed(
+            @Field("action") String action,
+            @Field("orderid") String orderId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/coins.php")
+    Call<ListModel> listTrans(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
+    @POST("users/user-registration.php")
+    Call<ResendOtpModel> resendOtp(
+            @Field("action") String action,
+            @Field("usersid") String userid
+    );
+
 }

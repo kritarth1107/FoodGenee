@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.Trace;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
@@ -28,16 +33,25 @@ public class CoinsTransaction extends AppCompatActivity {
     RecyclerView recyclerView;
     String token;
     SessionManager sessionManager;
+    TextView coins;
+    ImageView nocoins;
+    ProgressBar pro;
+    TransactionAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_coins_transaction);
         recyclerView = findViewById(R.id.transactionRecycler);
+        coins = findViewById(R.id.transctionstat);
+        nocoins = findViewById(R.id.norewardImg);
         sessionManager = new SessionManager(this);
+        pro = findViewById(R.id.transcprogres);
         HashMap<String, String> user = sessionManager.getUserDetail();
         token = user.get(sessionManager.USER_ID);
         setupRecycler();
+
+
 
     }
 
@@ -48,25 +62,42 @@ public class CoinsTransaction extends AppCompatActivity {
             @Override
             public void onResponse(Call<Transaction> call, Response<Transaction> response) {
                 try{
+
+
                     Transaction transaction = response.body();
                     List<Text> list = transaction.getText();
-                    TransactionAdapter adapter = new TransactionAdapter(CoinsTransaction.this, list);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(CoinsTransaction.this));
-                    recyclerView.setAdapter(adapter);
+                    if(transaction.getStatus().equals("1")){
+
+                        adapter = new TransactionAdapter(CoinsTransaction.this, list);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoinsTransaction.this);
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(adapter);
+                        pro.setVisibility(View.GONE);
+
+                    }
+                    else if(transaction.getStatus().equals("0")) {
+
+                        coins.setVisibility(View.VISIBLE);
+                        nocoins.setVisibility(View.VISIBLE);
+                        pro.setVisibility(View.GONE);
+                    }
+
 
 
                 }
                 catch (Exception e){
-
-                    Toast.makeText(CoinsTransaction.this, token, Toast.LENGTH_SHORT).show();
+                    coins.setVisibility(View.VISIBLE);
+                    nocoins.setVisibility(View.VISIBLE);
+                    pro.setVisibility(View.GONE);
                 }
 
             }
 
             @Override
             public void onFailure(Call<Transaction> call, Throwable t) {
-                Toast.makeText(CoinsTransaction.this, "Some error occured", Toast.LENGTH_SHORT).show();
-
+                coins.setVisibility(View.VISIBLE);
+                nocoins.setVisibility(View.VISIBLE);
+                pro.setVisibility(View.GONE);
 
             }
         });

@@ -69,7 +69,9 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             HashMap<String, String> user = sessionManager.getUserDetail();
             UserToken = user.get(sessionManager.USER_ID);
     }
-        public void scan(View view){
+
+
+    public void scan(View view){
         zXingScannerView = new ZXingScannerView(getApplicationContext());
         setContentView(zXingScannerView);
         zXingScannerView.setResultHandler(this);

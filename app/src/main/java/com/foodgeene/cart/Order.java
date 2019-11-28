@@ -4,8 +4,15 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Order {
+public class
 
+Order {
+
+
+    private String unique_id;
+    @SerializedName("feedbackstatus")
+    @Expose
+    private String feedbackstatus;
     @SerializedName("order_id")
     @Expose
     private String orderId;
@@ -30,6 +37,9 @@ public class Order {
     @SerializedName("orderprocess")
     @Expose
     private String orderprocess;
+    @SerializedName("orderprocessstatus")
+    @Expose
+    private String orderprocessstatus;
     @SerializedName("paidstatus")
     @Expose
     private String paidstatus;
@@ -117,4 +127,26 @@ public class Order {
         this.products = products;
     }
 
+    public String getFeedbackstatus() {
+        return feedbackstatus;
+    }
+
+    public void setFeedbackstatus(String feedbackstatus) {
+        this.feedbackstatus = feedbackstatus;
+    }
+    public String getUnique_id() {
+        return unique_id;
+    }
+
+    public void setUnique_id(String unique_id) {
+        this.unique_id = unique_id;
+    }
+
+    public String getOrderprocessstatus() {
+        return orderprocessstatus;
+    }
+
+    public void setOrderprocessstatus(String orderprocessstatus) {
+        this.orderprocessstatus = orderprocessstatus;
+    }
 }

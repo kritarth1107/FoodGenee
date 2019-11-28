@@ -45,33 +45,20 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLogin = findViewById(R.id.progressBarLogin);
         forgotPassword = findViewById(R.id.forotPassword);
 
-        NavigateToReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
-            }
-        });
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, ForgotActivity.class));
-            }
-        });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String string_email = Email.getText().toString().trim();
-                String string_password = Password.getText().toString().trim();
+        NavigateToReg.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
+        forgotPassword.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, ForgotActivity.class)));
+        login.setOnClickListener(view -> {
+            String string_email = Email.getText().toString().trim();
+            String string_password = Password.getText().toString().trim();
 
-                if(string_email.isEmpty()){
-                    Email.setError("Email is required");
-                }
-                else if(string_password.isEmpty()){
-                    Email.setError("Password is required");
-                }
-                else{
-                    login(string_email,string_password);
-                }
+            if(string_email.isEmpty()){
+                Email.setError("Email is required");
+            }
+            else if(string_password.isEmpty()){
+                Email.setError("Password is required");
+            }
+            else{
+                login(string_email,string_password);
             }
         });
     }

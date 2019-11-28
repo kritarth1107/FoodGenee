@@ -39,23 +39,28 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
 
-
+//        holder.reasonHere.setText(list.get(position).getReason());
         Glide.with(context)
                 .load(list.get(position).getLogo())
                 .into(holder.tranLogo);
 
         holder.transName.setText(list.get(position).getTitle());
         holder.transExcerpt.setText(list.get(position).getExcerpt());
-        holder.transValid.setText("Validity till "+list.get(position).getValidityto());
+        if(list.get(position).getValidityto().equals("1")){
+            holder.transValid.setText("Reward Expired");
 
-        holder.touch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String id = list.get(position).getId();
-                Intent intent = new Intent(context, RedeemedListDetails.class);
-                intent.putExtra("rId", id);
-                context.startActivity(intent);
-            }
+        }
+        else{
+
+            holder.transValid.setText("Validity "+list.get(position).getValidityto());
+
+        }
+
+        holder.touch.setOnClickListener(view -> {
+            String id = list.get(position).getId();
+            Intent intent = new Intent(context, RedeemedListDetails.class);
+            intent.putExtra("rId", id);
+            context.startActivity(intent);
         });
     }
 
@@ -68,6 +73,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         TextView transName, transValid, transExcerpt;
         ImageView tranLogo;
         CardView touch;
+//        TextView reasonHere;
         public TransactionViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -76,6 +82,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             transExcerpt = itemView.findViewById(R.id.tranDesc);
             transValid = itemView.findViewById(R.id.tranValidity);
             touch = itemView.findViewById(R.id.touchCard);
+//            reasonHere = itemView.findViewById(R.id.reason);
         }
     }
 }

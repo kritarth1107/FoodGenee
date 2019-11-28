@@ -21,6 +21,10 @@ public class Text {
     @Expose
     private String logo;
 
+    @SerializedName("reason")
+    @Expose
+    private String reason;
+
     public String getId() {
         return id;
     }
@@ -59,5 +63,13 @@ public class Text {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

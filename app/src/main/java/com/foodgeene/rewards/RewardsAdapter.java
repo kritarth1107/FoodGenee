@@ -54,7 +54,14 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
             Toast.makeText(context, rewardId, Toast.LENGTH_SHORT).show();
         });
 
-        holder.expires.setText("Expires on "+list.get(position).getValidityto());
+        if(list.get(position).getValidityto().equals("1")){
+            holder.expires.setText("Expired");
+
+        }
+        else{
+            holder.expires.setText("Expires on "+list.get(position).getValidityto());
+
+        }
 
     }
 

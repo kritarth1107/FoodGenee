@@ -18,6 +18,7 @@ import com.foodgeene.coinstransactions.CoinsTransaction;
 import com.foodgeene.rewards.rewardmodels.RModel;
 import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.rewards.rewardmodels.Text;
+import com.foodgeene.transactionlists.CoinsTransactionsList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,12 +53,7 @@ public class Rewards extends AppCompatActivity {
         check = findViewById(R.id.checkTransaction);
         redeemCount = findViewById(R.id.redeemCount);
 
-        check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Rewards.this, CoinsTransaction.class));
-            }
-        });
+        check.setOnClickListener(view -> startActivity(new Intent(Rewards.this, CoinsTransactionsList.class)));
         setupRecycler();
         setRedeemCount();
     }

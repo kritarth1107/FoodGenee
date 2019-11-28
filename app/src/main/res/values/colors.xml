@@ -7,6 +7,10 @@
     <color name="background">#dddddd</color>
     <color name="humara_black">#494949</color>
     <color name="bottomnavColor">#e9edf1</color>
+    <color name="none">#EBEBEB</color>
+    <color name="plus">#00ff00</color>
+
+
     <color name="bgBottomNavigation">#c8bed9</color>
 
 </resources>

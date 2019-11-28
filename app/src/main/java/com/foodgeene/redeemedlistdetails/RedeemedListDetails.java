@@ -2,6 +2,7 @@ package com.foodgeene.redeemedlistdetails;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ public class RedeemedListDetails extends AppCompatActivity {
     Bundle bundle;
     String rewardId = null;
     Intent get;
+    Dialog loadingDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,14 @@ public class RedeemedListDetails extends AppCompatActivity {
                 try{
                     RedeemedModel redeemedModel = response.body();
                     Text list = redeemedModel.getText();
-                    expireOn.setText(list.getValidityfrom()+" - "+list.getValidityto());
+
+                    if(list.getValidityto().equals("1")){
+                        expireOn.setText("Expired");
+                    }
+                    else{
+                        expireOn.setText(list.getValidityfrom()+" - "+list.getValidityto());
+
+                    }
                     offerName.setText(list.getTitle());
                    excerptO.setText(list.getExcerpt());
                    descript.setText(list.getDescription());

@@ -2,8 +2,8 @@ package com.foodgeene.rewarddetails;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,9 +16,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
-import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.rewarddetails.model.DetailModel;
-import com.foodgeene.rewarddetails.model.RedeemCoins;
+import com.foodgeene.rewarddetails.model.RedeemCoinsModel;
 import com.foodgeene.rewarddetails.model.Text;
 
 import java.util.HashMap;
@@ -42,6 +41,9 @@ public class RewardsDetails extends AppCompatActivity {
     RelativeLayout hideLay;
     RelativeLayout hideCoupon;
     Button redeem;
+    Dialog loadingDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,30 +71,52 @@ public class RewardsDetails extends AppCompatActivity {
         rewardId = get.getStringExtra("rewardid");
 
         redeem.setOnClickListener(view -> {
+            loadingDialog = new Dialog(RewardsDetails.this);
+            loadingDialog.setContentView(R.layout.loading_dialog_layout);
+            loadingDialog.show();
+            loadingDialog.setCancelable(false);
+            loadingDialog.setCanceledOnTouchOutside(false);
 
             FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-            Call<RedeemCoins> call = foodGeneeAPI.redeemCoins("redeem-coins", rewardId, UserToken, "application/x-www-form-urlencoded");
-            call.enqueue(new Callback<RedeemCoins>() {
+            Call<RedeemCoinsModel> call = foodGeneeAPI.redeemCoins("redeem-coins", rewardId, UserToken, "application/x-www-form-urlencoded");
+            call.enqueue(new Callback<RedeemCoinsModel>() {
                 @Override
-                public void onResponse(Call<RedeemCoins> call, Response<RedeemCoins> response) {
-                    try{
-                        RedeemCoins redeemCoins = response.body();
-                        couponCode.setText(redeemCoins.getCouponcode());
-                        hideCoupon.setVisibility(View.VISIBLE);
-                        redeem.setVisibility(View.GONE);
-                        Toast.makeText(RewardsDetails.this, redeemCoins.getMessage(), Toast.LENGTH_SHORT).show();
+                public void onResponse(Call<RedeemCoinsModel> call, Response<RedeemCoinsModel> response) {
 
+                        RedeemCoinsModel redeemCoins = response.body();
+
+                        if(redeemCoins.getStatusO().equals("1")){
+                            couponCode.setText(redeemCoins.getCouponcode0());
+                            hideCoupon.setVisibility(View.VISIBLE);
+                            redeem.setVisibility(View.GONE);
+                            Toast.makeText(RewardsDetails.this, redeemCoins.getMessage0(), Toast.LENGTH_SHORT).show();
+                            loadingDialog.cancel();
+                            loadingDialog.dismiss();
+
+                        }
+                        else if(redeemCoins.getStatusO().equals("0")){
+                            loadingDialog.cancel();
+                            loadingDialog.dismiss();
+                            Toast.makeText(RewardsDetails.this, redeemCoins.getMessage0(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        else {
+                            loadingDialog.cancel();
+                            loadingDialog.dismiss();
+
+                        }
                     }
-                    catch (Exception e){
 
 
-                    }
 
-                }
+
+
 
                 @Override
-                public void onFailure(Call<RedeemCoins> call, Throwable t) {
-
+                public void onFailure(Call<RedeemCoinsModel> call, Throwable t) {
+                    loadingDialog.cancel();
+                    loadingDialog.dismiss();
                 }
             });
 
@@ -111,7 +135,14 @@ public class RewardsDetails extends AppCompatActivity {
 
                     offerName.setText(text.getTitle());
                     excerptO.setText(text.getExcerpt());
-                    expireOn.setText(text.getValidityfrom()+" - "+text.getValidityto());
+                    if(detailModel.getText().getValidityto().equals("1")){
+                        expireOn.setText("Expired");
+                        redeem.setVisibility(View.GONE);
+                    }
+                    else {
+                        expireOn.setText(text.getValidityfrom()+" - "+text.getValidityto());
+
+                    }
                     descript.setText(text.getDescription());
                     hideLay.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
@@ -128,14 +159,16 @@ public class RewardsDetails extends AppCompatActivity {
                 }
                 catch (Exception ignored){
 
-
+                    loadingDialog.cancel();
+                    loadingDialog.dismiss();
                 }
 
             }
 
             @Override
             public void onFailure(Call<DetailModel> call, Throwable t) {
-
+                loadingDialog.cancel();
+                loadingDialog.dismiss();
             }
         });
 

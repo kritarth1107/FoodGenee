@@ -42,6 +42,10 @@ public class Merchantlist {
     @Expose
     private String coverpic;
 
+    @SerializedName("rating")
+    @Expose
+    private String rating;
+
     public String getId() {
         return id;
     }
@@ -136,5 +140,13 @@ public class Merchantlist {
 
     public void setCoverpic(String coverpic) {
         this.coverpic = coverpic;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }

@@ -45,6 +45,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
 
+        holder.ratingM.setText(list.get(position).getRating());
+
         Glide.with(context)
                 .load(list.get(position).getCoverpic())
                 .apply(option)
@@ -53,12 +55,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 //                holder.merchType.setText(list.get(position).getStoretype());
 //        holder.merchLoc.setText(list.get(position).getCity());
 
-        holder.CardViewRestraunt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, list.get(position).getStorename(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.CardViewRestraunt.setOnClickListener(view -> Toast.makeText(context, list.get(position).getStorename(), Toast.LENGTH_SHORT).show());
 
     }
 
@@ -70,6 +67,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     public class HomeViewHolder extends RecyclerView.ViewHolder {
 
         ImageView merchImage;
+        TextView ratingM;
         TextView merchName, merchType,merchLoc;
         CardView CardViewRestraunt;
         public HomeViewHolder(@NonNull View itemView) {
@@ -80,6 +78,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 //            merchType = itemView.findViewById(R.id.merchantType);
 //            merchLoc = itemView.findViewById(R.id.merchantLoc);
             CardViewRestraunt = itemView.findViewById(R.id.CardViewRestraunt);
+            ratingM = itemView.findViewById(R.id.ratingNo);
 
 
 

@@ -43,57 +43,48 @@ public class RegistrationActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
 
-        NavigateToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
+        NavigateToLogin.setOnClickListener(view -> finish());
+
+        RegisterButton.setOnClickListener(view -> {
+            String String_Name = Name.getText().toString().trim();
+            String String_Email = Email.getText().toString().trim();
+            String String_Number = Number.getText().toString().trim();
+            String String_Password = Password.getText().toString().trim();
+
+            if(String_Name.isEmpty()){
+                Name.setError("Name is required");
             }
-        });
-
-        RegisterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String String_Name = Name.getText().toString().trim();
-                String String_Email = Email.getText().toString().trim();
-                String String_Number = Number.getText().toString().trim();
-                String String_Password = Password.getText().toString().trim();
-
-                if(String_Name.isEmpty()){
-                        Name.setError("Name is required");
-                }
-                else if(String_Email.isEmpty()){
-                    Email.setError("Email is required");
-                }
-                else if(String_Number.isEmpty()){
-                    Number.setError("Number is required");
-                }
-                else if(String_Password.isEmpty()){
-                    Password.setError("Password is required");
-                }
-                else if(String_Number.length()<10){
-                    Number.setError("Invalid Mobile Number");
-                }
-                else{
-                    Register(String_Name,String_Email,String_Number,String_Password);
-                }
-
-                verifyOtp(String_Number);
-
+            else if(String_Email.isEmpty()){
+                Email.setError("Email is required");
             }
+            else if(String_Number.isEmpty()){
+                Number.setError("Number is required");
+            }
+            else if(String_Password.isEmpty()){
+                Password.setError("Password is required");
+            }
+            else if(String_Number.length()<10){
+                Number.setError("Invalid Mobile Number");
+            }
+            else{
+                Register(String_Name,String_Email,String_Number,String_Password);
+            }
+
+
         });
     }
 
-    private void verifyOtp(String phone) {
-
-//        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+//    private void verifyOtp(String phone) {
 //
-//        Call<OtpModel>call = foodGeneeAPI.verifyOtp("register-otp", "").
-
-        Intent intent = new Intent(this, SignupOtp.class);
-        startActivity(intent);
-
-
-    }
+////        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+////
+////        Call<OtpModel>call = foodGeneeAPI.verifyOtp("register-otp", "").
+//
+//        Intent intent = new Intent(this, SignupOtp.class);
+//        startActivity(intent);
+//
+//
+//    }
 
     public void Register(final String Name,final String Email, final String Phone, final String Password){
 
@@ -108,17 +99,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 RegisterModel userId = response.body();
                 sessionManager.saveUserId(userId);
-                String status = response.body().getStatus().trim();
-                String response_text = response.body().getText().trim();
-                if(status.equals("1")){
+
+                if(userId.getStatus().equals("1")){
                     String user_id = response.body().getUsersid().trim();
-                    Toast.makeText(RegistrationActivity.this, response_text+" - "+user_id, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Welcome - Please verify your number", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationActivity.this, SignupOtp.class);
+                    intent.putExtra("userid", userId.getUsersid());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
-                else if(status.equals("0")){
-                    Toast.makeText(RegistrationActivity.this, response_text, Toast.LENGTH_SHORT).show();
+                else if(userId.getStatus().equals("0")){
+                    Toast.makeText(RegistrationActivity.this, userId.getText(), Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -133,7 +124,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onFailure(Call<RegisterModel> call, Throwable t) {
                 progressBarReg.setVisibility(View.GONE);
                 RegisterButton.setVisibility(View.VISIBLE);
-                Toast.makeText(RegistrationActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationActivity.this, "Some problem occured", Toast.LENGTH_SHORT).show();
             }
         });
     }

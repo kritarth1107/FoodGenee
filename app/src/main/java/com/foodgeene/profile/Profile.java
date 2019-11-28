@@ -5,15 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.coinstransactions.CoinsTransaction;
@@ -46,7 +51,11 @@ public class Profile extends Fragment {
     String token;
     TextView coins;
     TextView name, email, mobile;
-    Button redeem;
+   TextView redeem;
+    ImageView propic;
+    String userID;
+    ProgressBar progressBar;
+    LinearLayout goNow;
 
     public Profile() {
         // Required empty public constructor
@@ -67,12 +76,13 @@ public class Profile extends Fragment {
         mobile = rootView.findViewById(R.id.userPhone);
         coins = rootView.findViewById(R.id.realcoins);
         redeem = rootView.findViewById(R.id.redeemNow);
-        redeem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), CoinsTransaction.class));
-            }
-        });
+        propic = rootView.findViewById(R.id.profilePicture);
+        progressBar = rootView.findViewById(R.id.startProgress);
+        goNow = rootView.findViewById(R.id.lal);
+        goNow.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
+        redeem.setOnClickListener(view -> startActivity(new Intent(getContext(), CoinsTransaction.class)));
         logout = rootView.findViewById(R.id.logout);
         editProfile = rootView.findViewById(R.id.editProfile);
         editProfile.setOnClickListener(view -> {
@@ -111,6 +121,13 @@ public class Profile extends Fragment {
                     email.setText(retrievedModelUsers.getEmail());
                     mobile.setText(retrievedModelUsers.getMobile());
                     coins.setText(retrievedModelUsers.getCoins());
+
+                    Glide.with(getContext())
+                            .load(retrievedModel.getUsers().getProfilepic())
+                            .into(propic);
+
+                    goNow.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
 
 
                 }

@@ -6,11 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".coinstransactions.CoinsTransaction">
 
+    <ProgressBar
+        android:id="@+id/transcprogres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/transctionstat"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        android:layout_below="@id/norewardImg"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/no_transactions_yet"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/norewardImg"
+        android:visibility="invisible"
+        android:src="@drawable/norewardsimage"/>
+
     <RelativeLayout
         android:id="@+id/layoutine"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:layout_height="55dp">
+
+
 
 
         <TextView
@@ -31,5 +60,7 @@
         android:layout_margin="5dp"
         android:layout_below="@id/layoutine"
         android:id="@+id/transactionRecycler"/>
+
+
 
 </RelativeLayout>

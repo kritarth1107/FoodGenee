@@ -418,7 +418,7 @@
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/gpayimg"/>
+                            android:src="@drawable/gpaynew"/>
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -507,7 +507,7 @@
                         <ImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/phonepeimg"/>
+                            android:src="@drawable/phonepenew"/>
                     </LinearLayout>
 
                 </RelativeLayout>

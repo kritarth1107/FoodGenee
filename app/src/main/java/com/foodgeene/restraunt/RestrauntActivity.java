@@ -37,7 +37,6 @@ import retrofit2.Response;
 
 public class RestrauntActivity extends AppCompatActivity {
     private RecyclerView recyclerView ;
-    TextView tableName;
     SessionManager sessionManager;
     String UserToken;
     Intent getIntent;
@@ -119,9 +118,11 @@ public class RestrauntActivity extends AppCompatActivity {
                         shimmerFrameLayout.stopShimmerAnimation();
                         shimmerFrameLayout.setVisibility(View.GONE);
 
-//                        Glide.with(RestrauntActivity.this)
-//                                .load(scannerModel.getLogo())
-//                                .into(logoHere);
+
+                        Glide.with(RestrauntActivity.this)
+                               .load(scannerModel.getLogo())
+                                .into(logoHere);
+
 
 
                     } else if (status.equals("0")) {

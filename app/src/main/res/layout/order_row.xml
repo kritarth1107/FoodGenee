@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:id="@+id/none"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -37,9 +38,29 @@
                         android:textSize="18sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Restaurant Ka Naam"
+                        android:text="Restraunt Name"
                         android:textStyle="bold"
                         android:textColor="@color/humara_black"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end">
+
+                        <TextView
+                            android:id="@+id/rateThisOrder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ratingborder"
+                            android:clickable="true"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="Rate This Order"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
             <LinearLayout
@@ -202,10 +223,55 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:elevation="10dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:id="@+id/orderprocesslayout"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/OrderCard">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:id="@+id/bell"
+                            android:layout_width="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="30dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_notifications_black_24dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/bell"
+                            android:text="Issue's with this order ? Click here"/>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
+
+
+
     </androidx.cardview.widget.CardView>
+
 
 
 </RelativeLayout>

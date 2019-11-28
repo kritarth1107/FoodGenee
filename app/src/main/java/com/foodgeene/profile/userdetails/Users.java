@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Users {
 
+    @SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -17,6 +20,10 @@ public class Users {
     @SerializedName("coins")
     @Expose
     private String coins;
+
+    @SerializedName("profilepic")
+    @Expose
+    private String profilepic;
 
     public String getName() {
         return name;
@@ -48,5 +55,21 @@ public class Users {
 
     public void setCoins(String coins) {
         this.coins = coins;
+    }
+
+    public String getProfilepic() {
+        return profilepic;
+    }
+
+    public void setProfilepic(String profilepic) {
+        this.profilepic = profilepic;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

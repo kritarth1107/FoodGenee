@@ -22,10 +22,17 @@ import com.foodgeene.cart.Orders;
 import com.foodgeene.home.Home;
 import com.foodgeene.profile.Profile;
 import com.foodgeene.rewards.Rewards;
+import com.foodgeene.rewardsfragment.RewardsFragment;
 import com.foodgeene.scanner.ScannerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.stepstone.apprating.AppRatingDialog;
+import com.stepstone.apprating.listener.RatingDialogListener;
 
-public class MainActivity extends AppCompatActivity {
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+
+public class MainActivity extends AppCompatActivity  {
     SessionManager sessionManager;
     Button logoutButton;
     String Current_Tab="Home";
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.nav_rewards:
-                        startActivity(new Intent(getApplicationContext(), Rewards.class));
+                        loadFragment(new RewardsFragment());
                     case R.id.nav_home:
                         if(Current_Tab.equals("Home")){
                         }
@@ -136,7 +143,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    
-
-
+//    public void showDailog() {
+//
+//        new AppRatingDialog.Builder()
+//                .setPositiveButtonText("Submit")
+//                .setNegativeButtonText("Cancel")
+//                .setNoteDescriptions(Arrays.asList("Bad", "Good", "Delicious"))
+//                .setTitle("Rate this order")
+//                .setDescription("Please rate your order")
+//                .setCommentInputEnabled(true)
+//                .setDefaultComment("Food is life")
+//                .setWindowAnimation(R.style.MyDialogFadeAnimation)
+//                .setCancelable(false)
+//                .setCanceledOnTouchOutside(false)
+//                .create(MainActivity.this)
+//                .setTargetFragment(new Fragment(), 1)
+//                .show();
+//
+//
+//    }
+//
+//
+//    @Override
+//    public void onNegativeButtonClicked() {
+//
+//    }
+//
+//    @Override
+//    public void onNeutralButtonClicked() {
+//
+//    }
+//
+//    @Override
+//    public void onPositiveButtonClicked(int i, @NotNull String s) {
+//
+//    }
 }

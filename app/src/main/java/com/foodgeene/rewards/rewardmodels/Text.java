@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public class Text implements Serializable {
 
+
     @SerializedName("id")
     @Expose
     private String id;
