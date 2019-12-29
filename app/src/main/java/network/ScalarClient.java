@@ -9,7 +9,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import static network.RetrofitClient.retrofit;
 
 public class ScalarClient {
-    public static final String BASE_URL = "http://sansdigitals.com/phpdemos/foodgenee/api/";
+    public static final String BASE_URL = "http://foodqonline.com/api/";
     public static Retrofit retrofit;
 
     public static Retrofit getApiClient(){

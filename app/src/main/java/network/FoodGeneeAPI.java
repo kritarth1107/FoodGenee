@@ -36,7 +36,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import updateprofile.UpdateModel;
+import com.foodgeene.updateprofile.UpdateModel;
 
 public interface FoodGeneeAPI {
 

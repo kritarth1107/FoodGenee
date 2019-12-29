@@ -1,51 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+<RelativeLayout android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:padding="15dp"
+        android:src="@drawable/logonew"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:fontFamily="@font/thinking_of_betty"/>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <TextView
+        android:layout_below="@id/logo"
+        android:id="@+id/proceed"
+        android:textSize="24sp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/proceed_with_your"/>
+    <TextView
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:paddingBottom="10dp"
+        android:paddingTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/regText"
+        android:layout_below="@id/proceed"
+        android:fontFamily="@font/aero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registration"/>
 
     <View
-        android:id="@+id/viewone"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:id="@+id/regline"
+        android:layout_width="180dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/regText"
+        android:layout_marginLeft="30dp"
+        android:background="@color/colorAccent"/>
+
+
+
+        <EditText
+            android:id="@+id/EditTextName"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            android:textSize="15sp"
+            android:drawableRight="@drawable/ic_account_circle_black_24dp"
+            android:drawableTint="@color/colorAccent"
+            android:layout_below="@id/regline"
+            android:drawablePadding="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="350dp"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"/>
+
+
+
+        <EditText
+            android:id="@+id/EditTextEmail"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email_address"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_email_black_24dp"
+            android:drawableTint="@color/colorAccent"
+            android:layout_centerHorizontal="true"
+            android:layout_width="350dp"
+            android:layout_below="@+id/EditTextName"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"/>
+
+
+
+
+
+        <EditText
+            android:maxLength="10"
+            android:id="@+id/EditTextNumber"
+            android:inputType="number"
+            android:hint="@string/phone_number"
+            android:textSize="15sp"
+            android:layout_below="@id/EditTextEmail"
+            android:layout_centerHorizontal="true"
+            android:layout_width="350dp"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_call_black_24dp"
+            android:drawableTint="@color/colorAccent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"/>
+
+
+
+
+
+        <EditText
+            android:id="@+id/EditTextPassword"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/EditTextNumber"
+            android:layout_width="350dp"
+            android:drawableRight="@drawable/ic_lock_black_24dp"
+            android:drawableTint="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"/>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBarReg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/EditTextPassword"
+        android:layout_height="wrap_content"/>
+
+
+
+    <Button
+        android:id="@+id/RegisterButton"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:layout_below="@id/progressBarReg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/NavigateToLogin"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:layout_below="@id/RegisterButton"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/already_have_an_account_login_now"/>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="156dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/viewone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-            </EditText>
+</RelativeLayout>
 
 
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</ScrollView>

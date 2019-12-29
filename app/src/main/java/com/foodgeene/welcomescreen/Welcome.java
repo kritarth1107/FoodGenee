@@ -83,7 +83,6 @@ public class Welcome extends AppCompatActivity {
 
                 try{
                     FirebaseMessagingModel fm = response.body();
-                    Toast.makeText(Welcome.this, fm.getText(), Toast.LENGTH_SHORT).show();
 
                 }
                 catch (Exception e){
@@ -124,6 +123,7 @@ public class Welcome extends AppCompatActivity {
                     handler = new Handler();
                     handler.postDelayed(() -> {
                         Intent intent = new Intent(Welcome.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
 
 

@@ -55,7 +55,7 @@ public class OrderDetails extends AppCompatActivity {
 
         rname.setText(restName);
         Order_id.setText(OdId);
-        TotalAmountTV.setText(totalAmount);
+        TotalAmountTV.setText("Rs. "+totalAmount);
         try{
 
             Bundle args = intent.getBundleExtra("BUNDLE");

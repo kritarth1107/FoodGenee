@@ -51,7 +51,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
             intent.putExtra("rewardid", rewardId);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-            Toast.makeText(context, rewardId, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, rewardId, Toast.LENGTH_SHORT).show();
         });
 
         if(list.get(position).getValidityto().equals("1")){

@@ -1,4 +1,4 @@
-package updateprofile;
+package com.foodgeene.updateprofile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,7 @@
 package com.foodgeene;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -8,7 +9,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -37,10 +40,11 @@ public class MainActivity extends AppCompatActivity  {
     Button logoutButton;
     String Current_Tab="Home";
     final int requestLocation = 1001;
-
+    private final static String TAG = "MainActivity";
+    public final static String PREFS = "PrefsFile";
+    
     BottomNavigationView bottomNavigationView;
     private LocationManager locationManager;
-
 
 
 
@@ -52,47 +56,53 @@ public class MainActivity extends AppCompatActivity  {
         checkLocationPerm();
         sessionManager = new SessionManager(this);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment;
-                switch (menuItem.getItemId()) {
 
-                    case R.id.nav_rewards:
-                        loadFragment(new RewardsFragment());
-                    case R.id.nav_home:
-                        if(Current_Tab.equals("Home")){
-                        }
-                        else{
-                            Current_Tab="Home";
-                            loadFragment(new Home());
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            Fragment fragment;
+            switch (menuItem.getItemId()) {
 
-                        }
-                        break;
-                    case R.id.nav_scan:
-                        startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
-                        break;
-                    case R.id.nav_cart:
-                        if(Current_Tab.equals("Cart")){
-                        }
-                        else{
-                            Current_Tab="Cart";
-                            loadFragment(new Orders());
 
-                        }
-                        break;
-                    case R.id.nav_profile:
-                        if(Current_Tab.equals("Profile")){
-                        }
-                        else{
-                            Current_Tab="Profile";
-                            loadFragment(new Profile());
-                        }
-                        break;
+                case R.id.nav_home:
+                    if(Current_Tab.equals("Home")){
+                    }
+                    else{
+                        Current_Tab="Home";
+                        loadFragment(new Home());
+
+                    }
+                    break;
+                case R.id.nav_scan:
+                    startActivity(new Intent(getApplicationContext(), ScannerActivity.class));
+                    break;
+                case R.id.nav_cart:
+                    if(Current_Tab.equals("Cart")){
+                    }
+                    else{
+                        Current_Tab="Cart";
+                        loadFragment(new Orders());
+
+                    }
+                    break;
+                case R.id.nav_profile:
+                    if(Current_Tab.equals("Profile")){
+                    }
+                    else{
+                        Current_Tab="Profile";
+                        loadFragment(new Profile());
+                    }
+                    break;
+                case R.id.nav_rewards:
+
+                if(Current_Tab.equals("Rewards")){
+                }
+                else{
+                    Current_Tab="Rewards";
+                    loadFragment(new RewardsFragment());
 
                 }
-                return true;
+                break;
             }
+            return true;
         });
         loadFragment(new Home());
     }
@@ -131,7 +141,12 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public void onBackPressed() {
         if(Current_Tab.equals("Home")){
-            finish();
+            new AlertDialog.Builder(this)
+                    .setMessage("Thank you for using FoodQ & come back again")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, id) -> finish())
+                    .setNegativeButton("No", null)
+                    .show();
         }
         else{
             bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -141,6 +156,8 @@ public class MainActivity extends AppCompatActivity  {
             loadFragment(fragment);
 
         }
+
+
     }
 
 //    public void showDailog() {
@@ -177,5 +194,19 @@ public class MainActivity extends AppCompatActivity  {
 //    @Override
 //    public void onPositiveButtonClicked(int i, @NotNull String s) {
 //
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        new AlertDialog.Builder(this)
+//                .setMessage("Are you sure you want to exit?")
+//                .setCancelable(false)
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        MainActivity.super.onBackPressed();
+//                    }
+//                })
+//                .setNegativeButton("No", null)
+//                .show();
 //    }
 }

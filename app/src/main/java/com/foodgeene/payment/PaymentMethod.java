@@ -1,12 +1,15 @@
 package com.foodgeene.payment;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -46,6 +49,10 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     ProgressBar ProgressBarCoupon;
     String Coupon;
     String BackupAmount;
+    TextView realPrice, discountedPrice;
+    CardView offerdetails;
+    TextView savedprice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,9 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         sessionManager = new SessionManager(this);
         CouponLayout = findViewById(R.id.CouponLayout);
         CouponLayout.setVisibility(View.GONE);
+        realPrice = findViewById(R.id.realprice);
+        discountedPrice = findViewById(R.id.discountedPrice);
+        savedprice = findViewById(R.id.savedAmount);
         amtv = findViewById(R.id.amtv);
         newtc = findViewById(R.id.newtc);
         newtcs = findViewById(R.id.newtcs);
@@ -67,6 +77,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         ProgressBarCoupon = findViewById(R.id.ProgressBarCoupon);
         paytm_tv = findViewById(R.id.amount_tv_paytm);
         pod_tv = findViewById(R.id.amount_tv_pod);
+        offerdetails = findViewById(R.id.offerdetails);
         get = getIntent();
         merchantid = get.getStringExtra("merchandid");
         productid = get.getStringExtra("productid");
@@ -82,67 +93,46 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         newtcs.setText(totalamount);
         toolbar = findViewById(R.id.toolbar);
         HaveACouponTV = findViewById(R.id.HaveACouponTV);
-        HaveACouponTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HaveACouponTV.setVisibility(View.GONE);
-                CouponLayout.setVisibility(View.VISIBLE);
+        HaveACouponTV.setOnClickListener(view -> {
+            HaveACouponTV.setVisibility(View.GONE);
+            CouponLayout.setVisibility(View.VISIBLE);
+        });
+        applyButton.setOnClickListener(view -> {
+            Coupon = couponEditText.getText().toString().trim();
+            if (!Coupon.isEmpty()){
+                applyCoupon(Coupon);
             }
         });
-        applyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Coupon = couponEditText.getText().toString().trim();
-                if (!Coupon.isEmpty()){
-                    applyCoupon(Coupon);
-                }
-            }
-        });
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                totalamount = BackupAmount;
-                pod_tv.setText(BackupAmount);
-                paytm_tv.setText(BackupAmount);
-                amtv.setText(BackupAmount);
-                newtc.setText(BackupAmount);
-                newtcs.setText(BackupAmount);
-                applyButton.setVisibility(View.VISIBLE);
-                couponEditText.setText("");
-                removeButton.setVisibility(View.GONE);
-                couponEditText.setVisibility(View.VISIBLE);
-                appliedTV.setVisibility(View.GONE);
-            }
+        removeButton.setOnClickListener(view -> {
+            totalamount = BackupAmount;
+            pod_tv.setText(BackupAmount);
+            paytm_tv.setText(BackupAmount);
+            amtv.setText(BackupAmount);
+            newtc.setText(BackupAmount);
+            newtcs.setText(BackupAmount);
+            applyButton.setVisibility(View.VISIBLE);
+            couponEditText.setText("");
+            removeButton.setVisibility(View.GONE);
+            couponEditText.setVisibility(View.VISIBLE);
+            appliedTV.setVisibility(View.GONE);
+            offerdetails.setVisibility(View.GONE);
         });
 
 
-        paytm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                generateCheckSum();
-            }
-        });
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        paytm.setOnClickListener(view -> generateCheckSum());
+        toolbar.setNavigationOnClickListener(view -> finish());
 
-        pod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(PaymentMethod.this, PodSuccess.class);
-                i.putExtra("totalamount",totalamount);
-                i.putExtra("productid",productid);
-                i.putExtra("count",count);
-                i.putExtra("price",price);
-                i.putExtra("merchandid",merchantid);
-                i.putExtra("table",table);
-                startActivity(i);
+        pod.setOnClickListener(view -> {
+            Intent i = new Intent(PaymentMethod.this, PodSuccess.class);
+            i.putExtra("totalamount",totalamount);
+            i.putExtra("productid",productid);
+            i.putExtra("count",count);
+            i.putExtra("price",price);
+            i.putExtra("merchandid",merchantid);
+            i.putExtra("table",table);
+            startActivity(i);
 
 
-            }
         });
     }
     void applyCoupon(String cpn){
@@ -167,6 +157,12 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                         ProgressBarCoupon.setVisibility(View.GONE);
                         couponEditText.setVisibility(View.GONE);
                         appliedTV.setVisibility(View.VISIBLE);
+                        offerdetails.setVisibility(View.VISIBLE);
+                        realPrice.setText("Rs. "+response.body().getTotalamt());
+                        discountedPrice.setText("Rs. "+response.body().getCoupanamt());
+                        savedprice.setText("Rs. "+response.body().getSavingamt());
+
+
                     }
                     else{
                         applyButton.setVisibility(View.VISIBLE);
@@ -186,6 +182,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             }
         });
     }
+
 
     private void generateCheckSum() {
 

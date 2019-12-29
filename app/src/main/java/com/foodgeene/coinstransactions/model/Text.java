@@ -25,6 +25,8 @@ public class Text {
     @Expose
     private String reason;
 
+
+
     public String getId() {
         return id;
     }
@@ -72,4 +74,6 @@ public class Text {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+
 }

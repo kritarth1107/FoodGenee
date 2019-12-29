@@ -1,20 +1,19 @@
 package com.foodgeene.profile;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +23,6 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.coinstransactions.CoinsTransaction;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.profile.userdetails.Users;
-import com.foodgeene.rewarddetails.RewardsDetails;
-import com.foodgeene.rewards.Rewards;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -39,7 +34,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import updateprofile.UpdateProfile;
+import com.foodgeene.updateprofile.UpdateProfile;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,6 +51,7 @@ public class Profile extends Fragment {
     String userID;
     ProgressBar progressBar;
     LinearLayout goNow;
+    LinearLayout rateUs;
 
     public Profile() {
         // Required empty public constructor
@@ -76,6 +72,7 @@ public class Profile extends Fragment {
         mobile = rootView.findViewById(R.id.userPhone);
         coins = rootView.findViewById(R.id.realcoins);
         redeem = rootView.findViewById(R.id.redeemNow);
+        rateUs = rootView.findViewById(R.id.rateus);
         propic = rootView.findViewById(R.id.profilePicture);
         progressBar = rootView.findViewById(R.id.startProgress);
         goNow = rootView.findViewById(R.id.lal);
@@ -90,6 +87,22 @@ public class Profile extends Fragment {
         });
         logout.setOnClickListener(view -> {
             sessionManager.logout();
+        });
+
+        rateUs.setOnClickListener(view -> {
+            Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            // To count with Play market backstack, After pressing back button,
+            // to taken back to our application, we need to add following flags to intent.
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+            }
         });
         return rootView;
 

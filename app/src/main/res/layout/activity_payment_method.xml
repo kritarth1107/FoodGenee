@@ -120,6 +120,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/offerdetails"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="130dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/offerdet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Offer Details"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"/>
+
+               <View
+                   android:id="@+id/linehere"
+                   android:layout_width="100dp"
+                   android:layout_height="1dp"
+                   android:layout_marginTop="3dp"
+                   android:layout_marginLeft="10dp"
+                   android:background="@color/colorPrimary"
+                   android:layout_below="@id/offerdet"/>
+
+                <TextView
+                    android:id="@+id/realpricetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Price: "
+                    android:layout_below="@id/linehere"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/discountedPricetext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discounted Price: "
+                    android:layout_below="@id/realprice"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/savedAmounttext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You Saved: "
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/discountedPricetext"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/realprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price: "
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@id/linehere"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/discountedPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price: "
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+
+                    android:layout_below="@id/realprice"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:id="@+id/savedAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saved Amount: "
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_below="@id/discountedPrice"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="7dp"/>
+
+
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/paytm_card"
             android:clickable="true"
@@ -173,6 +274,8 @@
                             android:textColor="@android:color/white"/>
 
                     </LinearLayout>
+
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:gravity="bottom|end"
@@ -573,6 +676,7 @@
 
     </LinearLayout>
     <TextView
+        android:id="@+id/olo"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -580,5 +684,7 @@
         android:fontFamily="@font/hallosans"
         android:layout_centerHorizontal="true"
         android:padding="10dp"/>
+
+
 
 </RelativeLayout>

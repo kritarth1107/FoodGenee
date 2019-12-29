@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
@@ -30,12 +31,14 @@ public class CoinsTransactionsList extends AppCompatActivity {
     ProgressBar listProgress;
     SessionManager sessionManager;
     String userToken;
+    TextView notransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coins_transactions_list);
         recyclerView = findViewById(R.id.reepeatlist);
         listProgress = findViewById(R.id.listProgress);
+        notransaction = findViewById(R.id.notransactionsyet);
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         userToken = user.get(sessionManager.USER_ID);
@@ -59,6 +62,11 @@ public class CoinsTransactionsList extends AppCompatActivity {
                         adapter = new ListAdapter(newText, CoinsTransactionsList.this);
                         recyclerView.setAdapter(adapter);
                         listProgress.setVisibility(View.GONE);
+
+                        if(adapter.getItemCount()==0){
+
+                            notransaction.setVisibility(View.VISIBLE);
+                        }
 
                     }
                     else if(response.body().getStatus().equals("0")){

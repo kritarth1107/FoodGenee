@@ -41,15 +41,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         if(list.get(position).getType().equals("Credit")){
 
             holder.value.setText("+"+list.get(position).getCoins());
+            holder.imageView.setImageResource(R.color.plus);
 
         }
         else if(list.get(position).getType().equals("Debit")){
 
             holder.value.setText("-"+list.get(position).getCoins());
+            holder.imageView.setImageResource(R.color.minus);
+
 
         }
         holder.description.setText(list.get(position).getReason());
         holder.valDate.setText(list.get(position).getRegdate());
+        holder.merchant.setText(list.get(position).getMerchant());
+
+        holder.orderid.setText("Order ID: "+list.get(position).getOrderid());
 
     }
 
@@ -59,7 +65,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView value, description, valDate;
+        TextView value, description, valDate, orderid, merchant;
         CircleImageView imageView;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +74,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             description = itemView.findViewById(R.id.valDesc);
             imageView = itemView.findViewById(R.id.transBag);
             valDate = itemView.findViewById(R.id.valDate);
+            orderid = itemView.findViewById(R.id.odrid);
+            merchant = itemView.findViewById(R.id.topic);
         }
     }
 }

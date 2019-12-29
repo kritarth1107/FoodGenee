@@ -3,6 +3,7 @@ package com.foodgeene.SessionManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.View;
 
 import com.foodgeene.MainActivity;
 import com.foodgeene.login.LoginActivity;
@@ -19,7 +20,7 @@ public class SessionManager {
     private static final String PREF_NAME = "LOGIN";
     private static final String LOGIN = "IS_LOGIN";
     public static final String USER_ID = "USER_ID";
-    private static final String SHARED_PREF_NAME = "my_shared_preff";
+    public static  String SHARED_PREF_NAME = "my_shared_preff";
 
 
     public SessionManager(Context context) {
@@ -41,6 +42,22 @@ public class SessionManager {
     }
 
 
+    public void recordRunTime(){
+    editor.putLong("lastRun", System.currentTimeMillis());
+    editor.commit();
+
+    }
+
+    public void enableNotification(View v) {
+        editor.putLong("lastRun", System.currentTimeMillis());
+        editor.putBoolean("enabled", true);
+        editor.commit();
+    }
+
+    public void disableNotification(View v) {
+        editor.putBoolean("enabled", false);
+        editor.commit();
+    }
 
     public HashMap<String, String> getUserDetail(){
         HashMap<String, String> user = new HashMap<>();
@@ -71,5 +88,7 @@ public class SessionManager {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
+
+
 
 }

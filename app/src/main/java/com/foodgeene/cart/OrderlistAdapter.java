@@ -130,12 +130,14 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 //        for(Product product: l){
 //            newList.add(product);
 //        }
+
+
+
         if(list.get(position).getFeedbackstatus().equals("false")){
             String orderId = list.get(position).getOrderId();
-
             holder.rateHere.setText("Rate us");
             holder.rateHere.setOnClickListener(view -> {
-
+                holder.rateHere.setVisibility(View.GONE);
                 Intent intent = new Intent(context, RatingsActivity.class);
                 intent.putExtra("orderId", orderId);
                 context.startActivity(intent);
@@ -154,26 +156,23 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 //
 //        });
 
-        holder.OrderCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<Product> products = new ArrayList<Product>(list.get(position).getProducts());
+        holder.OrderCard.setOnClickListener(view -> {
+            List<Product> products = new ArrayList<Product>(list.get(position).getProducts());
 
-                Intent intent = new Intent(context,OrderDetails.class);
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",(Serializable) products);
-                intent.putExtra("BUNDLE",args);
-                intent.putExtra("Restraunt",list.get(position).getStorename());
-                intent.putExtra("id",list.get(position).getOrderId());
-                intent.putExtra("paymentMethod",list.get(position).getPaymenttype());
-                intent.putExtra("orderStatus",list.get(position).getOrderprocess());
-                intent.putExtra("paymentStatus",list.get(position).getPaidstatus());
-                intent.putExtra("totalAmount",list.get(position).getTotalamount());
-                intent.putExtra("tableName",list.get(position).getTablename());
+            Intent intent = new Intent(context,OrderDetails.class);
+            Bundle args = new Bundle();
+            args.putSerializable("ARRAYLIST",(Serializable) products);
+            intent.putExtra("BUNDLE",args);
+            intent.putExtra("Restraunt",list.get(position).getStorename());
+            intent.putExtra("id",list.get(position).getUnique_id());
+            intent.putExtra("paymentMethod",list.get(position).getPaymenttype());
+            intent.putExtra("orderStatus",list.get(position).getOrderprocess());
+            intent.putExtra("paymentStatus",list.get(position).getPaidstatus());
+            intent.putExtra("totalAmount",list.get(position).getTotalamount());
+            intent.putExtra("tableName",list.get(position).getTablename());
 
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 

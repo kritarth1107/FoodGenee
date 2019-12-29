@@ -180,10 +180,52 @@ android:layout_centerInParent="true"                    android:layout_marginTop
 
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:id="@+id/coinscountlayout"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/bgtwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Required Coins"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/coinsCountNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/count"
+                    android:text="You need 3000 coins to redeem this offer" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@id/bgtwo"
+        android:layout_below="@id/coinscountlayout"
         android:visibility="gone"
         android:id="@+id/hideCoupon"
         android:layout_marginTop="10dp">

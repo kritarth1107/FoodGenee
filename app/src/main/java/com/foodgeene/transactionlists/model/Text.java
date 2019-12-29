@@ -21,6 +21,15 @@ public class Text {
     @Expose
     private String reason;
 
+    @SerializedName("merchant")
+    @Expose
+    private String merchant;
+
+    @SerializedName("orderid")
+    @Expose
+    private String orderid;
+
+
     public String getId() {
         return id;
     }
@@ -59,5 +68,22 @@ public class Text {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+
+    public String getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
+    }
+
+    public String getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
     }
 }

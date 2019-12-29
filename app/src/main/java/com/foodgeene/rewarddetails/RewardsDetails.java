@@ -42,6 +42,7 @@ public class RewardsDetails extends AppCompatActivity {
     RelativeLayout hideCoupon;
     Button redeem;
     Dialog loadingDialog;
+    TextView coinsCount;
 
 
 
@@ -57,6 +58,7 @@ public class RewardsDetails extends AppCompatActivity {
         excerptO = findViewById(R.id.excerpt);
         descript = findViewById(R.id.desc);
         couponCode = findViewById(R.id.orignalCoupn);
+        coinsCount = findViewById(R.id.coinsCountNew);
         expireOn = findViewById(R.id.expireson);
         hideLay  = findViewById(R.id.hideLay);
         logo = findViewById(R.id.restImage);
@@ -146,6 +148,7 @@ public class RewardsDetails extends AppCompatActivity {
                     descript.setText(text.getDescription());
                     hideLay.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
+                    coinsCount.setText(text.getCoins());
                     Glide.with(getApplicationContext())
                             .load(text.getLogo())
                             .into(logo);

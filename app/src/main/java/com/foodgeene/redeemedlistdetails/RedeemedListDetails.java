@@ -34,6 +34,7 @@ public class RedeemedListDetails extends AppCompatActivity {
     String rewardId = null;
     Intent get;
     Dialog loadingDialog;
+    TextView redeeemCoinsCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class RedeemedListDetails extends AppCompatActivity {
         couponCode = findViewById(R.id.orignalCoupnTwo);
         expireOn = findViewById(R.id.expiresonTwo);
         logo = findViewById(R.id.restImageTwo);
+//        redeeemCoinsCount = findViewById(R.id.coinsCountNew);
         drawRedeemedList(rewardId);
 
 
@@ -84,6 +86,7 @@ public class RedeemedListDetails extends AppCompatActivity {
                    excerptO.setText(list.getExcerpt());
                    descript.setText(list.getDescription());
                    couponCode.setText(list.getCouponcode());
+                   redeeemCoinsCount.setText(list.getCoins());
 
 
                     Glide.with(RedeemedListDetails.this)

@@ -16,10 +16,10 @@ public class Coupon {
     private String coupanamt;
     @SerializedName("totalamt")
     @Expose
-    private Integer totalamt;
+    private String totalamt;
     @SerializedName("savingamt")
     @Expose
-    private Integer savingamt;
+    private String savingamt;
 
     public String getStatus() {
         return status;
@@ -45,19 +45,19 @@ public class Coupon {
         this.coupanamt = coupanamt;
     }
 
-    public Integer getTotalamt() {
+    public String getTotalamt() {
         return totalamt;
     }
 
-    public void setTotalamt(Integer totalamt) {
+    public void setTotalamt(String totalamt) {
         this.totalamt = totalamt;
     }
 
-    public Integer getSavingamt() {
+    public String getSavingamt() {
         return savingamt;
     }
 
-    public void setSavingamt(Integer savingamt) {
+    public void setSavingamt(String savingamt) {
         this.savingamt = savingamt;
     }
 }
