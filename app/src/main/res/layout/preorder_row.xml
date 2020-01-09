@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:elevation="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/nole"
+            android:layout_width="90dp"
+            android:layout_height="80dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/tableImage"
+            android:layout_width="90dp"
+            android:layout_height="80dp"
+            android:src="@color/colorPrimary"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/realTableNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_centerInParent="true"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="TB23"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book this table"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/bookTable"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/nole"/>
+
+
+        <Button
+            android:id="@+id/bookTableButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:layout_margin="10dp"
+            android:text="Book Table"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

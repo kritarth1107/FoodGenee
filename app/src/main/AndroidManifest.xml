@@ -11,9 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".viewpagers.Intro">
+        <activity android:name=".viewpagers.PaperOnboarding">
 
         </activity>
+        <activity android:name=".preoder.ui.PreOrder" />
+        <activity android:name=".allhotels.ui.AllRestraunts" />
+        <activity android:name=".foodpreference.ui.AfterOrder" />
         <activity android:name=".transactionlists.CoinsTransactionsList" />
         <activity android:name=".reginew.PhaseOne" />
         <activity android:name=".updatepropic.UpdateProfilePicture" />
@@ -27,7 +30,7 @@
         <activity android:name=".welcomescreen.Welcome" />
         <activity android:name=".restraunt.SignupOtp" />
         <activity android:name=".cart.OrderDetails" />
-        <activity android:name="com.foodgeene.updateprofile.UpdateProfile" />
+        <activity android:name=".updateprofile.UpdateProfile" />
         <activity android:name=".success.PodSuccess" />
         <activity android:name=".payment.PaymentMethod" />
         <activity android:name=".success.SuccessActivity" />
@@ -38,7 +41,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".register.RegistrationActivity" />
         <activity android:name=".splashScreen.SplashScreen">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,17 +59,14 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service
-            android:name=".selfnotifyinactives.CheckRecentRun" >
-        </service>
+        <service android:name=".selfnotifyinactives.CheckRecentRun" />
     </application>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

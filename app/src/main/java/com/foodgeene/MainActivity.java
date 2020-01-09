@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity  {
     final int requestLocation = 1001;
     private final static String TAG = "MainActivity";
     public final static String PREFS = "PrefsFile";
-    
+
     BottomNavigationView bottomNavigationView;
     private LocationManager locationManager;
 

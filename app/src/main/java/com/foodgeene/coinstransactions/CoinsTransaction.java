@@ -37,6 +37,7 @@ public class CoinsTransaction extends AppCompatActivity {
     ImageView nocoins;
     ProgressBar pro;
     TransactionAdapter adapter;
+    TextView notransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,7 @@ public class CoinsTransaction extends AppCompatActivity {
         pro = findViewById(R.id.transcprogres);
         HashMap<String, String> user = sessionManager.getUserDetail();
         token = user.get(sessionManager.USER_ID);
+        notransaction = findViewById(R.id.notransaaction);
         setupRecycler();
 
 
@@ -80,6 +82,7 @@ public class CoinsTransaction extends AppCompatActivity {
                         coins.setVisibility(View.VISIBLE);
                         nocoins.setVisibility(View.VISIBLE);
                         pro.setVisibility(View.GONE);
+                        notransaction.setVisibility(View.VISIBLE);
                     }
 
 

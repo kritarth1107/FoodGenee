@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.foodpreference.ui.AfterOrder;
 import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.RegistrationActivity;
 import com.foodgeene.restraunt.RestrauntActivity;
@@ -40,11 +42,14 @@ public class PodSuccess extends AppCompatActivity {
     SessionManager sessionManager;
     LottieAnimationView animation_view;
     String SUCCESS_TEXT = "P";
+    String orderId;
+    Button selectPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pod_success);
         Amount_text = findViewById(R.id.Amount_text);
+        selectPref = findViewById(R.id.selectPreferences);
         place_order_layout = findViewById(R.id.place_order_layout);
         detailsTaba = findViewById(R.id.detailsTaba);
         Loading = findViewById(R.id.Loading);
@@ -60,16 +65,20 @@ public class PodSuccess extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
         Amount_text.setText("Amount Due - Rs. "+totalamount);
-        place_order_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(PodSuccess.this, MainActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+        place_order_layout.setOnClickListener(view -> {
+            Intent i = new Intent(PodSuccess.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
 
-            }
         });
         PlaceOrder();
+
+        selectPref.setOnClickListener(v -> {
+
+            Intent intent = new Intent(PodSuccess.this, AfterOrder.class);
+            intent.putExtra("orderId", orderId );
+            startActivity(intent);
+        });
     }
 
     public void PlaceOrder(){
@@ -78,11 +87,11 @@ public class PodSuccess extends AppCompatActivity {
         animation_view.setVisibility(View.INVISIBLE);
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<RegisterModel> call = foodGeneeAPI.OrderByCash("cash",merchantid,table,productid,count,price,totalamount,UserToken,"application/x-www-form-urlencoded"
+        Call<PostOrderModel> call = foodGeneeAPI.OrderByCash("cash",merchantid,table,productid,count,price,totalamount,UserToken,"application/x-www-form-urlencoded"
         );
-        call.enqueue(new Callback<RegisterModel>() {
+        call.enqueue(new Callback<PostOrderModel>() {
             @Override
-            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+            public void onResponse(Call<PostOrderModel> call, Response<PostOrderModel> response) {
                 try {
                     String status = response.body().getStatus().trim();
                     String response_text = response.body().getText().trim();
@@ -91,6 +100,8 @@ public class PodSuccess extends AppCompatActivity {
                         detailsTaba.setVisibility(View.VISIBLE);
                         animation_view.setVisibility(View.VISIBLE);
                         SUCCESS_TEXT = "S";
+//                        selectPref.setVisibility(View.VISIBLE);
+                        orderId = response.body().getId();
                     }
                     else if(status.equals("0")){
                         Toast.makeText(PodSuccess.this, response_text, Toast.LENGTH_SHORT).show();
@@ -108,7 +119,7 @@ public class PodSuccess extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<RegisterModel> call, Throwable t) {
+            public void onFailure(Call<PostOrderModel> call, Throwable t) {
                 Toast.makeText(PodSuccess.this, t.toString(), Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -123,6 +134,8 @@ public class PodSuccess extends AppCompatActivity {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         }
+
+
         else {
             Toast.makeText(this, "Processing your Order! please wait....", Toast.LENGTH_SHORT).show();
         }

@@ -22,6 +22,8 @@ public class SessionManager {
     public static final String USER_ID = "USER_ID";
     public static  String SHARED_PREF_NAME = "my_shared_preff";
 
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
 
     public SessionManager(Context context) {
         this.context = context;
@@ -35,6 +37,15 @@ public class SessionManager {
         editor.putString(USER_ID, user_id);
         editor.apply();
 
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
     public boolean isLoggin(){

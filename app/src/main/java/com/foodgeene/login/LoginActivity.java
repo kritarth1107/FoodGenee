@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         //sessionManager
         sessionManager = new SessionManager(this);
 
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.loginnew);
         Email = findViewById(R.id.EtEmail);
         Password = findViewById(R.id.EtPassword);
         NavigateToReg = findViewById(R.id.NavigateToReg);

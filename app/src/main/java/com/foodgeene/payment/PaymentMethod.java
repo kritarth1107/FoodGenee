@@ -1,6 +1,5 @@
 package com.foodgeene.payment;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -145,6 +144,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             public void onResponse(Call<Coupon> call, Response<Coupon> response) {
                 try {
                     String status = response.body().getStatus().trim();
+
+
                     if(status.equals("1")){
                         String amnt = response.body().getTotalamt().toString().trim();
                         totalamount = amnt;
@@ -234,12 +235,11 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     private void initializePaytmPayment(String checksumHash, Paytm paytm) {
 
         //getting paytm service
-        PaytmPGService Service = PaytmPGService.getStagingService();
+        PaytmPGService Service = PaytmPGService.getProductionService();
 
         //use this when using for production
         //PaytmPGService Service = PaytmPGService.getProductionService();
 
-        //creating a hashmap and adding all the values required
         HashMap<String, String> paramMap = new HashMap<>();
         paramMap.put("MID", Constants.M_ID);
         paramMap.put("ORDER_ID", paytm.getOrderId());
@@ -252,10 +252,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         paramMap.put("INDUSTRY_TYPE_ID", paytm.getIndustryTypeId());
 
 
-        //creating a paytm order object using the hashmap
         PaytmOrder order = new PaytmOrder(paramMap);
 
-        //intializing the paytm service
         Service.initialize(order, null);
 
         //finally starting the payment transaction

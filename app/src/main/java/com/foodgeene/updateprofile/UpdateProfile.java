@@ -115,12 +115,12 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
                 File file = new File(filePath);
                 Log.d(TAG, "Filename " + file.getName());
                 RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
-                String action = "com/foodgeene/updateprofile";
+                String action = "updateprofilepic";
                 action.trim();
                 MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("profilepic", file.getName(), mFile);
 
                 FoodGeneeAPI uploadImage = ScalarClient.getApiClient().create(FoodGeneeAPI.class);
-                Call<ResponseBody> fileUpload = uploadImage.updatePic(fileToUpload, userIdNew, "com/foodgeene/updateprofile");
+                Call<ResponseBody> fileUpload = uploadImage.updatePic(fileToUpload, userIdNew, "updateprofilepic");
                 fileUpload.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

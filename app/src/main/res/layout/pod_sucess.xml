@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_centerInParent="true"
+        android:layout_height="50dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Place another order"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:layout_margin="10dp"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_centerInParent="true"
+        android:id="@+id/animation_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:lottie_rawRes="@raw/tick_animation"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+    <LinearLayout
+        android:visibility="invisible"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/Loading"
+        android:layout_centerInParent="true"
+        android:layout_width="250dp"
+        android:layout_height="250dp">
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:text="Processing Order"
+            android:textSize="28sp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/hallosans"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/Suceess_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/animation_view"
+        android:text="Order Recieved"
+        android:textSize="28sp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/hallosans"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/Amount_text"
+        android:layout_width="match_parent"
+        android:layout_below="@id/Suceess_text"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Amount Due - Rs. 500"
+        android:textSize="28sp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/hallosans"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorAccent"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/Amount_text"
+        android:layout_margin="10dp"
+        android:text="Select preferences for your order"/>
+
+
+</RelativeLayout>

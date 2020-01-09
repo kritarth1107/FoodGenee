@@ -59,12 +59,7 @@ public class JSONparse {
             jObj = new JSONObject(retSrc);
         } catch (Exception e) {
             e.printStackTrace();
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(context, "Connectivity issue. Please try again later.", Toast.LENGTH_LONG).show();
-                }
-            });
+            new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(context, "Connectivity issue. Please try again later.", Toast.LENGTH_LONG).show());
             return null;
         }finally {
             if (urlConnection != null) {

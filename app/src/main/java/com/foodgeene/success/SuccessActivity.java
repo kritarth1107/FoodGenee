@@ -33,6 +33,7 @@ public class SuccessActivity extends AppCompatActivity {
     SessionManager sessionManager;
     LottieAnimationView animation_view;
     Integer SUCCESS_TEXT = 0;
+    String getOrderId;
     StringBuilder ProductIdBuilder,CountBuilder,PriceBuilder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +66,11 @@ public class SuccessActivity extends AppCompatActivity {
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
         Amount_text.setText("Rs. "+totalamount);
-        place_order_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(SuccessActivity.this, ScannerActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+        place_order_layout.setOnClickListener(view -> {
+            Intent i = new Intent(SuccessActivity.this, ScannerActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
 
-            }
         });
 
         PlaceOrder();
@@ -84,10 +82,10 @@ public class SuccessActivity extends AppCompatActivity {
         animation_view.setVisibility(View.INVISIBLE);
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<RegisterModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,UserToken,"application/x-www-form-urlencoded");
-        call.enqueue(new Callback<RegisterModel>() {
+        Call<PostOrderModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,UserToken,"application/x-www-form-urlencoded");
+        call.enqueue(new Callback<PostOrderModel>() {
             @Override
-            public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+            public void onResponse(Call<PostOrderModel> call, Response<PostOrderModel> response) {
                 try {
                     String status = response.body().getStatus().trim();
                     String response_text = response.body().getText().trim();
@@ -96,6 +94,9 @@ public class SuccessActivity extends AppCompatActivity {
                         detailsTaba.setVisibility(View.VISIBLE);
                         animation_view.setVisibility(View.VISIBLE);
                         SUCCESS_TEXT = 1;
+                        getOrderId = response.body().getId();
+                        Toast.makeText(SuccessActivity.this, response.body().id, Toast.LENGTH_SHORT).show();
+
                     }
                     else if(status.equals("0")){
                         Toast.makeText(SuccessActivity.this, response_text, Toast.LENGTH_SHORT).show();
@@ -109,7 +110,7 @@ public class SuccessActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<RegisterModel> call, Throwable t) {
+            public void onFailure(Call<PostOrderModel> call, Throwable t) {
                 Toast.makeText(SuccessActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 finish();
             }

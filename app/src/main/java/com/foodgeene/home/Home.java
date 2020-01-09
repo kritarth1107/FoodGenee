@@ -3,6 +3,7 @@ package com.foodgeene.home;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -23,12 +24,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.allhotels.ui.AllRestraunts;
 import com.foodgeene.home.brandlist.BrandAdapter;
 import com.foodgeene.home.brandlist.brandmodel.Bannerlist;
 import com.foodgeene.home.brandlist.brandmodel.Brand;
@@ -36,6 +39,7 @@ import com.foodgeene.home.brandlist.brandmodel.Brandlist;
 import com.foodgeene.home.hometwo.FlipperAdapter;
 import com.foodgeene.home.hometwo.HomeTwoAdapter;
 import com.foodgeene.home.hometwo.models.HomeTwoModel;
+import com.foodgeene.redeemedlistdetails.model.Text;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -67,6 +71,7 @@ public class Home extends Fragment implements LocationListener {
     double longi;
     double lati;
     private AdapterViewFlipper adapterViewFlipper;
+    TextView viewAll;
 
 
     public Home() {
@@ -86,6 +91,10 @@ public class Home extends Fragment implements LocationListener {
 //        brandRecycler = rootView.findViewById(R.id.brandRecycler);
         locationNew = rootView.findViewById(R.id.location);
         locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
+        viewAll = rootView.findViewById(R.id.viewallButton);
+        viewAll.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), AllRestraunts.class));
+        });
         checkLocationPerm();
 
         //shimmer

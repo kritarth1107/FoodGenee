@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".success.SuccessActivity">
 
+
+    <Button
+        android:id="@+id/selectPreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Select Preferences "
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:layout_margin="10dp"/>
+
     <com.airbnb.lottie.LottieAnimationView
         android:layout_centerInParent="true"
         android:id="@+id/animation_view"

@@ -1,9 +1,11 @@
 package network;
 
+import com.foodgeene.allhotels.hotelsmodel.HotelsModel;
 import com.foodgeene.cart.AlertModel;
 import com.foodgeene.cart.OrderListModel;
 import com.foodgeene.coinstransactions.model.Transaction;
 import com.foodgeene.firebaseservices.FirebaseMessagingModel;
+import com.foodgeene.foodpreference.model.AfterOrderModel;
 import com.foodgeene.forgot.ForgotOto;
 import com.foodgeene.forgot.ForgotPasswordModel;
 import com.foodgeene.forgot.changereal.PasswordChangeModel;
@@ -15,6 +17,8 @@ import com.foodgeene.orderratings.CancelModel;
 import com.foodgeene.orderratings.RatingModel;
 import com.foodgeene.payment.Checksum;
 import com.foodgeene.payment.coupon.Coupon;
+import com.foodgeene.preoder.preordermodel.BookTableModel;
+import com.foodgeene.preoder.preordermodel.PreOrderModel;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.redeemedlistdetails.model.RedeemedModel;
 import com.foodgeene.register.RegisterModel;
@@ -25,6 +29,7 @@ import com.foodgeene.rewarddetails.model.RedeemCoinsModel;
 import com.foodgeene.rewards.rewardmodels.RModel;
 import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.scanner.ScannerModel;
+import com.foodgeene.success.PostOrderModel;
 import com.foodgeene.transactionlists.model.ListModel;
 
 import okhttp3.MultipartBody;
@@ -118,7 +123,7 @@ public interface FoodGeneeAPI {
     );
     @FormUrlEncoded
     @POST("merchant/orders.php")
-    Call<RegisterModel> OrderByCash(
+    Call<PostOrderModel> OrderByCash(
             @Field("action") String action,
             @Field("merchantid") String merchantid,
             @Field("table") String table,
@@ -130,7 +135,7 @@ public interface FoodGeneeAPI {
             @Header("Content-Type") String Ctype
     );@FormUrlEncoded
     @POST("merchant/orders.php")
-    Call<RegisterModel> OrderByPrePaid(
+    Call<PostOrderModel> OrderByPrePaid(
                     @Field("action") String action,
                     @Field("merchantid") String merchantid,
                     @Field("table") String table,
@@ -343,6 +348,50 @@ public interface FoodGeneeAPI {
     Call<ResendOtpModel> resendOtp(
             @Field("action") String action,
             @Field("usersid") String userid
+    );
+
+
+    @FormUrlEncoded
+    @POST("merchant/merchants.php")
+    Call<HotelsModel> getAllHotel(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+
+    @FormUrlEncoded
+    @POST("merchant/preorders.php")
+    Call<PreOrderModel> getPreOrder(
+            @Field("action") String action,
+            @Field("merchantid") String merchantId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/preorders.php")
+    Call<BookTableModel> bookATable(
+            @Field("action") String action,
+            @Field("merchantid") String merchantId,
+            @Field("tableid") String tableId,
+            @Field("bookdate") String bookedDate,
+            @Field("booktime") String bookedTime,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<AfterOrderModel> afterOrderDetails(
+            @Field("action") String action,
+            @Field("orderid") String merchantId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+
     );
 
 }

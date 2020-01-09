@@ -17,6 +17,7 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.login.LoginActivity;
 import com.foodgeene.scanner.ScannerActivity;
 import com.foodgeene.success.SuccessActivity;
+import com.foodgeene.viewpagers.PaperOnboarding;
 import com.foodgeene.welcomescreen.Welcome;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
                 else {
 
-                    Intent intent=new Intent(SplashScreen.this, LoginActivity.class);
+                    Intent intent=new Intent(SplashScreen.this, PaperOnboarding.class);
                     startActivity(intent);
                     finish();
                 }

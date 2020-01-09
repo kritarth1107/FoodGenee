@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardViewClick"
+    android:elevation="10dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardCornerRadius="7dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <ImageView
+        android:id="@+id/allRestImage"
+        android:layout_width="160dp"
+        android:scaleType="centerCrop"
+        android:fitsSystemWindows="true"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:id="@+id/allRestName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hotel Name"
+        android:layout_toRightOf="@id/allRestImage"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        />
+
+    <RatingBar
+        android:id="@+id/rating_bar_indicator"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        android:layout_marginLeft="10dp"
+        android:layout_below="@id/allRestName"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/allRestImage"
+        android:numStars="5"
+        android:rating="3.5"
+        android:stepSize="0.5" />
+
+    <TextView
+        android:id="@+id/allRestType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/rating_bar_indicator"
+        android:layout_toRightOf="@id/allRestImage"
+        android:text="Fast Food, North Indian"/>
+
+    <TextView
+        android:id="@+id/ratingNumeric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="4.5"
+
+        android:textSize="10dp"
+        android:padding="4dp"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

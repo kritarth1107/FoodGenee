@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="Place another Order"
+                android:text="Place another order"
                 android:textStyle="bold"
                 android:textSize="15sp"/>
 

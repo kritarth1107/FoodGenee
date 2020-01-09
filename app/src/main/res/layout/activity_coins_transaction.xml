@@ -62,5 +62,16 @@
         android:id="@+id/transactionRecycler"/>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No transactions till now"
+        android:visibility="gone"
+        android:id="@+id/notransaaction"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
+
+
 
 </RelativeLayout>

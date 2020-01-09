@@ -23,7 +23,6 @@
             android:elevation="5dp"
             >
             <TextView
-                android:fontFamily="@font/aero"
                 android:textSize="18sp"
                 android:padding="10dp"
                 android:layout_width="wrap_content"
