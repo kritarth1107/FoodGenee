@@ -39,7 +39,7 @@ public class AfterOrderAdapter extends RecyclerView.Adapter<AfterOrderAdapter.Af
     public void onBindViewHolder(@NonNull AfterViewHolder holder, int position) {
 
         holder.products.setText(list.get(position).getName());
-
+        holder.prefernce.setText(String.valueOf(position));
     }
 
     @Override

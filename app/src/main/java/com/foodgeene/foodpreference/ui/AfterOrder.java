@@ -1,6 +1,8 @@
 package com.foodgeene.foodpreference.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +14,12 @@ import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.foodpreference.adapter.AfterOrderAdapter;
 import com.foodgeene.foodpreference.model.AfterOrderModel;
+import com.foodgeene.foodpreference.model.Product;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import network.FoodGeneeAPI;
 import network.RetrofitClient;
@@ -29,7 +35,8 @@ public class AfterOrder extends AppCompatActivity {
     String userToken;
     String orderId;
     Intent get;
-
+    AfterOrderAdapter afterOrderAdapter;
+    List<Product> afterList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,25 @@ public class AfterOrder extends AppCompatActivity {
         orderId = get.getStringExtra("orderId");
         initViews();
         setupReycler();
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
+        @Override
+        public
+        boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+
+            int fromPosition = viewHolder.getAdapterPosition();
+            int toPosition = target.getAdapterPosition();
+            Collections.swap(afterList, fromPosition, toPosition);
+            recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+            return false;
+        }
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
 
     private void setupReycler() {
 
@@ -56,9 +81,9 @@ public class AfterOrder extends AppCompatActivity {
                     if(response.body().getStatus().equals("1")){
 
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        AfterOrderAdapter afterOrderAdapter = new AfterOrderAdapter(response.body().getOrders().getProducts());
+                        afterOrderAdapter = new AfterOrderAdapter(response.body().getOrders().getProducts());
                         recyclerView.setAdapter(afterOrderAdapter);
-
+                        afterList = response.body().getOrders().getProducts();
                     }
                     else if(response.body().getStatus().equals("0")){
 
