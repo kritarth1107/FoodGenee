@@ -5,9 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,23 +20,26 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.coinstransactions.CoinsTransaction;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.profile.userdetails.Users;
+import com.foodgeene.updateprofile.UpdateProfile;
 
 import java.util.HashMap;
 import java.util.Objects;
 
+import androidx.fragment.app.Fragment;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.foodgeene.updateprofile.UpdateProfile;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Profile extends Fragment {
+public class Profile extends Fragment implements ConnectivityReceiver.ConnectivityReceiverListener {
 
     LinearLayout editProfile,logout;
     SessionManager sessionManager;
@@ -52,6 +52,7 @@ public class Profile extends Fragment {
     ProgressBar progressBar;
     LinearLayout goNow;
     LinearLayout rateUs;
+    boolean isOnline;
 
     public Profile() {
         // Required empty public constructor
@@ -66,7 +67,11 @@ public class Profile extends Fragment {
         sessionManager = new SessionManager(Objects.requireNonNull(getActivity()));
         HashMap<String, String> user = sessionManager.getUserDetail();
         token = user.get(sessionManager.USER_ID);
+        isOnline=ConnectivityReceiver.isConnected();
+
+        if(isOnline)
         setupProfile();
+        else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
         name = rootView.findViewById(R.id.userName);
         email = rootView.findViewById(R.id.userEmail);
         mobile = rootView.findViewById(R.id.userPhone);
@@ -107,6 +112,15 @@ public class Profile extends Fragment {
         return rootView;
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+        if(isOnline)
+            setupProfile();
+        else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
     }
 
     private void setupProfile() {
@@ -158,4 +172,8 @@ public class Profile extends Fragment {
         });
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnline=isConnected;
+    }
 }

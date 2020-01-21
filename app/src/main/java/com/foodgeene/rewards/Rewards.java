@@ -1,20 +1,14 @@
 package com.foodgeene.rewards;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
-import com.foodgeene.coinstransactions.CoinsTransaction;
 import com.foodgeene.rewards.rewardmodels.RModel;
 import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.rewards.rewardmodels.Text;
@@ -23,13 +17,18 @@ import com.foodgeene.transactionlists.CoinsTransactionsList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Rewards extends AppCompatActivity {
+public class Rewards extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
     RecyclerView recyclerView;
     RewardsAdapter rewardsAdapter;
@@ -37,8 +36,8 @@ public class Rewards extends AppCompatActivity {
     ProgressBar progressBar;
     String token;
     TextView redeemCount;
-    Button check;
-
+    TextView check;
+    boolean isOnLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +51,18 @@ public class Rewards extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         check = findViewById(R.id.checkTransaction);
         redeemCount = findViewById(R.id.redeemCount);
-
+        isOnLine=ConnectivityReceiver.isConnected();
         check.setOnClickListener(view -> startActivity(new Intent(Rewards.this, CoinsTransactionsList.class)));
-        setupRecycler();
-        setRedeemCount();
+       if(isOnLine) {
+           setupRecycler();
+           setRedeemCount();
+       }else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     private void setRedeemCount() {
@@ -117,5 +124,10 @@ public class Rewards extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

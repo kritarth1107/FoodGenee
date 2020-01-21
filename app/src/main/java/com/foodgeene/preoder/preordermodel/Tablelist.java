@@ -11,6 +11,17 @@ public class Tablelist {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("capacity")
+    @Expose
+    private String capacity;
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
 
     public String getTableid() {
         return tableid;

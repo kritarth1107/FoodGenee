@@ -10,16 +10,24 @@
     <RelativeLayout
         android:id="@+id/updatetoolbr"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/arrow_left"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Update Profile"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
+            style="@style/semiBoldWhite"
+            android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 
 
@@ -29,27 +37,27 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userPic"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:src="@color/colorPrimary"
         android:layout_below="@id/updatetoolbr"
-        android:layout_width="90dp"
-        android:layout_height="90dp"/>
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_85sdp"/>
 
   <TextView
       android:id="@+id/profileDetailsText"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@id/userPic"
-      android:layout_marginTop="20dp"
+      android:layout_marginTop="@dimen/_5sdp"
       android:layout_centerHorizontal="true"
       android:text="Profile Details"
-      android:layout_marginLeft="20dp"
+      style="@style/Regular"
       />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layone"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content"
         android:layout_below="@id/profileDetailsText"
         android:layout_centerHorizontal="true"
@@ -58,10 +66,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/changeName"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:drawableTint="@color/colorPrimary"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/_7sdp"
+            style="@style/Regular"
             android:drawableLeft="@drawable/ic_account_circle_black_24dp"
             android:layout_centerHorizontal="true"
             android:hint="Name" />
@@ -72,17 +81,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/laytwo"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_7sdp"
         android:layout_below="@id/layone"
         android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="300dp"
+            android:layout_width="@dimen/_250sdp"
             android:id="@+id/changeEmail"
             android:hint="@string/email"
+            style="@style/Regular"
+            android:editable="false"
             android:drawableTint="@color/colorPrimary"
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_email_black_24dp"
@@ -96,7 +107,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/laytwo"
         android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="wrap_content">
 
 
@@ -104,25 +115,49 @@
             android:layout_width="match_parent"
             android:id="@+id/changePassword"
             android:hint="Phone"
+            style="@style/Regular"
             android:drawableTint="@color/colorPrimary"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/_7sdp"
             android:drawableLeft="@drawable/ic_local_phone_black_24dp"
             android:layout_height="wrap_content"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_below="@id/laythree"
+        android:gravity="center"
+        android:id="@+id/ll_change"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/_12sdp"
+            android:text="Change Password"/>
+        <View
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="@dimen/_160sdp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/_18sdp"
         android:text="Update"
+        style="@style/semiBoldWhite"
         android:drawableTint="@color/colorPrimary"
         android:id="@+id/updateButton"
-        android:textColor="@android:color/white"
         android:layout_centerHorizontal="true" />
 
 

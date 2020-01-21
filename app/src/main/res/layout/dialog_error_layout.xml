@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Invalid QR code"
-        android:textColor="@color/humara_black"
-        android:textSize="20sp"/>
+        style="@style/semiBold"
+        android:textSize="@dimen/_14sdp"/>
     <TextView
         android:id="@+id/Scan_again"
         android:clickable="true"
@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:text="Scan Again"
         android:textColor="@color/colorAccent"
-        android:textSize="18sp"/>
+        style="@style/semiBold"
+        android:textSize="@dimen/_14sdp"/>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -26,6 +26,48 @@
     <style name="MyDialogFadeAnimation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="Regular">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/open_sans_regular</item>
+        <item name="fontFamily">@font/open_sans_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+    <style name="RegularWhite">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/open_sans_regular</item>
+        <item name="fontFamily">@font/open_sans_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    <style name="semiBold">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+    <style name="semiBoldWhite">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    <style name="bold">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/open_sans_bold</item>
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="Full_Screen_Dialog" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
     </style>
 </resources>
 

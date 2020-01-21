@@ -1,8 +1,9 @@
 package com.foodgeene.cart;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class
 
@@ -46,6 +47,83 @@ Order {
     @SerializedName("products")
     @Expose
     private List<Product> products = null;
+
+    @Expose
+    @SerializedName("rating")
+    private Integer rating;
+
+    @Expose
+    @SerializedName("orderdate")
+    private String orderdate;
+
+    @Expose
+    @SerializedName("serviceboy")
+    private String serviceboy;
+    @Expose
+    @SerializedName("orderprocesstext")
+    private String orderprocesstext;
+    @Expose
+    @SerializedName("enckey")
+    private String enckey;
+    @Expose
+    @SerializedName("preparetime")
+    private String preparetime;
+
+    @Expose
+    @SerializedName("merchant_id")
+    private String merchant_id;
+
+    @Expose
+    @SerializedName("couponamount")
+    private String couponamount;
+
+    public String getCouponamount() {
+        return couponamount;
+    }
+
+    public void setCouponamount(String couponamount) {
+        this.couponamount = couponamount;
+    }
+
+    public String getMerchant_id() {
+        return merchant_id;
+    }
+
+    public void setMerchant_id(String merchant_id) {
+        this.merchant_id = merchant_id;
+    }
+
+    public String getPreparetime() {
+        return preparetime;
+    }
+
+    public void setPreparetime(String preparetime) {
+        this.preparetime = preparetime;
+    }
+
+    public String getEnckey() {
+        return enckey;
+    }
+
+    public void setEnckey(String enckey) {
+        this.enckey = enckey;
+    }
+
+    public String getOrderprocesstext() {
+        return orderprocesstext;
+    }
+
+    public void setOrderprocesstext(String orderprocesstext) {
+        this.orderprocesstext = orderprocesstext;
+    }
+
+    public String getServiceboy() {
+        return serviceboy;
+    }
+
+    public void setServiceboy(String serviceboy) {
+        this.serviceboy = serviceboy;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -144,6 +222,22 @@ Order {
 
     public String getOrderprocessstatus() {
         return orderprocessstatus;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public String getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(String orderdate) {
+        this.orderdate = orderdate;
     }
 
     public void setOrderprocessstatus(String orderprocessstatus) {

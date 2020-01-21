@@ -9,8 +9,8 @@
     <com.airbnb.lottie.LottieAnimationView
         android:layout_centerInParent="true"
         android:id="@+id/animation_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
         app:lottie_rawRes="@raw/tick_animation"
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />
@@ -20,11 +20,11 @@
         android:orientation="vertical"
         android:id="@+id/Loading"
         android:layout_centerInParent="true"
-        android:layout_width="250dp"
-        android:layout_height="250dp">
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp">
         <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -32,8 +32,8 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:text="Processing Order"
-            android:textSize="28sp"
-            android:layout_marginTop="20dp"
+           style="@style/semiBold"
+            android:layout_marginTop="@dimen/_16sdp"
             android:fontFamily="@font/hallosans"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -50,7 +50,8 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:text="Order Recieved"
-            android:textSize="28sp"
+            style="@style/semiBold"
+            android:textSize="@dimen/_14sdp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/hallosans"
             android:textStyle="bold"/>
@@ -62,8 +63,9 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:text="Amount Due - Rs. 500"
-            android:textSize="28sp"
-            android:layout_marginTop="5dp"
+            style="@style/bold"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/hallosans"
             android:textStyle="bold"/>
         <LinearLayout
@@ -71,7 +73,7 @@
             android:id="@+id/place_order_layout"
             android:padding="10dp"
             android:background="@drawable/gradient_corner"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
@@ -79,8 +81,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
                 android:text="Place another order"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+               style="@style/semiBold"
+                android:textSize="@dimen/_13sdp"/>
 
         </LinearLayout>
     </LinearLayout>

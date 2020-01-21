@@ -1,26 +1,17 @@
 package com.foodgeene.cart;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeViewHolder> {
 
@@ -51,7 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
         List<Product> products = list;
 
         holder.Pname.setText(products.get(position).getName());
-        holder.QuantityTv.setText(products.get(position).getCount());
+        holder.QuantityTv.setText(" × "+products.get(position).getCount());
         holder.PriceTV.setText("Rs. "+products.get(position).getPrice());
 
     }

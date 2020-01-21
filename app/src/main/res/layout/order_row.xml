@@ -10,15 +10,15 @@
         android:id="@+id/OrderCard"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:layout_margin="10dp"
-        app:cardElevation="3dp"
-        app:cardCornerRadius="5dp"
+        android:layout_margin="@dimen/_8sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_3sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
-            android:padding="15dp"
+            android:padding="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
                 <LinearLayout
@@ -28,19 +28,20 @@
 
                     <ImageView
                         android:id="@+id/storeName"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_marginRight="@dimen/_3sdp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/ic_store"/>
 
                     <TextView
                         android:id="@+id/Restraunt_Name"
-                        android:textSize="18sp"
+                        style="@style/semiBold"
+                        android:layout_marginLeft="@dimen/_3sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Restraunt Name"
                         android:textStyle="bold"
-                        android:textColor="@color/humara_black"/>
+                        />
 
 
                     <LinearLayout
@@ -54,23 +55,33 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/ratingborder"
                             android:clickable="true"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:text="Rate This Order"
+                            android:paddingLeft="@dimen/_6sdp"
+                            android:paddingRight="@dimen/_6sdp"
+                            style="@style/Regular"
+                            android:text="Rate Us"
                             android:textColor="@android:color/white" />
                     </LinearLayout>
 
 
-                </LinearLayout>
 
-            <LinearLayout
-                android:layout_marginTop="5dp"
+                </LinearLayout>
+            <TextView
+                android:id="@+id/TotalAmount"
+                style="@style/semiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginLeft="@dimen/_30sdp"
+                />
+            <View
+                android:layout_marginTop="@dimen/_3sdp"
                 android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/background">
+                android:background="@color/colorViewGray"/>
 
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
@@ -82,15 +93,32 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5">
                     <TextView
+                        android:layout_marginTop="@dimen/_3sdp"
+                        style="@style/Regular"
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payment Method"/>
+                    <TextView
+                        android:id="@+id/PaymentMethod"
+                        style="@style/Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        />
+                    <TextView
                         android:layout_marginTop="5dp"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="12sp"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Order Id"/>
                     <TextView
                         android:id="@+id/OrderID"
                         android:textSize="12sp"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-"
@@ -103,25 +131,27 @@
                     android:layout_weight="0.5">
 
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        style="@style/Regular"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_9sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Table Name"/>
                     <TextView
                         android:id="@+id/TableNumber"
-                        android:textSize="12sp"
+                        style="@style/Regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-"
-                        android:textColor="@android:color/black"/>
+                       />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="vertical"
@@ -136,7 +166,6 @@
                         android:layout_height="wrap_content"
                         android:text="Total Amount"/>
                     <TextView
-                        android:id="@+id/TotalAmount"
                         android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -156,7 +185,6 @@
                         android:layout_height="wrap_content"
                         android:text="Payment Method"/>
                     <TextView
-                        android:id="@+id/PaymentMethod"
                         android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -165,14 +193,12 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_marginTop="5dp"
+            <View
+                android:layout_marginTop="@dimen/_3sdp"
                 android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/background">
-
-            </LinearLayout>
+                android:background="@color/colorViewGray"/>
 
             <LinearLayout
                 android:layout_marginTop="5dp"
@@ -185,19 +211,20 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5">
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        style="@style/Regular"
+                        android:textSize="@dimen/_9sdp"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Order Status"/>
                     <TextView
                         android:id="@+id/OrderStatus"
-                        android:textSize="12sp"
+                        style="@style/Regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-"
-                        android:textColor="@android:color/black"/>
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -206,22 +233,38 @@
                     android:layout_weight="0.5">
 
                     <TextView
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        style="@style/Regular"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_9sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Payment Status"/>
                     <TextView
                         android:id="@+id/PaymentStatus"
-                        android:textSize="12sp"
+                       style="@style/Regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="-"
-                        android:textColor="@android:color/black"/>
+                        />
                 </LinearLayout>
-            </LinearLayout>
 
+            </LinearLayout>
+            <View
+                android:layout_marginTop="@dimen/_3sdp"
+                android:alpha="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorViewGray"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+               style="@style/Regular"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

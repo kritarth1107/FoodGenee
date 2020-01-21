@@ -3,27 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:elevation="10dp"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="10dp"
-    android:layout_height="150dp">
+    android:elevation="@dimen/_10sdp"
+    android:layout_margin="@dimen/_6sdp"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_height="@dimen/_100sdp">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/transLayout"
         android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:layout_height="match_parent">
 
 
         <RelativeLayout
             android:id="@+id/layoutOneHere"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1.5"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:id="@+id/transBag"
                 android:layout_centerInParent="true"
                 app:civ_border_width="2dp"
@@ -36,62 +37,67 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="25"
+                style="@style/semiBold"
+                android:textSize="@dimen/_14sdp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20dp"/>
+
+               />
 
 
 
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/topic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/bold"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:text="Some Text"
+                android:textColor="@color/colorAccent"
+                />
+            <TextView
+                android:id="@+id/valDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:singleLine="false"
+                android:maxLines="2"
+                android:text="Some Text"
+                />
+            <TextView
+                android:id="@+id/valDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:singleLine="false"
+                android:maxLines="2"
+                android:text="Some Text"
+                />
+            <TextView
+                android:id="@+id/odrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:singleLine="false"
+                android:maxLines="2"
+                android:text="Some Text"
+                android:textColor="@color/colorAccent"
+                />
+
+        </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/topic"
-            android:layout_toRightOf="@+id/layoutOneHere"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_above="@id/valDesc"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:textColor="@color/colorAccent"
-            android:paddingBottom="5dp"
-            android:layout_height="wrap_content"
-            android:text="Some Text here"/>
-
-        <TextView
-            android:id="@+id/odrid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/valDate"
-            android:layout_marginLeft="-200dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="-62dp"
-            android:layout_toRightOf="@+id/topic"
-            android:text="Some Text here"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/valDesc"
-            android:layout_toRightOf="@+id/layoutOneHere"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="Some Text here"/>
-
-        <TextView
-            android:id="@+id/valDate"
-            android:layout_toRightOf="@+id/layoutOneHere"
-            android:layout_width="200dp"
-            android:layout_below="@id/valDesc"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="Some Text here"/>
 
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

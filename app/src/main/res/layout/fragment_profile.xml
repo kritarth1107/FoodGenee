@@ -24,18 +24,18 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp">
+            android:layout_height="@dimen/_200sdp">
 
             <RelativeLayout
-                android:layout_marginTop="-70dp"
-                android:layout_marginLeft="-70dp"
+                android:layout_marginTop="-50dp"
+                android:layout_marginLeft="-50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_centerInParent="true"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="@dimen/_200sdp"
                     android:tint="@color/colorPrimaryDark"
                     android:src="@drawable/ic_circle_darkblue"/>
 
@@ -50,10 +50,10 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_centerInParent="true"
                     android:id="@+id/profilePicture"
-                    android:layout_width="160dp"
+                    android:layout_width="@dimen/_130sdp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/demo_user_image"
-                    android:layout_height="160dp"
+                    android:layout_height="@dimen/_130sdp"
                     >
 
                 </de.hdodenhof.circleimageview.CircleImageView>
@@ -72,7 +72,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_stars_black_24dp"/>
+                    android:src="@drawable/star_circle_white"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginBottom="10dp"
@@ -107,58 +107,53 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/userName"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="@dimen/_60sdp"
             android:layout_marginTop="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"
-            android:textColor="@android:color/black"
-            android:textSize="28sp"
-            android:textStyle="bold"/>
-        <LinearLayout
-            android:alpha="0.7"
+            style="@style/bold"
+            android:textSize="@dimen/_16sdp"
+            />
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/background">
+            android:layout_marginLeft="@dimen/_60sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="@color/colorViewGray">
 
-        </LinearLayout>
+        </View>
         <TextView
-            android:textSize="15sp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="@dimen/_60sdp"
             android:id="@+id/userEmail"
-            android:layout_width="300dp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTint="@color/colorPrimary"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_black_back_closed_envelope_shape"
-            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="@dimen/_6sdp"
             android:text="Email"
-            android:textColor="@android:color/black"/>
+            style="@style/Regular"/>
         <TextView
-            android:textSize="15sp"
-            android:layout_marginLeft="80dp"
+            style="@style/Regular"
+            android:layout_marginLeft="@dimen/_60sdp"
             android:id="@+id/userPhone"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:drawableTint="@color/colorPrimary"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:drawablePadding="@dimen/_6sdp"
+            android:drawableLeft="@drawable/phone"
             android:text="Phone"
             android:textColor="@android:color/black"/>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/_200sdp"
         android:background="#80FFFFFF"
         android:id="@+id/newcard"
-        app:cardCornerRadius="40dp"
-        android:layout_marginTop="20dp"
-        android:elevation="10dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:elevation="@dimen/_5sdp"
         android:layout_below="@id/lal">
 
         <RelativeLayout
@@ -171,82 +166,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your coins score"
-                android:textStyle="bold"
-                android:textSize="20dp"
+                style="@style/semiBold"
                 android:id="@+id/coinstext"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_16sdp"/>
 
             <TextView
                 android:id="@+id/redeemNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
-                android:padding="5dp"
-                android:textStyle="bold"
+                android:padding="@dimen/_3sdp"
+                style="@style/semiBold"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginRight="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_16sdp"
                 android:text="Redeem List" />
 
             <View
-                android:layout_width="80dp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"
                 android:layout_below="@id/redeemNow"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="@dimen/_6sdp"/>
 
             <TextView
                 android:id="@+id/sumtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/coinstext"
-                android:layout_marginLeft="20dp"
+                style="@style/Regular"
+                android:layout_marginLeft="@dimen/_16sdp"
                 android:text="redeem coins and get exciting offers"/>
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/coinsscore"
-                android:layout_width="130dp"
-                android:layout_marginLeft="20dp"
-                android:elevation="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:elevation="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_below="@id/sumtext"
                 app:cardCornerRadius="20dp"
+                android:layout_height="@dimen/_80sdp">
 
-
-                android:layout_height="130dp">
-
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="match_parent">
 
 
 
                     <TextView
                         android:id="@+id/cttext"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Coins"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginLeft="20dp"
-                        android:textSize="14sp"/>
+                        android:gravity="center"
+                        style="@style/semiBold"
+                        android:layout_marginTop="@dimen/_10sdp"
+                       />
 
                     <TextView
                         android:id="@+id/realcoins"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/cttext"
-                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
                         android:text="0"
-                        android:textSize="30dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                        style="@style/bold"
+                        android:textSize="@dimen/_20sdp"
+                       />
+                </LinearLayout>
 
 
             </androidx.cardview.widget.CardView>

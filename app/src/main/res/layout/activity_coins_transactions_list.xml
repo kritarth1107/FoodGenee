@@ -7,20 +7,29 @@
     tools:context=".transactionlists.CoinsTransactionsList">
 
 
-    <Toolbar
+    <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
-        android:layout_height="wrap_content">
-
+        android:layout_height="?attr/actionBarSize">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/arrow_left"/>
 
         <TextView
             android:layout_width="wrap_content"
+            style="@style/semiBold"
+            android:layout_centerInParent="true"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="@dimen/_14sdp"
             android:layout_height="wrap_content"
             android:text="Transaction List"/>
-    </Toolbar>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reepeatlist"
@@ -28,6 +37,7 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:layout_below="@id/toolbar"/>
+
 
     <ProgressBar
         android:layout_width="wrap_content"

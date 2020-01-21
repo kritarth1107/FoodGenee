@@ -11,8 +11,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="-40dp"
+        android:layout_height="@dimen/_180sdp"
+        android:layout_marginBottom="-45dp"
         android:id="@+id/appbarlayout_id">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -22,9 +22,9 @@
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:title=" "
             android:background="@android:color/transparent"
-            app:expandedTitleMarginStart="10dp"
-            app:expandedTitleMarginEnd="10dp"
-            app:expandedTitleMarginBottom="40dp"
+            app:expandedTitleMarginStart="@dimen/_6sdp"
+            app:expandedTitleMarginEnd="@dimen/_6sdp"
+            app:expandedTitleMarginBottom="@dimen/_37sdp"
             >
 
 
@@ -43,9 +43,9 @@
 
                 <ImageView
                     android:id="@+id/aa_thumbnail"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
                     android:layout_marginTop="70dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/bg3" />
@@ -57,9 +57,9 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 android:id="@+id/toolbar"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_left_white"
-
+                app:navigationIcon="@drawable/arrow_left"
                 >
+
             </androidx.appcompat.widget.Toolbar>
 
 
@@ -69,7 +69,14 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
-
+    <ImageView
+        android:id="@+id/iv_filter"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:src="@drawable/filter"/>
 
     <androidx.core.widget.NestedScrollView
         android:background="@drawable/corner_bg"
@@ -102,8 +109,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
-                            android:textStyle="bold"
-                            android:textSize="23sp"
+                           style="@style/bold"
+                            android:textSize="@dimen/_14sdp"
                             android:text="Store Name"/>
                         <LinearLayout
                             android:gravity="center_vertical"
@@ -111,14 +118,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="@dimen/_10sdp"
+                                android:layout_height="@dimen/_10sdp"
                                 android:src="@drawable/ic_restaurant"/>
 
                             <TextView
-                                android:paddingLeft="5dp"
+                                android:paddingLeft="@dimen/_3sdp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                style="@style/Regular"
                                 android:textColor="@color/humara_black"
                                 android:text="Restaurant"/>
 
@@ -132,21 +140,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2">
                         <androidx.cardview.widget.CardView
-                            android:layout_marginTop="5dp"
-                            app:cardCornerRadius="5dp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            app:cardCornerRadius="@dimen/_3sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                             <LinearLayout
                                 android:background="@drawable/gradient_corner"
                                 android:gravity="center"
                                 android:orientation="horizontal"
-                                android:padding="8dp"
+                                android:padding="@dimen/_6sdp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
                                 <TextView
                                     android:id="@+id/table_number"
-                                    android:textStyle="bold"
+                                    style="@style/semiBold"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="3"
@@ -156,7 +164,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:background="@android:color/darker_gray"
                     android:alpha="0.2"
                     android:layout_width="match_parent"
@@ -193,7 +201,7 @@
                     </LinearLayout>
                 </com.facebook.shimmer.ShimmerFrameLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:paddingBottom="40dp"
+                    android:paddingBottom="@dimen/_35sdp"
                     android:id="@+id/ActsRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_margin="10dp"
@@ -229,13 +237,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textSize="10sp"
+                    style="@style/Regular"
+                    android:textSize="@dimen/_8sdp"
                     android:textColor="#FFFFFF"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" item"
-                    android:textSize="10sp"
+                    style="@style/Regular"
+                    android:textSize="@dimen/_8sdp"
                     android:textColor="#FFFFFF"/>
             </LinearLayout>
             <LinearLayout
@@ -254,8 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="300"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
+                    style="@style/bold"
                     android:textColor="#FFFFFF"/>
             </LinearLayout>
 
@@ -282,8 +291,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:textSize="15sp"
-                            android:textStyle="bold"
+                           style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pay Now"

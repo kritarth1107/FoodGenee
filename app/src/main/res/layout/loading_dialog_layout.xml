@@ -5,9 +5,13 @@
     android:padding="30dp"
     android:gravity="center"
     android:background="@android:color/white">
-        <ProgressBar
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/loading"
+        />
     <TextView
         android:layout_marginLeft="10dp"
         android:textSize="18sp"

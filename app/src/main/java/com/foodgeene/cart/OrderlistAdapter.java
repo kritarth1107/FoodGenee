@@ -2,9 +2,8 @@ package com.foodgeene.cart;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,27 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.orderratings.RatingsActivity;
-import com.stepstone.apprating.AppRatingDialog;
-import com.stepstone.apprating.listener.RatingDialogListener;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import network.FoodGeneeAPI;
 import network.RetrofitClient;
 import retrofit2.Call;
@@ -116,10 +107,11 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
         holder.Restraunt_Name.setText(list.get(position).getStorename());
         holder.OrderID.setText(list.get(position).getOrderId());
         holder.TableNumber.setText(list.get(position).getTablename());
-        holder.TotalAmount.setText(list.get(position).getTotalamount());
+        holder.TotalAmount.setText("₹ "+list.get(position).getTotalamount());
         holder.PaymentMethod.setText(list.get(position).getPaymenttype());
-        holder.OrderStatus.setText(list.get(position).getOrderprocess());
+        holder.OrderStatus.setText(list.get(position).getOrderprocesstext());
         holder.PaymentStatus.setText(list.get(position).getPaidstatus());
+        holder.tv_date.setText(list.get(position).getOrderdate());
 
 //        Glide.with(context)
 //               .load(list.get(position).getOrderprocess());
@@ -135,18 +127,36 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 
         if(list.get(position).getFeedbackstatus().equals("false")){
             String orderId = list.get(position).getOrderId();
-            holder.rateHere.setText("Rate us");
-            holder.rateHere.setOnClickListener(view -> {
+
+            if(list.get(position).getOrderprocess().equalsIgnoreCase("2")||list.get(position).getOrderprocess().equalsIgnoreCase("4")){
+                holder.rateHere.setText("Rate us");
+                holder.rateHere.setVisibility(View.VISIBLE);
+                holder.rateHere.setBackground(context.getResources().getDrawable(
+                        R.drawable.ratingborder));
+                holder.rateHere.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+                holder.rateHere.setTextColor(Color.WHITE);
+                    holder.rateHere.setOnClickListener(view -> {
+                        holder.rateHere.setVisibility(View.GONE);
+                        Intent intent = new Intent(context, RatingsActivity.class);
+                        intent.putExtra("orderId", orderId);
+                        intent.putExtra("merchant", list.get(position).getMerchant_id());
+                        context.startActivity(intent);
+                    });
+
+            }else{
                 holder.rateHere.setVisibility(View.GONE);
-                Intent intent = new Intent(context, RatingsActivity.class);
-                intent.putExtra("orderId", orderId);
-                context.startActivity(intent);
-            });
+            }
 
-        }
-        else if(list.get(position).getFeedbackstatus().equals("true")){
 
-            holder.rateHere.setVisibility(View.GONE);
+
+        } else if(list.get(position).getFeedbackstatus().equals("true")){
+            //Log.e("rating",""+list.get(position).getRating());
+            holder.rateHere.setVisibility(View.VISIBLE);
+           // holder.rateHere.setVisibility(View.GONE);
+            holder.rateHere.setText(""+list.get(position).getRating());
+            holder.rateHere.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.rateHere.setTextColor(Color.parseColor("#364760"));
+            holder.rateHere.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.star,0);
 
         }
 //        holder.rateHere.setOnClickListener(view -> {
@@ -170,7 +180,12 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
             intent.putExtra("paymentStatus",list.get(position).getPaidstatus());
             intent.putExtra("totalAmount",list.get(position).getTotalamount());
             intent.putExtra("tableName",list.get(position).getTablename());
-
+            intent.putExtra("serviceBoy",list.get(position).getServiceboy());
+            intent.putExtra("encKey",list.get(position).getEnckey());
+            intent.putExtra("cover",list.get(position).getLogo());
+            intent.putExtra("orderID",list.get(position).getOrderId());
+            intent.putExtra("prePaidTime",list.get(position).getPreparetime());
+            intent.putExtra("couponAmount",list.get(position).getCouponamount());
 
             context.startActivity(intent);
         });
@@ -188,7 +203,7 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
-        TextView Restraunt_Name,OrderID,TableNumber,TotalAmount,PaymentMethod,OrderStatus,PaymentStatus;
+        TextView Restraunt_Name,OrderID,TableNumber,TotalAmount,PaymentMethod,OrderStatus,PaymentStatus,tv_date;
         CardView OrderCard;
         ImageView orderRestImage;
         TextView rateHere;
@@ -197,6 +212,7 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
             super(itemView);
             Restraunt_Name = itemView.findViewById(R.id.Restraunt_Name);
             OrderID = itemView.findViewById(R.id.OrderID);
+            tv_date=itemView.findViewById(R.id.tv_date);
             TableNumber = itemView.findViewById(R.id.TableNumber);
             TotalAmount = itemView.findViewById(R.id.TotalAmount);
             PaymentMethod = itemView.findViewById(R.id.PaymentMethod);

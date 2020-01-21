@@ -1,25 +1,15 @@
 package com.foodgeene.rewardsfragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
-import com.foodgeene.coinstransactions.CoinsTransaction;
-import com.foodgeene.rewards.Rewards;
 import com.foodgeene.rewards.RewardsAdapter;
 import com.foodgeene.rewards.rewardmodels.RModel;
 import com.foodgeene.rewards.rewardmodels.RedeemCount;
@@ -29,22 +19,29 @@ import com.foodgeene.transactionlists.CoinsTransactionsList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class RewardsFragment extends Fragment {
+public class RewardsFragment extends Fragment implements ConnectivityReceiver.ConnectivityReceiverListener{
 
     RecyclerView recyclerView;
     RewardsAdapter rewardsAdapter;
     SessionManager sessionManager;
-    ProgressBar progressBar;
+    GifImageView progressBar;
     String token;
     TextView redeemCount;
-    Button check;
+    TextView check;
+    boolean isOnLine;
 
     public RewardsFragment() {
         // Required empty public constructor
@@ -62,16 +59,26 @@ public class RewardsFragment extends Fragment {
         sessionManager = new SessionManager(getContext());
         HashMap<String, String> user = sessionManager.getUserDetail();
         token = user.get(sessionManager.USER_ID);
-        progressBar = rootView.findViewById(R.id.progress);
+        progressBar = rootView.findViewById(R.id.gif);
         progressBar.setVisibility(View.VISIBLE);
         check = rootView.findViewById(R.id.checkTransaction);
         redeemCount = rootView.findViewById(R.id.redeemCount);
+        isOnLine=ConnectivityReceiver.isConnected();
 
         check.setOnClickListener(view -> startActivity(new Intent(getContext(), CoinsTransactionsList.class)));
-        setupRecycler();
-        setRedeemCount();
+        if(isOnLine) {
+            setupRecycler();
+            setRedeemCount();
+        }else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
         return rootView;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     private void setRedeemCount() {
@@ -133,5 +140,10 @@ public class RewardsFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

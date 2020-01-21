@@ -5,9 +5,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="120dp"
-        android:padding="15dp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_70sdp"
         android:src="@drawable/logonew"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
@@ -16,17 +15,19 @@
     <TextView
         android:layout_below="@id/logo"
         android:id="@+id/proceed"
-        android:textSize="24sp"
-        android:layout_marginLeft="30dp"
+        style="@style/Regular"
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/proceed_with_your"/>
     <TextView
         android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:paddingBottom="10dp"
-        android:paddingTop="15dp"
-        android:layout_marginLeft="30dp"
+        android:textSize="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        style="@style/bold"
+        android:layout_marginLeft="@dimen/_20sdp"
         android:id="@+id/regText"
         android:layout_below="@id/proceed"
         android:fontFamily="@font/aero"
@@ -36,10 +37,10 @@
 
     <View
         android:id="@+id/regline"
-        android:layout_width="180dp"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="1dp"
         android:layout_below="@id/regText"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="@dimen/_6sdp"
         android:background="@color/colorAccent"/>
 
 
@@ -48,14 +49,14 @@
             android:id="@+id/EditTextName"
             android:inputType="textPersonName"
             android:hint="Name"
-            android:textSize="15sp"
+            style="@style/Regular"
             android:drawableRight="@drawable/ic_account_circle_black_24dp"
             android:drawableTint="@color/colorAccent"
             android:layout_below="@id/regline"
-            android:drawablePadding="10dp"
+            android:drawablePadding="@dimen/_5sdp"
             android:layout_centerHorizontal="true"
-            android:layout_width="350dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"/>
 
@@ -65,12 +66,12 @@
             android:id="@+id/EditTextEmail"
             android:inputType="textEmailAddress"
             android:hint="@string/email_address"
-            android:textSize="15sp"
-            android:layout_marginTop="10dp"
+           style="@style/Regular"
+            android:layout_marginTop="@dimen/_5sdp"
             android:drawableRight="@drawable/ic_email_black_24dp"
             android:drawableTint="@color/colorAccent"
             android:layout_centerHorizontal="true"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_below="@+id/EditTextName"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"/>
@@ -84,11 +85,11 @@
             android:id="@+id/EditTextNumber"
             android:inputType="number"
             android:hint="@string/phone_number"
-            android:textSize="15sp"
+           style="@style/Regular"
             android:layout_below="@id/EditTextEmail"
             android:layout_centerHorizontal="true"
-            android:layout_width="350dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:drawableRight="@drawable/ic_call_black_24dp"
             android:drawableTint="@color/colorAccent"
             android:layout_height="wrap_content"
@@ -102,13 +103,13 @@
             android:id="@+id/EditTextPassword"
             android:inputType="textPassword"
             android:hint="Password"
-            android:textSize="15sp"
+            style="@style/Regular"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/EditTextNumber"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_250sdp"
             android:drawableRight="@drawable/ic_lock_black_24dp"
             android:drawableTint="@color/colorAccent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"/>
 
@@ -130,20 +131,37 @@
         android:text="@string/register"
         android:layout_below="@id/progressBarReg"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        style="@style/semiBold"
+        android:layout_marginTop="@dimen/_15sdp"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/NavigateToLogin"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        android:layout_below="@id/RegisterButton"
-        android:layout_marginTop="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/already_have_an_account_login_now"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@id/RegisterButton">
+        <TextView
+            android:textAlignment="center"
+            style="@style/Regular"
+            android:textSize="@dimen/_11sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_an_account_login_now"/>
+        <TextView
+            android:id="@+id/NavigateToLogin"
+            android:textAlignment="center"
+            style="@style/bold"
+            android:textSize="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Login Now"/>
+    </LinearLayout>
+
+
 
 
 </RelativeLayout>

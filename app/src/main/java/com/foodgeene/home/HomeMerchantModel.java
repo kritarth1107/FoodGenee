@@ -15,6 +15,65 @@ public class HomeMerchantModel {
     @Expose
     private List<Merchantlist> merchantlist = null;
 
+    @SerializedName("locationlist")
+    @Expose
+    private List<HomeMerchantModel> locationlist = null;
+
+    @SerializedName("city")
+    @Expose
+    private String city;
+
+    @SerializedName("location")
+    @Expose
+    private String location;
+
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+
+    public List<HomeMerchantModel> getLocationlist() {
+        return locationlist;
+    }
+
+    public void setLocationlist(List<HomeMerchantModel> locationlist) {
+        this.locationlist = locationlist;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
     public int getStatus() {
         return status;
     }

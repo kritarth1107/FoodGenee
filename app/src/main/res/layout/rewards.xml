@@ -7,10 +7,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/_4sdp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         card_view:cardCornerRadius="4dp"
@@ -26,38 +26,39 @@
 
             <ImageView
                 android:id="@+id/rewardImage"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_17sdp"
                 
                  />
 
             <TextView
                 android:id="@+id/rewardWon"
+                style="@style/Regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rewardImage"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:text="@string/coupon_won" />
 
             <TextView
                 android:id="@+id/expire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Regular"
                 android:background="@drawable/coloredborder"
-                android:textSize="12dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
+                android:paddingTop="@dimen/_1sdp"
+                android:paddingBottom="@dimen/_1sdp"
                 android:textColor="@color/white"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:paddingLeft="@dimen/_12sdp"
+                android:paddingRight="@dimen/_12sdp"
                 android:layout_below="@id/rewardWon"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Expires on"
-                android:textStyle="normal" />
+                android:elevation="@dimen/_3sdp" />
 
         </RelativeLayout>
 

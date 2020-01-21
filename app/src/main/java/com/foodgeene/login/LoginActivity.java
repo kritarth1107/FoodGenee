@@ -1,7 +1,5 @@
 package com.foodgeene.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,22 +13,24 @@ import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.forgot.ForgotActivity;
-import com.foodgeene.register.RegisterModel;
 import com.foodgeene.register.RegistrationActivity;
-import com.foodgeene.scanner.ScannerActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
     EditText Email,Password;
     TextView NavigateToReg,forgotPassword;
     Button login;
     ProgressBar progressBarLogin;
     SessionManager sessionManager;
+    boolean isOnline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.LoginButton);
         progressBarLogin = findViewById(R.id.progressBarLogin);
         forgotPassword = findViewById(R.id.forotPassword);
+        isOnline=ConnectivityReceiver.isConnected();
 
         NavigateToReg.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
         forgotPassword.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, ForgotActivity.class)));
@@ -58,12 +59,20 @@ public class LoginActivity extends AppCompatActivity {
                 Email.setError("Password is required");
             }
             else{
+                if(isOnline)
                 login(string_email,string_password);
+                else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void login(final String username,final String Password){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
+    public void login(final String username, final String Password){
         progressBarLogin.setVisibility(View.VISIBLE);
         login.setVisibility(View.GONE);
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
@@ -105,5 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnline=isConnected;
     }
 }

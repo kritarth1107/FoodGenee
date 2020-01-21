@@ -1,10 +1,9 @@
 package com.foodgeene.redeemedlistdetails;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,25 +15,28 @@ import com.foodgeene.redeemedlistdetails.model.RedeemedModel;
 import com.foodgeene.redeemedlistdetails.model.Text;
 
 import java.util.HashMap;
-import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RedeemedListDetails extends AppCompatActivity {
+public class RedeemedListDetails extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
     String UserToken;
     SessionManager sessionManager;
     ImageView offerBack;
     TextView offerName, excerptO, descript, expireOn, couponCode;
-    ImageView logo;
+    ImageView logo,mIvBack;
     Bundle bundle;
     String rewardId = null;
     Intent get;
     Dialog loadingDialog;
     TextView redeeemCoinsCount;
+    boolean isOnLine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +53,26 @@ public class RedeemedListDetails extends AppCompatActivity {
         couponCode = findViewById(R.id.orignalCoupnTwo);
         expireOn = findViewById(R.id.expiresonTwo);
         logo = findViewById(R.id.restImageTwo);
+        mIvBack=findViewById(R.id.iv_back);
+        isOnLine=ConnectivityReceiver.isConnected();
+
 //        redeeemCoinsCount = findViewById(R.id.coinsCountNew);
+        if(isOnLine)
         drawRedeemedList(rewardId);
+        else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     private void initViews() {
@@ -109,5 +127,10 @@ public class RedeemedListDetails extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

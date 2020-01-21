@@ -4,19 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.foodgeene.R;
-import com.foodgeene.preoder.preordermodel.PreOrderModel;
 import com.foodgeene.preoder.preordermodel.Tablelist;
 
 import java.util.List;
 
-import retrofit2.Callback;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PreOrderAdapter extends RecyclerView.Adapter<PreOrderAdapter.PreOrderViewHolder> {
 
@@ -42,6 +38,7 @@ public class PreOrderAdapter extends RecyclerView.Adapter<PreOrderAdapter.PreOrd
     public void onBindViewHolder(@NonNull PreOrderViewHolder holder, int position) {
 
         holder.tableNumber.setText(list.get(position).getName());
+        holder.mTvCapacity.setText("Capacity : "+list.get(position).getCapacity());
 
     }
 
@@ -52,14 +49,15 @@ public class PreOrderAdapter extends RecyclerView.Adapter<PreOrderAdapter.PreOrd
 
     public class PreOrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tableNumber;
-        Button bookTable;
+        TextView tableNumber,mTvCapacity;
+        TextView bookTable;
         BookClickListener clickListener;
         public PreOrderViewHolder(@NonNull View itemView, BookClickListener clickListener) {
             super(itemView);
             this.clickListener = clickListener;
             tableNumber = itemView.findViewById(R.id.realTableNo);
             bookTable = itemView.findViewById(R.id.bookTableButton);
+            mTvCapacity=itemView.findViewById(R.id.tv_capacity);
             bookTable.setOnClickListener(this);
         }
 

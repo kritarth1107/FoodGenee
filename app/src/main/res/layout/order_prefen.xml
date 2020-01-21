@@ -3,23 +3,30 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/foodSet"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1.2"
             android:layout_height="wrap_content"
             android:text="Paneer Butter Masala"
-            android:textStyle="bold"
-            android:layout_margin="20dp"/>
+           style="@style/semiBold"
+            android:layout_margin="@dimen/_6sdp"/>
 
 
         <EditText
             android:id="@+id/spinnerSet"
-            android:layout_width="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.8"
+            android:layout_margin="@dimen/_8sdp"
+            style="@style/semiBold"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
             android:hint="Write Preference like 1, 2, 3"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content"
@@ -27,6 +34,6 @@
           />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

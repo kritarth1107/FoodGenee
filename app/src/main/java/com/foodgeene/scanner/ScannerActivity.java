@@ -1,48 +1,48 @@
 package com.foodgeene.scanner;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
 import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
-import com.foodgeene.login.LoginActivity;
-import com.foodgeene.login.LoginModel;
 import com.foodgeene.restraunt.RestrauntActivity;
-import com.google.android.gms.vision.barcode.Barcode;
 import com.google.zxing.Result;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import info.androidhive.barcode.BarcodeReader;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class ScannerActivity extends AppCompatActivity implements  ConnectivityReceiver.ConnectivityReceiverListener {
     SessionManager sessionManager;
-    private ZXingScannerView zXingScannerView;
     String UserToken;
     Dialog loadingDialog;
     boolean close=true;
     final int RequestCameraPermissionID = 1001;
     String ActivityString="Home";
+    boolean isOnline;
+    FrameLayout frame;
+    RelativeLayout dummy;
+    private CodeScanner mCodeScanner;
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -64,37 +64,63 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_scanner);
+             frame=findViewById(R.id.frame);
+             dummy=findViewById(R.id.dummy);
+
             req_camera_permission();
             sessionManager = new SessionManager(this);
             HashMap<String, String> user = sessionManager.getUserDetail();
             UserToken = user.get(sessionManager.USER_ID);
+             isOnline=ConnectivityReceiver.isConnected();
+        CodeScannerView scannerView = findViewById(R.id.scanner_view);
+        mCodeScanner = new CodeScanner(this, scannerView);
+
+        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull final Result result) {
+                ScannerActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(isOnline)
+                            CallScannerApi(result.getText());
+                        else Toast.makeText(ScannerActivity.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+                        mCodeScanner.stopPreview();
+
+                        loadingDialog = new Dialog(ScannerActivity.this);
+                        loadingDialog.setContentView(R.layout.loading_dialog_layout);
+                        loadingDialog.show();
+                        loadingDialog.setCancelable(false);
+                        loadingDialog.setCanceledOnTouchOutside(false);
+                    }
+                });
+            }
+        });
+
     }
 
 
     public void scan(View view){
-        zXingScannerView = new ZXingScannerView(getApplicationContext());
-        setContentView(zXingScannerView);
-        zXingScannerView.setResultHandler(this);
-        zXingScannerView.startCamera();
-        ActivityString="Scanner";
+        frame.setVisibility(View.VISIBLE);
+        dummy.setVisibility(View.GONE);
 
     }
 
     @Override
-    public void handleResult(Result result) {
-        CallScannerApi(result.getText());
-            loadingDialog = new Dialog(this);
-            loadingDialog.setContentView(R.layout.loading_dialog_layout);
-            loadingDialog.show();
-            loadingDialog.setCancelable(false);
-            loadingDialog.setCanceledOnTouchOutside(false);
-        zXingScannerView.resumeCameraPreview(this);
+    protected void onResume() {
+        super.onResume();
+        mCodeScanner.startPreview();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
 
+    @Override
+    protected void onPause() {
+        mCodeScanner.releaseResources();
+        super.onPause();
     }
 
     public void CallScannerApi(final String result){
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<ScannerModel> call = foodGeneeAPI.submitScannedQR("qrcode",result,UserToken,"application/x-www-form-urlencoded");
+        Call<ScannerModel> call = foodGeneeAPI.submitScannedQR("qrcode",result,0,UserToken,"application/x-www-form-urlencoded");
         call.enqueue(new Callback<ScannerModel>() {
             @Override
             public void onResponse(Call<ScannerModel> call, Response<ScannerModel> response) {
@@ -111,6 +137,8 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                         intent.putExtra("store",store);
                         intent.putExtra("table",table);
                         intent.putExtra("cover",cover);
+                        intent.putExtra("from","scanner");
+                        intent.putExtra("orderId","");
                         startActivity(intent);
                         finish();
                         loadingDialog.cancel();
@@ -119,6 +147,9 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                     } else if (status.equals("0")) {
                         String text = response.body().getText().trim();
                         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                        mCodeScanner.startPreview();
+                        loadingDialog.cancel();
+                        loadingDialog.dismiss();
                     }
 
 
@@ -126,6 +157,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                 catch (Exception e){
                     loadingDialog.cancel();
                     loadingDialog.dismiss();
+                    mCodeScanner.startPreview();
                     Toast.makeText(ScannerActivity.this, "Invalid QR-code Scan Again", Toast.LENGTH_SHORT).show();
                 }
 
@@ -133,6 +165,9 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             @Override
             public void onFailure(Call<ScannerModel> call, Throwable t) {
                 Toast.makeText(ScannerActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                mCodeScanner.startPreview();
+                loadingDialog.cancel();
+                loadingDialog.dismiss();
             }
         });
 
@@ -164,5 +199,10 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             setContentView(R.layout.activity_scanner);
         }
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnline=isConnected;
     }
 }

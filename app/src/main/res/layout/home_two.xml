@@ -27,11 +27,11 @@
 
     <TextView
         android:maxLines="1"
-        android:textColor="@android:color/white"
         android:id="@+id/mTwoName"
         android:text="Merchant Name"
         android:layout_width="wrap_content"
-        android:textStyle="bold"
+       style="@style/Regular"
+        android:textColor="@android:color/white"
         android:layout_height="wrap_content"/>
 </LinearLayout>
 

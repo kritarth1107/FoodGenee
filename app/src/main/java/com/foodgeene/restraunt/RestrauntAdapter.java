@@ -10,9 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
@@ -22,6 +19,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyViewHolder> {
 
@@ -35,17 +35,18 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
     ArrayList<String> itemIdList = new ArrayList<String>();
     ArrayList<String> itemCountList = new ArrayList<String>();
     ArrayList<String> itemPriceList = new ArrayList<String>();
-    String merchandid,table;
+    String merchandid,table,orderID;
 
 
 
     BottomSheetBehavior bottomSheetBehavior;
 
-    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv,LinearLayout ViewCartLayout,String table, String merchandid) {
+    public RestrauntAdapter(Context mContext, List<Productlist> mData,LinearLayout OrderSheet,TextView Total_amount,TextView Quanity_item_tv,LinearLayout ViewCartLayout,String table, String merchandid,String orderID) {
         this.mContext = mContext;
         this.mData = mData;
         this.OrderSheet = OrderSheet;
         this.Total_amount = Total_amount;
+        this.orderID=orderID;
         this.Quanity_item_tv = Quanity_item_tv;
         this.merchandid = merchandid;
         this.table = table;
@@ -224,6 +225,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 i.putExtra("price",itemPriceList.toString());
                 i.putExtra("merchandid",merchandid);
                 i.putExtra("table",table);
+                i.putExtra("orderID",orderID);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 mContext.startActivity(i);}

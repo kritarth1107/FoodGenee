@@ -1,7 +1,5 @@
 package com.foodgeene.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,22 +11,27 @@ import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
-import com.foodgeene.register.signupotp.OtpModel;
 import com.foodgeene.restraunt.SignupOtp;
-import com.google.android.material.snackbar.Snackbar;
 
+import java.util.regex.Pattern;
+
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
     TextView NavigateToLogin;
     EditText Email,Number,Name,Password;
     Button RegisterButton;
+  //  ImageView mIvBack;
     ProgressBar progressBarReg;
     SessionManager sessionManager;
+    boolean isOnline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +43,18 @@ public class RegistrationActivity extends AppCompatActivity {
         Password = findViewById(R.id.EditTextPassword);
         RegisterButton = findViewById(R.id.RegisterButton);
         progressBarReg = findViewById(R.id.progressBarReg);
+      //  mIvBack=findViewById(R.id.iv_back);
         sessionManager = new SessionManager(this);
+        isOnline=ConnectivityReceiver.isConnected();
 
 
         NavigateToLogin.setOnClickListener(view -> finish());
+    /*    mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });*/
 
         RegisterButton.setOnClickListener(view -> {
             String String_Name = Name.getText().toString().trim();
@@ -56,6 +67,8 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             else if(String_Email.isEmpty()){
                 Email.setError("Email is required");
+            }else if(!isValidEmailId(String_Email)){
+                Email.setError("Invalid Email");
             }
             else if(String_Number.isEmpty()){
                 Number.setError("Number is required");
@@ -67,14 +80,29 @@ public class RegistrationActivity extends AppCompatActivity {
                 Number.setError("Invalid Mobile Number");
             }
             else{
+                if(isOnline)
                 Register(String_Name,String_Email,String_Number,String_Password);
+                else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
             }
 
 
         });
     }
+    private boolean isValidEmailId(String email){
 
-//    private void verifyOtp(String phone) {
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+    //    private void verifyOtp(String phone) {
 //
 ////        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
 ////
@@ -127,5 +155,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast.makeText(RegistrationActivity.this, "Some problem occured", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnline=isConnected;
     }
 }

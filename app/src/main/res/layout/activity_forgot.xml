@@ -28,17 +28,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:fontFamily="@font/cambria"
-                android:textSize="24sp"
+                style="@style/semiBold"
+                android:textSize="@dimen/_14sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Proceed with"/>
 
             <TextView
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:paddingBottom="10dp"
-                android:paddingTop="15dp"
+                style="@style/bold"
+                android:textSize="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_7sdp"
+                android:paddingTop="@dimen/_12sdp"
                 android:fontFamily="@font/aero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:textColor="@android:color/black"
-                android:textSize="15sp"
+                style="@style/Regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email or Phone"/>
@@ -70,7 +71,7 @@
                     android:hint="Email or Phone"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="15sp"
+                    style="@style/Regular"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"/>
@@ -100,16 +101,16 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:text="Sent otp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                style="@style/semiBoldWhite"
+              />
 
             <TextView
                 android:id="@+id/NavigateToLogin"
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_17sdp"
                 android:fontFamily="@font/cambria"
-                android:textSize="15sp"
+                style="@style/Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Login Now"/>

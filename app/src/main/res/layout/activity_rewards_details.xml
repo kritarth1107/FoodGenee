@@ -17,7 +17,7 @@
     <RelativeLayout
         android:id="@+id/backdroplayout"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="@dimen/_200sdp">
 
 
         <ImageView
@@ -32,23 +32,23 @@
 
         <ImageView
             android:id="@+id/restImage"
-            android:layout_width="55dp"
+            android:layout_width="@dimen/_50sdp"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/_17sdp"
             android:src="@drawable/ic_arrow"
 
             android:layout_marginBottom="20dp"
-            android:layout_height="55dp"/>
+            android:layout_height="@dimen/_50sdp"/>
         <TextView
             android:id="@+id/offername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Offer Name"
-            android:textSize="30dp"
+            android:textSize="@dimen/_16sdp"
+            style="@style/bold"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_25sdp"
+            android:layout_marginLeft="@dimen/_7sdp"
             android:layout_toRightOf="@+id/restImage"
             android:textColor="@android:color/white" />
 
@@ -57,7 +57,13 @@
 
 
     </RelativeLayout>
-
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:src="@drawable/arrow_left"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_10sdp"/>
     <RelativeLayout
         android:layout_below="@id/backdroplayout"
         android:id="@+id/layoutExtra"
@@ -82,8 +88,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/excerpt"
-android:layout_centerInParent="true"                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
+                    style="@style/Regular"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginLeft="@dimen/_7sdp"
                     android:textStyle="bold"
                     android:text="Actual Offer Details"/>
 
@@ -112,18 +120,18 @@ android:layout_centerInParent="true"                    android:layout_marginTop
                     android:id="@+id/textL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_margin="10dp"
+                    style="@style/semiBold"
+                    android:layout_margin="@dimen/_7sdp"
                     android:text="Rewards Validity"/>
                 <TextView
                     android:id="@+id/expireson"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    style="@style/semiBold"
                     android:layout_below="@id/textL"
                     android:textColor="@android:color/holo_red_dark"
-                   android:layout_marginLeft="10dp"
-                    android:layout_marginTop="1dp"
+                   android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
                     android:text="Expires on" />
 
 
@@ -159,17 +167,18 @@ android:layout_centerInParent="true"                    android:layout_marginTop
                 android:id="@+id/textOffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_7sdp"
+                style="@style/semiBold"
                 android:text="Offer Details"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="@dimen/_7sdp"/>
 
             <TextView
                 android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
+                style="@style/Regular"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_marginLeft="@dimen/_7sdp"
                 android:layout_below="@id/textOffer"
                 android:text="New Offer" />
 
@@ -203,16 +212,17 @@ android:layout_centerInParent="true"                    android:layout_marginTop
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Required Coins"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"/>
+                    style="@style/semiBold"
+                    android:layout_marginLeft="@dimen/_7sdp"/>
 
                 <TextView
                     android:id="@+id/coinsCountNew"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:layout_marginLeft="@dimen/_7sdp"
                     android:layout_below="@id/count"
+                    style="@style/Regular"
                     android:text="You need 3000 coins to redeem this offer" />
 
             </RelativeLayout>
@@ -253,11 +263,12 @@ android:layout_centerInParent="true"                    android:layout_marginTop
 
     <Button
         android:id="@+id/orignalRedeemButton"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
         android:text="@string/redeem"
+        style="@style/semiBold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/_45sdp"
         android:layout_below="@id/hideCoupon"
         android:background="@color/colorAccent"
         android:textColor="@color/white"/>

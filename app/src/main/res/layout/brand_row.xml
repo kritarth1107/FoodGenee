@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_margin="10dp"
-    android:elevation="10dp"
-    android:layout_height="190dp">
+    android:layout_margin="@dimen/_7sdp"
+    android:elevation="@dimen/_7sdp"
+    android:layout_height="@dimen/_170sdp">
 
     <RelativeLayout
         android:layout_width="match_parent"

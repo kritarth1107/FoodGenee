@@ -39,6 +39,73 @@ public class PreOrderModel {
     @Expose
     private List<Tablelist> tablelist = null;
 
+    @SerializedName("mobile")
+    @Expose
+    private String mobile;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+    @SerializedName("state")
+    @Expose
+    private String state;
+    @SerializedName("city")
+    @Expose
+    private String city;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public Integer getStatus() {
         return status;
     }

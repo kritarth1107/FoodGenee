@@ -12,87 +12,95 @@
   <RelativeLayout
       android:id="@+id/fakeToolbar"
       android:layout_width="match_parent"
-      android:layout_height="60dp"
+      android:layout_height="?attr/actionBarSize"
       android:background="@color/colorPrimary">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:background="@android:color/transparent"
-android:layout_centerVertical="true"
-        android:textColor="@color/white"
-        android:text="Transactions"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkTransaction"/>
-
-    <RelativeLayout
-        android:layout_width="130dp"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+       android:src="@drawable/arrow_left"
+        android:layout_marginLeft="@dimen/_10sdp"
+      android:layout_centerInParent="true"
+      android:layout_alignParentLeft="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewards"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:textColor="@android:color/white"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/_14sdp"
+        style="@style/semiBold" />
 
-    </RelativeLayout>
+
   </RelativeLayout>
 
-  <RelativeLayout
+  <LinearLayout
       android:id="@+id/pannel"
       android:layout_below="@id/fakeToolbar"
-      android:background="@color/colorPrimary"
+      android:background="@color/white"
+      android:orientation="horizontal"
       android:layout_width="match_parent"
-      android:layout_height="120dp">
-
-    <RelativeLayout
-        android:layout_width="130dp"
-        android:layout_height="match_parent">
-
-
-    <ImageView
-        android:id="@+id/rewardsCountImage"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_stars_black_24dp" />
-
-      <TextView
-        android:id="@+id/rewardsreedem"
-        android:layout_below="@id/rewardsCountImage"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="10dp"
+      android:layout_height="@dimen/_120sdp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+      android:layout_weight="1">
+      <ImageView
+          android:id="@+id/rewardsCountImage"
+          android:layout_width="@dimen/_48sdp"
+          android:layout_height="@dimen/_48sdp"
           android:layout_centerHorizontal="true"
-
-          android:textColor="@android:color/white"
-        android:layout_height="wrap_content"
-        android:text="@string/rewards_claimed"/>
+          android:src="@drawable/ic_stars_black_24dp" />
 
       <TextView
-          android:textSize="25dp"
-          android:textStyle="bold"
-          android:textColor="@android:color/white"
+          android:id="@+id/rewardsreedem"
+          android:layout_below="@id/rewardsCountImage"
+          android:layout_width="wrap_content"
+          android:layout_centerHorizontal="true"
+          style="@style/semiBold"
+          android:layout_height="wrap_content"
+          android:text="@string/rewards_claimed"/>
+
+      <TextView
+          style="@style/bold"
           android:layout_below="@id/rewardsreedem"
           android:layout_width="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_centerHorizontal="true"
           android:layout_height="wrap_content"
           android:text=""
-          android:id="@+id/redeemCount"/>
+          android:id="@+id/redeemCount"
+          android:textSize="@dimen/_16sdp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+      <TextView
+          android:layout_width="@dimen/_100sdp"
+          android:text="Transactions"
+          style="@style/semiBold"
+          android:layout_gravity="right|center"
+          android:textStyle="bold"
+          android:layout_alignParentEnd="true"
+          android:layout_marginRight="@dimen/_15sdp"
+          android:layout_height="wrap_content"
+          android:id="@+id/checkTransaction"/>
+      <View
+          android:layout_width="@dimen/_70sdp"
+          android:layout_height="1dp"
+          android:layout_marginTop="@dimen/_3sdp"
+          android:background="@color/colorPrimary"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
-  </RelativeLayout>
+
+
+  </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rewardrecycler"
         android:layout_marginTop="10dp"

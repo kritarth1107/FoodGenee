@@ -1,16 +1,15 @@
 package com.foodgeene.preoder.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.DatePicker;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -24,18 +23,23 @@ import com.foodgeene.preoder.preordermodel.PreOrderModel;
 import com.foodgeene.preoder.preordermodel.Tablelist;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static java.lang.String.*;
-
-public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookClickListener {
+public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookClickListener, ConnectivityReceiver.ConnectivityReceiverListener {
 
     RecyclerView recyclerView;
     ImageView coverImage, logo;
@@ -50,6 +54,10 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
     private int mYear, mMonth, mDay, mHour, mMinute;
     String dateSelected;
     String timeSelected;
+    ImageView mIvBack;
+    TextView mTvRestName,mTvRestDesc,mTvPhone,mTvMail,mTvAddress;
+    LinearLayout mLLNavigation;
+    boolean isOnLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +65,19 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
         setContentView(R.layout.activity_pre_order);
         okIntent = getIntent();
         merchantId = okIntent.getStringExtra("merchantId");
+        isOnLine=ConnectivityReceiver.isConnected();
+
         initViews();
+        if(isOnLine)
         setupRecycler();
+        else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
 
     private void setupRecycler() {
         SessionManager sessionManager = new SessionManager(this);
@@ -92,7 +109,20 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
                                 .into(logo);
 
                         restarauntName.setText(response.body().getStorename());
+                        mTvRestName.setText(response.body().getStorename());
+                    mTvPhone.setText(response.body().getMobile());
+                    mTvMail.setText(response.body().getEmail());
+                    mTvAddress.setText(response.body().getAddress()+","+response.body().getLocation()+","+response.body().getCity()+","+response.body().getState());
 
+                    mLLNavigation.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("google.navigation:q="+Double.valueOf(response.body().getLatitude())+","+Double.valueOf(response.body().getLongitude())+"&mode=d"));
+                            intent.setPackage("com.google.android.apps.maps");
+                          startActivity(intent);
+                        }
+                    });
                     }
 
                     else if(response.body().getStatus().equals(0)){
@@ -123,11 +153,24 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
     }
 
     private void initViews() {
-
+        mTvRestName=findViewById(R.id.tv_rest_name);
+        mTvRestDesc=findViewById(R.id.tv_rest_desc);
+        mTvPhone=findViewById(R.id.tv_mobile);
+        mTvMail=findViewById(R.id.tv_mail);
+        mIvBack=findViewById(R.id.iv_back);
+        mTvAddress=findViewById(R.id.tv_address);
         recyclerView = findViewById(R.id.tableRecycler);
         coverImage = findViewById(R.id.allHotelCoverImage);
         restarauntName = findViewById(R.id.restNameHere);
         logo = findViewById(R.id.preOrderImage);
+        mLLNavigation=findViewById(R.id.ll_navigate);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
 
@@ -139,37 +182,65 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+
+        datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth)
+
+                -> {
 
         String dayNew = String.valueOf(dayOfMonth);
-        String monthNew = String.valueOf(month);
+        String monthNew = String.valueOf(Calendar.MONTH);
         String yearNew = String.valueOf(year);
+        if(monthNew.startsWith("0"))
+            monthNew=monthNew;
+        else monthNew="0"+monthNew;
 
-        dateSelected = dayNew + monthNew + yearNew;
+        dateSelected = yearNew +"-"+ monthNew +"-"+ dayNew;
         openTimePicker(dateSelected);
 
         }, mYear,mMonth,mDay);
+        datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
         datePickerDialog.show();
 
 
     }
 
     private void openTimePicker(String dateSelected) {
-        final Calendar c = Calendar.getInstance();
+       /* final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
+        mMinute = c.get(Calendar.MINUTE);*/
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
+    /*    TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
 
             String hour = String.valueOf(hourOfDay);
             String minuteNew = String.valueOf(minute);
 
-            timeSelected = hour + minuteNew;
+            timeSelected = hour +":"+minuteNew;
 
         }, mHour, mMinute, false);
+
+        timePickerDialog.show();*/
+
+
+        TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hour, int minute) {
+                String hours = String.valueOf(hour);
+                String minuteNew = String.valueOf(minute);
+
+                timeSelected = hours +":"+minuteNew;
+                Log.e("timeSelected",""+timeSelected);
+                if(isOnLine)
+                reserveATableRequest(dateSelected, timeSelected);
+                else Toast.makeText(PreOrder.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        Calendar c = Calendar.getInstance();
+
+        final TimePickerDialog timePickerDialog = new TimePickerDialog(PreOrder.this,timePickerListener,
+                c.get(Calendar.HOUR_OF_DAY),c.get(Calendar.MINUTE)+5,false);
         timePickerDialog.show();
 
-        reserveATableRequest(dateSelected, timeSelected);
 
 
     }
@@ -184,7 +255,15 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
 
                 if(response.body().getStatus().equals("1")){
 
-
+                    new AlertDialog.Builder(PreOrder.this)
+                .setMessage("Booking confirmed successfully")
+                .setCancelable(false)
+               .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                   }
+                })
+                .show();
 
                 }
                 else if(response.body().getStatus().equals("0")){
@@ -205,4 +284,8 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
+    }
 }

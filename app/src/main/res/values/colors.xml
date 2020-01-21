@@ -42,5 +42,11 @@
 
     <color name="gradient_start_color">#4c84ff</color>
     <color name="gradient_end_color">#18a3fe</color>
+
+    <color name="colorText">#364760</color>
+    <color name="colorGray">#E7E8EF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorViewGray">#EFEFEF</color>
+
 </resources>
 

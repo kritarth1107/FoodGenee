@@ -3,37 +3,33 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:iconTint="@color/colorPrimary"
-
+        android:icon="@drawable/home_selector"
         android:title="@string/home" />
 
     <item
         android:id="@+id/nav_cart"
-        android:iconTint="@color/colorPrimary"
-
-        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:icon="@drawable/order_selector"
         android:title="Orders" />
 
 
     <item
         android:id="@+id/nav_scan"
         android:iconTint="@color/colorPrimary"
-
         android:icon="@drawable/barcode"
         android:title="@string/scan" />
 
 
     <item
         android:id="@+id/nav_rewards"
-        android:icon="@drawable/ic_stars_black_24dp"
-        android:iconTint="@color/colorPrimary"
-
+        android:icon="@drawable/rewards_selector"
         android:title="@string/rewards" />
     <item
         android:id="@+id/nav_profile"
-        android:iconTint="@color/colorPrimary"
-        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:icon="@drawable/account_selector"
         android:title="@string/profile" />
+<!--    <item
+        android:id="@+id/nav_table"
+        android:icon="@drawable/account_selector"
+        android:title="@string/profile" />-->
 
 </menu>

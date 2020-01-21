@@ -1,24 +1,19 @@
 package com.foodgeene.payment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.payment.coupon.Coupon;
-import com.foodgeene.register.RegisterModel;
 import com.foodgeene.success.PodSuccess;
 import com.foodgeene.success.SuccessActivity;
 import com.paytm.pgsdk.PaytmOrder;
@@ -27,19 +22,22 @@ import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import java.util.HashMap;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
-import network.PaytmRetrofitClient;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTransactionCallback {
+public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTransactionCallback, ConnectivityReceiver.ConnectivityReceiverListener {
     CardView paytm,pod;
     TextView paytm_tv,pod_tv,amtv,newtc,newtcs;
     Intent get;
-    String totalamount,merchantid,productid,count,price,table;
-    Toolbar toolbar;
+    String totalamount,merchantid,productid,count,price,table,orderID;
+    RelativeLayout toolbar;
     String UserToken;
     SessionManager sessionManager;
     TextView HaveACouponTV,applyButton,removeButton,appliedTV;
@@ -51,6 +49,10 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
     TextView realPrice, discountedPrice;
     CardView offerdetails;
     TextView savedprice;
+    ImageView mIvBack;
+    boolean isOnLine;
+    String couponAmount="0";
+    String coupon="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         paytm_tv = findViewById(R.id.amount_tv_paytm);
         pod_tv = findViewById(R.id.amount_tv_pod);
         offerdetails = findViewById(R.id.offerdetails);
+        offerdetails.setVisibility(View.GONE);
         get = getIntent();
         merchantid = get.getStringExtra("merchandid");
         productid = get.getStringExtra("productid");
@@ -84,6 +87,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         price = get.getStringExtra("price");
         table = get.getStringExtra("table");
         totalamount = get.getStringExtra("totalamount");
+        orderID=get.getStringExtra("orderID");
         BackupAmount=totalamount;
         paytm_tv.setText(totalamount);
         pod_tv.setText(totalamount);
@@ -91,16 +95,23 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         newtc.setText(totalamount);
         newtcs.setText(totalamount);
         toolbar = findViewById(R.id.toolbar);
+        mIvBack=findViewById(R.id.iv_back);
         HaveACouponTV = findViewById(R.id.HaveACouponTV);
         HaveACouponTV.setOnClickListener(view -> {
             HaveACouponTV.setVisibility(View.GONE);
             CouponLayout.setVisibility(View.VISIBLE);
         });
+        isOnLine=ConnectivityReceiver.isConnected();
+
         applyButton.setOnClickListener(view -> {
             Coupon = couponEditText.getText().toString().trim();
             if (!Coupon.isEmpty()){
-                applyCoupon(Coupon);
-            }
+                if(isOnLine) {
+                    applyCoupon(Coupon);
+                    coupon=Coupon;
+                } else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
+            }else coupon="";
         });
         removeButton.setOnClickListener(view -> {
             totalamount = BackupAmount;
@@ -119,7 +130,13 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
 
 
         paytm.setOnClickListener(view -> generateCheckSum());
-        toolbar.setNavigationOnClickListener(view -> finish());
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+       // toolbar.setNavigationOnClickListener(view -> finish());
 
         pod.setOnClickListener(view -> {
             Intent i = new Intent(PaymentMethod.this, PodSuccess.class);
@@ -129,11 +146,21 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             i.putExtra("price",price);
             i.putExtra("merchandid",merchantid);
             i.putExtra("table",table);
+            i.putExtra("orderID",orderID);
+            i.putExtra("couponAmount",couponAmount);
+            i.putExtra("coupon",coupon);
             startActivity(i);
 
 
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
     void applyCoupon(String cpn){
         applyButton.setVisibility(View.GONE);
         ProgressBarCoupon.setVisibility(View.VISIBLE);
@@ -147,6 +174,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
 
 
                     if(status.equals("1")){
+                        offerdetails.setVisibility(View.VISIBLE);
                         String amnt = response.body().getTotalamt().toString().trim();
                         totalamount = amnt;
                         paytm_tv.setText(amnt);
@@ -162,10 +190,11 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                         realPrice.setText("Rs. "+response.body().getTotalamt());
                         discountedPrice.setText("Rs. "+response.body().getCoupanamt());
                         savedprice.setText("Rs. "+response.body().getSavingamt());
-
+                        couponAmount=response.body().getCoupanamt();
 
                     }
                     else{
+                        offerdetails.setVisibility(View.GONE);
                         applyButton.setVisibility(View.VISIBLE);
                         ProgressBarCoupon.setVisibility(View.GONE);
                         Toast.makeText(PaymentMethod.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -294,6 +323,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             i.putExtra("table",table);
             i.putExtra("TXNID",TXNID);
             i.putExtra("TXNDATE",TXNDATE);
+            i.putExtra("couponAmount",couponAmount);
+            i.putExtra("coupon",coupon);
             startActivity(i);
         }
         else{
@@ -333,4 +364,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         Toast.makeText(this, s + bundle.toString(), Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
+    }
 }

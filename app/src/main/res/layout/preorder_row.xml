@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="5dp"
-    android:elevation="10dp"
+    android:layout_margin="@dimen/_6sdp"
+    android:elevation="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_6sdp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="Table No : "/>
+            <TextView
+                android:id="@+id/realTableNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/bold"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:textSize="@dimen/_14sdp"
+                android:text="TB23"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_capacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            style="@style/Regular"/>
+
+
+        <TextView
+            android:id="@+id/bookTableButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/bold"
+            android:text="Book Table"
+            android:gravity="right"
+            android:textSize="@dimen/_11sdp"
+            android:padding="@dimen/_6sdp"
+            android:background="@drawable/rectangle"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textColor="@color/colorPrimary"
+          />
+
+
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
 
 
@@ -26,15 +81,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="10dp"/>
 
-            <TextView
-                android:id="@+id/realTableNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:layout_centerInParent="true"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="TB23"/>
+
 
         </RelativeLayout>
 
@@ -50,16 +97,6 @@
             android:layout_toRightOf="@id/nole"/>
 
 
-        <Button
-            android:id="@+id/bookTableButton"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:background="@color/colorPrimary"
-            android:layout_margin="10dp"
-            android:text="Book Table"
-            android:padding="10dp"
-            android:textColor="@android:color/white"
-            android:layout_centerVertical="true"/>
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

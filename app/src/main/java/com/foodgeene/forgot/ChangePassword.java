@@ -1,31 +1,36 @@
 package com.foodgeene.forgot;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
 import com.foodgeene.forgot.changereal.PasswordChangeModel;
 import com.foodgeene.login.LoginActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangePassword extends AppCompatActivity {
+public class ChangePassword extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
 
 EditText changedPasswordInput;
 EditText confirmPassword;
 Button changedPassoword;
 Intent spd;
 String userId;
+ImageView mImBack;
+boolean isOnLine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +40,31 @@ String userId;
         changedPasswordInput = findViewById(R.id.new_password);
         changedPassoword = findViewById(R.id.reset_password);
         confirmPassword = findViewById(R.id.confirmpassword);
-        changedPassoword.setOnClickListener(view -> startAcall());
+        mImBack=findViewById(R.id.iv_back);
+        isOnLine=ConnectivityReceiver.isConnected();
+
+        mImBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        changedPassoword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isOnLine) startAcall();
+                else Toast.makeText(ChangePassword.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     private void startAcall() {
@@ -89,5 +116,10 @@ String userId;
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

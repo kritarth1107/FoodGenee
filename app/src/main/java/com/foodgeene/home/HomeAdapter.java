@@ -1,22 +1,24 @@
 package com.foodgeene.home;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
+import com.foodgeene.preoder.ui.PreOrder;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
@@ -54,8 +56,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.merchName.setText(list.get(position).getStorename());
 //                holder.merchType.setText(list.get(position).getStoretype());
 //        holder.merchLoc.setText(list.get(position).getCity());
+        holder.iv_navigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("google.navigation:q="+Double.valueOf(list.get(position).getLatitude())+","+Double.valueOf(list.get(position).getLongitude())+"&mode=d"));
+               intent.setPackage("com.google.android.apps.maps");
+                context.startActivity(intent);
+            }
+        });
+        holder.CardViewRestraunt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PreOrder.class);
+                intent.putExtra("merchantId", list.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
 
-        holder.CardViewRestraunt.setOnClickListener(view -> Toast.makeText(context, list.get(position).getStorename(), Toast.LENGTH_SHORT).show());
 
     }
 
@@ -70,9 +88,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         TextView ratingM;
         TextView merchName, merchType,merchLoc;
         CardView CardViewRestraunt;
+        ImageView iv_navigation;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            iv_navigation=itemView.findViewById(R.id.iv_navigation);
             merchImage = itemView.findViewById(R.id.wereavaialble);
             merchName = itemView.findViewById(R.id.merchantName);
 //            merchType = itemView.findViewById(R.id.merchantType);

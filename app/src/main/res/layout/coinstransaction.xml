@@ -7,8 +7,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:elevation="10dp"
+        android:layout_margin="@dimen/_8sdp"
+        android:elevation="@dimen/_8sdp"
         android:id="@+id/touchCard"
         app:cardCornerRadius="5dp"
         android:layout_height="wrap_content">
@@ -21,9 +21,9 @@
             <ImageView
                 android:id="@+id/tranLogo"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"/>
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"/>
 
 
             <TextView
@@ -31,10 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tranLogo"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
+               style="@style/bold"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_27sdp"
                 android:text="PayTM"/>
             <TextView
                 android:id="@+id/tranDesc"
@@ -42,10 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tranLogo"
                 android:layout_below="@id/tranTitle"
+                style="@style/semiBold"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:text="Get meal for 2 days"/>
 
 
@@ -54,12 +54,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/tranLogo"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_marginLeft="@dimen/_7sdp"
+               style="@style/bold"
+                android:textSize="@dimen/_9sdp"
                 android:layout_below="@+id/tranDesc"
                 android:textColor="@color/DarkRed"
-                android:layout_marginRight="90dp"
                 android:text="Validity"/>
 
 <!--            <TextView-->

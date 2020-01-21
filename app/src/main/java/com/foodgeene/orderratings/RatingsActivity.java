@@ -1,12 +1,9 @@
 package com.foodgeene.orderratings;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.stepstone.apprating.AppRatingDialog;
@@ -17,18 +14,23 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RatingsActivity extends AppCompatActivity implements RatingDialogListener {
+public class RatingsActivity extends AppCompatActivity implements RatingDialogListener, ConnectivityReceiver.ConnectivityReceiverListener {
 
     Intent intent;
     String oId = null;
     SessionManager sessionManager;
     String userToken;
+    String merchant=null;
+    boolean isOnLine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +40,25 @@ public class RatingsActivity extends AppCompatActivity implements RatingDialogLi
         userToken = user.get(sessionManager.USER_ID);
         intent = getIntent();
         oId = intent.getStringExtra("orderId");
+        merchant=intent.getStringExtra("merchant");
+        isOnLine=ConnectivityReceiver.isConnected();
+
         showDailog();
 
 
     }
 
     @Override
-    public void onNegativeButtonClicked() {
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNegativeButtonClicked() {
+        if(isOnLine)
         cancelThisWindow();
+        else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -80,22 +92,26 @@ public class RatingsActivity extends AppCompatActivity implements RatingDialogLi
 
     @Override
     public void onPositiveButtonClicked(int i, @NotNull String s) {
-        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<RatingModel> call = foodGeneeAPI.orderFeedback("add-feedback", "1",String.valueOf(i), s,oId, userToken, "application/x-www-form-urlencoded");
-        call.enqueue(new Callback<RatingModel>() {
-            @Override
-            public void onResponse(Call<RatingModel> call, Response<RatingModel> response) {
-                finish();
-            }
+        //Log.e("rating",""+i);
+        if(isOnLine){
+            FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+            Call<RatingModel> call = foodGeneeAPI.orderFeedback("add-feedback", merchant,String.valueOf(i), s,oId, userToken, "application/x-www-form-urlencoded");
+            call.enqueue(new Callback<RatingModel>() {
+                @Override
+                public void onResponse(Call<RatingModel> call, Response<RatingModel> response) {
+                    finish();
+                }
 
-            @Override
-            public void onFailure(Call<RatingModel> call, Throwable t) {
+                @Override
+                public void onFailure(Call<RatingModel> call, Throwable t) {
 
-                finish();
+                    finish();
 
 
-            }
-        });
+                }
+            });
+        }else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -125,5 +141,10 @@ public class RatingsActivity extends AppCompatActivity implements RatingDialogLi
                 .show();
 
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

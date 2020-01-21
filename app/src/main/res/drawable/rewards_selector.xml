@@ -1,0 +1,6 @@
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_stars_black_24dp"
+        android:state_checked="true" />
+    <item android:drawable="@drawable/star_circle_outline" />
+</selector>

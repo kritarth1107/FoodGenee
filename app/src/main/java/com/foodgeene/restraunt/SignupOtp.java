@@ -1,35 +1,32 @@
 package com.foodgeene.restraunt;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.login.LoginActivity;
 import com.foodgeene.register.RegisterModel;
-import com.foodgeene.register.RegistrationActivity;
 import com.foodgeene.register.signupotp.OtpModel;
 import com.foodgeene.register.signupotp.ResendOtpModel;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignupOtp extends AppCompatActivity {
+public class SignupOtp extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
 
     EditText one, two, three, four;
     Button verify;
@@ -38,7 +35,7 @@ public class SignupOtp extends AppCompatActivity {
     Intent get;
     String userId, email, mobile, password;
     Dialog loadingDialog;
-
+    boolean isOnLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +45,7 @@ public class SignupOtp extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         get = getIntent();
         userId = get.getStringExtra("userid");
+        isOnLine=ConnectivityReceiver.isConnected();
 
         one = findViewById(R.id.et1);
         two = findViewById(R.id.et2);
@@ -56,7 +54,9 @@ public class SignupOtp extends AppCompatActivity {
         resendOtp = findViewById(R.id.resendOtpHere);
 
         resendOtp.setOnClickListener(view -> {
+            if(isOnLine)
             resendOtpFromThisMethod();
+            else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
         });
 
         verify = findViewById(R.id.verify_otp);
@@ -73,8 +73,9 @@ public class SignupOtp extends AppCompatActivity {
             String fourText = four.getText().toString().trim();
 
 
-
-            verifyOtp(oneText, twoText, threeText, fourText);
+             if (isOnLine)
+                verifyOtp(oneText, twoText, threeText, fourText);
+             else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
         });
 
 
@@ -214,6 +215,12 @@ public class SignupOtp extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
     private void verifyOtp(String oneText, String twoText, String threeText, String fourText) {
         String otp = oneText + twoText + threeText + fourText;
         RegisterModel registerModel = sessionManager.getUserId();
@@ -265,4 +272,8 @@ public class SignupOtp extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
+    }
 }

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".cart.OrderDetails">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <RelativeLayout
         android:id="@+id/HeaderLayout"
         android:background="@drawable/gradientbg"
@@ -24,10 +28,11 @@
         </LinearLayout>
         <ImageView
             android:id="@+id/BackImage"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow_left_white"/>
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_14sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:src="@drawable/arrow_left"/>
 
         <LinearLayout
             android:gravity="center"
@@ -40,17 +45,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
+                style="@style/bold"
+                android:textSize="@dimen/_16sdp"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="25sp"/>
+               />
             <TextView
                 android:id="@+id/Order_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
+                style="@style/semiBoldWhite"
+                />
+
+            <TextView
+                android:id="@+id/prepare_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@style/semiBoldWhite"/>
         </LinearLayout>
     </RelativeLayout>
     <!--
@@ -108,53 +120,134 @@
         android:layout_height="match_parent"
         android:layout_below="@id/HeaderLayout">
         <LinearLayout
-            android:padding="10dp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:weightSum="2"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:layout_height="@dimen/_35sdp"
+                style="@style/bold"
                 android:text="Order Summary"
-                android:textStyle="bold"
-                android:textSize="25sp"/>
+               />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/tv_add_more"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:text="Add More.."
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:drawablePadding="1dp"
+                    android:gravity="center"
+                   style="@style/Regular"
+                    android:textSize="@dimen/_10sdp"
+                    android:padding="@dimen/_6sdp"
+                    android:background="@drawable/rectangle"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+
+
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recyclerViewDetails"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:background="@color/background"
+            android:alpha="0.6"/>
         <LinearLayout
-            android:padding="15dp"
+            android:id="@+id/ll_coupon"
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="19sp"
-                android:textColor="#AAAAAA"
-                android:textStyle="bold"
+                style="@style/Regular"
+                android:text="Coupon Amount"/>
+            <TextView
+                android:id="@+id/tv_coupon"
+                android:textAlignment="textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="300.00"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/bold"
                 android:text="Total"/>
             <TextView
                 android:id="@+id/TotalAmountTV"
                 android:textAlignment="textEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:textColor="#AAAAAA"
+               style="@style/bold"
                 android:text="300.00"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:background="@color/background"
+            android:alpha="0.6"/>
+
+        <TextView
+            android:textSize="@dimen/_11sdp"
+            android:id="@+id/tv_service_boy"
+           style="@style/semiBold"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_height="wrap_content"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/background"
             android:alpha="0.6"
-            android:layout_marginLeft="10dp"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:layout_marginRight="10dp">
+
+
 
         </LinearLayout>
     </LinearLayout>
+    </LinearLayout>
 
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 

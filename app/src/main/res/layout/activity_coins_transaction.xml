@@ -40,16 +40,23 @@
         android:layout_height="55dp">
 
 
-
+<ImageView
+    android:id="@+id/iv_back"
+    android:layout_width="@dimen/_24sdp"
+    android:layout_height="@dimen/_24sdp"
+    android:layout_marginLeft="@dimen/_14sdp"
+    android:src="@drawable/arrow_left"
+    android:layout_alignParentLeft="true"
+    android:layout_centerInParent="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:layout_centerVertical="true"
-            android:textStyle="bold"
-            android:layout_marginLeft="20dp"
-            android:textSize="15dp"
+            android:layout_centerInParent="true"
+            style="@style/semiBold"
+            android:textSize="@dimen/_14sdp"
             android:text="Coins Transactions"/>
 
     </RelativeLayout>

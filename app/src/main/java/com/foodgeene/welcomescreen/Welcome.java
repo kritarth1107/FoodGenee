@@ -1,58 +1,59 @@
 package com.foodgeene.welcomescreen;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.SimpleItemAnimator;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.firebaseservices.FirebaseMessagingModel;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.profile.userdetails.Users;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.HashMap;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.paytm.pgsdk.easypay.manager.PaytmAssist.getContext;
 
-public class Welcome extends AppCompatActivity {
+public class Welcome extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
 
     TextView welcomeTextUser;
     SessionManager sessionManager;
     Handler handler;
     String userToken;
-
+    ImageView propic;
+    boolean isOnline;
     public static String TAG = "EWE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+        propic = findViewById(R.id.profilePicture);
         welcomeTextUser = findViewById(R.id.welcomeBro);
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         userToken = user.get(sessionManager.USER_ID);
-        setupWelcomeScreenWithUsername(userToken);
-        sendFirebaseTokenToServer();
+        isOnline=ConnectivityReceiver.isConnected();
+        if(isOnline) {
+            setupWelcomeScreenWithUsername(userToken);
+            sendFirebaseTokenToServer();
+        }  else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
 
 
     }
@@ -98,6 +99,12 @@ public class Welcome extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
     private void setupWelcomeScreenWithUsername(String token) {
 
 //
@@ -120,6 +127,11 @@ public class Welcome extends AppCompatActivity {
                     UserModel retrievedModel = response.body();
                     Users retrievedModelUsers = retrievedModel.getUsers();
                     welcomeTextUser.setText(retrievedModelUsers.getName());
+
+                    Glide.with(Welcome.this)
+                            .load(retrievedModel.getUsers().getProfilepic())
+                            .into(propic);
+
                     handler = new Handler();
                     handler.postDelayed(() -> {
                         Intent intent = new Intent(Welcome.this, MainActivity.class);
@@ -147,5 +159,9 @@ public class Welcome extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnline=isConnected;
     }
+}
 

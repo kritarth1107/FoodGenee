@@ -3,6 +3,7 @@ package network;
 import com.foodgeene.allhotels.hotelsmodel.HotelsModel;
 import com.foodgeene.cart.AlertModel;
 import com.foodgeene.cart.OrderListModel;
+import com.foodgeene.cart.ReservationListModel;
 import com.foodgeene.coinstransactions.model.Transaction;
 import com.foodgeene.firebaseservices.FirebaseMessagingModel;
 import com.foodgeene.foodpreference.model.AfterOrderModel;
@@ -31,6 +32,7 @@ import com.foodgeene.rewards.rewardmodels.RedeemCount;
 import com.foodgeene.scanner.ScannerModel;
 import com.foodgeene.success.PostOrderModel;
 import com.foodgeene.transactionlists.model.ListModel;
+import com.foodgeene.updateprofile.UpdateModel;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -41,7 +43,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import com.foodgeene.updateprofile.UpdateModel;
 
 public interface FoodGeneeAPI {
 
@@ -88,6 +89,7 @@ public interface FoodGeneeAPI {
     Call<ScannerModel> submitScannedQR(
             @Field("action") String action,
             @Field("enckey") String enckey,
+            @Field("foodtype") Integer foodtype,
             @Header("Authorization") String Authorization,
             @Header("Content-Type") String CType
     );
@@ -105,6 +107,15 @@ public interface FoodGeneeAPI {
     @FormUrlEncoded
     @POST("merchant/merchants.php")
     Call<HomeMerchantModel> merchantList(
+            @Field("action") String action,
+            @Field("latitude") String latitude,@Field("longitude") String longitude,
+            @Header("Authorization") String Authorization,
+            @Header("Content-Type") String CType
+    );
+
+    @FormUrlEncoded
+    @POST("merchant/merchants.php")
+    Call<HomeMerchantModel> location(
             @Field("action") String action,
             @Header("Authorization") String Authorization,
             @Header("Content-Type") String CType
@@ -131,6 +142,9 @@ public interface FoodGeneeAPI {
             @Field("count") String count,
             @Field("price") String price,
             @Field("totalamount") String totalamount,
+            @Field("orderid") String orderid,
+            @Field("couponamount")String couponAmount,
+            @Field("coupon")String coupon,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );@FormUrlEncoded
@@ -145,6 +159,8 @@ public interface FoodGeneeAPI {
                     @Field("totalamount") String totalamount,
                     @Field("transactionid") String transactionid,
                     @Field("transactiondate") String transactiondate,
+                    @Field("couponamount")String couponAmount,
+                    @Field("coupon")String coupon,
                     @Header("Authorization") String Auth,
                     @Header("Content-Type") String Ctype
             );
@@ -157,9 +173,18 @@ public interface FoodGeneeAPI {
     );
 
     @FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<ReservationListModel> GetReservationList(
+            @Field("action") String action,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+    );
+
+    @FormUrlEncoded
     @POST("merchant/merchants.php")
     Call<HomeTwoModel> getRecomm(
             @Field("action") String action,
+            @Field("latitude") String latitude,@Field("longitude") String longitude,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
@@ -168,6 +193,7 @@ public interface FoodGeneeAPI {
     @POST("merchant/merchants.php")
     Call<Brand> getBrandList(
             @Field("action") String action,
+            @Field("latitude") String latitude,@Field("longitude") String longitude,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
@@ -355,6 +381,7 @@ public interface FoodGeneeAPI {
     @POST("merchant/merchants.php")
     Call<HotelsModel> getAllHotel(
             @Field("action") String action,
+            @Field("latitude") String latitude,@Field("longitude") String longitude,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
@@ -389,6 +416,19 @@ public interface FoodGeneeAPI {
     Call<AfterOrderModel> afterOrderDetails(
             @Field("action") String action,
             @Field("orderid") String merchantId,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<AfterOrderModel> submitPreference(
+            @Field("action") String action,
+            @Field("orderid") String orderid,
+            @Field("orderproductid") String orderproductid,
+            @Field("inc") String inc,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
 

@@ -5,97 +5,141 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".success.SuccessActivity">
-
-
-    <Button
-        android:id="@+id/selectPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Select Preferences "
-        android:textColor="@color/colorAccent"
-        android:layout_alignParentEnd="true"
-        android:background="@android:color/transparent"
-        android:layout_margin="10dp"/>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_centerInParent="true"
-        android:id="@+id/animation_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        app:lottie_rawRes="@raw/tick_animation"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true" />
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="?attr/actionBarSize">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_14sdp"
+            android:src="@drawable/arrow_left"/>
+    </RelativeLayout>
     <LinearLayout
-        android:visibility="invisible"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/Loading"
-        android:layout_centerInParent="true"
-        android:layout_width="250dp"
-        android:layout_height="250dp">
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
-
-        <TextView
+        android:layout_below="@+id/rl_toolbar"
+        android:weightSum="3">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:text="Processing Order"
-            android:textSize="28sp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/hallosans"
-            android:textStyle="bold"/>
-    </LinearLayout>
-<LinearLayout
-    android:id="@+id/detailsTaba"
-    android:orientation="vertical"
-    android:layout_below="@id/animation_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/Suceess_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:text="Order Recieved"
-        android:textSize="28sp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/hallosans"
-        android:textStyle="bold"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/selectPreferences"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:visibility="visible"
+                android:layout_gravity="right|center"
+                android:gravity="center"
+                android:background="@color/white"
+                android:text="Select Preferences "
+                style="@style/semiBold"
+                android:textColor="@color/colorAccent"
+                android:layout_marginRight="@dimen/_10sdp"
+               />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
+                app:lottie_rawRes="@raw/tick_animation"
+                app:lottie_loop="true"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true" />
+            <LinearLayout
+                android:visibility="gone"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/Loading"
+                android:layout_centerInParent="true"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp">
+                <ProgressBar
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_gravity="center"
+                    android:layout_height="@dimen/_40sdp"/>
 
-    <TextView
-        android:id="@+id/Amount_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Amount Due - Rs. 500"
-        android:textSize="28sp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/hallosans"
-        android:textStyle="bold"/>
-    <LinearLayout
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/place_order_layout"
-        android:padding="10dp"
-        android:background="@drawable/gradient_corner"
-        android:layout_marginTop="70dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="Place another Order"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Processing Order"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    style="@style/semiBold"
+                    android:textSize="@dimen/_14sdp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/detailsTaba"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/Suceess_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Order Recieved"
+                    style="@style/bold"
+                    android:textSize="@dimen/_12sdp"/>
 
+                <TextView
+                    android:id="@+id/Amount_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Amount Due - Rs. 500"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    style="@style/bold"
+                    android:textSize="@dimen/_14sdp"/>
+                <LinearLayout
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/place_order_layout"
+                    android:padding="@dimen/_6sdp"
+                    android:background="@drawable/gradient_corner"
+                    android:layout_marginTop="@dimen/_35sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="Place another Order"
+                        android:padding="@dimen/_4sdp"
+                        style="@style/semiBoldWhite"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+
+
+
 
 
 </RelativeLayout>

@@ -18,8 +18,9 @@
         android:id="@+id/texthey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="@dimen/_26sdp"
         android:layout_below="@+id/phaselogo"
+        style="@style/Regular"
         android:text="Hey! Please provide us your mobile number."/>
 
 
@@ -34,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Enter your phone number"
+            style="@style/semiBold"
             android:id="@+id/mobileverification"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,10 +46,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textinputlayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@color/colorPrimary"
         android:text="Proceed"
-        android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
+        style="@style/semiBoldWhite"/>
 
 
 </RelativeLayout>

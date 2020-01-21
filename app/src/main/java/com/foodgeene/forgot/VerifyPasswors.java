@@ -1,34 +1,34 @@
 package com.foodgeene.forgot;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.foodgeene.R;
-import com.foodgeene.register.signupotp.OtpModel;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerifyPasswors extends AppCompatActivity {
+public class VerifyPasswors extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
     EditText ed1,ed2,ed3,ed4;
     Intent get;
     String userId;
     Button verifyhere;
     Dialog loadingDialog;
+    boolean isOnLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class VerifyPasswors extends AppCompatActivity {
         setContentView(R.layout.activity_verify_passwors);
         get = getIntent();
         userId = get.getStringExtra("userId");
+        isOnLine=ConnectivityReceiver.isConnected();
 
 
         ed1 = findViewById(R.id.et1);
@@ -46,12 +47,15 @@ public class VerifyPasswors extends AppCompatActivity {
         verifyhere = findViewById(R.id.verify_otp);
         verifyhere.setOnClickListener(view -> {
 
-            loadingDialog = new Dialog(this);
-            loadingDialog.setContentView(R.layout.loading_dialog_layout);
-            loadingDialog.show();
-            loadingDialog.setCancelable(false);
-            loadingDialog.setCanceledOnTouchOutside(false);
-            validateOtp();
+            if(isOnLine){
+                loadingDialog = new Dialog(this);
+                loadingDialog.setContentView(R.layout.loading_dialog_layout);
+                loadingDialog.show();
+                loadingDialog.setCancelable(false);
+                loadingDialog.setCanceledOnTouchOutside(false);
+                validateOtp();
+            }else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
         });
 
         ed1.addTextChangedListener(new TextWatcher() {
@@ -141,7 +145,11 @@ public class VerifyPasswors extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
 
     private void validateOtp() {
 
@@ -194,5 +202,10 @@ public class VerifyPasswors extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

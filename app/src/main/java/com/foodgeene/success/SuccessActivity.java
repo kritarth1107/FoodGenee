@@ -1,7 +1,5 @@
 package com.foodgeene.success;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,28 +11,30 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
-import com.foodgeene.register.RegisterModel;
 import com.foodgeene.scanner.ScannerActivity;
 
 import java.util.HashMap;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuccessActivity extends AppCompatActivity {
+public class SuccessActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
     TextView Amount_text;
     Intent get;
     LinearLayout place_order_layout,detailsTaba,Loading;
-    String totalamount,merchantid,productid,count,price,table,TXNID,TXNDATE;
+    String totalamount,merchantid,productid,count,price,table,TXNID,TXNDATE,couponAmount,coupon;
     String UserToken;
     SessionManager sessionManager;
     LottieAnimationView animation_view;
     Integer SUCCESS_TEXT = 0;
     String getOrderId;
-    StringBuilder ProductIdBuilder,CountBuilder,PriceBuilder;
+    boolean isOnLine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,10 @@ public class SuccessActivity extends AppCompatActivity {
         price = get.getStringExtra("price");
         table = get.getStringExtra("table");
         totalamount = get.getStringExtra("totalamount");
+        couponAmount=get.getStringExtra("couponAmount");
+        coupon=get.getStringExtra("coupon");
+        isOnLine=ConnectivityReceiver.isConnected();
+
         /*ProductIdBuilder = new StringBuilder(productid);
         ProductIdBuilder.deleteCharAt(0);
         ProductIdBuilder.deleteCharAt(productid.length()-1);
@@ -73,7 +77,14 @@ public class SuccessActivity extends AppCompatActivity {
 
         });
 
-        PlaceOrder();
+        if(isOnLine) PlaceOrder();
+        else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
     }
 
     public void PlaceOrder(){
@@ -82,7 +93,7 @@ public class SuccessActivity extends AppCompatActivity {
         animation_view.setVisibility(View.INVISIBLE);
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<PostOrderModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,UserToken,"application/x-www-form-urlencoded");
+        Call<PostOrderModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,couponAmount,coupon,UserToken,"application/x-www-form-urlencoded");
         call.enqueue(new Callback<PostOrderModel>() {
             @Override
             public void onResponse(Call<PostOrderModel> call, Response<PostOrderModel> response) {
@@ -127,5 +138,10 @@ public class SuccessActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "Processing your Order! please wait....", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }

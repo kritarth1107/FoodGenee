@@ -1,7 +1,5 @@
 package com.foodgeene.rewarddetails;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,15 +20,18 @@ import com.foodgeene.rewarddetails.model.Text;
 
 import java.util.HashMap;
 
+import androidx.appcompat.app.AppCompatActivity;
+import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
+import network.MyApplication;
 import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RewardsDetails extends AppCompatActivity {
+public class RewardsDetails extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
 
-    ImageView offerBack;
+    ImageView offerBack,mIvBack;
     TextView offerName, excerptO, descript, expireOn, couponCode;
     ImageView logo;
     Intent get;
@@ -43,6 +44,7 @@ public class RewardsDetails extends AppCompatActivity {
     Button redeem;
     Dialog loadingDialog;
     TextView coinsCount;
+    boolean isOnLine;
 
 
 
@@ -59,31 +61,40 @@ public class RewardsDetails extends AppCompatActivity {
         descript = findViewById(R.id.desc);
         couponCode = findViewById(R.id.orignalCoupn);
         coinsCount = findViewById(R.id.coinsCountNew);
+        mIvBack=findViewById(R.id.iv_back);
         expireOn = findViewById(R.id.expireson);
         hideLay  = findViewById(R.id.hideLay);
         logo = findViewById(R.id.restImage);
         redeem = findViewById(R.id.orignalRedeemButton);
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
+        isOnLine=ConnectivityReceiver.isConnected();
 
         hideLay.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
 
         get = getIntent();
         rewardId = get.getStringExtra("rewardid");
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         redeem.setOnClickListener(view -> {
-            loadingDialog = new Dialog(RewardsDetails.this);
-            loadingDialog.setContentView(R.layout.loading_dialog_layout);
-            loadingDialog.show();
-            loadingDialog.setCancelable(false);
-            loadingDialog.setCanceledOnTouchOutside(false);
 
-            FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-            Call<RedeemCoinsModel> call = foodGeneeAPI.redeemCoins("redeem-coins", rewardId, UserToken, "application/x-www-form-urlencoded");
-            call.enqueue(new Callback<RedeemCoinsModel>() {
-                @Override
-                public void onResponse(Call<RedeemCoinsModel> call, Response<RedeemCoinsModel> response) {
+            if(isOnLine){
+                loadingDialog = new Dialog(RewardsDetails.this);
+                loadingDialog.setContentView(R.layout.loading_dialog_layout);
+                loadingDialog.show();
+                loadingDialog.setCancelable(false);
+                loadingDialog.setCanceledOnTouchOutside(false);
+                FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+                Call<RedeemCoinsModel> call = foodGeneeAPI.redeemCoins("redeem-coins", rewardId, UserToken, "application/x-www-form-urlencoded");
+                call.enqueue(new Callback<RedeemCoinsModel>() {
+                    @Override
+                    public void onResponse(Call<RedeemCoinsModel> call, Response<RedeemCoinsModel> response) {
 
                         RedeemCoinsModel redeemCoins = response.body();
 
@@ -115,65 +126,83 @@ public class RewardsDetails extends AppCompatActivity {
 
 
 
+                    @Override
+                    public void onFailure(Call<RedeemCoinsModel> call, Throwable t) {
+                        loadingDialog.cancel();
+                        loadingDialog.dismiss();
+                    }
+                });
+            }else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
+
+
+
+        });
+
+        if(isOnLine){
+            FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+            Call<DetailModel> call =  foodGeneeAPI.rewardListDetails("rewards-details", rewardId, UserToken, "application/x-www-form-urlencoded");
+            call.enqueue(new Callback<DetailModel>() {
                 @Override
-                public void onFailure(Call<RedeemCoinsModel> call, Throwable t) {
+                public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
+
+                    try{
+
+                        DetailModel detailModel = response.body();
+                        Text text = detailModel.getText();
+
+                        offerName.setText(text.getTitle());
+                        excerptO.setText(text.getExcerpt());
+                        if(detailModel.getText().getValidityto().equals("1")){
+                            expireOn.setText("Expired");
+                            redeem.setVisibility(View.GONE);
+                        }
+                        else {
+                            expireOn.setText(text.getValidityfrom()+" - "+text.getValidityto());
+
+                        }
+                        descript.setText(text.getDescription());
+                        hideLay.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        coinsCount.setText(text.getCoins());
+                        Glide.with(getApplicationContext())
+                                .load(text.getLogo())
+                                .into(logo);
+
+                        Glide.with(getApplicationContext())
+                                .load(text.getCover())
+                                .into(offerBack);
+
+
+
+                    }
+                    catch (Exception ignored){
+
+                        loadingDialog.cancel();
+                        loadingDialog.dismiss();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<DetailModel> call, Throwable t) {
                     loadingDialog.cancel();
                     loadingDialog.dismiss();
                 }
             });
-
-        });
-
-        FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<DetailModel> call =  foodGeneeAPI.rewardListDetails("rewards-details", rewardId, UserToken, "application/x-www-form-urlencoded");
-        call.enqueue(new Callback<DetailModel>() {
-            @Override
-            public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
-
-                try{
-
-                    DetailModel detailModel = response.body();
-                    Text text = detailModel.getText();
-
-                    offerName.setText(text.getTitle());
-                    excerptO.setText(text.getExcerpt());
-                    if(detailModel.getText().getValidityto().equals("1")){
-                        expireOn.setText("Expired");
-                        redeem.setVisibility(View.GONE);
-                    }
-                    else {
-                        expireOn.setText(text.getValidityfrom()+" - "+text.getValidityto());
-
-                    }
-                    descript.setText(text.getDescription());
-                    hideLay.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                    coinsCount.setText(text.getCoins());
-                    Glide.with(getApplicationContext())
-                            .load(text.getLogo())
-                            .into(logo);
-
-                    Glide.with(getApplicationContext())
-                            .load(text.getCover())
-                            .into(offerBack);
+        }else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
 
 
+    }
 
-                }
-                catch (Exception ignored){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
 
-                    loadingDialog.cancel();
-                    loadingDialog.dismiss();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<DetailModel> call, Throwable t) {
-                loadingDialog.cancel();
-                loadingDialog.dismiss();
-            }
-        });
-
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        isOnLine=isConnected;
     }
 }
