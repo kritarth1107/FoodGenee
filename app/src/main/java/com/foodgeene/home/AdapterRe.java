@@ -28,6 +28,8 @@ public class AdapterRe extends RecyclerView.Adapter<AdapterRe.MyViewHolder> {
         this.location = location;
         this.searchLocation=new ArrayList<>();
         this.searchLocation.addAll(location);
+
+        //Wait im checking myside
     }
  
     @Override
