@@ -393,11 +393,17 @@ public class Home extends Fragment implements LocationUpdatesComponent.ILocation
                     Brand brand1 = response.body();
                     List<Bannerlist> bannerlists = brand1.getBannerlist();
 
+                    if(bannerlists!=null){
+                        if(bannerlists.size()>0){
+                            FlipperAdapter flipper = new FlipperAdapter(getContext(), bannerlists);
+                            adapterViewFlipper.setAdapter(flipper);
+                            adapterViewFlipper.setFlipInterval(3000);
+                            adapterViewFlipper.startFlipping();
 
-                    FlipperAdapter flipper = new FlipperAdapter(getContext(), bannerlists);
-                    adapterViewFlipper.setAdapter(flipper);
-                    adapterViewFlipper.setFlipInterval(3000);
-                    adapterViewFlipper.startFlipping();
+                        }
+                    }
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
 
 //                    brandAdapter = new BrandAdapter(bannerlists, getContext());
 //                    layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
@@ -408,8 +414,7 @@ public class Home extends Fragment implements LocationUpdatesComponent.ILocation
 //                    brandRecycler.addItemDecoration(dividerItemDecoration);
 
 
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    shimmerFrameLayout.stopShimmerAnimation();
+
 
 
                 }
@@ -559,11 +564,15 @@ public class Home extends Fragment implements LocationUpdatesComponent.ILocation
                     Brand brand1 = response.body();
                     List<Bannerlist> bannerlists = brand1.getBannerlist();
 
+                    if(bannerlists!=null){
+                        if(bannerlists.size()>0){
+                            FlipperAdapter flipper = new FlipperAdapter(getContext(), bannerlists);
+                            adapterViewFlipper.setAdapter(flipper);
+                            adapterViewFlipper.setFlipInterval(3000);
+                            adapterViewFlipper.startFlipping();
+                        }
+                    }
 
-                    FlipperAdapter flipper = new FlipperAdapter(getContext(), bannerlists);
-                    adapterViewFlipper.setAdapter(flipper);
-                    adapterViewFlipper.setFlipInterval(3000);
-                    adapterViewFlipper.startFlipping();
 
 //                    brandAdapter = new BrandAdapter(bannerlists, getContext());
 //                    layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);

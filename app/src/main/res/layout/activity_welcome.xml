@@ -1,71 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:weightSum="3"
-    android:background="@drawable/splash_bg"
+
     tools:context=".welcomescreen.Welcome">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_bg"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom|center"
-        android:layout_weight="1.1">
-
-    </LinearLayout>
+        android:background="#99000000"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="1.25">
-        <TextView
-            android:id="@+id/welcomeTextHere"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            style="@style/bold"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:textSize="@dimen/_18sdp"
-            android:layout_centerInParent="true"
-            android:text="Welcome "/>
-        <TextView
-            android:id="@+id/welcomeBro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/semiBold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@id/profilePicture"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/_18sdp"
-            android:layout_centerInParent="true"
-            android:text=".... "/>
+        android:weightSum="3"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom|center"
+            android:layout_weight="1.1">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1.25">
+            <TextView
+                android:id="@+id/welcomeTextHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                style="@style/bold"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textSize="@dimen/_18sdp"
+                android:layout_centerInParent="true"
+                android:text="Welcome "/>
+            <TextView
+                android:id="@+id/welcomeBro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/semiBold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@id/profilePicture"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                android:layout_centerInParent="true"
+                android:text=".... "/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="top|center"
+            android:layout_weight="0.65">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/profilePicture"
+                android:layout_below="@id/welcomeTextHere"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="@dimen/_90sdp"
+
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="top|center"
-        android:layout_weight="0.65">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_centerInParent="true"
-            android:id="@+id/profilePicture"
-            android:layout_below="@id/welcomeTextHere"
-            android:layout_width="@dimen/_90sdp"
-            android:layout_centerHorizontal="true"
-            android:layout_height="@dimen/_90sdp"
-
-            >
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-    </LinearLayout>
 
 
 
@@ -76,4 +90,6 @@
 
 
 
-</LinearLayout>
+
+
+</RelativeLayout>
