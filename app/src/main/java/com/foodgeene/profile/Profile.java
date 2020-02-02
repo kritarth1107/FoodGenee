@@ -1,16 +1,19 @@
 package com.foodgeene.profile;
 
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +28,19 @@ import com.foodgeene.updateprofile.UpdateProfile;
 import java.util.HashMap;
 import java.util.Objects;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,14 +54,16 @@ public class Profile extends Fragment implements ConnectivityReceiver.Connectivi
     SessionManager sessionManager;
     String token;
     TextView coins;
-    TextView name, email, mobile;
+    TextView name, email, mobile,contact,mail;
    TextView redeem;
     ImageView propic;
     String userID;
-    ProgressBar progressBar;
+    GifImageView progressBar;
     LinearLayout goNow;
     LinearLayout rateUs;
     boolean isOnline;
+    RecyclerView mRvCoins;
+    String supportNumber;
 
     public Profile() {
         // Required empty public constructor
@@ -68,10 +79,10 @@ public class Profile extends Fragment implements ConnectivityReceiver.Connectivi
         HashMap<String, String> user = sessionManager.getUserDetail();
         token = user.get(sessionManager.USER_ID);
         isOnline=ConnectivityReceiver.isConnected();
-
         if(isOnline)
         setupProfile();
         else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+        mRvCoins=rootView.findViewById(R.id.rv_coin);
         name = rootView.findViewById(R.id.userName);
         email = rootView.findViewById(R.id.userEmail);
         mobile = rootView.findViewById(R.id.userPhone);
@@ -80,8 +91,10 @@ public class Profile extends Fragment implements ConnectivityReceiver.Connectivi
         rateUs = rootView.findViewById(R.id.rateus);
         propic = rootView.findViewById(R.id.profilePicture);
         progressBar = rootView.findViewById(R.id.startProgress);
+        contact=rootView.findViewById(R.id.tv_contact);
+        mail=rootView.findViewById(R.id.tv_mail);
         goNow = rootView.findViewById(R.id.lal);
-        goNow.setVisibility(View.GONE);
+        goNow.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
 
         redeem.setOnClickListener(view -> startActivity(new Intent(getContext(), CoinsTransaction.class)));
@@ -149,6 +162,60 @@ public class Profile extends Fragment implements ConnectivityReceiver.Connectivi
                     mobile.setText(retrievedModelUsers.getMobile());
                     coins.setText(retrievedModelUsers.getCoins());
 
+                    if(retrievedModelUsers.getSupportmobile()!=null){
+                        supportNumber=retrievedModelUsers.getSupportmobile().toString();
+                        contact.setText("Contact Us: "+retrievedModelUsers.getSupportmobile());
+                        contact.setOnClickListener(new View.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.M)
+                            @Override
+                            public void onClick(View view) {
+                                if (isPermissionGranted()) {
+                                    call_action();
+                                }
+
+                            }
+                        });
+                    }
+
+                    if(retrievedModelUsers.getSupportemail()!=null){
+                        mail.setText("Mail Us: "+retrievedModelUsers.getSupportemail());
+                        mail.setOnClickListener(new View.OnClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.M)
+                            @Override
+                            public void onClick(View view) {
+                                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                                emailIntent.setType("text/plain");
+                                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, retrievedModelUsers.getSupportemail());
+                                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Reg:Customer Support");
+                                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Add Message here");
+
+
+                                emailIntent.setType("message/rfc822");
+
+                                try {
+                                    startActivity(Intent.createChooser(emailIntent,
+                                            "Send email using..."));
+                                } catch (android.content.ActivityNotFoundException ex) {
+                                    Toast.makeText(getActivity(),
+                                            "No email clients installed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+                    }
+
+
+
+
+
+                    if(retrievedModelUsers.getCoinburners().size()>0){
+                        mRvCoins.setVisibility(View.VISIBLE);
+                        mRvCoins.setLayoutManager(new LinearLayoutManager(getContext()));
+                        CoinAdapter adapter = new CoinAdapter(getContext(), retrievedModelUsers.getCoinburners());
+                        mRvCoins.setAdapter(adapter);
+                    }else mRvCoins.setVisibility(View.GONE);
+
                     Glide.with(getContext())
                             .load(retrievedModel.getUsers().getProfilepic())
                             .into(propic);
@@ -175,5 +242,55 @@ public class Profile extends Fragment implements ConnectivityReceiver.Connectivi
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
         isOnline=isConnected;
+    }
+
+    public void call_action() {
+
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + supportNumber));
+        startActivity(callIntent);
+    }
+    public  boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.CALL_PHONE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v("TAG","Permission is granted");
+                call_action();
+                return true;
+            } else {
+                //isPermissionGranted();
+                Log.v("TAG","Permission is revoked");
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("TAG","Permission is granted");
+            call_action();
+            return true;
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+
+            case 1: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permission granted", Toast.LENGTH_SHORT).show();
+                    call_action();
+                } else {
+                    Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }

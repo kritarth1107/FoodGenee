@@ -64,9 +64,138 @@
         android:src="@drawable/arrow_left"
         android:layout_marginLeft="@dimen/_14sdp"
         android:layout_marginTop="@dimen/_10sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginLeft="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginRight="@dimen/_7sdp"
+        android:layout_below="@id/backdroplayout"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textOffer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/semiBold"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Offer Details"
+           />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Regular"
+            android:layout_below="@id/textOffer"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:text="New Offer" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/excerpt"
+            style="@style/Regular"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:textStyle="bold"
+            android:text="Actual Offer Details"/>
+
+        <TextView
+            android:id="@+id/textL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/semiBold"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:text="Rewards Validity"/>
+        <TextView
+            android:id="@+id/expireson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/semiBold"
+            android:layout_below="@id/textL"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Expires on" />
+
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Required Coins"
+            style="@style/semiBold"
+            android:layout_marginTop="@dimen/_6sdp"/>
+
+        <TextView
+            android:id="@+id/coinsCountNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_below="@id/count"
+            style="@style/Regular"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="You need 3000 coins to redeem this offer" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/coinscountlayout"
+            android:visibility="gone"
+            android:id="@+id/hideCoupon"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/orignalCoupn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CP100"
+                android:padding="10dp"
+                android:background="@drawable/couponborder"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coupon Code"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+        <Button
+            android:id="@+id/orignalRedeemButton"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            android:text="@string/redeem"
+            style="@style/semiBold"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_below="@id/hideCoupon"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/progressDetail"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/loader"
+        />
+
     <RelativeLayout
         android:layout_below="@id/backdroplayout"
         android:id="@+id/layoutExtra"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="70dp">
 
@@ -84,16 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/excerpt"
-                    style="@style/Regular"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:layout_marginLeft="@dimen/_7sdp"
-                    android:textStyle="bold"
-                    android:text="Actual Offer Details"/>
+
 
 
 
@@ -104,6 +224,7 @@
     <RelativeLayout
         android:layout_below="@id/layoutExtra"
         android:id="@+id/layoutExtraTwo"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="70dp">
 
@@ -116,23 +237,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/textL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/semiBold"
-                    android:layout_margin="@dimen/_7sdp"
-                    android:text="Rewards Validity"/>
-                <TextView
-                    android:id="@+id/expireson"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/semiBold"
-                    android:layout_below="@id/textL"
-                    android:textColor="@android:color/holo_red_dark"
-                   android:layout_marginLeft="@dimen/_7sdp"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:text="Expires on" />
+
 
 
 
@@ -146,6 +251,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/layoutExtraTwo"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content">
 
 
@@ -157,30 +263,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ProgressBar
+
+               <!-- <ProgressBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:id="@+id/progressDetail"/>
+                    android:id="@+id/progressDetail"/>-->
 
-            <TextView
-                android:id="@+id/textOffer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
-                style="@style/semiBold"
-                android:text="Offer Details"
-                android:layout_marginLeft="@dimen/_7sdp"/>
 
-            <TextView
-                android:id="@+id/desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Regular"
-                android:layout_marginBottom="@dimen/_7sdp"
-                android:layout_marginLeft="@dimen/_7sdp"
-                android:layout_below="@id/textOffer"
-                android:text="New Offer" />
 
             </RelativeLayout>
 
@@ -195,6 +285,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/bgtwo"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content">
 
 
@@ -206,24 +297,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Required Coins"
-                    style="@style/semiBold"
-                    android:layout_marginLeft="@dimen/_7sdp"/>
-
-                <TextView
-                    android:id="@+id/coinsCountNew"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_7sdp"
-                    android:layout_marginLeft="@dimen/_7sdp"
-                    android:layout_below="@id/count"
-                    style="@style/Regular"
-                    android:text="You need 3000 coins to redeem this offer" />
 
             </RelativeLayout>
 
@@ -232,46 +305,9 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@id/coinscountlayout"
-        android:visibility="gone"
-        android:id="@+id/hideCoupon"
-        android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/orignalCoupn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CP100"
-            android:padding="10dp"
-            android:background="@drawable/couponborder"
-            android:layout_centerInParent="true"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coupon Code"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"/>
 
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/orignalRedeemButton"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="wrap_content"
-        android:text="@string/redeem"
-        style="@style/semiBold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_45sdp"
-        android:layout_below="@id/hideCoupon"
-        android:background="@color/colorAccent"
-        android:textColor="@color/white"/>
 
 </RelativeLayout>
 

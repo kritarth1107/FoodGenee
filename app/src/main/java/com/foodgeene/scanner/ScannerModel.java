@@ -1,8 +1,9 @@
 package com.foodgeene.scanner;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class ScannerModel {
 
@@ -31,9 +32,34 @@ public class ScannerModel {
     @SerializedName("coverpic")
     @Expose
     private String coverpic;
+    @SerializedName("verify")
+    @Expose
+    private String verify;
+
+    @SerializedName("servingtype")
+    @Expose
+    private String servingtype;
+
+    public String getServingtype() {
+        return servingtype;
+    }
+
+    public void setServingtype(String servingtype) {
+        this.servingtype = servingtype;
+    }
+
     @SerializedName("productlist")
     @Expose
     private List<Productlist> productlist = null;
+
+    public String getVerify() {
+        return verify;
+    }
+
+    public void setVerify(String verify) {
+        this.verify = verify;
+    }
+
     public String getStatus() {
         return status;
     }

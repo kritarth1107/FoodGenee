@@ -7,7 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    public static final String BASE_URL = "http://sansdigitals.com/phpdemos/foodgenee/api/";
+    //Dev
+    //public static final String BASE_URL = "http://sansdigitals.com/phpdemos/foodgenee/api/";
+
+    //Live
+    public static final String BASE_URL = "https://foodqonline.com/api/";
+
     public static Retrofit retrofit;
 
     public static Retrofit getApiClient(){

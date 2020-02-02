@@ -60,13 +60,20 @@
         android:text="@string/no_restaraunts"
         android:layout_below="@id/noRestImage"/>
 
-
-    <ProgressBar
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/allRestProgress"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/loader"
+        />
+    <!--<ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_centerInParent="true"
-        android:id="@+id/allRestProgress"/>
+        android:id="@+id/allRestProgress"/>-->
 
 
 

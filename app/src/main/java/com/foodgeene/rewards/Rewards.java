@@ -3,7 +3,6 @@ package com.foodgeene.rewards;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,7 @@ import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +33,7 @@ public class Rewards extends AppCompatActivity implements ConnectivityReceiver.C
     RecyclerView recyclerView;
     RewardsAdapter rewardsAdapter;
     SessionManager sessionManager;
-    ProgressBar progressBar;
+    GifImageView progressBar;
     String token;
     TextView redeemCount;
     TextView check;
@@ -100,6 +100,7 @@ public class Rewards extends AppCompatActivity implements ConnectivityReceiver.C
         call.enqueue(new Callback<RModel>() {
             @Override
             public void onResponse(Call<RModel> call, Response<RModel> response) {
+
                 try{
                     RModel newModel = response.body();
                     List<Text> offers = newModel.getText();
@@ -121,7 +122,7 @@ public class Rewards extends AppCompatActivity implements ConnectivityReceiver.C
 
             @Override
             public void onFailure(Call<RModel> call, Throwable t) {
-
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }

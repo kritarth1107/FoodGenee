@@ -3,6 +3,8 @@ package com.foodgeene.success;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
+import com.foodgeene.foodpreference.ui.AfterOrder;
 import com.foodgeene.scanner.ScannerActivity;
 
 import java.util.HashMap;
@@ -35,6 +38,9 @@ public class SuccessActivity extends AppCompatActivity implements ConnectivityRe
     Integer SUCCESS_TEXT = 0;
     String getOrderId;
     boolean isOnLine;
+    String tax,tips,subscription,orderID;
+    Button selectPref;
+    ImageView mIvBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,8 @@ public class SuccessActivity extends AppCompatActivity implements ConnectivityRe
         detailsTaba = findViewById(R.id.detailsTaba);
         Loading = findViewById(R.id.Loading);
         animation_view = findViewById(R.id.animation_view);
+        selectPref = findViewById(R.id.selectPreferences);
+        mIvBack=findViewById(R.id.iv_back);
         get = getIntent();
         merchantid = get.getStringExtra("merchandid");
         productid = get.getStringExtra("productid");
@@ -53,6 +61,10 @@ public class SuccessActivity extends AppCompatActivity implements ConnectivityRe
         totalamount = get.getStringExtra("totalamount");
         couponAmount=get.getStringExtra("couponAmount");
         coupon=get.getStringExtra("coupon");
+        tips=get.getStringExtra("tips");
+        subscription=get.getStringExtra("subscription");
+        tax=get.getStringExtra("tax");
+        orderID=get.getStringExtra("orderID");
         isOnLine=ConnectivityReceiver.isConnected();
 
         /*ProductIdBuilder = new StringBuilder(productid);
@@ -79,6 +91,22 @@ public class SuccessActivity extends AppCompatActivity implements ConnectivityRe
 
         if(isOnLine) PlaceOrder();
         else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+
+        selectPref.setOnClickListener(v -> {
+
+            Intent intent = new Intent(SuccessActivity.this, AfterOrder.class);
+            intent.putExtra("orderId", getOrderId );
+            startActivity(intent);
+        });
+
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SuccessActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -89,11 +117,14 @@ public class SuccessActivity extends AppCompatActivity implements ConnectivityRe
 
     public void PlaceOrder(){
         Loading.setVisibility(View.VISIBLE);
-        detailsTaba.setVisibility(View.INVISIBLE);
-        animation_view.setVisibility(View.INVISIBLE);
+        detailsTaba.setVisibility(View.GONE);
+        animation_view.setVisibility(View.GONE);
+        String type="cash";
+        if(orderID.equalsIgnoreCase("")) type="prepaid";
+        else type="reorderprepaid";
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<PostOrderModel> call = foodGeneeAPI.OrderByPrePaid("prepaid",merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,couponAmount,coupon,UserToken,"application/x-www-form-urlencoded");
+        Call<PostOrderModel> call = foodGeneeAPI.OrderByPrePaid(type,merchantid,table,productid,count,price,totalamount,TXNID,TXNDATE,couponAmount,coupon,tax,tips,subscription,orderID,UserToken,"application/x-www-form-urlencoded");
         call.enqueue(new Callback<PostOrderModel>() {
             @Override
             public void onResponse(Call<PostOrderModel> call, Response<PostOrderModel> response) {
@@ -101,7 +132,7 @@ public class SuccessActivity extends AppCompatActivity implements ConnectivityRe
                     String status = response.body().getStatus().trim();
                     String response_text = response.body().getText().trim();
                     if(status.equals("1")){
-                        Loading.setVisibility(View.INVISIBLE);
+                        Loading.setVisibility(View.GONE);
                         detailsTaba.setVisibility(View.VISIBLE);
                         animation_view.setVisibility(View.VISIBLE);
                         SUCCESS_TEXT = 1;

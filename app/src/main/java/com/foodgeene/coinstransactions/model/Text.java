@@ -25,7 +25,17 @@ public class Text {
     @Expose
     private String reason;
 
+    @SerializedName("couponid")
+    @Expose
+    private String couponid;
 
+    public String getCouponid() {
+        return couponid;
+    }
+
+    public void setCouponid(String couponid) {
+        this.couponid = couponid;
+    }
 
     public String getId() {
         return id;

@@ -132,6 +132,11 @@ public class ScannerActivity extends AppCompatActivity implements  ConnectivityR
                         String store = response.body().getStore().trim();
                         String table = response.body().getTablename().trim();
                         String cover = response.body().getLogo().trim();
+                        String verify=response.body().getVerify();
+                        String servingtype=response.body().getServingtype();
+                        if(verify==null)
+                            verify="0";
+                      //  Log.e("verify",verify);
                         Intent intent = new Intent(ScannerActivity.this, RestrauntActivity.class);
                         intent.putExtra("encKey",result);
                         intent.putExtra("store",store);
@@ -139,6 +144,8 @@ public class ScannerActivity extends AppCompatActivity implements  ConnectivityR
                         intent.putExtra("cover",cover);
                         intent.putExtra("from","scanner");
                         intent.putExtra("orderId","");
+                        intent.putExtra("verify",verify);
+                        intent.putExtra("servingtype",servingtype);
                         startActivity(intent);
                         finish();
                         loadingDialog.cancel();

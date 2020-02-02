@@ -38,6 +38,11 @@ public class PreOrderModel {
     @SerializedName("tablelist")
     @Expose
     private List<Tablelist> tablelist = null;
+    @SerializedName("gallerylist")
+    @Expose
+    private List<Tablelist> gallerylist = null;
+
+
 
     @SerializedName("mobile")
     @Expose
@@ -57,6 +62,26 @@ public class PreOrderModel {
     @SerializedName("city")
     @Expose
     private String city;
+    @SerializedName("description")
+    @Expose
+    private String description;
+
+    public List<Tablelist> getGallerylist() {
+        return gallerylist;
+    }
+
+    public void setGallerylist(List<Tablelist> gallerylist) {
+        this.gallerylist = gallerylist;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getMobile() {
         return mobile;

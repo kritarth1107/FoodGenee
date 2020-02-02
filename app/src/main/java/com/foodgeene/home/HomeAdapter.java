@@ -56,6 +56,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.merchName.setText(list.get(position).getStorename());
 //                holder.merchType.setText(list.get(position).getStoretype());
 //        holder.merchLoc.setText(list.get(position).getCity());
+        if(list.get(position).getLatitude()!=null){
+            if(list.get(position).getLatitude().equalsIgnoreCase("")){
+                holder.iv_navigation.setVisibility(View.GONE);
+            }else  holder.iv_navigation.setVisibility(View.VISIBLE);
+        }else  holder.iv_navigation.setVisibility(View.GONE);
+
         holder.iv_navigation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,9 +74,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.CardViewRestraunt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PreOrder.class);
-                intent.putExtra("merchantId", list.get(position).getId());
-                context.startActivity(intent);
+                if(list.get(position).getShowpage().equalsIgnoreCase("1")){
+                    Intent intent = new Intent(context, PreOrder.class);
+                    intent.putExtra("merchantId", list.get(position).getId());
+                    context.startActivity(intent);
+                }
+
             }
         });
 

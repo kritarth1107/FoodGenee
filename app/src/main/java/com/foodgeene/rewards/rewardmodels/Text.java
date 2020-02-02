@@ -39,6 +39,18 @@ public class Text implements Serializable {
     @Expose
     private String description;
 
+    @SerializedName("soldout")
+    @Expose
+    private String soldout;
+
+    public String getSoldout() {
+        return soldout;
+    }
+
+    public void setSoldout(String soldout) {
+        this.soldout = soldout;
+    }
+
     public String getId() {
         return id;
     }

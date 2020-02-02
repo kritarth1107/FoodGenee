@@ -3,7 +3,6 @@ package com.foodgeene.coinstransactions;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +22,7 @@ import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,7 +34,7 @@ public class CoinsTransaction extends AppCompatActivity implements ConnectivityR
     SessionManager sessionManager;
     TextView coins;
     ImageView nocoins,mIvBack;
-    ProgressBar pro;
+    GifImageView pro;
     TransactionAdapter adapter;
     TextView notransaction;
     boolean isOnLine;
@@ -84,28 +84,40 @@ public class CoinsTransaction extends AppCompatActivity implements ConnectivityR
 
 
                     Transaction transaction = response.body();
-                    List<Text> list = transaction.getText();
-                    if(transaction.getStatus().equals("1")){
 
-                        adapter = new TransactionAdapter(CoinsTransaction.this, list);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoinsTransaction.this);
-                        recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.setAdapter(adapter);
-                        pro.setVisibility(View.GONE);
+                    if(transaction.getStatus().equals("1")){
+                        List<Text> list = transaction.getText();
+                        if(list.size()>0){
+                            recyclerView.setVisibility(View.VISIBLE);
+                            adapter = new TransactionAdapter(CoinsTransaction.this, list);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoinsTransaction.this);
+                            recyclerView.setLayoutManager(linearLayoutManager);
+                            recyclerView.setAdapter(adapter);
+                            pro.setVisibility(View.GONE);
+                        }else{
+                            coins.setVisibility(View.VISIBLE);
+                            nocoins.setVisibility(View.VISIBLE);
+                            pro.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.GONE);
+                           // notransaction.setVisibility(View.VISIBLE);
+                        }
+
+
 
                     }
                     else if(transaction.getStatus().equals("0")) {
-
+                        recyclerView.setVisibility(View.GONE);
                         coins.setVisibility(View.VISIBLE);
                         nocoins.setVisibility(View.VISIBLE);
                         pro.setVisibility(View.GONE);
-                        notransaction.setVisibility(View.VISIBLE);
+                       // notransaction.setVisibility(View.VISIBLE);
                     }
 
 
 
                 }
                 catch (Exception e){
+                    recyclerView.setVisibility(View.GONE);
                     coins.setVisibility(View.VISIBLE);
                     nocoins.setVisibility(View.VISIBLE);
                     pro.setVisibility(View.GONE);

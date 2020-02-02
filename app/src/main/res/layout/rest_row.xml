@@ -37,16 +37,17 @@
         android:layout_toRightOf="@id/allRestImage"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_6sdp"
-       style="@style/bold"
+       style="@style/semiBold"
         />
 
     <RatingBar
         android:id="@+id/rating_bar_indicator"
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_6sdp"
         android:layout_below="@id/allRestName"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_toRightOf="@+id/allRestImage"
         android:numStars="5"
         android:rating="3.5"
@@ -60,6 +61,7 @@
         android:layout_below="@id/rating_bar_indicator"
         android:layout_toRightOf="@id/allRestImage"
         style="@style/Regular"
+        android:layout_marginTop="@dimen/_10sdp"
         android:textSize="@dimen/_9sdp"
         android:text="Fast Food, North Indian"/>
 
@@ -74,8 +76,18 @@
         android:padding="4dp"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginTop="@dimen/_14sdp"
+        android:layout_marginRight="@dimen/_14sdp"/>
+
+    <ImageView
+        android:id="@+id/iv_verify"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_toRightOf="@id/rating_bar_indicator"
+        android:layout_below="@+id/allRestName"
+        android:layout_marginRight="@dimen/_14sdp"
+        android:src="@drawable/verify_logo"/>
 
 </RelativeLayout>
 

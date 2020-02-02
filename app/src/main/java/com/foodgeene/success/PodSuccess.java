@@ -40,6 +40,7 @@ public class PodSuccess extends AppCompatActivity implements ConnectivityReceive
     Button selectPref;
     ImageView mIvBack;
     boolean isOnLine;
+    String tax,tips,subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class PodSuccess extends AppCompatActivity implements ConnectivityReceive
         Loading = findViewById(R.id.Loading);
         animation_view = findViewById(R.id.animation_view);
         mIvBack=findViewById(R.id.iv_back);
+
         isOnLine=ConnectivityReceiver.isConnected();
 
         get = getIntent();
@@ -64,6 +66,11 @@ public class PodSuccess extends AppCompatActivity implements ConnectivityReceive
         orderID=get.getStringExtra("orderID");
         couponAmount=get.getStringExtra("couponAmount");
         coupon=get.getStringExtra("coupon");
+        tips=get.getStringExtra("tips");
+        subscription=get.getStringExtra("subscription");
+        tax=get.getStringExtra("tax");
+
+
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
@@ -110,7 +117,7 @@ public class PodSuccess extends AppCompatActivity implements ConnectivityReceive
 
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
-        Call<PostOrderModel> call = foodGeneeAPI.OrderByCash(type,merchantid,table,productid,count,price,totalamount,orderID,couponAmount,coupon,UserToken,"application/x-www-form-urlencoded"
+        Call<PostOrderModel> call = foodGeneeAPI.OrderByCash(type,merchantid,table,productid,count,price,totalamount,orderID,couponAmount,coupon,tax,tips,subscription,UserToken,"application/x-www-form-urlencoded"
         );
         call.enqueue(new Callback<PostOrderModel>() {
             @Override

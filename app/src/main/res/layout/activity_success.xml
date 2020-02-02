@@ -5,6 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".success.SuccessActivity">
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="?attr/actionBarSize">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_14sdp"
+            android:src="@drawable/arrow_left"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@+id/rl_toolbar"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/selectPreferences"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:visibility="visible"
+            android:layout_gravity="right|center"
+            android:background="@color/white"
+            android:text="Select Preferences "
+            style="@style/semiBold"
+            android:textColor="@color/colorAccent"
+            android:layout_marginRight="@dimen/_10sdp"
+            />
+    </LinearLayout>
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_centerInParent="true"
@@ -22,9 +55,9 @@
         android:layout_centerInParent="true"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_200sdp">
-        <ProgressBar
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"/>
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"/>
 
         <TextView
             android:layout_width="match_parent"

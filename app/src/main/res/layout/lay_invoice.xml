@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_250sdp"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:elevation="@dimen/_3sdp"
+    android:layout_height="@dimen/_150sdp" >
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/editLocationLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_margin="@dimen/_6sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/_200sdp"
+            android:singleLine="true"
+            android:imeOptions="actionGo"
+            android:inputType="textEmailAddress"
+            android:id="@+id/et_email"
+            style="@style/Regular"
+            android:layout_height="wrap_content"
+            android:hint="Email Id"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:id="@+id/b_submit"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:text="Submit"
+        android:layout_centerHorizontal="true"
+       />
+
+</LinearLayout>

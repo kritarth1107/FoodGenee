@@ -197,11 +197,11 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ProgressBar
+            <pl.droidsonroids.gif.GifImageView
                 android:visibility="gone"
                 android:id="@+id/progressBarReg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"/>
 
             <Button
                 android:id="@+id/RegisterButton"

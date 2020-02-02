@@ -72,7 +72,6 @@
                                     android:src="@drawable/ic_rupee_grey" />
 
                                 <TextView
-                                    android:background="@drawable/strike"
                                     android:id="@+id/price_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -172,8 +171,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/cambria"
                             android:text="Not Available"
+                            style="@style/Regular"
+                            android:textSize="@dimen/_8sdp"
                             android:textColor="@color/DarkRed"
-                            android:textSize="10sp"
                             android:visibility="gone" />
 
                         <LinearLayout

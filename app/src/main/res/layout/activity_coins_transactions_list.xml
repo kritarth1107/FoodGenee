@@ -39,12 +39,19 @@
         android:layout_below="@id/toolbar"/>
 
 
-    <ProgressBar
+ <!--   <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/listProgress"/>
-
+        android:id="@+id/listProgress"/>-->
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/listProgress"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:background="@drawable/loader"
+        />
 
     <TextView
         android:layout_width="wrap_content"

@@ -75,9 +75,11 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
             public void onClick(View view) {
                 mVTable.setVisibility(View.GONE);
                 mVOrder.setVisibility(View.VISIBLE);
-                if(isOnLine)
-                setupRecyclerView();
-                else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+                if(isOnLine) {
+                    cart_recyclerView.setVisibility(View.VISIBLE);
+                    NorOrderFound.setVisibility(View.GONE);
+                    setupRecyclerView();
+                }else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -86,9 +88,11 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
             public void onClick(View view) {
                 mVTable.setVisibility(View.VISIBLE);
                 mVOrder.setVisibility(View.GONE);
-                if(isOnLine)
-                setupReservationList();
-                else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+                if(isOnLine) {
+                    cart_recyclerView.setVisibility(View.VISIBLE);
+                    NorOrderFound.setVisibility(View.GONE);
+                    setupReservationList();
+                }else Toast.makeText(getActivity(), "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -125,6 +129,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                         OrderlistAdapter orderlistAdapter = new OrderlistAdapter(getContext(), orderDetails, sessionManager, userToken);
                         int  x = orderlistAdapter.getItemCount();
                         if(x>0){
+                            cart_recyclerView.setVisibility(View.VISIBLE);
                             cart_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                             cart_recyclerView.setAdapter(orderlistAdapter);
                             shimmer_view_container.setVisibility(View.GONE);
@@ -132,10 +137,12 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                         }
                         else{
                             NorOrderFound.setVisibility(View.VISIBLE);
+                            cart_recyclerView.setVisibility(View.GONE);
                         }
                 }
                 catch (Exception e){
                     NorOrderFound.setVisibility(View.VISIBLE);
+                    cart_recyclerView.setVisibility(View.GONE);
                     shimmer_view_container.setVisibility(View.GONE);
                     shimmer_view_container.stopShimmerAnimation();
                 }
@@ -167,10 +174,12 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
             @Override
             public void onResponse(Call<ReservationListModel> call, Response<ReservationListModel> response) {
                 try {
+
                     List<Reservation> orderDetails = response.body().getReservationlist();
                     ReservationlistAdapter orderlistAdapter = new ReservationlistAdapter(getContext(), orderDetails, sessionManager, userToken);
                     int  x = orderlistAdapter.getItemCount();
                     if(x>0){
+                        cart_recyclerView.setVisibility(View.VISIBLE);
                         NorOrderFound.setVisibility(View.GONE);
                         cart_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                         cart_recyclerView.setAdapter(orderlistAdapter);
@@ -184,6 +193,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                 }
                 catch (Exception e){
                     NorOrderFound.setVisibility(View.VISIBLE);
+                    cart_recyclerView.setVisibility(View.GONE);
                     shimmer_view_container.setVisibility(View.GONE);
                     shimmer_view_container.stopShimmerAnimation();
                 }

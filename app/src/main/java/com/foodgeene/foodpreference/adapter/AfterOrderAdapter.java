@@ -72,7 +72,7 @@ public class AfterOrderAdapter extends RecyclerView.Adapter<AfterOrderAdapter.Af
 
                                 }
                                 else if(response.body().getStatus().equals("0")){
-
+                                    Toast.makeText(context,"Invalid number",Toast.LENGTH_SHORT).show();
                                 }
 
                             }

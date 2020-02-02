@@ -67,28 +67,21 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 
             holder.orderProcessStatus.setVisibility(View.VISIBLE);
             holder.orderProcessStatus.setOnClickListener(view -> {
-
                 FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
                 Call<AlertModel> call = foodGeneeAPI.alertIcon("set-alert", list.get(position).getOrderId(), userToken, "application/x-www-form-urlencoded");
                 call.enqueue(new Callback<AlertModel>() {
                     @Override
                     public void onResponse(Call<AlertModel> call, Response<AlertModel> response) {
-
                         try {
                             AlertModel retrievedModel = response.body();
-
                             if(retrievedModel.getStatus().equals("1")){
-
                                 Toast.makeText(context, retrievedModel.message, Toast.LENGTH_SHORT).show();
                             }
                         }
                         catch (Exception e){
-
                             Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
-
                         }
                     }
-
                     @Override
                     public void onFailure(Call<AlertModel> call, Throwable t) {
                         Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
@@ -186,6 +179,11 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
             intent.putExtra("orderID",list.get(position).getOrderId());
             intent.putExtra("prePaidTime",list.get(position).getPreparetime());
             intent.putExtra("couponAmount",list.get(position).getCouponamount());
+            intent.putExtra("verify",list.get(position).getVerify());
+            intent.putExtra("showaddmore",list.get(position).getShowaddmore());
+            intent.putExtra("tip",list.get(position).getTips());
+            intent.putExtra("tax",list.get(position).getTax());
+            intent.putExtra("subscription",list.get(position).getSubscription());
 
             context.startActivity(intent);
         });

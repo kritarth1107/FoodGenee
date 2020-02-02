@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,12 +13,15 @@ import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.forgot.ForgotActivity;
 import com.foodgeene.register.RegistrationActivity;
+import com.foodgeene.restraunt.SignupOtp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
     EditText Email,Password;
     TextView NavigateToReg,forgotPassword;
     Button login;
-    ProgressBar progressBarLogin;
+    GifImageView progressBarLogin;
     SessionManager sessionManager;
     boolean isOnline;
     @Override
@@ -82,7 +84,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
 
                 try {
-
                     assert response.body() != null;
                     String status = response.body().getStatus();
                     String response_text = response.body().getText().trim();
@@ -94,6 +95,19 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         startActivity(i);
                     } else if (status.equals("0")) {
                         Toast.makeText(LoginActivity.this, response_text, Toast.LENGTH_SHORT).show();
+                    }else if(status.equalsIgnoreCase("2")){
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setMessage("Your account is inactive . Click ok to active your account! ")
+                                .setCancelable(false)
+                                .setPositiveButton("Ok", (dialog, id) ->{
+                                    String user_id = response.body().getUsersid().trim();
+                                    Intent intent = new Intent(LoginActivity.this, SignupOtp.class);
+                                    intent.putExtra("userid", user_id);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);})
+
+                                .show();
+
                     }
 
                     progressBarLogin.setVisibility(View.GONE);

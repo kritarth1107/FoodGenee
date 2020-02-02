@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +25,7 @@ import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +36,7 @@ public class AllRestraunts extends AppCompatActivity implements HotelsAdapter.On
     RecyclerView recyclerView;
     ImageView noRestImage,mIvBack;
     TextView noRestText;
-    ProgressBar progressBar;
+    GifImageView progressBar;
     List<Merchantlist> list;
     boolean isOnLine;
     @Override

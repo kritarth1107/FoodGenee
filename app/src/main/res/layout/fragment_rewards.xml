@@ -108,10 +108,10 @@
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/gif"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
             android:layout_centerInParent="true"
-            android:src="@drawable/loading"
+            android:background="@drawable/loader"
             />
 
 

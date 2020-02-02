@@ -109,12 +109,20 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+  <pl.droidsonroids.gif.GifImageView
+      android:layout_width="@dimen/_90sdp"
+      android:layout_height="@dimen/_90sdp"
+      android:id="@+id/progress"
+      android:visibility="gone"
+      android:layout_centerInParent="true"
+      android:background="@drawable/loader"
+      />
 
-  <ProgressBar
+<!--  <ProgressBar
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:id="@+id/progress"/>
+      android:id="@+id/progress"/>-->
 
 
 

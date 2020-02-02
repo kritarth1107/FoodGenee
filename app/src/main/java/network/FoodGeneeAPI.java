@@ -145,6 +145,9 @@ public interface FoodGeneeAPI {
             @Field("orderid") String orderid,
             @Field("couponamount")String couponAmount,
             @Field("coupon")String coupon,
+            @Field("tax") String tax,
+            @Field("tips")String tips,
+            @Field("subscription")String subscription,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );@FormUrlEncoded
@@ -161,6 +164,10 @@ public interface FoodGeneeAPI {
                     @Field("transactiondate") String transactiondate,
                     @Field("couponamount")String couponAmount,
                     @Field("coupon")String coupon,
+                    @Field("tax") String tax,
+                    @Field("tips")String tips,
+                    @Field("subscription")String subscription,
+                    @Field("orderid") String orderid,
                     @Header("Authorization") String Auth,
                     @Header("Content-Type") String Ctype
             );
@@ -218,6 +225,7 @@ public interface FoodGeneeAPI {
             @Field("coupon") String coupon,
             @Field("amount") String amount,
             @Field("merchant_id") String merchant_id,
+            @Field(" productid") String  productid,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
@@ -278,6 +286,7 @@ public interface FoodGeneeAPI {
     Call<RedeemedModel> redeemedListDet(
             @Field("action") String action,
             @Field("rewardid") String rewardId,
+            @Field("rewardcouponid") String rewardcouponid,
             @Header("Authorization") String Auth,
             @Header("Content-Type") String Ctype
     );
@@ -396,6 +405,18 @@ public interface FoodGeneeAPI {
             @Header("Content-Type") String Ctype
 
     );
+
+    @FormUrlEncoded
+    @POST("merchant/orders.php")
+    Call<PreOrderModel> getInvoice(
+            @Field("action") String action,
+            @Field("orderid") String orderid,
+            @Field("email") String email,
+            @Header("Authorization") String Auth,
+            @Header("Content-Type") String Ctype
+
+    );
+
 
     @FormUrlEncoded
     @POST("merchant/preorders.php")

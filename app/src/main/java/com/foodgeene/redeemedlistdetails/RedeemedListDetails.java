@@ -32,7 +32,7 @@ public class RedeemedListDetails extends AppCompatActivity implements Connectivi
     TextView offerName, excerptO, descript, expireOn, couponCode;
     ImageView logo,mIvBack;
     Bundle bundle;
-    String rewardId = null;
+    String rewardId ,couponid;
     Intent get;
     Dialog loadingDialog;
     TextView redeeemCoinsCount;
@@ -46,6 +46,7 @@ public class RedeemedListDetails extends AppCompatActivity implements Connectivi
         UserToken = user.get(sessionManager.USER_ID);
         get = getIntent();
         rewardId = get.getStringExtra("rId");
+        couponid=get.getStringExtra("couponid");
         offerBack = findViewById(R.id.offerImageTwo);
         offerName = findViewById(R.id.offernameTwo);
         excerptO = findViewById(R.id.excerptTwo);
@@ -56,9 +57,9 @@ public class RedeemedListDetails extends AppCompatActivity implements Connectivi
         mIvBack=findViewById(R.id.iv_back);
         isOnLine=ConnectivityReceiver.isConnected();
 
-//        redeeemCoinsCount = findViewById(R.id.coinsCountNew);
+        redeeemCoinsCount = findViewById(R.id.coinsCountNew);
         if(isOnLine)
-        drawRedeemedList(rewardId);
+        drawRedeemedList(rewardId,couponid);
         else Toast.makeText(this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,11 +82,11 @@ public class RedeemedListDetails extends AppCompatActivity implements Connectivi
     }
 
 
-    private void drawRedeemedList(String rewardIdHere) {
+    private void drawRedeemedList(String rewardIdHere,String couponid) {
 
         FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
 
-        Call<RedeemedModel> call = foodGeneeAPI.redeemedListDet("redeem-rewards-details", rewardIdHere, UserToken, "application/x-www-form-urlencoded");
+        Call<RedeemedModel> call = foodGeneeAPI.redeemedListDet("redeem-rewards-details", rewardIdHere,couponid, UserToken, "application/x-www-form-urlencoded");
         call.enqueue(new Callback<RedeemedModel>() {
             @Override
             public void onResponse(Call<RedeemedModel> call, Response<RedeemedModel> response) {
@@ -93,7 +94,7 @@ public class RedeemedListDetails extends AppCompatActivity implements Connectivi
                     RedeemedModel redeemedModel = response.body();
                     Text list = redeemedModel.getText();
 
-                    if(list.getValidityto().equals("1")){
+                    if(list.getValidityto().equals("0")){
                         expireOn.setText("Expired");
                     }
                     else{

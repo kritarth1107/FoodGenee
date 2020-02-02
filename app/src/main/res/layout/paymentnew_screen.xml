@@ -562,12 +562,13 @@
                     android:textAlignment="textEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-                <ProgressBar
+                <pl.droidsonroids.gif.GifImageView
                     android:id="@+id/ProgressBarCoupon"
                     android:visibility="gone"
                     android:layout_alignParentEnd="true"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"/>
+                    android:layout_width="@dimen/_60sdp"
+                    android:background="@drawable/loader"
+                    android:layout_height="@dimen/_60sdp"/>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

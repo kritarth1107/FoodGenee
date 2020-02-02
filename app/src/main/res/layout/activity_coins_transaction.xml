@@ -6,12 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".coinstransactions.CoinsTransaction">
 
-    <ProgressBar
+   <!-- <ProgressBar
         android:id="@+id/transcprogres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"/>-->
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/transcprogres"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/loader"
+        />
 
     <TextView
         android:id="@+id/transctionstat"

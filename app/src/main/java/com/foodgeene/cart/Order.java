@@ -76,6 +76,67 @@ Order {
     @Expose
     @SerializedName("couponamount")
     private String couponamount;
+    @Expose
+    @SerializedName("verify")
+    private String verify;
+
+    @Expose
+    @SerializedName("tax")
+    private String tax;
+
+    @Expose
+    @SerializedName("tips")
+    private String tips;
+
+    @Expose
+    @SerializedName("subscription")
+    private String subscription;
+
+
+    @Expose
+    @SerializedName("showaddmore")
+    private String showaddmore;
+
+
+    public String getShowaddmore() {
+        return showaddmore;
+    }
+
+    public void setShowaddmore(String showaddmore) {
+        this.showaddmore = showaddmore;
+    }
+
+    public String getTax() {
+        return tax;
+    }
+
+    public void setTax(String tax) {
+        this.tax = tax;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
+    public String getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(String subscription) {
+        this.subscription = subscription;
+    }
+
+    public String getVerify() {
+        return verify;
+    }
+
+    public void setVerify(String verify) {
+        this.verify = verify;
+    }
 
     public String getCouponamount() {
         return couponamount;

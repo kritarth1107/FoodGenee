@@ -28,20 +28,92 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_45sdp"
             android:src="@drawable/norest"
-            android:layout_marginLeft="@dimen/_16sdp"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_16sdp"/>
 
         <TextView
             android:id="@+id/restNameHere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/preOrderImage"
             style="@style/bold"
+            android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/_6sdp"
             android:text="Restaraunt Name"
             android:layout_marginLeft="@dimen/_16sdp"
             android:textColor="@android:color/white"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorViewGray"
+            android:alpha=".7"
+            android:weightSum="3">
+            <LinearLayout
+                android:id="@+id/ll_book"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Table"
+                    style="@style/semiBold"
+                    />
+                <View
+                    android:id="@+id/v_book"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@color/colorText"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gallery"
+                    style="@style/semiBold"
+                    />
+                <View
+                    android:id="@+id/v_gallery"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="1dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@color/colorText"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_about"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Information"
+                    style="@style/semiBold"
+                    />
+                <View
+                    android:id="@+id/v_info"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="1dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@color/colorText"/>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
     <ImageView
         android:id="@+id/iv_back"
@@ -64,7 +136,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="2"
         android:layout_below="@+id/normalText"
         android:orientation="vertical">
 
@@ -73,65 +144,65 @@
             android:layout_width="match_parent"
             android:id="@+id/tableRecycler"
             android:layout_margin="@dimen/_6sdp"
+            android:visibility="visible"
             android:layout_height="match_parent"
-            android:layout_weight="0.6"
             android:layout_below="@id/normalText"/>
         <LinearLayout
+            android:id="@+id/ll_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.4"
             android:layout_margin="@dimen/_4sdp"
+            android:visibility="gone"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/bold"
-                android:textSize="@dimen/_11sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/tv_rest_name"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Regular"
-                android:visibility="gone"
+                android:visibility="visible"
+                android:maxLines="5"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:id="@+id/tv_rest_desc"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact Us : "
                         style="@style/semiBold"
-                        android:textSize="@dimen/_8sdp"/>
+                        />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="2"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CALL US:"
+                            android:text="Call Us:"
                             style="@style/semiBold"
-                            android:textSize="@dimen/_8sdp"
                             />
                         <TextView
                             android:id="@+id/tv_mobile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textSize="@dimen/_8sdp"
                             style="@style/Regular"
                            />
 
@@ -140,13 +211,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="2"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="MAIL US:"
+                            android:text="Mail Us:"
                             style="@style/semiBold"
-                            android:textSize="@dimen/_8sdp"
                             />
                         <TextView
                             android:id="@+id/tv_mail"
@@ -154,7 +225,6 @@
                             android:layout_height="wrap_content"
                             android:text=""
                             style="@style/Regular"
-                            android:textSize="@dimen/_8sdp"
                             />
 
                     </LinearLayout>
@@ -163,28 +233,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address : "
                         style="@style/semiBold"
-                        android:textSize="@dimen/_8sdp"/>
+                       />
                     <TextView
                         android:id="@+id/tv_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
                         style="@style/Regular"/>
                     <LinearLayout
                         android:id="@+id/ll_navigate"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
                         android:gravity="center"
+
+                        android:layout_gravity="right"
                         android:orientation="horizontal">
                         <ImageView
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
                             android:src="@drawable/navigation_orange"
                             android:rotation="45"/>
                         <TextView
@@ -192,7 +265,6 @@
                             android:layout_height="wrap_content"
                             android:text="Navigate to Restaurant"
                             style="@style/Regular"
-                            android:textSize="@dimen/_8sdp"
                             android:textColor="@color/colorPrimary"/>
                     </LinearLayout>
 

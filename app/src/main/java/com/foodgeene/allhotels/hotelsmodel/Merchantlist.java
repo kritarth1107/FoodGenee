@@ -44,6 +44,30 @@ public class Merchantlist {
     @SerializedName("coverpic")
     @Expose
     private String coverpic;
+    @SerializedName("servingtype")
+    @Expose
+    private String servingtype;
+
+    @SerializedName("verify")
+    @Expose
+    private String verify;
+
+
+    public String getVerify() {
+        return verify;
+    }
+
+    public void setVerify(String verify) {
+        this.verify = verify;
+    }
+
+    public String getServingtype() {
+        return servingtype;
+    }
+
+    public void setServingtype(String servingtype) {
+        this.servingtype = servingtype;
+    }
 
     public String getId() {
         return id;

@@ -126,18 +126,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="#ffffff"/>
+
             <TextView
 
                 android:textStyle="bold"
-                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="It looks you haven't placed any order yet."
-                android:textColor="@android:color/black"/>
+                style="@style/semiBold"
+                android:textSize="@dimen/_12sdp"/>
         </LinearLayout>
 
     </RelativeLayout>

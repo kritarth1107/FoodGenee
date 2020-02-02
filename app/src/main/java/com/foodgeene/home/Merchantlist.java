@@ -53,6 +53,19 @@ public class Merchantlist {
     @Expose
     private String longitude;
 
+    @SerializedName("showpage")
+    @Expose
+    private String showpage;
+
+
+    public String getShowpage() {
+        return showpage;
+    }
+
+    public void setShowpage(String showpage) {
+        this.showpage = showpage;
+    }
+
     public String getLatitude() {
         return latitude;
     }

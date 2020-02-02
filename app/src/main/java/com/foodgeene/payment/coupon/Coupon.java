@@ -21,6 +21,54 @@ public class Coupon {
     @Expose
     private String savingamt;
 
+    @SerializedName("tax")
+    @Expose
+    private String tax;
+
+    @SerializedName("subscription")
+    @Expose
+    private String subscription;
+
+    @SerializedName("tips")
+    @Expose
+    private String tips;
+
+    @SerializedName("amount")
+    @Expose
+    private String amount;
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getTax() {
+        return tax;
+    }
+
+    public void setTax(String tax) {
+        this.tax = tax;
+    }
+
+    public String getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(String subscription) {
+        this.subscription = subscription;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
     public String getStatus() {
         return status;
     }

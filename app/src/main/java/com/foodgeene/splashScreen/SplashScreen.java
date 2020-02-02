@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
 
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
@@ -37,7 +36,7 @@ public class SplashScreen extends AppCompatActivity implements GoogleApiClient.C
     private static final int GRANT_PERM = 1;
     Handler handler;
     SessionManager sessionManager;
-    ImageView gif;
+ //   ImageView gif;
 
 
     public static final int REQUEST_LOCATION=001;
@@ -60,7 +59,7 @@ public class SplashScreen extends AppCompatActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        gif=findViewById(R.id.gif);
+       // gif=findViewById(R.id.gif);
         checkLocationPermission();
         //sessionManager
         sessionManager = new SessionManager(this);
@@ -98,7 +97,7 @@ public class SplashScreen extends AppCompatActivity implements GoogleApiClient.C
                     finish();
                 }
             }
-        }, 1500);
+        }, 1000);
     }
 
     public void mEnableGps() {

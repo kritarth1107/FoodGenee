@@ -2,42 +2,57 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="@dimen/_6sdp"
     android:elevation="@dimen/_8sdp"
+    android:layout_margin="@dimen/_4sdp"
     app:cardCornerRadius="@dimen/_6sdp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_gravity="center"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="@dimen/_130sdp">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/im_gallery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        />
+    <LinearLayout
+        android:id="@+id/ll_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Regular"
-                android:text="Table No : "/>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="TB No : "/>
             <TextView
                 android:id="@+id/realTableNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/bold"
                 android:layout_marginLeft="@dimen/_4sdp"
-                android:textSize="@dimen/_14sdp"
-                android:text="TB23"/>
+                android:text="TABLE 100"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_capacity"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="10"
             style="@style/Regular"/>
 
 
@@ -46,13 +61,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/bold"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="Book Table"
-            android:gravity="right"
+            android:gravity="left"
             android:textSize="@dimen/_11sdp"
-            android:padding="@dimen/_6sdp"
+            android:padding="@dimen/_10sdp"
             android:background="@drawable/rectangle"
-            android:layout_gravity="right"
-            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/_10sdp"
             android:textColor="@color/colorPrimary"
           />

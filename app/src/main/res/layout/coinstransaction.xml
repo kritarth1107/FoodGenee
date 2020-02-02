@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/_100sdp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -11,56 +11,61 @@
         android:elevation="@dimen/_8sdp"
         android:id="@+id/touchCard"
         app:cardCornerRadius="5dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/tranLogo"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_7sdp"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"/>
-
-
-            <TextView
-                android:id="@+id/tranTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tranLogo"
-               style="@style/bold"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
                 android:layout_marginLeft="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_27sdp"
-                android:text="PayTM"/>
-            <TextView
-                android:id="@+id/tranDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tranLogo"
-                android:layout_below="@id/tranTitle"
-                style="@style/semiBold"
-                android:textColor="@color/colorPrimary"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tranTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tranLogo"
+                    style="@style/semiBold"
+                   android:textColor="@color/colorPrimary"
+                    android:text="PayTM"/>
+                <TextView
+                    android:id="@+id/tranDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tranLogo"
+                    android:layout_below="@id/tranTitle"
+                    style="@style/Regular"
+                    android:maxLines="2"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:text="Get meal for 2 days \n Get meal for 2 days"/>
 
-                android:layout_marginLeft="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:text="Get meal for 2 days"/>
+
+                <TextView
+                    android:id="@+id/tranValidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tranLogo"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    style="@style/Regular"
+                    android:textSize="@dimen/_9sdp"
+                    android:layout_below="@+id/tranDesc"
+                    android:text="Validity"/>
+            </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/tranValidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tranLogo"
-                android:layout_marginBottom="@dimen/_7sdp"
-                android:layout_marginLeft="@dimen/_7sdp"
-               style="@style/bold"
-                android:textSize="@dimen/_9sdp"
-                android:layout_below="@+id/tranDesc"
-                android:textColor="@color/DarkRed"
-                android:text="Validity"/>
 
 <!--            <TextView-->
 <!--                android:id="@+id/reason"-->
@@ -75,7 +80,7 @@
 <!--                android:text="" />-->
 
 
-        </RelativeLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

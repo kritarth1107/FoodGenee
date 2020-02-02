@@ -3,7 +3,6 @@ package com.foodgeene.transactionlists;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +21,7 @@ import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +30,7 @@ public class CoinsTransactionsList extends AppCompatActivity implements Connecti
 
     RecyclerView recyclerView;
     ListAdapter adapter;
-    ProgressBar listProgress;
+    GifImageView listProgress;
     SessionManager sessionManager;
     String userToken;
     TextView notransaction;

@@ -43,6 +43,7 @@ public class FirebaseStoreToken extends FirebaseMessagingService {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher))
                 .setContentTitle(remoteMessage.getData().get("title"))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("content")))
                 .setContentText(remoteMessage.getData().get("content")).setAutoCancel(true).setContentIntent(pendingIntent);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

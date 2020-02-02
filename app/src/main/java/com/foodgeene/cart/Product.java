@@ -17,6 +17,18 @@ public class Product implements Serializable {
     @Expose
     private String price;
 
+    @SerializedName("order")
+    @Expose
+    private String order;
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
     public String getName() {
         return name;
     }

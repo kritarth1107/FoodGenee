@@ -40,15 +40,18 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/restName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                style="@style/bold"
-                android:textSize="@dimen/_16sdp"
-                android:textColor="@android:color/white"
-               />
+
+                <TextView
+                    android:id="@+id/restName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    style="@style/bold"
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@android:color/white"
+                    />
+
+
             <TextView
                 android:id="@+id/Order_id"
                 android:layout_width="wrap_content"
@@ -120,21 +123,33 @@
         android:layout_height="match_parent"
         android:layout_below="@id/HeaderLayout">
         <LinearLayout
-            android:layout_marginLeft="@dimen/_4sdp"
-            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/_6sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:weightSum="2"
             android:layout_height="wrap_content">
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:gravity="left|center"
-                android:layout_height="@dimen/_35sdp"
-                style="@style/bold"
-                android:text="Order Summary"
-               />
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:layout_height="@dimen/_35sdp"
+                    style="@style/bold"
+                    android:text="Order Summary"
+                    />
+                <ImageView
+                    android:id="@+id/im_verify"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:src="@drawable/verify_logo"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -161,6 +176,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:id="@+id/recyclerViewDetails"/>
         <View
             android:layout_width="match_parent"
@@ -174,10 +191,9 @@
             android:id="@+id/ll_coupon"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/_4sdp"
-            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
@@ -193,10 +209,73 @@
                 android:text="300.00"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_tax"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/_4sdp"
-            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="Tax"/>
+            <TextView
+                android:id="@+id/tv_tax"
+                android:textAlignment="textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="300.00"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_tip"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="Tip"/>
+            <TextView
+                android:id="@+id/tv_tip"
+                android:textAlignment="textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="300.00"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_subscription"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="Subscription Amount"/>
+            <TextView
+                android:id="@+id/tv_subscription"
+                android:textAlignment="textEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:text="300.00"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:layout_height="wrap_content">
@@ -233,6 +312,24 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:layout_height="wrap_content"
             />
+
+
+        <TextView
+            android:id="@+id/tv_invoice"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Send Invoice"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_18sdp"
+            android:layout_marginRight="@dimen/_18sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:drawablePadding="1dp"
+            android:gravity="center"
+            style="@style/semiBold"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_6sdp"
+            android:background="@drawable/rectangle"
+            android:textColor="@color/colorPrimary"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"

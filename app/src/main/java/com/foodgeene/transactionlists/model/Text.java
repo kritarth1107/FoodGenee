@@ -29,6 +29,28 @@ public class Text {
     @Expose
     private String orderid;
 
+    @SerializedName("rewardtitle")
+    @Expose
+    private String rewardtitle;
+    @SerializedName("rewardcoupon")
+    @Expose
+    private String rewardcoupon;
+
+    public String getRewardtitle() {
+        return rewardtitle;
+    }
+
+    public void setRewardtitle(String rewardtitle) {
+        this.rewardtitle = rewardtitle;
+    }
+
+    public String getRewardcoupon() {
+        return rewardcoupon;
+    }
+
+    public void setRewardcoupon(String rewardcoupon) {
+        this.rewardcoupon = rewardcoupon;
+    }
 
     public String getId() {
         return id;

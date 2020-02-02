@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +19,13 @@ import com.foodgeene.rewarddetails.model.Text;
 
 import java.util.HashMap;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +39,7 @@ public class RewardsDetails extends AppCompatActivity implements ConnectivityRec
     String rewardId = null;
     String UserToken;
     SessionManager sessionManager;
-    ProgressBar progressBar;
+    GifImageView progressBar;
     RelativeLayout hideLay;
     RelativeLayout hideCoupon;
     Button redeem;
@@ -95,16 +96,27 @@ public class RewardsDetails extends AppCompatActivity implements ConnectivityRec
                 call.enqueue(new Callback<RedeemCoinsModel>() {
                     @Override
                     public void onResponse(Call<RedeemCoinsModel> call, Response<RedeemCoinsModel> response) {
-
+                        loadingDialog.cancel();
+                        loadingDialog.dismiss();
                         RedeemCoinsModel redeemCoins = response.body();
 
                         if(redeemCoins.getStatusO().equals("1")){
-                            couponCode.setText(redeemCoins.getCouponcode0());
-                            hideCoupon.setVisibility(View.VISIBLE);
-                            redeem.setVisibility(View.GONE);
-                            Toast.makeText(RewardsDetails.this, redeemCoins.getMessage0(), Toast.LENGTH_SHORT).show();
-                            loadingDialog.cancel();
-                            loadingDialog.dismiss();
+
+                            new AlertDialog.Builder(RewardsDetails.this)
+                                    .setMessage(redeemCoins.getMessage0())
+                                    .setCancelable(false)
+                                    .setPositiveButton("Ok", (dialog, id) ->{
+                                        finish();
+                                       })
+
+                                    .show();
+
+
+                          //  couponCode.setText(redeemCoins.getCouponcode0());
+                          //  hideCoupon.setVisibility(View.VISIBLE);
+                          //  redeem.setVisibility(View.GONE);
+                          //  Toast.makeText(RewardsDetails.this, redeemCoins.getMessage0(), Toast.LENGTH_SHORT).show();
+
 
                         }
                         else if(redeemCoins.getStatusO().equals("0")){
@@ -153,11 +165,12 @@ public class RewardsDetails extends AppCompatActivity implements ConnectivityRec
 
                         offerName.setText(text.getTitle());
                         excerptO.setText(text.getExcerpt());
-                        if(detailModel.getText().getValidityto().equals("1")){
+                        if(detailModel.getText().getValidityto().equals("0")){
                             expireOn.setText("Expired");
                             redeem.setVisibility(View.GONE);
                         }
                         else {
+                            redeem.setVisibility(View.VISIBLE);
                             expireOn.setText(text.getValidityfrom()+" - "+text.getValidityto());
 
                         }

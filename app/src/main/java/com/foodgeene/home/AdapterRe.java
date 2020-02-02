@@ -30,6 +30,10 @@ public class AdapterRe extends RecyclerView.Adapter<AdapterRe.MyViewHolder> {
         this.searchLocation.addAll(location);
 
         //Wait im checking myside
+        //This is done which is next?
+        // i'll open the other project please wait
+        //okay?
+        //yes sir
     }
  
     @Override

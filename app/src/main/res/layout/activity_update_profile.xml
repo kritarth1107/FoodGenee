@@ -159,14 +159,23 @@
         android:drawableTint="@color/colorPrimary"
         android:id="@+id/updateButton"
         android:layout_centerHorizontal="true" />
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:id="@+id/progressId"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:background="@drawable/loader"
+        />
 
-
+<!--
         <ProgressBar
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/progressId"
             android:layout_centerInParent="true"/>
+-->
 
 
 

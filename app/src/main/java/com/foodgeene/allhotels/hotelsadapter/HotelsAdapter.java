@@ -8,19 +8,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.FloatRange;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
-import com.foodgeene.allhotels.hotelsmodel.HotelsModel;
 import com.foodgeene.allhotels.hotelsmodel.Merchantlist;
 
 import java.util.List;
 
-import retrofit2.Callback;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsViewHolder>{
 
@@ -58,7 +54,10 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
 //            holder.restRating.setText(list.get(position).getRating());
             holder.restRating.setText(rating);
             holder.ratingBar.setRating(list.get(position).getRating());
-
+            holder.restType.setText(list.get(position).getServingtype());
+            if(list.get(position).getVerify().equalsIgnoreCase("0"))
+                holder.mIvVerify.setVisibility(View.GONE);
+            else  holder.mIvVerify.setVisibility(View.VISIBLE);
         }
         catch (Exception e){
 
@@ -72,7 +71,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
 
     public class HotelsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cardView;
-        ImageView restImage;
+        ImageView restImage,mIvVerify;
         RatingBar ratingBar;
         TextView restType;
         TextView restRating;
@@ -89,6 +88,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
             restRating = itemView.findViewById(R.id.ratingNumeric);
             restName = itemView.findViewById(R.id.allRestName);
             cardView = itemView.findViewById(R.id.cardViewClick);
+            mIvVerify=itemView.findViewById(R.id.iv_verify);
             cardView.setOnClickListener(this);
 
         }

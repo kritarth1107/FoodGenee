@@ -23,11 +23,17 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/loader"
+        android:layout_below="@id/logo"/>
+    <!--<ProgressBar
+        android:id="@+id/gif"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
         android:layout_centerInParent="true"
         android:src="@drawable/loading"
-        android:layout_below="@id/logo"/>
-
+        android:layout_below="@id/logo"/>-->
 
 </RelativeLayout>

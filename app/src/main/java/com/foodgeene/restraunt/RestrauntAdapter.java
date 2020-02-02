@@ -72,7 +72,20 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
 
         holder.food_title.setText(mData.get(position).getTitle());
         holder.price.setText(mData.get(position).getPrice());
-        holder.sale_price.setText(mData.get(position).getSaleprice());
+        if((mData.get(position).getSaleprice()!=null)){
+            if(mData.get(position).getSaleprice().equalsIgnoreCase("0")||mData.get(position).getSaleprice().equalsIgnoreCase("")){
+                holder.sale_price.setText(mData.get(position).getPrice());
+                holder.sale_price.setBackground(null);
+            }else{
+                holder.sale_price.setText(mData.get(position).getSaleprice());
+                holder.price.setBackgroundResource(R.drawable.strike);
+            }
+        }else {
+            holder.sale_price.setText(mData.get(position).getPrice());
+            holder.sale_price.setBackground(null);
+        }
+
+
         holder.serve_line.setText(mData.get(position).getServeline());
         holder.tagline.setText(mData.get(position).getLabeltag());
 
@@ -113,7 +126,16 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 quantity = quantity+1;
                 holder.quantity_tv.setText(String.valueOf(quantity));
                 holder.quantity_tv.setAnimation(AnimationUtils.loadAnimation(mContext,android.R.anim.slide_in_left));
-                String saleP = mData.get(position).getSaleprice();
+                String saleP;
+                if((mData.get(position).getSaleprice()!=null)){
+                    if(mData.get(position).getSaleprice().equalsIgnoreCase("0")||mData.get(position).getSaleprice().equalsIgnoreCase("")){
+                        saleP = mData.get(position).getPrice();
+                    }else{
+                        saleP = mData.get(position).getSaleprice();
+                    }
+                }else {  saleP = mData.get(position).getPrice();}
+
+               // String saleP = mData.get(position).getSaleprice();
                 Integer SalePrice = Integer.parseInt(saleP);
                 finalAmmount = finalAmmount+SalePrice;
                 Total_amount.setText(String.valueOf(finalAmmount));
@@ -139,8 +161,16 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 Q_String = holder.quantity_tv.getText().toString().trim();
                 quantity = Integer.parseInt(Q_String);
                 quantity = quantity-1;
+                String saleP;
+                if((mData.get(position).getSaleprice()!=null)){
+                    if(mData.get(position).getSaleprice().equalsIgnoreCase("0")||mData.get(position).getSaleprice().equalsIgnoreCase("")){
+                        saleP = mData.get(position).getPrice();
+                    }else{
+                        saleP = mData.get(position).getSaleprice();
+                    }
+                }else {  saleP = mData.get(position).getPrice();}
 
-                String saleP = mData.get(position).getSaleprice();
+               // String saleP = mData.get(position).getSaleprice();
                 Integer SalePrice = Integer.parseInt(saleP);
                 finalAmmount = finalAmmount-SalePrice;
                 if(finalAmmount==0){
@@ -198,7 +228,15 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                     OrderSheet.setVisibility(View.VISIBLE);
                     OrderSheet.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_up));
                 }
-                String saleP = mData.get(position).getSaleprice();
+               // String saleP = mData.get(position).getSaleprice();
+                String saleP;
+                if((mData.get(position).getSaleprice()!=null)){
+                    if(mData.get(position).getSaleprice().equalsIgnoreCase("0")||mData.get(position).getSaleprice().equalsIgnoreCase("")){
+                        saleP = mData.get(position).getPrice();
+                    }else{
+                        saleP = mData.get(position).getSaleprice();
+                    }
+                }else {  saleP = mData.get(position).getPrice();}
                 Integer SalePrice = Integer.parseInt(saleP);
                 finalAmmount = finalAmmount+SalePrice;
                 Total_amount.setText(String.valueOf(finalAmmount));
@@ -210,7 +248,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
                 String Item_image =mData.get(position).getImage();
                 itemIdList.add(mData.get(position).getId());
                 itemCountList.add("1");
-                itemPriceList.add(mData.get(position).getSaleprice());
+                itemPriceList.add(saleP);
             }
         });
 

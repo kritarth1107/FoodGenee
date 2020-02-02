@@ -8,12 +8,13 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/_4sdp"
         android:clickable="true"
+        card_view:cardElevation="@dimen/_3sdp"
         android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardCornerRadius="4dp"
+        card_view:cardCornerRadius="@dimen/_4sdp"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
@@ -27,9 +28,9 @@
             <ImageView
                 android:id="@+id/rewardImage"
                 android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 
                  />
 
@@ -47,17 +48,19 @@
                 android:id="@+id/expire"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Regular"
-                android:background="@drawable/coloredborder"
+                style="@style/semiBoldWhite"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingBottom="@dimen/_1sdp"
-                android:textColor="@color/white"
+                android:textColor="@color/colorText"
+                android:gravity="center"
+                android:textSize="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_12sdp"
                 android:paddingRight="@dimen/_12sdp"
                 android:layout_below="@id/rewardWon"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Expires on"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="Expires on 31 jan 2020"
                 android:elevation="@dimen/_3sdp" />
 
         </RelativeLayout>

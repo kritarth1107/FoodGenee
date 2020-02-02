@@ -2,8 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginLeft="@dimen/_4sdp"
-    android:layout_marginRight="@dimen/_4sdp"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_30sdp">
 <LinearLayout
@@ -17,6 +15,16 @@
         android:gravity="left|center"
         android:layout_height="match_parent"
         android:layout_weight="0.7">
+
+        <TextView
+            android:textSize="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Porder"
+            style="@style/Regular"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:text="1"/>
         <TextView
             android:textSize="@dimen/_10sdp"
             android:layout_width="wrap_content"

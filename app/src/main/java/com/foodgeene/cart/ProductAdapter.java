@@ -44,7 +44,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
         holder.Pname.setText(products.get(position).getName());
         holder.QuantityTv.setText(" × "+products.get(position).getCount());
         holder.PriceTV.setText("Rs. "+products.get(position).getPrice());
-
+            holder.Porder.setText(products.get(position).getOrder()+" ");
     }
 
     @Override
@@ -53,13 +53,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.HomeView
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
-        TextView Pname,QuantityTv,PriceTV;
+        TextView Pname,QuantityTv,PriceTV,Porder;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             Pname = itemView.findViewById(R.id.Pname);
             QuantityTv = itemView.findViewById(R.id.QuantityTv);
             PriceTV = itemView.findViewById(R.id.PriceTV);
-
+            Porder=itemView.findViewById(R.id.Porder);
         }
     }
 }

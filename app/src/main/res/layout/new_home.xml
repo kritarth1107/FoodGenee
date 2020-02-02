@@ -64,7 +64,6 @@
                             android:drawableRight="@drawable/chevron_down"
                             android:layout_alignParentEnd="true"
                             style="@style/Regular"
-                            android:textSize="@dimen/_8sdp"
                             android:padding="@dimen/_6sdp"
                             />
 

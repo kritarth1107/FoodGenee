@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/progressBar"
-        android:layout_width="50dp"
+        android:layout_width="@dimen/_90sdp"
         android:layout_centerInParent="true"
-        android:layout_height="50dp"/>
+        android:layout_height="@dimen/_90sdp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -35,9 +35,10 @@
         android:layout_centerInParent="true"
         android:layout_width="250dp"
         android:layout_height="250dp">
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:background="@drawable/loader"/>
 
         <TextView
             android:layout_width="match_parent"

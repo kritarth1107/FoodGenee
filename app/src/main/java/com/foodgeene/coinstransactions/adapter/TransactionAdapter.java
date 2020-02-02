@@ -2,16 +2,11 @@ package com.foodgeene.coinstransactions.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
@@ -19,6 +14,10 @@ import com.foodgeene.coinstransactions.model.Text;
 import com.foodgeene.redeemedlistdetails.RedeemedListDetails;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
     Context context;
@@ -46,7 +45,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.transName.setText(list.get(position).getTitle());
         holder.transExcerpt.setText(list.get(position).getExcerpt());
-        if(list.get(position).getValidityto().equals("1")){
+        if(list.get(position).getValidityto().equals("0")){
             holder.transValid.setText("Reward Expired");
 
         }
@@ -58,8 +57,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         holder.touch.setOnClickListener(view -> {
             String id = list.get(position).getId();
+            String couponid = list.get(position).getCouponid();
             Intent intent = new Intent(context, RedeemedListDetails.class);
             intent.putExtra("rId", id);
+            intent.putExtra("couponid", couponid);
             context.startActivity(intent);
         });
     }

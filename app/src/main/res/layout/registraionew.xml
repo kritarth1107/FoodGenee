@@ -113,14 +113,39 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.9"/>
 
-    <ProgressBar
+            <LinearLayout
+                android:id="@+id/ll_terms"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_centerInParent="true"
+                android:layout_below="@id/EditTextPassword"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/c_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"></CheckBox>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Regular"
+                    android:text="Terms &amp; Conditions"/>
+            </LinearLayout>
+
+
+
+
+    <pl.droidsonroids.gif.GifImageView
         android:visibility="gone"
         android:id="@+id/progressBarReg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/EditTextPassword"
-        android:layout_height="wrap_content"/>
+        android:layout_width="@dimen/_90sdp"
+        android:background="@drawable/loader"
+        android:layout_below="@id/ll_terms"
+        android:layout_height="@dimen/_90sdp"/>
 
 
 

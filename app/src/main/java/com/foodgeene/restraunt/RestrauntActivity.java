@@ -41,12 +41,12 @@ public class RestrauntActivity extends AppCompatActivity implements Connectivity
     SessionManager sessionManager;
     String UserToken;
     Intent getIntent;
-    String encKey,Store_Name,Table_Name,cover,orderID;
+    String encKey,Store_Name,Table_Name,cover,orderID,verify;
     Toolbar toolbar;
     ShimmerFrameLayout shimmerFrameLayout;
-    TextView table_number,store,Total_amount,Quanity_item_tv;
+    TextView table_number,store,Total_amount,Quanity_item_tv,mTvServingtype;
     LinearLayout OrderSheet,ViewCartLayout;
-    ImageView logoHere,iv_filter;
+    ImageView logoHere,iv_filter,im_verify;
     RequestOptions option;
     String from;
     boolean isOnline;
@@ -55,6 +55,8 @@ public class RestrauntActivity extends AppCompatActivity implements Connectivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restraunt);
         toolbar = findViewById(R.id.toolbar);
+        im_verify=findViewById(R.id.im_verify);
+        mTvServingtype=findViewById(R.id.tv_servingtype);
         option = new RequestOptions().centerCrop().placeholder(R.drawable.ic_image).error(R.drawable.ic_image);
         setSupportActionBar(toolbar);
         logoHere = findViewById(R.id.aa_thumbnail);
@@ -67,6 +69,14 @@ public class RestrauntActivity extends AppCompatActivity implements Connectivity
         cover = getIntent.getStringExtra("cover");
         from=getIntent.getStringExtra("from");
         orderID=getIntent.getStringExtra("orderId");
+        verify=getIntent.getStringExtra("verify");
+        mTvServingtype.setText(getIntent.getStringExtra("servingtype"));
+
+        if(verify!=null){
+            if(verify.equalsIgnoreCase("0"))
+                im_verify.setVisibility(View.GONE);
+            else im_verify.setVisibility(View.VISIBLE);
+        }else im_verify.setVisibility(View.GONE);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

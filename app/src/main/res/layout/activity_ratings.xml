@@ -8,11 +8,12 @@
     tools:context=".orderratings.RatingsActivity">
 
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:background="@drawable/loader"
         android:layout_centerInParent="true">
 
-    </ProgressBar>
+    </pl.droidsonroids.gif.GifImageView>
 
 </RelativeLayout>

@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import network.ConnectivityReceiver;
 import network.FoodGeneeAPI;
 import network.MyApplication;
 import network.RetrofitClient;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,9 +31,11 @@ public class RegistrationActivity extends AppCompatActivity implements Connectiv
     EditText Email,Number,Name,Password;
     Button RegisterButton;
   //  ImageView mIvBack;
-    ProgressBar progressBarReg;
+    GifImageView progressBarReg;
     SessionManager sessionManager;
+    LinearLayout mLLTerms;
     boolean isOnline;
+    CheckBox mCTerms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +44,22 @@ public class RegistrationActivity extends AppCompatActivity implements Connectiv
         Email = findViewById(R.id.EditTextEmail);
         Number = findViewById(R.id.EditTextNumber);
         Name = findViewById(R.id.EditTextName);
+        mLLTerms=findViewById(R.id.ll_terms);
         Password = findViewById(R.id.EditTextPassword);
         RegisterButton = findViewById(R.id.RegisterButton);
         progressBarReg = findViewById(R.id.progressBarReg);
+        mCTerms=findViewById(R.id.c_terms);
       //  mIvBack=findViewById(R.id.iv_back);
         sessionManager = new SessionManager(this);
         isOnline=ConnectivityReceiver.isConnected();
 
-
+        mLLTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(RegistrationActivity.this,WebViewActivity.class);
+                startActivity(i);
+            }
+        });
         NavigateToLogin.setOnClickListener(view -> finish());
     /*    mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +90,8 @@ public class RegistrationActivity extends AppCompatActivity implements Connectiv
             }
             else if(String_Number.length()<10){
                 Number.setError("Invalid Mobile Number");
+            }else if(mCTerms.isChecked()!=true){
+                Toast.makeText(RegistrationActivity.this, "Check terms &amp; conditions", Toast.LENGTH_SHORT).show();
             }
             else{
                 if(isOnline)

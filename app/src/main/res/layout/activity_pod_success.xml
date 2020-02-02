@@ -58,20 +58,22 @@
                 android:layout_height="@dimen/_200sdp"
                 app:lottie_rawRes="@raw/tick_animation"
                 app:lottie_loop="true"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 app:lottie_autoPlay="true" />
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:id="@+id/Loading"
                 android:layout_centerInParent="true"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="@dimen/_200sdp">
-                <ProgressBar
-                    android:layout_width="@dimen/_40sdp"
+                <pl.droidsonroids.gif.GifImageView
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_gravity="center"
-                    android:layout_height="@dimen/_40sdp"/>
+                    android:background="@drawable/loader"
+                    android:layout_height="@dimen/_90sdp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -99,6 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:textColor="@color/colorPrimary"
                     android:text="Order Recieved"
                     style="@style/bold"
@@ -111,7 +114,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="Amount Due - Rs. 500"
-                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     style="@style/bold"
                     android:textSize="@dimen/_14sdp"/>
                 <LinearLayout
@@ -119,7 +122,7 @@
                     android:id="@+id/place_order_layout"
                     android:padding="@dimen/_6sdp"
                     android:background="@drawable/gradient_corner"
-                    android:layout_marginTop="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView

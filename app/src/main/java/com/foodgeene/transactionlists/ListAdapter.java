@@ -6,14 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.foodgeene.R;
 import com.foodgeene.transactionlists.model.Text;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder>{
@@ -55,7 +54,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         holder.valDate.setText(list.get(position).getRegdate());
         holder.merchant.setText(list.get(position).getMerchant());
 
-        holder.orderid.setText("Order ID: "+list.get(position).getOrderid());
+        if(list.get(position).getRewardcoupon()!=null) {
+            if(list.get(position).getRewardcoupon().equalsIgnoreCase(""))
+                holder.orderid.setVisibility(View.GONE);
+            else {
+                holder.orderid.setVisibility(View.VISIBLE);
+                holder.orderid.setText("Coupon :  " + list.get(position).getRewardcoupon());
+            }
+        }else holder.orderid.setVisibility(View.GONE);
+
 
     }
 

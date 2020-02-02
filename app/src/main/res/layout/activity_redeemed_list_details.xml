@@ -21,8 +21,6 @@
 
             <ImageView
                 android:id="@+id/offerImageTwo"
-                android:background="@android:color/holo_orange_dark"
-                android:tint="#7A886E"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
                 android:tintMode="multiply"
@@ -34,8 +32,6 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/_16sdp"
-                android:src="@drawable/ic_arrow"
-
                 android:layout_marginBottom="@dimen/_16sdp"
                 android:layout_height="@dimen/_40sdp"/>
             <TextView
@@ -64,153 +60,114 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:src="@drawable/arrow_left"/>
-        <RelativeLayout
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@id/backdroplayout"
-            android:id="@+id/layoutExtra"
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:clickable="true"
-                android:elevation="10dp"
-                app:cardCornerRadius="5dp"
-                android:layout_margin="10dp"
-                android:layout_height="match_parent">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/excerptTwo"
-                        android:layout_centerInParent="true"                    android:layout_marginTop="10dp"
-                        android:layout_marginLeft="@dimen/_7sdp"
-                        style="@style/Regular"
-                        android:text="Actual Offer Details"/>
-
-
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_below="@id/layoutExtra"
-            android:id="@+id/layoutExtraTwo"
-            android:layout_width="match_parent"
-            android:layout_height="70dp">
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/textL"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                       style="@style/Regular"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:text="Rewards Validity"/>
-                    <TextView
-                        android:id="@+id/expiresonTwo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/Regular"
-                        android:layout_below="@id/textL"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="1dp"
-                        android:text="Expires on" />
-
-
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/bgtwo"
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/layoutExtraTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textOffer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Offer Details"
-                        style="@style/semiBold"
-                        android:layout_marginLeft="@dimen/_7sdp"/>
-
-                    <TextView
-                        android:id="@+id/descTwo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_7sdp"
-                        android:layout_marginLeft="@dimen/_7sdp"
-                        android:layout_below="@id/textOffer"
-                        style="@style/Regular"
-                        android:text="New Offer" />
-
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
-            android:layout_below="@id/bgtwo"
-            android:visibility="visible"
-            android:id="@+id/hideCoupon"
-            android:layout_marginTop="10dp">
-
+            android:paddingLeft="@dimen/_16sdp"
+            android:paddingRight="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/orignalCoupnTwo"
+                android:id="@+id/textOffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CP100"
-                android:padding="@dimen/_7sdp"
-                android:background="@drawable/couponborder"
-                android:layout_centerInParent="true"
-                style="@style/bold"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_16sdp"/>
+                android:layout_marginTop="10dp"
+                android:text="Offer Details"
+                style="@style/semiBold"
+                />
 
             <TextView
+                android:id="@+id/descTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Coupon Code"
+                android:layout_below="@id/textOffer"
                 style="@style/Regular"
-                android:layout_marginLeft="@dimen/_7sdp"/>
+                android:text="New Offer" />
 
-        </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/excerptTwo"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                style="@style/Regular"
+                android:text="Actual Offer Details"/>
+            <TextView
+                android:id="@+id/textL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Rewards Validity"/>
+            <TextView
+                android:id="@+id/expiresonTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Regular"
+                android:layout_below="@id/textL"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:text="Expires on" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:src="@drawable/coins"></ImageView>
+                <TextView
+                    android:id="@+id/coinsCountNew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coins"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    style="@style/Regular"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coupon Code : "
+                    android:layout_gravity="left|center"
+                    style="@style/Regular"
+                    android:gravity="left|center"
+                    />
+                <TextView
+                    android:id="@+id/orignalCoupnTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CP100"
+                    android:layout_gravity="left|center"
+                    style="@style/bold"
+                    android:gravity="left|center"
+                    android:textColor="@color/colorPrimary"
+                    />
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
 
     </RelativeLayout>
 

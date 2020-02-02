@@ -15,6 +15,18 @@ public class Tablelist {
     @Expose
     private String capacity;
 
+    @SerializedName("image")
+    @Expose
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getCapacity() {
         return capacity;
     }
