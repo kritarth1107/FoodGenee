@@ -13,6 +13,7 @@ import com.foodgeene.MainActivity;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.firebaseservices.FirebaseMessagingModel;
+import com.foodgeene.login.LoginActivity;
 import com.foodgeene.profile.userdetails.UserModel;
 import com.foodgeene.profile.userdetails.Users;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -27,8 +28,6 @@ import network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.paytm.pgsdk.easypay.manager.PaytmAssist.getContext;
 
 public class Welcome extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener {
 
@@ -124,29 +123,40 @@ public class Welcome extends AppCompatActivity implements ConnectivityReceiver.C
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
                 try {
+
                     UserModel retrievedModel = response.body();
-                    Users retrievedModelUsers = retrievedModel.getUsers();
-                    welcomeTextUser.setText(retrievedModelUsers.getName());
+                    if(retrievedModel.getStatus()=="1"){
+                        Users retrievedModelUsers = retrievedModel.getUsers();
+                        welcomeTextUser.setText(retrievedModelUsers.getName());
 
-                    Glide.with(Welcome.this)
-                            .load(retrievedModel.getUsers().getProfilepic())
-                            .into(propic);
+                        Glide.with(Welcome.this)
+                                .load(retrievedModel.getUsers().getProfilepic())
+                                .into(propic);
 
-                    handler = new Handler();
-                    handler.postDelayed(() -> {
-                        Intent intent = new Intent(Welcome.this, MainActivity.class);
+                        handler = new Handler();
+                        handler.postDelayed(() -> {
+                                    Intent intent = new Intent(Welcome.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+
+
+                                }, 2500
+                        );
+                    }else{
+                        Intent intent = new Intent(Welcome.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                    }
 
-
-                    }, 2500
-                    );
 
 
 
                 }
                 catch (Exception e){
-                    Toast.makeText(getContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                   /// Toast.makeText(Welcome.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Welcome.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
 
             }
