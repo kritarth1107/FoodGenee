@@ -103,7 +103,7 @@
                     android:textAlignment="center"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:textColor="@color/colorPrimary"
-                    android:text="Order Recieved"
+                    android:text="Order is placed successfully"
                     style="@style/bold"
                     android:textSize="@dimen/_12sdp"/>
 

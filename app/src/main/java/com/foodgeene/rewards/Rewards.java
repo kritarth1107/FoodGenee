@@ -100,7 +100,7 @@ public class Rewards extends AppCompatActivity implements ConnectivityReceiver.C
         call.enqueue(new Callback<RModel>() {
             @Override
             public void onResponse(Call<RModel> call, Response<RModel> response) {
-
+                progressBar.setVisibility(View.INVISIBLE);
                 try{
                     RModel newModel = response.body();
                     List<Text> offers = newModel.getText();

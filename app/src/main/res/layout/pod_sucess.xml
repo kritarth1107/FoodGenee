@@ -60,8 +60,8 @@
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:layout_below="@id/animation_view"
-        android:text="Order Recieved"
-        android:textSize="28sp"
+        android:text="Order is placed successfully"
+        android:textSize="@dimen/_20sdp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/hallosans"
         android:textStyle="bold"/>

@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:text="Order Recieved"
+            android:text="Order is placed successfully"
             style="@style/semiBold"
             android:textSize="@dimen/_14sdp"
             android:layout_marginTop="20dp"

@@ -343,7 +343,6 @@ public interface FoodGeneeAPI {
     @Multipart
     @POST("users/user-registration.php")
     Call<ResponseBody> updatePic(
-
             @Part MultipartBody.Part profilepic,
             @Part("usersid") String usersid,
             @Part("action") String action

@@ -222,7 +222,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top coins scores"
+                android:text="Top coins scorers"
                 style="@style/semiBold"
                 android:id="@+id/coinstext"
                 android:textColor="@color/colorPrimaryDark"

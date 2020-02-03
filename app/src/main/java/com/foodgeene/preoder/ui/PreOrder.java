@@ -308,7 +308,13 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
         String dayNew = String.valueOf(dayOfMonth);
         String monthNew = String.valueOf(month+1);
         String yearNew = String.valueOf(year);
-        if(monthNew.startsWith("0"))
+
+
+            if(dayNew.length()>1)
+                dayNew=dayNew;
+            else dayNew="0"+dayNew;
+
+        if(monthNew.length()>1)
             monthNew=monthNew;
         else monthNew="0"+monthNew;
 

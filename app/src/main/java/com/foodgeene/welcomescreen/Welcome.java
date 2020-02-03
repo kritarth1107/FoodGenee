@@ -125,7 +125,7 @@ public class Welcome extends AppCompatActivity implements ConnectivityReceiver.C
                 try {
 
                     UserModel retrievedModel = response.body();
-                    if(retrievedModel.getStatus()=="1"){
+                    if(retrievedModel.getStatus().equalsIgnoreCase("1")){
                         Users retrievedModelUsers = retrievedModel.getUsers();
                         welcomeTextUser.setText(retrievedModelUsers.getName());
 

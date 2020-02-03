@@ -42,6 +42,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
     SessionManager sessionManager;
     TextView mTvOrders,mTvTable;
     View mVOrder,mVTable;
+    TextView mTvMsg;
     boolean isOnLine;
 
     public Orders() {
@@ -59,6 +60,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
         NorOrderFound = rootView.findViewById(R.id.NorOrderFound);
         mTvOrders=rootView.findViewById(R.id.tv_orders);
         mTvTable=rootView.findViewById(R.id.tv_table);
+        mTvMsg=rootView.findViewById(R.id.tv_msg);
         isOnLine=ConnectivityReceiver.isConnected();
 
         mVOrder=rootView.findViewById(R.id.v_order);
@@ -138,6 +140,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                         else{
                             NorOrderFound.setVisibility(View.VISIBLE);
                             cart_recyclerView.setVisibility(View.GONE);
+                            mTvMsg.setText("It looks you haven't placed any order yet.");
                         }
                 }
                 catch (Exception e){
@@ -145,6 +148,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                     cart_recyclerView.setVisibility(View.GONE);
                     shimmer_view_container.setVisibility(View.GONE);
                     shimmer_view_container.stopShimmerAnimation();
+                    mTvMsg.setText("It looks you haven't placed any order yet.");
                 }
 
             }
@@ -189,6 +193,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                     else{
                         NorOrderFound.setVisibility(View.VISIBLE);
                         cart_recyclerView.setVisibility(View.GONE);
+                        mTvMsg.setText("It looks you haven't placed any table yet.");
                     }
                 }
                 catch (Exception e){
@@ -196,6 +201,7 @@ public class Orders extends Fragment implements RatingDialogListener, Connectivi
                     cart_recyclerView.setVisibility(View.GONE);
                     shimmer_view_container.setVisibility(View.GONE);
                     shimmer_view_container.stopShimmerAnimation();
+                    mTvMsg.setText("It looks you haven't placed any table yet.");
                 }
 
             }
