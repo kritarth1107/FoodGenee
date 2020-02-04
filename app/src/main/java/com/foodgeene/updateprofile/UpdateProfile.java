@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.foodgeene.R;
 import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.forgot.ChangePassword;
@@ -154,7 +155,49 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
                 }
                 else if (options[item].equals("Choose from Gallery"))
                 {
-                    selectPicture();
+                    if(ContextCompat.checkSelfPermission(UpdateProfile.this,Manifest.permission.READ_EXTERNAL_STORAGE)
+                            + ContextCompat.checkSelfPermission(
+                            UpdateProfile.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED){
+                        if(ActivityCompat.shouldShowRequestPermissionRationale(
+                                UpdateProfile.this,Manifest.permission.READ_EXTERNAL_STORAGE)
+                                || ActivityCompat.shouldShowRequestPermissionRationale(
+                                UpdateProfile.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfile.this);
+                            builder.setMessage("Camera, Read Contacts and Write External" +
+                                    " Storage permissions are required to do the task.");
+                            builder.setTitle("Please grant those permissions");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    ActivityCompat.requestPermissions(
+                                            UpdateProfile.this,
+                                            new String[]{
+                                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                            },
+                                            124
+                                    );
+                                }
+                            });
+                            builder.setNeutralButton("Cancel",null);
+                            AlertDialog dialog1 = builder.create();
+                            dialog1.show();
+                        }else{
+                            ActivityCompat.requestPermissions(
+                                    UpdateProfile.this,
+                                    new String[]{
+                                            Manifest.permission.CAMERA,
+                                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                    },
+                                    124
+                            );
+                        }
+                    }else {
+                        selectPicture();
+                    }
+
                 }
                 else if (options[item].equals("Cancel")) {
                     dialog.dismiss();
@@ -256,6 +299,21 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
                     Toast.makeText(UpdateProfile.this,"Permissions denied.",Toast.LENGTH_SHORT).show();
                 }
                 return;
+            }
+            case 124:{
+                if(
+                        (grantResults.length >0) &&
+                                (grantResults[0]
+                                        + grantResults[1]
+                                        == PackageManager.PERMISSION_GRANTED)){
+                    Intent openGalleryIntent = new Intent(Intent.ACTION_PICK);
+                    openGalleryIntent.setType("image/*");
+                    startActivityForResult(openGalleryIntent, REQUEST_GALLERY_CODE);
+
+                }else {
+                    // Permissions are denied
+                    Toast.makeText(UpdateProfile.this,"Permissions denied.",Toast.LENGTH_SHORT).show();
+                }
             }
         }
 
@@ -571,6 +629,7 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
                     userPassword.setText(retrievedModelUsers.getMobile());
                     Glide.with(UpdateProfile.this)
                             .load(retrievedModel.getUsers().getProfilepic())
+                            .apply(new RequestOptions().override(100, 100))
                             .into(changePic);
 
                 }
@@ -749,6 +808,7 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
 
                                              Glide.with(UpdateProfile.this)
                                                      .load(profilepic)
+                                                     .apply(new RequestOptions().override(100, 100))
                                                      .into(changePic);
                                          }
 

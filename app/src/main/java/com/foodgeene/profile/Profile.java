@@ -218,6 +218,7 @@ public class Profile extends Fragment implements ConnectivityReceiver.Connectivi
 
                     Glide.with(getContext())
                             .load(retrievedModel.getUsers().getProfilepic())
+
                             .into(propic);
 
                     goNow.setVisibility(View.VISIBLE);
