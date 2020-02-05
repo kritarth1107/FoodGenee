@@ -110,10 +110,12 @@ public class RedeemedListDetails extends AppCompatActivity implements Connectivi
 
                     Glide.with(RedeemedListDetails.this)
                             .load(list.getCover())
+                            .centerCrop()
                             .into(offerBack);
 
                     Glide.with(RedeemedListDetails.this)
                             .load(list.getLogo())
+                            .centerCrop()
                             .into(logo);
 
                 }

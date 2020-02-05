@@ -54,6 +54,7 @@ public class PreOrderAdapter extends RecyclerView.Adapter<PreOrderAdapter.PreOrd
             holder.mIvGallery.setVisibility(View.VISIBLE);
             Glide.with(context)
                     .load(list.get(position).getImage())
+                    .centerCrop()
                     .into(holder.mIvGallery);
             holder.mIvGallery.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,6 +69,7 @@ public class PreOrderAdapter extends RecyclerView.Adapter<PreOrderAdapter.PreOrd
                     ImageView close=dialogLayout.findViewById(R.id.iv_close);
                     Glide.with(context)
                             .load(list.get(position).getImage())
+                            .centerCrop()
                             .into(iv);
                     close.setOnClickListener(new View.OnClickListener() {
                         @Override

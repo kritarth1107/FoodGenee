@@ -131,6 +131,7 @@ public class Welcome extends AppCompatActivity implements ConnectivityReceiver.C
 
                         Glide.with(Welcome.this)
                                 .load(retrievedModel.getUsers().getProfilepic())
+                                .centerCrop()
                                 .into(propic);
 
                         handler = new Handler();

@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
 import com.foodgeene.home.brandlist.brandmodel.Bannerlist;
-import com.foodgeene.home.brandlist.brandmodel.Brandlist;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHolder>{
 
@@ -42,6 +41,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHol
 
         Glide.with(context)
                 .load(list.get(position).getImage())
+                .centerCrop()
                 .into(holder.brandImage);
 
 //        holder.brandName.setText(list.get(position).getName());

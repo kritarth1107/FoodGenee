@@ -43,6 +43,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsAdapter.RewardsV
         holder.rewardWon.setText(list.get(position).getTitle());
         Glide.with(context)
                 .load(list.get(position).getLogo())
+                .centerCrop()
                 .into(holder.rewardImageHere);
 
 

@@ -180,10 +180,12 @@ public class RewardsDetails extends AppCompatActivity implements ConnectivityRec
                         coinsCount.setText(text.getCoins());
                         Glide.with(getApplicationContext())
                                 .load(text.getLogo())
+                                .centerCrop()
                                 .into(logo);
 
                         Glide.with(getApplicationContext())
                                 .load(text.getCover())
+                                .centerCrop()
                                 .into(offerBack);
 
 

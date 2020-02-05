@@ -104,7 +104,7 @@ public class RestrauntActivity extends AppCompatActivity implements Connectivity
         UserToken = user.get(sessionManager.USER_ID);
 
         collapsingToolbarLayout.setTitle(Store_Name);
-        Glide.with(this).load(cover).apply(option).into(logoHere);
+        Glide.with(this).load(cover).apply(option).centerCrop().into(logoHere);
         store.setText(Store_Name);
         table_number.setText(Table_Name);
         isOnline=ConnectivityReceiver.isConnected();
@@ -196,6 +196,7 @@ public class RestrauntActivity extends AppCompatActivity implements Connectivity
 
                         Glide.with(RestrauntActivity.this)
                                .load(scannerModel.getLogo())
+                                .centerCrop()
                                 .into(logoHere);
 
 

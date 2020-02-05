@@ -44,6 +44,7 @@ public class CoinAdapter extends  RecyclerView.Adapter<CoinAdapter.NewViewHolder
 
             Glide.with(context)
                     .load(list.get(position).getImage())
+                    .centerCrop()
                     .into(holder.propic);
             holder.tv_coin_user.setText("Name : "+list.get(position).getName());
             holder.tv_coins.setText(list.get(position).getCoins());

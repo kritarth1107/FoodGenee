@@ -102,7 +102,7 @@ public class RestrauntAdapter extends RecyclerView.Adapter<RestrauntAdapter.MyVi
             holder.available_layout.setVisibility(View.GONE);
             holder.not_available.setVisibility(View.VISIBLE);
         }
-        Glide.with(mContext).load(mData.get(position).getImage()).apply(option).into(holder.food_image);
+        Glide.with(mContext).load(mData.get(position).getImage()).apply(option).centerCrop().into(holder.food_image);
         if(tagline.equals("")){
             holder.rest_tagline_logo.setVisibility(View.GONE);
             holder.tagline.setVisibility(View.GONE);

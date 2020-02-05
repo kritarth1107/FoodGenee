@@ -630,6 +630,7 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
                     Glide.with(UpdateProfile.this)
                             .load(retrievedModel.getUsers().getProfilepic())
                             .apply(new RequestOptions().override(100, 100))
+                            .centerCrop()
                             .into(changePic);
 
                 }
@@ -809,6 +810,7 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
                                              Glide.with(UpdateProfile.this)
                                                      .load(profilepic)
                                                      .apply(new RequestOptions().override(100, 100))
+                                                     .centerCrop()
                                                      .into(changePic);
                                          }
 

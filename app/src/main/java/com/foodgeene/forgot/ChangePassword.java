@@ -25,6 +25,7 @@ public class ChangePassword extends AppCompatActivity implements ConnectivityRec
 
 EditText changedPasswordInput;
 EditText confirmPassword;
+EditText oldPassword;
 Button changedPassoword;
 Intent spd;
 String userId;
@@ -40,6 +41,7 @@ boolean isOnLine;
         changedPasswordInput = findViewById(R.id.new_password);
         changedPassoword = findViewById(R.id.reset_password);
         confirmPassword = findViewById(R.id.confirmpassword);
+        oldPassword=findViewById(R.id.old_password);
         mImBack=findViewById(R.id.iv_back);
         isOnLine=ConnectivityReceiver.isConnected();
 
@@ -52,8 +54,12 @@ boolean isOnLine;
         changedPassoword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isOnLine) startAcall();
-                else Toast.makeText(ChangePassword.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+                if(isOnLine) {
+                    if(oldPassword.getText().toString().equalsIgnoreCase("")||oldPassword.getText().toString().equalsIgnoreCase("")||oldPassword.getText().toString().equalsIgnoreCase("")){
+                        Toast.makeText(ChangePassword.this, "Please enter details", Toast.LENGTH_SHORT).show();
+                    }else
+                    startAcall();
+                }else Toast.makeText(ChangePassword.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -75,7 +81,7 @@ boolean isOnLine;
         if(newPassword.equals(confirm)){
             FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
 
-            Call<PasswordChangeModel> call = foodGeneeAPI.changePassword("changepassword", newPassword, userId);
+            Call<PasswordChangeModel> call = foodGeneeAPI.update("updatepassword", newPassword,oldPassword.getText().toString(), userId);
             call.enqueue(new Callback<PasswordChangeModel>() {
                 @Override
                 public void onResponse(Call<PasswordChangeModel> call, Response<PasswordChangeModel> response) {

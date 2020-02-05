@@ -111,10 +111,12 @@ public class PreOrder extends AppCompatActivity implements PreOrderAdapter.BookC
 
                     Glide.with(PreOrder.this)
                             .load(response.body().getCoverpic())
+                            .centerCrop()
                             .into(coverImage);
 
                     Glide.with(PreOrder.this)
                             .load(response.body().getLogo())
+                            .centerCrop()
                             .into(logo);
 
                     restarauntName.setText(response.body().getStorename());

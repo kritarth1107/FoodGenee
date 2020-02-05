@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
 import com.foodgeene.home.brandlist.brandmodel.Bannerlist;
-import com.foodgeene.home.brandlist.brandmodel.Brandlist;
 
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class FlipperAdapter extends BaseAdapter {
          view = inflater.inflate(R.layout.brand_row, null);
         ImageView imageView =  view.findViewById(R.id.mBrandImage);
 
-        Glide.with(context).load(hero.getImage()).into(imageView);
+        Glide.with(context).load(hero.getImage()).centerCrop().into(imageView);
         return view;
     }
 }

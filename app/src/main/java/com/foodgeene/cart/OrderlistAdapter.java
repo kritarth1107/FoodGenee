@@ -95,6 +95,7 @@ public class OrderlistAdapter extends RecyclerView.Adapter<OrderlistAdapter.Home
 
         Glide.with(context)
                 .load(list.get(position).getLogo())
+                .centerCrop()
                 .into(holder.orderRestImage);
         
         holder.Restraunt_Name.setText(list.get(position).getStorename());

@@ -41,6 +41,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 //        holder.reasonHere.setText(list.get(position).getReason());
         Glide.with(context)
                 .load(list.get(position).getLogo())
+                .centerCrop()
                 .into(holder.tranLogo);
 
         holder.transName.setText(list.get(position).getTitle());

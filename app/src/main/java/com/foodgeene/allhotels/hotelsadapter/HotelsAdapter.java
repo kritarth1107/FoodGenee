@@ -48,6 +48,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelsView
             String rating = String.valueOf(list.get(position).getRating());
             Glide.with(context)
                     .load(list.get(position).getLogo())
+                    .centerCrop()
                     .into(holder.restImage);
 
             holder.restName.setText(list.get(position).getName());

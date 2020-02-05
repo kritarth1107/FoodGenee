@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.foodgeene.R;
-import com.foodgeene.home.HomeAdapter;
 import com.foodgeene.home.hometwo.models.Merchantlist;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class HomeTwoAdapter extends RecyclerView.Adapter<HomeTwoAdapter.TwoViewHolder>{
 
@@ -42,6 +41,7 @@ public class HomeTwoAdapter extends RecyclerView.Adapter<HomeTwoAdapter.TwoViewH
 
         Glide.with(context)
                 .load(merchantlists.get(position).getLogo())
+                .centerCrop()
                 .into(holder.mtwoImage);
 
 //        holder.mtwoCity.setText(merchantlists.get(position).getCity());

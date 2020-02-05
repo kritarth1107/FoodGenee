@@ -52,6 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         Glide.with(context)
                 .load(list.get(position).getCoverpic())
                 .apply(option)
+                .centerCrop()
                 .into(holder.merchImage);
         holder.merchName.setText(list.get(position).getStorename());
 //                holder.merchType.setText(list.get(position).getStoretype());
