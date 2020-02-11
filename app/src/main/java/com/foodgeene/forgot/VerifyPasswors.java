@@ -170,6 +170,7 @@ public class VerifyPasswors extends AppCompatActivity implements ConnectivityRec
                        Toast.makeText(VerifyPasswors.this, "OTP Verified", Toast.LENGTH_SHORT).show();
                        Intent intent  = new Intent(VerifyPasswors.this, ChangePassword.class);
                        intent.putExtra("userId", retrievedResult.getUsersid());
+                       intent.putExtra("type", "forgot");
                        startActivity(intent);
                        Log.d("TEST", retrievedResult.getStatus());
                        loadingDialog.cancel();

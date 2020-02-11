@@ -332,14 +332,14 @@ public interface FoodGeneeAPI {
 
     @FormUrlEncoded
     @POST("users/user-registration.php")
-    Call<PasswordChangeModel> changePassword(
+    Call<PasswordChangeModel> forgot(
             @Field("action") String action,
             @Field("password") String otp,
             @Field("usersid") String userid
     );
     @FormUrlEncoded
     @POST("users/user-registration.php")
-    Call<PasswordChangeModel> update(
+    Call<PasswordChangeModel> changePassword(
             @Field("action") String action,
             @Field("password") String otp,
             @Field("oldpassword") String oldpassword,

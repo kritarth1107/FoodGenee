@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.foodgeene.R;
@@ -28,9 +29,11 @@ EditText confirmPassword;
 EditText oldPassword;
 Button changedPassoword;
 Intent spd;
-String userId;
+String userId,oldpass;
 ImageView mImBack;
+TextView mTvTitle;
 boolean isOnLine;
+    Call<PasswordChangeModel> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,18 @@ boolean isOnLine;
         confirmPassword = findViewById(R.id.confirmpassword);
         oldPassword=findViewById(R.id.old_password);
         mImBack=findViewById(R.id.iv_back);
+        mTvTitle=findViewById(R.id.tv_title);
         isOnLine=ConnectivityReceiver.isConnected();
+        if(spd.getStringExtra("type").equalsIgnoreCase("forgot")){
+            mTvTitle.setText("Forgot Password");
+            oldPassword.setVisibility(View.GONE);
+            oldpass="";
+
+        }else{
+            mTvTitle.setText("Change Password");
+            oldPassword.setVisibility(View.VISIBLE);
+            oldpass=oldPassword.getText().toString();
+        }
 
         mImBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +69,6 @@ boolean isOnLine;
             @Override
             public void onClick(View view) {
                 if(isOnLine) {
-                    if(oldPassword.getText().toString().equalsIgnoreCase("")||oldPassword.getText().toString().equalsIgnoreCase("")||oldPassword.getText().toString().equalsIgnoreCase("")){
-                        Toast.makeText(ChangePassword.this, "Please enter details", Toast.LENGTH_SHORT).show();
-                    }else
                     startAcall();
                 }else Toast.makeText(ChangePassword.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
             }
@@ -80,8 +91,10 @@ boolean isOnLine;
 
         if(newPassword.equals(confirm)){
             FoodGeneeAPI foodGeneeAPI = RetrofitClient.getApiClient().create(FoodGeneeAPI.class);
+            if(spd.getStringExtra("type").equalsIgnoreCase("forgot"))
+                call = foodGeneeAPI.forgot("updatepassword", newPassword, userId);
+            else  call = foodGeneeAPI.changePassword("changepassword", newPassword,oldPassword.getText().toString(), userId);
 
-            Call<PasswordChangeModel> call = foodGeneeAPI.update("updatepassword", newPassword,oldPassword.getText().toString(), userId);
             call.enqueue(new Callback<PasswordChangeModel>() {
                 @Override
                 public void onResponse(Call<PasswordChangeModel> call, Response<PasswordChangeModel> response) {

@@ -126,6 +126,7 @@ public class UpdateProfile extends AppCompatActivity implements EasyPermissions.
             public void onClick(View view) {
                 Intent intent  = new Intent(UpdateProfile.this, ChangePassword.class);
                 intent.putExtra("userId", userIdNew);
+                intent.putExtra("type", "change");
                 startActivity(intent);
             }
         });
