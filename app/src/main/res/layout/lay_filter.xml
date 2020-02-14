@@ -38,6 +38,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/non_veg"
             android:text="Non-Veg" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drinks"
+            android:text="Drinks" />
 
     </RadioGroup>
 

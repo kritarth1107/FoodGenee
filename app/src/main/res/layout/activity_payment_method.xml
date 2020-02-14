@@ -258,7 +258,7 @@
                             android:gravity="left|center"
                             android:layout_gravity="left|center"
                             android:layout_height="wrap_content"
-                            android:text="Subscription"
+                            android:text="Service Charge"
                             style="@style/Regular"
                             />
                         <TextView
@@ -596,6 +596,7 @@
             app:cardElevation="@dimen/_3sdp"
             app:cardCornerRadius="10dp"
             android:layout_margin="@dimen/_7sdp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_130sdp">
             <LinearLayout
@@ -680,6 +681,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardElevation="@dimen/_3sdp"
             app:cardCornerRadius="10dp"
+            android:visibility="gone"
             android:layout_margin="@dimen/_7sdp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_130sdp">
@@ -767,6 +769,7 @@
             app:cardCornerRadius="10dp"
             android:layout_below="@id/gpay"
             android:layout_margin="10dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="170dp">
             <LinearLayout

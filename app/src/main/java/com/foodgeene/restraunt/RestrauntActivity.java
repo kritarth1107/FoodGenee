@@ -144,7 +144,13 @@ public class RestrauntActivity extends AppCompatActivity implements Connectivity
                             if(isOnline)
                                 CallScannerApi(encKey,3);
                             else Toast.makeText(RestrauntActivity.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
-                        } else {
+                        } else if(checkedId == R.id.drinks) {
+                            if(isOnline)
+                                CallScannerApi(encKey,4);
+                            else Toast.makeText(RestrauntActivity.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();
+                        }
+
+                        else {
                             if(isOnline)
                                 CallScannerApi(encKey,0);
                             else Toast.makeText(RestrauntActivity.this, "Sorry! Not connected to internet", Toast.LENGTH_SHORT).show();

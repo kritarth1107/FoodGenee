@@ -270,8 +270,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                             mLLTip.setVisibility(View.VISIBLE);
                             tips=response.body().getTips();
                             mTvTip.setText("₹ "+response.body().getTips());
-                            totalamount=String.valueOf(Double.valueOf(totalamount)+Double.valueOf(response.body().getTips()));
-                            BackupAmount=""+formText.equals(totalamount);
+                            totalamount=String.valueOf(formText.format(Double.valueOf(totalamount)+Double.valueOf(response.body().getTips())));
+                            BackupAmount=""+formText.format(totalamount);
                             paytm_tv.setText(totalamount);
                             pod_tv.setText(totalamount);
                             amtv.setText(totalamount);
@@ -282,8 +282,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                                 @Override
                                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                                     if(b){
-                                        totalamount=String.valueOf(Double.valueOf(totalamount)+Double.valueOf(response.body().getTips()));
-                                        BackupAmount=""+formText.equals(totalamount);
+                                        totalamount=String.valueOf(formText.format(Double.valueOf(totalamount)+Double.valueOf(response.body().getTips())));
+                                        BackupAmount=""+formText.format(totalamount);
                                         paytm_tv.setText(totalamount);
                                         pod_tv.setText(totalamount);
                                         amtv.setText(totalamount);
@@ -302,8 +302,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                                             tips="0";
                                             BackupAmount=totalamount;
                                         }else{*/
-                                            totalamount=String.valueOf(Double.valueOf(totalamount)-Double.valueOf(response.body().getTips()));
-                                        BackupAmount=""+formText.equals(totalamount);
+                                            totalamount=String.valueOf(formText.format(Double.valueOf(totalamount)-Double.valueOf(response.body().getTips())));
+                                        BackupAmount=""+formText.format(totalamount);
                                             paytm_tv.setText(totalamount);
                                             pod_tv.setText(totalamount);
                                             amtv.setText(totalamount);
@@ -324,8 +324,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                             mLLSubscription.setVisibility(View.VISIBLE);
                             subscription=response.body().getSubscription();
                             mTvSubscription.setText("₹ "+response.body().getSubscription());
-                            totalamount=String.valueOf(Double.valueOf(totalamount)+Double.valueOf(response.body().getSubscription()));
-                            BackupAmount=""+formText.equals(totalamount);
+                            totalamount=String.valueOf(formText.format(Double.valueOf(totalamount)+Double.valueOf(response.body().getSubscription())));
+                            BackupAmount=""+formText.format(totalamount);
                             paytm_tv.setText(totalamount);
                             pod_tv.setText(totalamount);
                             amtv.setText(totalamount);
@@ -336,8 +336,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                                 @Override
                                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                                     if(b){
-                                        totalamount=String.valueOf(Double.valueOf(totalamount)+Double.valueOf(response.body().getSubscription()));
-                                        BackupAmount=""+formText.equals(totalamount);
+                                        totalamount=String.valueOf(formText.format(Double.valueOf(totalamount)+Double.valueOf(response.body().getSubscription())));
+                                        BackupAmount=""+formText.format(totalamount);
                                         paytm_tv.setText(totalamount);
                                         pod_tv.setText(totalamount);
                                         amtv.setText(totalamount);
@@ -357,8 +357,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                                             subscription="0";
                                             BackupAmount=totalamount;
                                         }else{*/
-                                            totalamount=String.valueOf(Double.valueOf(totalamount)-Double.valueOf(response.body().getSubscription()));
-                                            BackupAmount=""+formText.equals(totalamount);
+                                            totalamount=String.valueOf(formText.format(Double.valueOf(totalamount)-Double.valueOf(response.body().getSubscription())));
+                                            BackupAmount=""+formText.format(totalamount);
                                             paytm_tv.setText(totalamount);
                                             pod_tv.setText(totalamount);
                                             amtv.setText(totalamount);
