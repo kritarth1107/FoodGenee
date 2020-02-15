@@ -135,7 +135,8 @@
                     android:id="@+id/NavigateToReg"
                     android:textAlignment="center"
                     style="@style/bold"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Register Now"/>
