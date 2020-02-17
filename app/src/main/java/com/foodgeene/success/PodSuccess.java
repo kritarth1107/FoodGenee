@@ -16,7 +16,6 @@ import com.foodgeene.SessionManager.SessionManager;
 import com.foodgeene.foodpreference.ui.AfterOrder;
 import com.foodgeene.scanner.ScannerActivity;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +41,6 @@ public class PodSuccess extends AppCompatActivity implements ConnectivityReceive
     ImageView mIvBack;
     boolean isOnLine;
     String tax,tips,subscription;
-    private static DecimalFormat df2 = new DecimalFormat("#.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +73,7 @@ public class PodSuccess extends AppCompatActivity implements ConnectivityReceive
         sessionManager = new SessionManager(this);
         HashMap<String, String> user = sessionManager.getUserDetail();
         UserToken = user.get(sessionManager.USER_ID);
-        Amount_text.setText("Amount Due - Rs. "+df2.format(totalamount));
+        Amount_text.setText("Amount Due - Rs. "+totalamount);
         place_order_layout.setOnClickListener(view -> {
             Intent i = new Intent(PodSuccess.this, ScannerActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

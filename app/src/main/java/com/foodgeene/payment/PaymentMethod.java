@@ -140,19 +140,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             }else coupon="";
         });
         removeButton.setOnClickListener(view -> {
-
-         /*   mLLSave.setVisibility(View.GONE);
-            mLLDiscount.setVisibility(View.GONE);
-            BackupAmount=String.valueOf(Double.valueOf(BackupAmount)-Double.valueOf(couponAmount));
-
-            totalamount = BackupAmount;
-            pod_tv.setText(BackupAmount);
-            paytm_tv.setText(BackupAmount);
-            amtv.setText(BackupAmount);
-            newtc.setText(BackupAmount);
-            newtcs.setText(BackupAmount);*/
             if(isOnLine) {
-
                 totalamount = get.getStringExtra("totalamount");
                 applyCoupon("","remove");
                 coupon="";
@@ -162,17 +150,11 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             removeButton.setVisibility(View.GONE);
             couponEditText.setVisibility(View.VISIBLE);
             appliedTV.setVisibility(View.GONE);
-           // offerdetails.setVisibility(View.GONE);
         });
 
 
         paytm.setOnClickListener(view -> generateCheckSum());
-        mIvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        mIvBack.setOnClickListener(view -> finish());
        // toolbar.setNavigationOnClickListener(view -> finish());
 
         pod.setOnClickListener(view -> {
@@ -240,28 +222,12 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                             appliedTV.setVisibility(View.GONE);
                         }
 
-
-                     /*   if(action.equalsIgnoreCase("remove")){
-                            removeButton.setVisibility(View.GONE);
-                            couponEditText.setVisibility(View.VISIBLE);
-                            applyButton.setVisibility(View.VISIBLE);
-                            appliedTV.setVisibility(View.GONE);
-                        }else{
-                            removeButton.setVisibility(View.VISIBLE);
-                            couponEditText.setVisibility(View.GONE);
-                            applyButton.setVisibility(View.GONE);
-                            appliedTV.setVisibility(View.GONE);
-                        }*/
-
-
-
                         offerdetails.setVisibility(View.VISIBLE);
                         realPrice.setText("₹ "+response.body().getTotalamt());
                         mTvActualPrice.setText("₹ "+response.body().getAmount());
                         discountedPrice.setText("₹ "+response.body().getCoupanamt());
                         savedprice.setText("₹ "+response.body().getSavingamt());
                         mTvTax.setText("₹ "+response.body().getTax());
-
                         tax=response.body().getTax();
                         discountAmount=response.body().getCoupanamt();
                         couponAmount=response.body().getCoupanamt();
@@ -376,7 +342,6 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                         }
                     }
                     else{
-                       // offerdetails.setVisibility(View.GONE);
                         applyButton.setVisibility(View.VISIBLE);
                         ProgressBarCoupon.setVisibility(View.GONE);
                         Toast.makeText(PaymentMethod.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -448,7 +413,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         //getting paytm service
         PaytmPGService Service = PaytmPGService.getProductionService();
 
-        //staging service
+        //Testing service
        // PaytmPGService Service = PaytmPGService.getStagingService();
 
         HashMap<String, String> paramMap = new HashMap<>();
